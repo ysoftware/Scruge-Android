@@ -1,7 +1,9 @@
 package com.scruge.scruge.services.api
 
 import com.scruge.scruge.services.api.model.AuthRequest
+import com.scruge.scruge.services.api.model.EmailRequest
 import com.scruge.scruge.services.api.model.LoginResponse
+import com.scruge.scruge.services.api.model.ResultResponse
 import com.scruge.scruge.services.network.enqueue
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -32,8 +34,16 @@ class Api {
                 .create(BackendApi::class.java)
     }
 
-    fun login(email:String, password:String, completion:(LoginResponse?, Throwable?)->Unit) {
+    fun login(email: String, password: String, completion: (LoginResponse?, Throwable?) -> Unit) {
         instance.login(AuthRequest(email, password)).enqueue(completion)
+    }
+
+    fun signUp(email: String, password: String, completion: (ResultResponse?, Throwable?) -> Unit) {
+        instance.signUp(AuthRequest(email, password)).enqueue(completion)
+    }
+
+    fun checkEmail(email:String, completion: (ResultResponse?, Throwable?) -> Unit) {
+        instance.checkEmail(EmailRequest(email)).enqueue(completion)
     }
 }
 
@@ -43,4 +53,12 @@ interface BackendApi {
 
     @POST("auth/login")
     fun login(@Body request: AuthRequest): Call<LoginResponse>
+
+    @POST("auth/register")
+    fun signUp(@Body request: AuthRequest): Call<ResultResponse>
+
+    @POST("auth/check_email")
+    fun checkEmail(@Body request: EmailRequest): Call<ResultResponse>
+
+
 }
