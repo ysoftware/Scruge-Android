@@ -4,7 +4,7 @@ import com.scruge.scruge.model.entity.Comment
 
 // response
 
-data class CommentListResponse(val result:Int, val comments:List<Comment>)
+data class CommentListResponse(val comments:List<Comment>)
 
 // request
 

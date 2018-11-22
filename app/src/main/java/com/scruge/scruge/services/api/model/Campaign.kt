@@ -5,9 +5,9 @@ import com.scruge.scruge.model.entity.PartialCampaign
 
 // response
 
-data class CampaignResponse(val result: Int, val campaign: Campaign?)
+data class CampaignResponse(val campaign: Campaign)
 
-data class CampaignListResponse(val result:Int, val campaigns:List<PartialCampaign>)
+data class CampaignListResponse(val campaigns:List<PartialCampaign>)
 
 // request
 

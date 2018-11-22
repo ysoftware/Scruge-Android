@@ -2,7 +2,7 @@ package com.scruge.scruge.services
 
 import com.scruge.scruge.services.api.Api
 
-data class Service {
+class Service {
 
     companion object {
 

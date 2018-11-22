@@ -1,15 +1,16 @@
 package com.scruge.scruge.services.api.model
 
 import android.os.Build
+import com.google.gson.annotations.Expose
 import com.scruge.scruge.model.entity.Profile
 
 // response
 
-data class LoginResponse(val result:Int, val token:String?)
+data class LoginResponse(val result: Int, val token:String)
 
-data class UserIdResponse(val result:Int, val userId:Int?)
+data class UserIdResponse(@Expose val userId:Int)
 
-data class ProfileResponse(val result: Int, val profile: Profile?)
+data class ProfileResponse(val profile: Profile)
 
 // request
 
