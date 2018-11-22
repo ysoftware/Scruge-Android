@@ -1,0 +1,14 @@
+package com.scruge.scruge.services.api.model
+
+import android.app.Activity
+import com.scruge.scruge.model.entity.Milestone
+import com.scruge.scruge.model.entity.Update
+
+data class MilestoneListResponse(val result:Int,
+                                 val milestones:List<Milestone>)
+
+data class UpdateListResponse(val result: Int,
+                              val updates:List<Update>)
+
+data class ActivityListResponse(val result: Int,
+                                val updates: List<Activity>)

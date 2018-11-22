@@ -8,7 +8,12 @@ data class PartialCampaign(override val id:Int,
                            override val imageUrl:String,
                            override val startTimestamp:Int,
                            override val endTimestamp:Int,
-                           override val economics: Economics): PartialCampaignModel
+                           override val economics: Economics
+                          ): PartialCampaignModel, Comparable<PartialCampaign> {
+
+    override fun compareTo(other: PartialCampaign): Int = compareValuesBy(this, other,
+                                                                          { it.id }, { it.economics })
+}
 
 data class Campaign(override val id:Int,
                     override val title:String,
@@ -17,7 +22,9 @@ data class Campaign(override val id:Int,
                     override val startTimestamp:Int,
                     override val endTimestamp:Int,
                     override val economics: Economics,
+
                     // Full campaign only
+
                     val team:List<Member>,
                     val status:Int,
                     val about:String?,
@@ -28,7 +35,14 @@ data class Campaign(override val id:Int,
                     val documents:List<Document>?,
                     val currentMilestone:Milestone?,
                     val lastUpdate:Update?,
-                    val topComments:List<Comment>?): PartialCampaignModel
+                    val topComments:List<Comment>?): PartialCampaignModel, Comparable<Campaign> {
+
+    override fun compareTo(other: Campaign): Int {
+        return if (topComments != other.topComments) -1
+        else compareValuesBy(this, other, { it.id }, { it.economics }, { it.status }, { it.lastUpdate },
+                             { it.currentMilestone })
+    }
+}
 
 interface PartialCampaignModel {
 
