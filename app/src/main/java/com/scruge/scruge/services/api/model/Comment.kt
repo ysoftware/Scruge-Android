@@ -10,7 +10,7 @@ data class CommentListResponse(val result:Int, val comments:List<Comment>)
 
 data class CommentRequest(val comment:String, val token:String)
 
-data class CommentListRequest(q:CommentQuery?) {
-
-    val page = q.page ?: 0
-}
+//data class CommentListRequest(q:CommentQuery?) {
+//
+//    val page = q.page ?: 0
+//}
