@@ -12,7 +12,7 @@ data class CampaignListResponse(val campaigns:List<PartialCampaign>)
 
 // request
 
-data class CampaignRequest(val campaignId:String)
+data class CampaignRequest(val campaignId:Int)
 
 data class CampaignListRequest(val q: CampaignQuery?) {
 

@@ -20,7 +20,7 @@ fun <T> callback(fn: (Throwable?, Response<T>?) -> Unit): Callback<T> {
     }
 }
 
-inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (T?, ScrugeError?) -> Unit) {
+inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Result<T>) -> Unit) {
     enqueue(callback { t:Throwable?, r:Response<ResponseBody>? ->
         r?.let {
             val gson = Gson()
@@ -28,7 +28,7 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (T?, S
 
             if (body == null) {
                 log("Error: status code: ${it.code()}")
-                completion(null, BackendError.parsingError)
+                completion(Result.failure(BackendError.parsingError.wrap()))
                 return@let
             }
 
@@ -41,7 +41,7 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (T?, S
                     if (error.isAuthenticationFailureError) {
                         Service.tokenManager.removeToken()
                     }
-                    completion(null, error)
+                    completion(Result.failure(error.wrap()))
                     return@let
                 }
             }
@@ -51,16 +51,16 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (T?, S
 
             if (obj != null) {
                 log(body)
-                completion(obj, null)
+                completion(Result.success(obj))
                 return@let
             }
 
             log("Could not parse object")
-            completion(null, BackendError.parsingError)
+            completion(Result.failure(BackendError.parsingError.wrap()))
         }
         t?.let {
             log(t.localizedMessage)
-            completion(null, getNetworkError(t))
+            completion(Result.failure(getNetworkError(t).wrap()))
         }
     })
 }

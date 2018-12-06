@@ -73,7 +73,7 @@ interface BackendApi {
     // UPDATES
 
     @GET("campaign/{campaignId}/updates")
-    fun getUpdateList(@Path("campaignId") campaignId:String): Call<ResponseBody>
+    fun getUpdateList(@Path("campaignId") campaignId:Int): Call<ResponseBody>
 
     @GET("user/{token}/campaign_updates")
     fun getActivity(@Path("token") token:String): Call<ResponseBody>
@@ -84,12 +84,12 @@ interface BackendApi {
     // HTML DESCRIPTION
 
     @GET("campaign/{campaignId}/update/{updateId}/description")
-    fun getUpdateDescription(@Path("campaignId") campaignId:String,
+    fun getUpdateDescription(@Path("campaignId") campaignId:Int,
                              @Path("updateId") updateId:String): Call<ResponseBody>
 
 
     @GET("campaign/{campaignId}/content")
-    fun getCampaignContent(@Path("campaignId") campaignId:String): Call<ResponseBody>
+    fun getCampaignContent(@Path("campaignId") campaignId:Int): Call<ResponseBody>
 
     @GET("update/{updateId}/content")
     fun getUpdateContent(@Path("updateId") updateId:String): Call<ResponseBody>
@@ -97,7 +97,7 @@ interface BackendApi {
     // MILESTONES
 
     @GET("campaign/{campaignId}/milestones")
-    fun getMilestones(@Path("campaignId") campaignId:String): Call<ResponseBody>
+    fun getMilestones(@Path("campaignId") campaignId:Int): Call<ResponseBody>
 
     // CONTRIBUTIONS
 
@@ -121,15 +121,15 @@ interface BackendApi {
     fun getContributionHistory(@Path("token") token:String):Call<ResponseBody>
 
     @GET("campaign/{campaignId}/vote_results")
-    fun getVoteResult(@Path("campaignId") campaignId:String):Call<ResponseBody>
+    fun getVoteResult(@Path("campaignId") campaignId:Int):Call<ResponseBody>
 
     @GET("campaign/{campaignId}/votes")
-    fun getVoteInfo(@Path("campaignId") campaignId:String):Call<ResponseBody>
+    fun getVoteInfo(@Path("campaignId") campaignId:Int):Call<ResponseBody>
 
     // COMMENTS
 
     @POST("campaign/{campaignId}/comment")
-    fun postCampaignComment(@Path("campaignId") campaignId:String,
+    fun postCampaignComment(@Path("campaignId") campaignId:Int,
                             @Body request:CommentRequest):Call<ResponseBody>
 
     @POST("update/{updateId}/comment")
@@ -137,7 +137,7 @@ interface BackendApi {
                           @Body request:CommentRequest):Call<ResponseBody>
 
     @GET("campaign/{campaignId}/comment")
-    fun getCampaignComment(@Path("campaignId") campaignId:String,
+    fun getCampaignComment(@Path("campaignId") campaignId:Int,
                            @Body request:CommentListRequest):Call<ResponseBody>
 
     @GET("update/{updateId}/comment")
