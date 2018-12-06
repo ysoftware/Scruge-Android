@@ -2,11 +2,11 @@ package com.scruge.scruge.viewmodel.comment
 
 import com.ysoftware.mvvm.array.Query
 
-class CommentQuery(val source: Source, val id:String) : Query {
+enum class CommentSource {
+    update, campaign
+}
 
-    enum class Source {
-        update, campaign
-    }
+class CommentQuery(val source: CommentSource, val id:String) : Query {
 
     var page = 0
 

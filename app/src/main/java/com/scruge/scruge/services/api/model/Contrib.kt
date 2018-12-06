@@ -16,4 +16,6 @@ data class ContributionHistoryResponse(val contributions:List<Contribution>)
 
 data class VotesResultResponse(val votings:List<VoteInfo>)
 
+data class VoteInfoResponse(val voting:VoteInfo)
+
 data class ActiveVotesResponse(val votings:List<Voting>)

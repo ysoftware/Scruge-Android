@@ -137,10 +137,10 @@ interface BackendApi {
                           @Body request:CommentRequest):Call<ResponseBody>
 
     @GET("campaign/{campaignId}/comment")
-    fun getCampaignComment(@Path("campaignId") campaignId:Int,
-                           @Body request:CommentListRequest):Call<ResponseBody>
+    fun getCampaignComments(@Path("campaignId") campaignId:String,
+                            @Body request:CommentListRequest):Call<ResponseBody>
 
     @GET("update/{updateId}/comment")
-    fun getUpdateComment(@Path("updateId") updateId:String,
-                         @Body request:CommentListRequest):Call<ResponseBody>
+    fun getUpdateComments(@Path("updateId") updateId:String,
+                          @Body request:CommentListRequest):Call<ResponseBody>
 }

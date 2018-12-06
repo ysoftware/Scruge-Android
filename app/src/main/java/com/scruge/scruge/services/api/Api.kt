@@ -2,6 +2,9 @@ package com.scruge.scruge.services.api
 
 import android.graphics.Bitmap
 import com.scruge.scruge.model.entity.Campaign
+import com.scruge.scruge.model.entity.Comment
+import com.scruge.scruge.model.entity.Update
+import com.scruge.scruge.model.entity.VoteInfo
 import com.scruge.scruge.model.error.AuthError
 import com.scruge.scruge.model.error.ScrugeError
 import com.scruge.scruge.model.error.wrap
@@ -9,6 +12,8 @@ import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
 import com.scruge.scruge.services.network.enqueue
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
+import com.scruge.scruge.viewmodel.comment.CommentQuery
+import com.scruge.scruge.viewmodel.comment.CommentSource
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -83,6 +88,15 @@ class Api {
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
+    fun updateProfile(name:String,
+                      country:String,
+                      description:String,
+                      completion: (Result<ResultResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            service.updateProfile(it, ProfileRequest(name, country, description))
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
     fun getProfile(completion: (Result<ProfileResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             service.getProfile(it).enqueue(completion)
@@ -149,5 +163,95 @@ class Api {
 
     // HTML DESCRIPTION
 
+    fun getUpdateDescription(update: Update,
+                             campaign: Campaign,
+                             completion: (Result<HTMLResponse>) -> Unit) {
+        service.getUpdateDescription(campaign.id, update.id).enqueue(completion)
+    }
 
+    fun getCampaignContent(campaign: Campaign, completion: (Result<HTMLResponse>) -> Unit) {
+        service.getCampaignContent(campaign.id).enqueue(completion)
+    }
+
+    fun getUpdateContent(update:Update, completion: (Result<HTMLResponse>) -> Unit) {
+        service.getUpdateContent(update.id).enqueue(completion)
+    }
+
+    // MILESTONES
+
+    fun getMilestones(campaign:Campaign, completion: (Result<MilestoneListResponse>) -> Unit) {
+        service.getMilestones(campaign.id).enqueue(completion)
+    }
+
+    // CONTRIBUTIONS
+
+    fun getDidContribute(campaignId:Int, completion: (Result<BoolResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            service.getDidContribute(it, CampaignRequest(campaignId)).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
+    fun getDidVote(campaignId:Int, completion: (Result<BoolResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            service.getDidVote(it, CampaignRequest(campaignId)).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
+    fun notifyVote(campaignId: Int,
+                   value:Boolean,
+                   transactionId:String,
+                   completion: (Result<ResultResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            val request = VoteNotificationRequest(value, campaignId, transactionId)
+            service.notifyVote(it, request).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
+    fun notifyContribution(campaignId: Int, amount: Double, transactionId: String,
+                           completion: (Result<ResultResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            val request = ContributionNotificationRequest(amount, campaignId, transactionId)
+            service.notifyContribution(it, request).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
+    fun getContributionHistory(completion: (Result<ContributionHistoryResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            service.getContributionHistory(it).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
+    fun getVoteResult(campaignId: Int, completion: (Result<VotesResultResponse>) -> Unit) {
+        service.getVoteResult(campaignId).enqueue(completion)
+    }
+
+    fun getVoteInfo(campaignId: Int, completion: (Result<VoteInfoResponse>) -> Unit) {
+        service.getVoteInfo(campaignId).enqueue(completion)
+    }
+
+    // COMMENTS
+
+    fun postUpdateComment(comment: String,
+                          updateId: String,
+                          completion: (Result<ResultResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            service.postUpdateComment(updateId, CommentRequest(comment, it)).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
+    fun postCampaignComment(comment: String,
+                            campaignId: Int,
+                            completion: (Result<ResultResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            service.postCampaignComment(campaignId, CommentRequest(comment, it)).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
+    fun getUpdateComments(query:CommentQuery, completion: (Result<CommentListResponse>) -> Unit) {
+        service.getUpdateComments(query.id, CommentListRequest(query)).enqueue(completion)
+    }
+
+    fun getCampaignComments(query:CommentQuery, completion: (Result<CommentListResponse>) -> Unit) {
+        service.getCampaignComments(query.id, CommentListRequest(query)).enqueue(completion)
+    }
 }
