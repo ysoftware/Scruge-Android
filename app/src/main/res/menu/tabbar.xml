@@ -4,18 +4,22 @@
     <item
         android:title="Featured"
         android:icon="@drawable/featured"
+        android:orderInCategory="0"
         />
 
     <item
         android:title="Activity"
         android:icon="@drawable/bell"
+        android:orderInCategory="1"
         />
     <item
         android:title="Wallet"
         android:icon="@drawable/wallet"
+        android:orderInCategory="2"
         />
     <item
         android:title="Profile"
         android:icon="@drawable/tab_profile"
+        android:orderInCategory="3"
         />
 </menu>

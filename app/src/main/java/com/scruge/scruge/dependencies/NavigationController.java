@@ -27,6 +27,10 @@ public class NavigationController {
         this.manager = fragmentManager;
     }
 
+    public int getContainerId() {
+        return containerId;
+    }
+
     public void replaceWith(Fragment fragment) {
         currentFragment = fragment;
         manager.popBackStackImmediate(null,

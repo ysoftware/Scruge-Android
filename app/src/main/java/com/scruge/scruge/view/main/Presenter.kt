@@ -6,6 +6,5 @@ class Presenter {
 
     fun setupMainTabs(activity: TabbarActivity) {
 
-
     }
 }

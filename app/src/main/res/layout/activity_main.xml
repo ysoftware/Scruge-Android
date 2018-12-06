@@ -8,19 +8,44 @@
     tools:context=".view.activity.TabbarActivity">
 
     <RelativeLayout
-        android:id="@+id/container_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/container_view_featured"
+            android:layout_width="match_parent"
+            android:background="@color/tabbar_grey"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:background="@color/white"
+            android:id="@+id/container_view_activity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:background="@color/purple"
+            android:id="@+id/container_view_wallet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/container_view_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/tabbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/white"
         app:itemIconTint="@color/tabbar"
-        app:labelVisibilityMode="labeled"
         app:itemTextColor="@color/tabbar"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/tabbar"
         />
 </FrameLayout>
