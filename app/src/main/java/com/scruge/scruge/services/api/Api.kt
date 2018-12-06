@@ -136,6 +136,18 @@ class Api {
     }
 
     fun getActivity(completion: (Result<ActivityListResponse>) -> Unit) {
-
+        Service.tokenManager.getToken()?.let {
+            service.getActivity(it).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
+
+    fun getVoteNotifications(completion: (Result<ActiveVotesResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            service.getVoteNotifications(it).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
+    // HTML DESCRIPTION
+
+
 }

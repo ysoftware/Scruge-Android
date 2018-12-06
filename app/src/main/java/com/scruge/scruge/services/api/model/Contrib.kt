@@ -1,6 +1,8 @@
 package com.scruge.scruge.services.api.model
 
 import com.scruge.scruge.model.entity.Contribution
+import com.scruge.scruge.model.entity.VoteInfo
+import com.scruge.scruge.model.entity.Voting
 
 // request
 
@@ -11,3 +13,7 @@ data class VoteNotificationRequest(val value:Boolean, val campaignId:Int, val tr
 // response
 
 data class ContributionHistoryResponse(val contributions:List<Contribution>)
+
+data class VotesResultResponse(val votings:List<VoteInfo>)
+
+data class ActiveVotesResponse(val votings:List<Voting>)
