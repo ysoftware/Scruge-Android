@@ -13,16 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        Service.api.login("yaroslav.erohin@scruge.world", "1234567") { response, error ->
-//            response?.let {
-                Service.tokenManager.save("123")
-
-
-                Service.api.getUserId { response, error ->
-                    print(response)
-                }
-//            }
-//        }
 
     }
 }

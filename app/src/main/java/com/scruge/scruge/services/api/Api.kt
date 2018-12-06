@@ -41,6 +41,12 @@ class Api {
                 .create(BackendApi::class.java)
     }
 
+    // WALLET
+
+    fun createAccount(accountName:String, publicKey:String, completion: (Result<LoginResponse>) -> Unit) {
+
+    }
+
     // AUTH
 
     fun login(email: String, password: String, completion: (LoginResponse?, ScrugeError?) -> Unit) {
@@ -66,34 +72,4 @@ class Api {
             completion(null, AuthError.noToken)
         }
     }
-}
-
-interface BackendApi {
-
-    // AUTH
-
-    @POST("auth/login")
-    fun login(@Body request: AuthRequest): Call<ResponseBody>
-
-    @POST("auth/register")
-    fun signUp(@Body request: AuthRequest): Call<ResponseBody>
-
-    @POST("auth/check_email")
-    fun checkEmail(@Body request: EmailRequest): Call<ResponseBody>
-
-    // PROFILE
-
-    @GET("user/{token}/id")
-    fun getUserId(@Path("token") token:String): Call<ResponseBody>
-
-    @POST("avatar/{token}")
-    fun updateProfileImage(@Path("token") token:String): Call<ResponseBody>
-
-    @PUT("profile/{token}")
-    fun updateProfile(@Path("token") token:String, @Body request: ProfileRequest): Call<ResponseBody>
-
-    @GET("profile/{token}")
-    fun getProfile(@Path("token") token:String): Call<ResponseBody>
-
-
 }

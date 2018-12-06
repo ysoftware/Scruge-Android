@@ -2,6 +2,7 @@ package com.scruge.scruge.services.api.model
 
 import com.scruge.scruge.model.entity.Campaign
 import com.scruge.scruge.model.entity.PartialCampaign
+import com.scruge.scruge.viewmodel.campaign.CampaignQuery
 
 // response
 
@@ -13,15 +14,15 @@ data class CampaignListResponse(val campaigns:List<PartialCampaign>)
 
 data class CampaignRequest(val campaignId:String)
 
-//data class CampaignListRequest(q: CampaignQuery?) {
-//
-//    val page:Int = q?.page ?: 0
-//
-//    val query:String? = q?.query
-//
+data class CampaignListRequest(val q: CampaignQuery?) {
+
+    val page:Int = q?.page ?: 0
+
+    val query:String? = q?.query
+
 //    val category:String? = q?.category?.model?.id
-//
-//    val tags:List<String>? = q?.tags
-//
-//    val type:String? = q?.type
-//}
+
+    val tags:List<String>? = q?.tags
+
+    val type:String? = q?.type
+}

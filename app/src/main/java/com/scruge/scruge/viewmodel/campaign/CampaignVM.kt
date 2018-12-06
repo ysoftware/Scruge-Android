@@ -3,6 +3,7 @@ package com.scruge.scruge.viewmodel.campaign
 import com.scruge.scruge.dependencies.format
 import com.scruge.scruge.dependencies.formatRounding
 import com.scruge.scruge.model.entity.Campaign
+import com.scruge.scruge.services.Service
 import com.scruge.scruge.viewmodel.ViewState
 import com.ysoftware.mvvm.single.ViewModel
 import java.net.URL
@@ -47,7 +48,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
     }
 
     private fun resetViewModels() {
-
+//        Service.api.getCampaign
     }
 
     // ACTIONS
