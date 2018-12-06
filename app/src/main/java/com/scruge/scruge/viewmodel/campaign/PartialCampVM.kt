@@ -8,7 +8,7 @@ import com.scruge.scruge.model.entity.PartialCampaignModel
 import com.ysoftware.mvvm.single.ViewModel
 import java.net.URL
 
-class PartialCampVM(model: PartialCampaign?) : ViewModel<PartialCampaign>(model),
+class PartialCampaignVM(model: PartialCampaign?) : ViewModel<PartialCampaign>(model),
         PartialCampaignModelHolder<PartialCampaign>,
         PartialCampaignViewModel {
 

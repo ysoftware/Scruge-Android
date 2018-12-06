@@ -62,8 +62,6 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
         // todo
     }
 
-
-
     // partial
 
     override val description get() = model?.description ?: ""

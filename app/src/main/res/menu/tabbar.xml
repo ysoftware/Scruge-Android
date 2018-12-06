@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Featured"
+        android:icon="@drawable/featured"
+        />
+
+    <item
+        android:title="Activity"
+        android:icon="@drawable/bell"
+        />
+    <item
+        android:title="Wallet"
+        android:icon="@drawable/wallet"
+        />
+    <item
+        android:title="Profile"
+        android:icon="@drawable/tab_profile"
+        />
+</menu>
