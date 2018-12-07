@@ -11,6 +11,8 @@ import com.scruge.scruge.dependencies.verticalLayout
 import com.scruge.scruge.view.cells.CampaignCell
 import com.scruge.scruge.viewmodel.ViewState
 import com.scruge.scruge.viewmodel.campaign.CampaignAVM
+import com.scruge.scruge.viewmodel.campaign.CampaignVM
+import com.scruge.scruge.viewmodel.campaign.PartialCampaignVM
 import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
 import kotlinx.android.synthetic.main.featured_fragment.*

@@ -10,9 +10,9 @@ class CampaignAVM : ArrayViewModel<PartialCampaign, PartialCampaignVM, CampaignQ
         query = CampaignQuery()
     }
 
-    override fun fetchData(query: CampaignQuery?, block: (Result<List<PartialCampaign>>) -> Unit) {
+    override fun fetchData(query: CampaignQuery?, block: (Result<Collection<PartialCampaignVM>>) -> Unit) {
         Service.api.getCampaignList(query) { result ->
-            block(result.map { it.campaigns })
+            block(result.map { it.campaigns.map { PartialCampaignVM(it) }})
         }
     }
 }
