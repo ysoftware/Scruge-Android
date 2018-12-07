@@ -10,6 +10,7 @@ import com.google.gson.internal.LinkedTreeMap
 import com.scruge.scruge.model.error.*
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.ResultResponse
+import java.lang.Exception
 import java.lang.reflect.Type
 import java.util.*
 
@@ -35,19 +36,28 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Resul
             // if fails try parsing to ResultResponse
             val result = gson.fromJson(body, ResultResponse::class.java)
 
-            if (result != null) {
+            if (result != null && result.result != 0) {
                 val error = ErrorHandler.error(result.result)
                 if (error != null) {
                     if (error.isAuthenticationFailureError) {
                         Service.tokenManager.removeToken()
                     }
+                    log("Error result: ${result.result}")
                     completion(Result.failure(error.wrap()))
                     return@let
                 }
             }
 
             // try parsing response to T
-            val obj:T = gson.fromJson(body, T::class.java)
+            val obj:T
+
+            try {
+                obj = gson.fromJson(body, T::class.java)
+            }
+            catch (exception: Exception) {
+                completion(Result.failure(BackendError.parsingError.wrap()))
+                return@let
+            }
 
             if (obj != null) {
                 log(body)
@@ -70,6 +80,7 @@ fun log(message:String) {
 }
 
 fun handleResultError(t: Throwable):ScrugeError {
+    log(t.message ?: "---")
     return NetworkingError.unknown
 }
 

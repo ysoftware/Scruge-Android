@@ -6,8 +6,8 @@ data class PartialCampaign(override val id:Int,
                            override val title:String,
                            override val description:String,
                            override val imageUrl:String,
-                           override val startTimestamp:Int,
-                           override val endTimestamp:Int,
+                           override val startTimestamp:Long,
+                           override val endTimestamp:Long,
                            override val economics: Economics
                           ): PartialCampaignModel, Comparable<PartialCampaign> {
 
@@ -19,8 +19,8 @@ data class Campaign(override val id:Int,
                     override val title:String,
                     override val description:String,
                     override val imageUrl:String,
-                    override val startTimestamp:Int,
-                    override val endTimestamp:Int,
+                    override val startTimestamp:Long,
+                    override val endTimestamp:Long,
                     override val economics: Economics,
 
                     // Full campaign only
@@ -54,9 +54,9 @@ interface PartialCampaignModel {
 
     val imageUrl:String
 
-    val startTimestamp:Int
+    val startTimestamp:Long
 
-    val endTimestamp:Int
+    val endTimestamp:Long
 
     val economics:Economics
 }

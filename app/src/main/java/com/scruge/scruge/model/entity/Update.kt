@@ -1,6 +1,6 @@
 package com.scruge.scruge.model.entity
 
-data class Update(val id:String, val title:String, val timestamp:Int,
+data class Update(val id:String, val title:String, val timestamp:Long,
                   val description:String?, val imageUrl:String,
                   val campaignInfo: CampaignInfo): Comparable<Update> {
 

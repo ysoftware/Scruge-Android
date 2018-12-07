@@ -29,9 +29,13 @@ class Api {
 
     // Initialization
 
-    private var service = service(Environment.test)
+    fun setEnvironment(env:Environment) {
+        service = createService(env)
+    }
 
-    fun service(environment: Environment):BackendApi {
+    private var service = createService(Environment.test)
+
+    private fun createService(environment: Environment):BackendApi {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.HEADERS
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
