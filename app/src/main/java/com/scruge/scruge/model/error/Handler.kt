@@ -4,6 +4,10 @@ class ErrorHandler {
 
     companion object {
 
+        fun message(throwable: Throwable):String {
+            return message(NetworkingError.unknown) // todo
+        }
+
         fun message(error: ScrugeError):String {
             return "todo" // todo
         }
