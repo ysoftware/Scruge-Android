@@ -53,12 +53,12 @@ interface BackendApi {
     @GET("campaigns/{token}/subscribed")
     fun getSubscribed(@Path("token") token:String): Call<ResponseBody>
 
-    @GET("campaigns")
+    @HTTP(method = "GET", path = "campaigns", hasBody = true)
     fun getCampaignList(@Body request: CampaignListRequest): Call<ResponseBody>
 
     // SUBSCRIPTIONS
 
-    @GET("user/{token}/is_subscribed")
+    @HTTP(method = "GET", path = "user/{token}/is_subscribed", hasBody = true)
     fun getSubscriptionStatus(@Path("token") token:String,
                               @Body request: CampaignRequest): Call<ResponseBody>
 
@@ -101,11 +101,11 @@ interface BackendApi {
 
     // CONTRIBUTIONS
 
-    @GET("user/{token}/did_contribute")
+    @HTTP(method = "GET", path = "user/{token}/did_contribute", hasBody = true)
     fun getDidContribute(@Path("token") token:String,
                          @Body request:CampaignRequest): Call<ResponseBody>
 
-    @GET("user/token/did_vote")
+    @HTTP(method = "GET", path = "user/token/did_vote", hasBody = true)
     fun getDidVote(@Path("token") token:String,
                    @Body request:CampaignRequest): Call<ResponseBody>
 
@@ -136,11 +136,11 @@ interface BackendApi {
     fun postUpdateComment(@Path("updateId") updateId:String,
                           @Body request:CommentRequest):Call<ResponseBody>
 
-    @GET("campaign/{campaignId}/comment")
+    @HTTP(method = "GET", path = "campaign/{campaignId}/comment", hasBody = true)
     fun getCampaignComments(@Path("campaignId") campaignId:String,
                             @Body request:CommentListRequest):Call<ResponseBody>
 
-    @GET("update/{updateId}/comment")
+    @HTTP(method = "GET", path = "update/{updateId}/comment", hasBody = true)
     fun getUpdateComments(@Path("updateId") updateId:String,
                           @Body request:CommentListRequest):Call<ResponseBody>
 }
