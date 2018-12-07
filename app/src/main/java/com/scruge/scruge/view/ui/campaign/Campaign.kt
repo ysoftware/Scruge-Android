@@ -9,18 +9,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.verticalLayout
 import com.scruge.scruge.view.cells.CampaignCell
-import com.scruge.scruge.viewmodel.campaign.CampaignAVM
-import com.ysoftware.mvvm.array.*
+import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.ysoftware.mvvm.single.ViewModel
-import kotlinx.android.synthetic.main.featured_fragment.*
+import com.ysoftware.mvvm.single.ViewModelDelegate
+import kotlinx.android.synthetic.main.campaign_fragment.*
 
-class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
+class CampaignFragment: Fragment(), ViewModelDelegate {
+
+    enum class Block(val rawValue:Int) {
+        info(0),  economies(1), update(2), comments(3),
+        about(4), faq(5), milestone(6), documents(7)
+    }
 
     // PROPERTIES
 
-    private val vm = CampaignAVM()
-    private val adapter = Adapter(vm)
-    private val updateHandler = ArrayViewModelUpdateHandler(adapter)
+    lateinit var vm: CampaignVM
+    val adapter = Adapter(vm)
 
     // SETUP
 
@@ -38,7 +42,7 @@ class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
 
     private fun setupVM() {
         vm.delegate = this
-        reloadData()
+        vm.load()
     }
 
     private fun setupTable() {
@@ -46,24 +50,15 @@ class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
         recycler_view.adapter = adapter
     }
 
-    private fun reloadData() {
-        vm.reloadData()
-    }
+    // DELEGATE
 
-    // VIEW MODEL
-
-    override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
-            arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
-        updateHandler.handle(update)
-    }
-
-    override fun didChangeState(state: State) {
+    override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
 
     }
 
     // ADAPTER
 
-    class Adapter(private val vm:CampaignAVM): RecyclerView.Adapter<CampaignCell>() {
+    class Adapter(private val vm: CampaignVM): RecyclerView.Adapter<CampaignCell>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampaignCell {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.cell_campaign_small, parent, false)
@@ -71,11 +66,12 @@ class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
         }
 
         override fun getItemCount(): Int {
-            return vm.numberOfItems
+            return 0
         }
 
         override fun onBindViewHolder(holder: CampaignCell, position: Int) {
-            holder.setup(vm.item(position, true))
+
         }
     }
+
 }

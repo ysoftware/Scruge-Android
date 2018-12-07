@@ -14,7 +14,7 @@
         <RelativeLayout
             android:id="@+id/container_view_featured"
             android:layout_width="match_parent"
-            android:background="@color/tabbar_grey"
+            android:background="@color/gray"
             android:layout_height="match_parent"/>
 
         <RelativeLayout

@@ -5,5 +5,5 @@
         android:color="@color/purple" />
     <item
         android:state_checked="false"
-        android:color="@color/tabbar_grey" />
+        android:color="@color/gray" />
 </selector>
