@@ -1,4 +1,4 @@
-package com.scruge.scruge.view.activity
+package com.scruge.scruge.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class TabbarActivity : AppCompatActivity() {
 
+    var selectedTab = 0; private set
     val navigationControllers =
             listOf(NavigationController(supportFragmentManager, R.id.container_view_featured),
                    NavigationController(supportFragmentManager, R.id.container_view_activity),
@@ -34,6 +35,7 @@ class TabbarActivity : AppCompatActivity() {
     }
 
     private fun selectTab(index:Int) {
+        selectedTab = index
         for (i in 0 until navigationControllers.size) {
             val view = findViewById<View>(navigationControllers[i].containerId)
             view.visibility = if (index == i) View.VISIBLE else View.GONE
