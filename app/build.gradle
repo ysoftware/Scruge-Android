@@ -38,10 +38,12 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
 
-    implementation 'com.github.ysoftware:MVVM-Android:0.2'
+    implementation 'com.github.ysoftware:MVVM-Android:0.3'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
