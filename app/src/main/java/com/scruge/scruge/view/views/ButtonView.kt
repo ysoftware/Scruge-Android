@@ -7,8 +7,11 @@ import android.widget.RelativeLayout
 import com.scruge.scruge.R
 import kotlinx.android.synthetic.main.button_view.view.*
 
-class ButtonView(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+class ButtonView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
         RelativeLayout(context, attrs, defStyleAttr) {
+
+    constructor(context: Context) : this(context, null)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     enum class Color(val id:Int) {
         purple(R.drawable.purple_button), green(R.drawable.green_button), gray(R.drawable.gray_button)

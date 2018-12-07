@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.verticalLayout
 import com.scruge.scruge.view.cells.CampaignCell
+import com.scruge.scruge.viewmodel.ViewState
 import com.scruge.scruge.viewmodel.campaign.CampaignAVM
 import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
@@ -38,16 +39,16 @@ class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
 
     private fun setupVM() {
         vm.delegate = this
-        reloadData()
+        vm.reloadData()
     }
 
     private fun setupTable() {
+        refresh_control.setOnRefreshListener {
+            vm.reloadData()
+        }
+
         recycler_view.verticalLayout()
         recycler_view.adapter = adapter
-    }
-
-    private fun reloadData() {
-        vm.reloadData()
     }
 
     // VIEW MODEL
@@ -58,7 +59,27 @@ class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
     }
 
     override fun didChangeState(state: State) {
-
+        when (state) {
+            State.error -> {
+                loading_view.state = ViewState.error
+                loading_view.state.errorMessage = state.errorValue?.message ?: "" // todo
+                refresh_control.isRefreshing = false
+            }
+            State.loading, State.initial -> {
+                loading_view.state = ViewState.loading
+            }
+            State.ready -> {
+                refresh_control.isRefreshing = false
+                if (vm.numberOfItems == 0) {
+                    loading_view.state = ViewState.error
+                    loading_view.state.errorMessage = "No campaigns were found for your request"
+                }
+                else {
+                    loading_view.state = ViewState.ready
+                }
+            }
+            else -> return
+        }
     }
 
     // ADAPTER

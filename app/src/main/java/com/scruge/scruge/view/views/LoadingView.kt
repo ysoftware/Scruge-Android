@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import com.scruge.scruge.R
+import com.scruge.scruge.viewmodel.ViewState
 import kotlinx.android.synthetic.main.loading_view.view.*
 
-class LoadingView(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+class LoadingView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
         RelativeLayout(context, attrs, defStyleAttr) {
+
+    constructor(context: Context) : this(context, null)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     init {
         LayoutInflater.from(context).inflate(R.layout.loading_view, this, true)
@@ -38,4 +42,26 @@ class LoadingView(context: Context, attrs: AttributeSet? = null, defStyleAttr: I
     private fun showTryAgainButtonIfNeeded() {
         loading_view_button.visibility = if (delegate == null) View.GONE else View.VISIBLE
     }
+
+    var state: ViewState = ViewState.loading
+        set(value) {
+            field = value
+
+            when (value) {
+                ViewState.loading -> {
+                    visibility = View.VISIBLE
+                    loading_indicator.visibility = View.VISIBLE
+                    error_view.visibility = View.GONE
+                }
+                ViewState.error -> {
+                    visibility = View.VISIBLE
+                    loading_indicator.visibility = View.GONE
+                    error_view.visibility = View.VISIBLE
+                    setMessage(field.errorMessage)
+                }
+                ViewState.ready -> {
+                    visibility = View.GONE
+                }
+            }
+        }
 }

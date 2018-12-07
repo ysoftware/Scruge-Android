@@ -1,6 +1,7 @@
 package com.scruge.scruge.services.api
 
 import android.graphics.Bitmap
+import android.util.Log
 import com.scruge.scruge.model.entity.Campaign
 import com.scruge.scruge.model.entity.Comment
 import com.scruge.scruge.model.entity.Update
@@ -115,14 +116,15 @@ class Api {
         if (query != null && query.requestType != CampaignQuery.RequestType.regular) {
             Service.tokenManager.getToken()?.let {
                 when (query.requestType) {
-                    CampaignQuery.RequestType.backed -> service.getBacked(it)
-                    CampaignQuery.RequestType.subscribed -> service.getSubscribed(it)
+                    CampaignQuery.RequestType.backed -> service.getBacked(it).enqueue(completion)
+                    CampaignQuery.RequestType.subscribed -> service.getSubscribed(it).enqueue(completion)
                     else -> return@let
                 }
             } ?: completion(Result.failure(AuthError.noToken.wrap()))
-            return
         }
-        service.getCampaignList(CampaignListRequest(query))
+        else {
+            service.getCampaignList(CampaignListRequest(query)).enqueue(completion)
+        }
     }
 
     // SUBSCRIPTIONS

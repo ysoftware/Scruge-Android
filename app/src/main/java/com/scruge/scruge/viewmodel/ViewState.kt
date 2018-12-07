@@ -4,5 +4,5 @@ enum class ViewState {
 
     loading, ready, error;
 
-    val errorMessage:String? = null
+    var errorMessage:String = ""
 }
