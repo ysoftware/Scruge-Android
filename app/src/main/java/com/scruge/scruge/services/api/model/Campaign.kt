@@ -1,5 +1,6 @@
 package com.scruge.scruge.services.api.model
 
+import com.scruge.scruge.dependencies.Codable
 import com.scruge.scruge.model.entity.Campaign
 import com.scruge.scruge.model.entity.PartialCampaign
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
@@ -14,7 +15,7 @@ data class CampaignListResponse(val campaigns:List<PartialCampaign>)
 
 data class CampaignRequest(val campaignId:Int)
 
-data class CampaignListRequest(val q: CampaignQuery?) {
+class CampaignListRequest(q: CampaignQuery?): Codable {
 
     val page:Int = q?.page ?: 0
 

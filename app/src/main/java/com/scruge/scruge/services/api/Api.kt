@@ -1,27 +1,20 @@
 package com.scruge.scruge.services.api
 
 import android.graphics.Bitmap
-import android.util.Log
+import com.scruge.scruge.dependencies.toMap
 import com.scruge.scruge.model.entity.Campaign
-import com.scruge.scruge.model.entity.Comment
 import com.scruge.scruge.model.entity.Update
-import com.scruge.scruge.model.entity.VoteInfo
 import com.scruge.scruge.model.error.AuthError
-import com.scruge.scruge.model.error.ScrugeError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
 import com.scruge.scruge.services.network.enqueue
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
 import com.scruge.scruge.viewmodel.comment.CommentQuery
-import com.scruge.scruge.viewmodel.comment.CommentSource
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class Api {
 
@@ -40,7 +33,7 @@ class Api {
 
     fun service(environment: Environment):BackendApi {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        interceptor.level = HttpLoggingInterceptor.Level.HEADERS
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
         return Retrofit.Builder()
@@ -123,7 +116,7 @@ class Api {
             } ?: completion(Result.failure(AuthError.noToken.wrap()))
         }
         else {
-            service.getCampaignList(CampaignListRequest(query)).enqueue(completion)
+            service.getCampaignList(CampaignListRequest(query).toMap()).enqueue(completion)
         }
     }
 

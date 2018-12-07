@@ -5,7 +5,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
-
+@JvmSuppressWildcards
 interface BackendApi {
 
     // WALLET
@@ -53,8 +53,8 @@ interface BackendApi {
     @GET("campaigns/{token}/subscribed")
     fun getSubscribed(@Path("token") token:String): Call<ResponseBody>
 
-    @HTTP(method = "GET", path = "campaigns", hasBody = true)
-    fun getCampaignList(@Body request: CampaignListRequest): Call<ResponseBody>
+    @GET("campaigns")
+    fun getCampaignList(@QueryMap map: Map<String, Any>): Call<ResponseBody>
 
     // SUBSCRIPTIONS
 
