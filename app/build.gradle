@@ -3,12 +3,21 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    // increment version code
+    Properties versionProps = new Properties()
+    def versionPropsFile = file('version.properties')
+    if(versionPropsFile.exists())
+        versionProps.load(new FileInputStream(versionPropsFile))
+    def code = (versionProps['VERSION_CODE'] ?: "0").toInteger() + 1
+    versionProps['VERSION_CODE'] = code.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.scruge.scruge"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
+        versionCode code
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

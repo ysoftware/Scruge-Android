@@ -1,6 +1,6 @@
 package com.scruge.scruge.view.main
 
-import com.scruge.scruge.view.activity.ActivityFragment
+import com.scruge.scruge.view.ui.activity.ActivityFragment
 import com.scruge.scruge.view.ui.authprofile.ProfileFragment
 import com.scruge.scruge.view.ui.campaign.FeaturedFragment
 import com.scruge.scruge.view.ui.wallet.WalletFragment
