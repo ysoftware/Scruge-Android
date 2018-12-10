@@ -150,7 +150,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
             val block = Block.from(viewType)
             return when (block) {
                 about -> AboutCell(i.inflate(R.layout.cell_about, parent, false))
-                info -> CampaignCell(i.inflate(R.layout.cell_campaign_info, parent, false))
+                info -> CampaignInfoCell(i.inflate(R.layout.cell_campaign_info, parent, false))
                 economies -> EconomiesCell(i.inflate(R.layout.cell_economies, parent, false))
                 faq -> FaqCell(i.inflate(R.layout.cell_faq, parent, false))
                 milestone -> PagingCell(i.inflate(R.layout.cell_paging, parent, false))
@@ -169,7 +169,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                             }?.socialTap { social ->
 
                             }
-                info -> (holder as? CampaignCell)?.setup(fr.vm)
+                info -> (holder as? CampaignInfoCell)?.setup(fr.vm)
                 economies -> fr.vm.economiesVM?.let {
                         (holder as? EconomiesCell)?.setup(it)
                     }

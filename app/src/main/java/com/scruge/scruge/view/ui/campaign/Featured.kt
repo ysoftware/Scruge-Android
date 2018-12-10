@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
-import com.scruge.scruge.view.cells.CampaignCell
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.view.cells.CampaignSmallCell
 import com.scruge.scruge.viewmodel.campaign.CampaignAVM
 import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
@@ -89,12 +89,12 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
 
     // ADAPTER
 
-    class Adapter(private val vm:CampaignAVM): RecyclerView.Adapter<CampaignCell>() {
+    class Adapter(private val vm:CampaignAVM): RecyclerView.Adapter<CampaignSmallCell>() {
 
         var tap:((Int)->Unit)? = null
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampaignCell {
-            return CampaignCell(LayoutInflater.from(parent.context)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampaignSmallCell {
+            return CampaignSmallCell(LayoutInflater.from(parent.context)
                                         .inflate(R.layout.cell_campaign_small, parent, false))
         }
 
@@ -102,7 +102,7 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
             return vm.numberOfItems
         }
 
-        override fun onBindViewHolder(holder: CampaignCell, position: Int) {
+        override fun onBindViewHolder(holder: CampaignSmallCell, position: Int) {
             holder.setup(vm.item(position, true))
             holder.itemView.setOnClickListener {
                 tap?.invoke(position)
