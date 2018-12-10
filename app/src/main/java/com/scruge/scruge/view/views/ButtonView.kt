@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.scruge.scruge.R
-import kotlinx.android.synthetic.main.button_view.view.*
+import kotlinx.android.synthetic.main.view_button.view.*
 
 class ButtonView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
         RelativeLayout(context, attrs, defStyleAttr) {
@@ -18,7 +18,7 @@ class ButtonView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
     }
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.button_view, this, true)
+        LayoutInflater.from(context).inflate(R.layout.view_button, this, true)
     }
 
     var click:((ButtonView)->Unit)? = null

@@ -14,7 +14,7 @@ import com.scruge.scruge.services.Service
 import com.scruge.scruge.viewmodel.campaign.CampaignAVM
 import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
-import kotlinx.android.synthetic.main.featured_fragment.*
+import kotlinx.android.synthetic.main.fragment_featured.*
 
 class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
 
@@ -28,7 +28,7 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.featured_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_featured, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

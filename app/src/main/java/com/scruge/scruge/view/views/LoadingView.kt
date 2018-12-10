@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import com.scruge.scruge.R
 import com.scruge.scruge.model.ViewState
-import kotlinx.android.synthetic.main.loading_view.view.*
+import kotlinx.android.synthetic.main.view_loading.view.*
 
 class LoadingView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
         RelativeLayout(context, attrs, defStyleAttr) {
@@ -16,7 +16,7 @@ class LoadingView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.loading_view, this, true)
+        LayoutInflater.from(context).inflate(R.layout.view_loading, this, true)
         showTryAgainButtonIfNeeded()
     }
 

@@ -12,7 +12,7 @@ import com.scruge.scruge.view.cells.CampaignCell
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
-import kotlinx.android.synthetic.main.campaign_fragment.*
+import kotlinx.android.synthetic.main.fragment_campaign.*
 
 class CampaignFragment: NavigationFragment(), ViewModelDelegate {
 
@@ -23,14 +23,14 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate {
 
     // PROPERTIES
 
-    var vm: CampaignVM? = null
+    lateinit var vm: CampaignVM
     var adapter:Adapter? = null
 
     // SETUP
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.featured_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_featured, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -41,16 +41,25 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate {
     }
 
     private fun setupVM() {
-        vm?.let { vm ->
-            vm.delegate = this
-            vm.load()
-            adapter = Adapter(vm)
-        }
+        vm.delegate = this
+        vm.load()
+        adapter = Adapter(this)
     }
 
     private fun setupTable() {
         recycler_view.setupForVerticalLayout()
         recycler_view.adapter = adapter
+    }
+
+    fun shouldDisplay(block:Block):Boolean {
+        return when (block) {
+            Block.info, Block.comments, Block.about -> true
+            Block.milestone -> vm.currentMilestoneVM != null
+            Block.update -> vm.lastUpdateVM != null
+            Block.economies -> vm.economiesVM != null
+            Block.documents -> vm.documentsVM?.numberOfItems ?: 0 != 0
+            Block.faq -> vm.faqVM?.numberOfItems ?: 0 != 0
+        }
     }
 
     // DELEGATE
@@ -61,15 +70,19 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate {
 
     // ADAPTER
 
-    class Adapter(private val vm: CampaignVM): RecyclerView.Adapter<CampaignCell>() {
+    class Adapter(private val fr:CampaignFragment): RecyclerView.Adapter<CampaignCell>() {
+
+        override fun getItemViewType(position: Int): Int {
+            return Block.values().filter { fr.shouldDisplay(it) }[position].rawValue
+        }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampaignCell {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.cell_campaign_small, parent, false)
-            return CampaignCell(view)
+            val id = R.layout.cell_campaign_small
+            return CampaignCell(LayoutInflater.from(parent.context).inflate(id, parent, false))
         }
 
         override fun getItemCount(): Int {
-            return 0
+            return Block.values().filter { fr.shouldDisplay(it) }.size
         }
 
         override fun onBindViewHolder(holder: CampaignCell, position: Int) {
