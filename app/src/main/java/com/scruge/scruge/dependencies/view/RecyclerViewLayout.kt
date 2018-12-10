@@ -1,4 +1,4 @@
-package com.scruge.scruge.dependencies
+package com.scruge.scruge.dependencies.view
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

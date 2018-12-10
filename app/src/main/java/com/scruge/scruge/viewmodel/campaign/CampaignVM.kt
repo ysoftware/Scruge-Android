@@ -1,12 +1,12 @@
 package com.scruge.scruge.viewmodel.campaign
 
 import android.net.Uri
-import com.scruge.scruge.dependencies.format
-import com.scruge.scruge.dependencies.formatRounding
+import com.scruge.scruge.dependencies.dataformatting.format
+import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.*
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
-import com.scruge.scruge.viewmodel.ViewState
+import com.scruge.scruge.model.ViewState
 import com.ysoftware.mvvm.single.ViewModel
 import java.net.URL
 

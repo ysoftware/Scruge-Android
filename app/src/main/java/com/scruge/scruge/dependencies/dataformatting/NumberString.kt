@@ -1,4 +1,4 @@
-package com.scruge.scruge.dependencies
+package com.scruge.scruge.dependencies.dataformatting
 
 fun Double.formatRounding():String {
     // todo

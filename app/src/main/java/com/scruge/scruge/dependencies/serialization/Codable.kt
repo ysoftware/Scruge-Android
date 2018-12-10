@@ -1,7 +1,6 @@
-package com.scruge.scruge.dependencies
+package com.scruge.scruge.dependencies.serialization
 
 import android.util.Log
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 

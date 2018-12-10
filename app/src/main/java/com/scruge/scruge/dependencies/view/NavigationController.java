@@ -1,4 +1,4 @@
-package com.scruge.scruge.dependencies;
+package com.scruge.scruge.dependencies.view;
 
 import android.transition.Slide;
 import android.view.Gravity;

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import com.scruge.scruge.R
-import com.scruge.scruge.viewmodel.ViewState
+import com.scruge.scruge.model.ViewState
 import kotlinx.android.synthetic.main.loading_view.view.*
 
 class LoadingView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):

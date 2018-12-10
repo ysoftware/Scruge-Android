@@ -1,4 +1,4 @@
-package com.scruge.scruge.viewmodel
+package com.scruge.scruge.model
 
 enum class ViewState {
 

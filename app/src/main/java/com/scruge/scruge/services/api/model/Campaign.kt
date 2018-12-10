@@ -1,6 +1,6 @@
 package com.scruge.scruge.services.api.model
 
-import com.scruge.scruge.dependencies.Codable
+import com.scruge.scruge.dependencies.serialization.Codable
 import com.scruge.scruge.model.entity.Campaign
 import com.scruge.scruge.model.entity.PartialCampaign
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery

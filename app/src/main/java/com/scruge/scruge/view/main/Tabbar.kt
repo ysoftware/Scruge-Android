@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.scruge.scruge.R
-import com.scruge.scruge.dependencies.NavigationController
+import com.scruge.scruge.dependencies.view.NavigationController
 import com.scruge.scruge.services.Service
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -12,10 +12,14 @@ class TabbarActivity : AppCompatActivity() {
 
     var selectedTab = 0; private set
     val navigationControllers =
-            listOf(NavigationController(supportFragmentManager, R.id.container_view_featured),
-                   NavigationController(supportFragmentManager, R.id.container_view_activity),
-                   NavigationController(supportFragmentManager, R.id.container_view_wallet),
-                   NavigationController(supportFragmentManager, R.id.container_view_profile))
+            listOf(NavigationController(supportFragmentManager,
+                                                                            R.id.container_view_featured),
+                   NavigationController(supportFragmentManager,
+                                                                            R.id.container_view_activity),
+                   NavigationController(supportFragmentManager,
+                                                                            R.id.container_view_wallet),
+                   NavigationController(supportFragmentManager,
+                                                                            R.id.container_view_profile))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

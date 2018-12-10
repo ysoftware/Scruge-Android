@@ -1,10 +1,8 @@
 package com.scruge.scruge.viewmodel.campaign
 
-import com.scruge.scruge.dependencies.format
-import com.scruge.scruge.dependencies.formatRounding
-import com.scruge.scruge.model.entity.Campaign
+import com.scruge.scruge.dependencies.dataformatting.format
+import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.PartialCampaign
-import com.scruge.scruge.model.entity.PartialCampaignModel
 import com.ysoftware.mvvm.single.ViewModel
 import java.net.URL
 

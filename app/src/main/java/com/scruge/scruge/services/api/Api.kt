@@ -1,7 +1,7 @@
 package com.scruge.scruge.services.api
 
 import android.graphics.Bitmap
-import com.scruge.scruge.dependencies.toMap
+import com.scruge.scruge.dependencies.serialization.toMap
 import com.scruge.scruge.model.entity.Campaign
 import com.scruge.scruge.model.entity.Update
 import com.scruge.scruge.model.error.AuthError

@@ -1,4 +1,4 @@
-package com.scruge.scruge.dependencies;
+package com.scruge.scruge.dependencies.serialization;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;

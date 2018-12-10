@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
-import com.scruge.scruge.dependencies.verticalLayout
+import com.scruge.scruge.dependencies.view.verticalLayout
 import com.scruge.scruge.view.cells.CampaignCell
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.ysoftware.mvvm.single.ViewModel
