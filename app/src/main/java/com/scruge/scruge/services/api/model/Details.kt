@@ -1,6 +1,6 @@
 package com.scruge.scruge.services.api.model
 
-import android.app.Activity
+import com.scruge.scruge.model.entity.Activity
 import com.scruge.scruge.model.entity.Milestone
 import com.scruge.scruge.model.entity.Update
 

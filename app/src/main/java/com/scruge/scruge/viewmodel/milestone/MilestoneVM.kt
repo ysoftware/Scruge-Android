@@ -7,9 +7,9 @@ import com.ysoftware.mvvm.single.ViewModel
 
 class MilestoneVM(model: Milestone?) : ViewModel<Milestone>(model) {
 
-    val description:String get() = model?.description ?: ""
+    val description get() = model?.description ?: ""
 
-    val date:String get() = model?.let { datePresent(it.endTimestamp, "d MMMM yyyy") } ?: ""
+    val date get() = model?.let { datePresent(it.endTimestamp, "d MMMM yyyy") } ?: ""
 
     val fundsRelease:String get() {
         val value = (model?.fundsReleasePercent ?: 0.0).formatRounding()
