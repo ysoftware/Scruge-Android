@@ -1,5 +1,6 @@
 package com.scruge.scruge.viewmodel.campaign
 
+import android.net.Uri
 import com.scruge.scruge.dependencies.dataformatting.format
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.PartialCampaign
@@ -16,30 +17,17 @@ class PartialCampaignVM(model: PartialCampaign?) : ViewModel<PartialCampaign>(mo
 
     override val title get() = model?.title ?: ""
 
-    override val imageUrl:URL? get() {
+    override val imageUrl: Uri? get() {
         val m = model
-        if (m?.imageUrl != null) { return URL(m.imageUrl) }
+        if (m?.imageUrl != null) { return try { Uri.parse(m.imageUrl) } catch (e:Exception) { null }}
         return null
     }
 
-    override val progress:Double get() {
-        val m = model
-        if (m != null) { return m.economics.raised / m.economics.softCap }
-        return 0.0
-    }
+    override val raised get() = model?.economics?.raised ?: 0.0
 
-    override val progressString
-        get() = "${(progress * 100).formatRounding()}% raised"
+    override val hardCap get() = model?.economics?.hardCap ?: 0
 
-    override val raisedString: String get() {
-        val m = model
-        if (m != null) {
-            val raised = m.economics.raised.format()
-            val total = m.economics.softCap.format()
-            return "$raised raised of $total"
-        }
-        return ""
-    }
+    override val softCap get() = model?.economics?.softCap ?: 0
 
     override val daysLeft:String get()  {
         val m = model

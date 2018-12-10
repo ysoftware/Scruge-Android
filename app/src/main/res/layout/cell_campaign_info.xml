@@ -14,18 +14,20 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/gray"
+            android:background="@color/black"
             app:layout_constraintDimensionRatio="H,1.2:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <WebView
-                android:id="@+id/campaign_web_view"
+                android:alpha="0.5"
+                android:id="@+id/campaign_info_web_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
             <ImageView
-                android:id="@+id/campaign_image"
+                android:alpha="0.5"
+                android:id="@+id/campaign_info_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </RelativeLayout>
@@ -41,6 +43,7 @@
         android:paddingBottom="15dp">
 
         <TextView
+            android:id="@+id/campaign_info_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="6 days left"
@@ -48,6 +51,7 @@
             android:textSize="12sp"/>
 
         <TextView
+            android:id="@+id/campaign_info_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -75,6 +79,7 @@
             android:padding="15dp">
 
             <TextView
+                android:id="@+id/campaign_info_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"

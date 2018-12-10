@@ -17,4 +17,13 @@ class ProgressView(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
         LayoutInflater.from(context).inflate(R.layout.view_progress, this, true)
     }
 
+    var value = 0.0; set(value) { field = value; updateLayout() }
+    var total = 0.0; set(value) { field = value; updateLayout() }
+    var firstGoal = 0.0; set(value) { field = value; updateLayout() }
+    var prefix = "$"; set(value) { field = value; updateLayout() }
+    var suffix = ""; set(value) { field = value; updateLayout() }
+
+    fun updateLayout() {
+        // todo
+    }
 }

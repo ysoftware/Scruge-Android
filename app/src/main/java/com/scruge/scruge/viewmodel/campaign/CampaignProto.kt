@@ -1,6 +1,6 @@
 package com.scruge.scruge.viewmodel.campaign
 
-import java.net.URL
+import android.net.Uri
 
 interface PartialCampaignViewModel {
 
@@ -8,15 +8,15 @@ interface PartialCampaignViewModel {
 
     val title: String
 
-    val progress: Double
+    val raised: Double
 
-    val progressString: String
+    val hardCap: Int
 
-    val raisedString: String
+    val softCap: Int 
 
     val daysLeft:String
 
-    val imageUrl: URL?
+    val imageUrl: Uri?
 }
 
 interface PartialCampaignModelHolder<Model> {
