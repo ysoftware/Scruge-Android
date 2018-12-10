@@ -14,6 +14,7 @@
     <color name="green_light">#B5E352</color>
 
     <color name="gray">#DAD9E2</color>
+    <color name="gray_comment">#F4F6F6</color>
     <color name="gray_light">#F1F3F5</color>
 
     <color name="background_inactive">#D3D3D3</color>
@@ -21,5 +22,6 @@
     <color name="text_title">#455154</color>
     <color name="text_regular">#5F5D70</color>
     <color name="text_light">#C4CACC</color>
+    <color name="text_comment">#969FA2</color>
 
 </resources>
