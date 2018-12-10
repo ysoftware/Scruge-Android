@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/campaign_info_image_constraint"
@@ -20,16 +20,16 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <WebView
-                android:alpha="0.5"
                 android:id="@+id/campaign_info_web_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:alpha="0.5"/>
 
             <ImageView
-                android:alpha="0.5"
                 android:id="@+id/campaign_info_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:alpha="0.5"/>
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -69,13 +69,14 @@
         android:layout_below="@id/campaign_info_image_constraint"
         android:layout_marginStart="15dp"
         android:layout_marginTop="-15dp"
-        android:layout_marginEnd="15dp">
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:orientation="vertical"
             android:padding="15dp">
 
             <TextView
@@ -88,10 +89,10 @@
                 android:textSize="15sp"/>
 
             <com.scruge.scruge.view.views.ProgressView
-                android:layout_marginTop="10dp"
                 android:id="@+id/campaign_progress_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

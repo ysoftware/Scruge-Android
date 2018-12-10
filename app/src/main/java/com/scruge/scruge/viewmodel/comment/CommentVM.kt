@@ -16,5 +16,5 @@ class CommentVM(model: Comment?) : ViewModel<Comment>(model) {
 
     val date get() = model?.let { datePresent(it.timestamp, "d MMMM, H:mm") }
 
-    val likes get() = model?.let { "${it.likesCount}" } ?: ""
+    val likes get() = model?.let { it.likesCount?.let { if (it != 0) it.toString() else "" }} ?: ""
 }
