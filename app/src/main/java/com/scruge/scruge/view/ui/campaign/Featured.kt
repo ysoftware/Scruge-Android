@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
-import com.scruge.scruge.dependencies.view.verticalLayout
+import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.view.cells.CampaignCell
 import com.scruge.scruge.model.ViewState
+import com.scruge.scruge.services.Service
 import com.scruge.scruge.viewmodel.campaign.CampaignAVM
 import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
 import kotlinx.android.synthetic.main.featured_fragment.*
 
-class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
+class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
 
     // PROPERTIES
 
@@ -47,8 +48,12 @@ class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
             vm.reloadData()
         }
 
-        recycler_view.verticalLayout()
+        recycler_view.setupForVerticalLayout()
         recycler_view.adapter = adapter
+
+        adapter.tap = { index ->
+            Service.presenter.presentCampaignFragment(this, vm.item(index).id)
+        }
     }
 
     // VIEW MODEL
@@ -86,9 +91,11 @@ class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
 
     class Adapter(private val vm:CampaignAVM): RecyclerView.Adapter<CampaignCell>() {
 
+        var tap:((Int)->Unit)? = null
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampaignCell {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.cell_campaign_small, parent, false)
-            return CampaignCell(view)
+            return CampaignCell(LayoutInflater.from(parent.context)
+                                        .inflate(R.layout.cell_campaign_small, parent, false))
         }
 
         override fun getItemCount(): Int {
@@ -97,6 +104,9 @@ class FeaturedFragment: Fragment(), ArrayViewModelDelegate {
 
         override fun onBindViewHolder(holder: CampaignCell, position: Int) {
             holder.setup(vm.item(position, true))
+            holder.itemView.setOnClickListener {
+                tap?.invoke(position)
+            }
         }
     }
 }

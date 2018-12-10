@@ -1,4 +1,4 @@
-package com.scruge.scruge.dependencies.view;
+package com.scruge.scruge.dependencies.navigation;
 
 import android.transition.Slide;
 import android.view.Gravity;
@@ -38,12 +38,20 @@ public class NavigationController {
         manager.beginTransaction()
                 .replace(containerId, fragment).commitAllowingStateLoss();
         fragmentStack = new Stack<>();
+
+        if (fragment instanceof NavigationFragment) {
+            ((NavigationFragment) fragment).setNavigationController(this);
+        }
     }
 
     public void navigateTo(Fragment fragment) {
         if (android.os.Build.VERSION.SDK_INT > 21) {
             fragment.setEnterTransition(new Slide(Gravity.END));
             fragment.setExitTransition(new Slide(Gravity.START));
+        }
+
+        if (fragment instanceof NavigationFragment) {
+            ((NavigationFragment) fragment).setNavigationController(this);
         }
 
         if (currentFragment != null) {
