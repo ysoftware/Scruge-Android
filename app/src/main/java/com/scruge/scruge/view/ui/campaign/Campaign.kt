@@ -23,8 +23,8 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate {
 
     // PROPERTIES
 
-    lateinit var vm: CampaignVM
-    val adapter = Adapter(vm)
+    var vm: CampaignVM? = null
+    var adapter:Adapter? = null
 
     // SETUP
 
@@ -41,8 +41,11 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate {
     }
 
     private fun setupVM() {
-        vm.delegate = this
-        vm.load()
+        vm?.let { vm ->
+            vm.delegate = this
+            vm.load()
+            adapter = Adapter(vm)
+        }
     }
 
     private fun setupTable() {
