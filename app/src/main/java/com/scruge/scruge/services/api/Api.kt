@@ -32,9 +32,13 @@ class Api {
 
     fun setEnvironment(env:Environment) {
         service = createService(env)
+        environment = env
     }
 
+    private var environment = Environment.test
     private var service = createService(Environment.test)
+
+    val serviceUrl = environment.url
 
     private fun createService(environment: Environment):BackendApi {
         val interceptor = HttpLoggingInterceptor()

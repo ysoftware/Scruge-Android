@@ -35,7 +35,8 @@ data class Campaign(override val id:Int,
                     val documents:List<Document>?,
                     val currentMilestone:Milestone?,
                     val lastUpdate:Update?,
-                    val topComments:List<Comment>?): PartialCampaignModel, Comparable<Campaign> {
+                    val topComments:List<Comment>?,
+                    val pitchUrl:String?): PartialCampaignModel, Comparable<Campaign> {
 
     override fun compareTo(other: Campaign): Int {
         return if (topComments != other.topComments) -1

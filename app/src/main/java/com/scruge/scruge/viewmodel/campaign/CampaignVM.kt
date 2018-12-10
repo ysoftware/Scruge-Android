@@ -7,6 +7,14 @@ import com.scruge.scruge.model.entity.*
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.model.ViewState
+import com.scruge.scruge.viewmodel.comment.CommentAVM
+import com.scruge.scruge.viewmodel.comment.CommentSource
+import com.scruge.scruge.viewmodel.document.DocumentAVM
+import com.scruge.scruge.viewmodel.economies.EconomiesVM
+import com.scruge.scruge.viewmodel.faq.FaqAVM
+import com.scruge.scruge.viewmodel.milestone.MilestoneAVM
+import com.scruge.scruge.viewmodel.milestone.MilestoneVM
+import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.ysoftware.mvvm.single.ViewModel
 import java.net.URL
 
@@ -70,7 +78,35 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
     }
 
     private fun resetViewModels() {
-        // todo
+        lastUpdateVM = model?.lastUpdate?.let { UpdateVM(it) }
+        currentMilestoneVM = model?.currentMilestone?.let { MilestoneVM(it) }
+        faqVM = model?.faq?.let { FaqAVM(it) }
+        economiesVM = model?.economics?.let { EconomiesVM(it) }
+
+        milestonesVM = model?.let { MilestoneAVM(it) }
+        milestonesVM?.reloadData()
+
+        topCommentsVM = model?.let { m ->
+            val source = CommentSource.campaign
+            source.campaignObject = m
+            m.topComments?.let { CommentAVM(it, source)}
+        }
+
+        documentsVM = model?.let { model ->
+            val documents = arrayListOf<Document>()
+
+            if (model.pitchUrl != null) {
+                documents.add(Document("Pitch", model.pitchUrl))
+            }
+            else {
+                val url = Service.api.serviceUrl + "campaign/${model.id}/content"
+                documents.add(Document("Pitch", url))
+            }
+            model.documents?.let {
+                documents.addAll(it)
+            }
+            DocumentAVM(documents)
+        }
     }
 
     // METHODS
@@ -134,6 +170,20 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
     }
 
     // VIEW MODELS
+
+    var lastUpdateVM: UpdateVM? = null; private set
+
+    var topCommentsVM:CommentAVM? = null; private set
+
+    var currentMilestoneVM:MilestoneVM? = null; private set
+
+    var milestonesVM:MilestoneAVM? = null; private set
+
+    var economiesVM:EconomiesVM? = null; private set
+
+    var documentsVM:DocumentAVM? = null; private set
+
+    var faqVM: FaqAVM? = null; private set
 
     // PROPERTIES
 
