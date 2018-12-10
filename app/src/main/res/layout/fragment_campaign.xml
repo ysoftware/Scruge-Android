@@ -28,7 +28,6 @@
         android:layout_height="wrap_content"/>
 
     <com.scruge.scruge.view.views.LoadingView
-        android:visibility="gone"
         android:id="@+id/campaign_loading_view"
         android:background="@color/white"
         android:layout_width="match_parent"

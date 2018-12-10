@@ -8,15 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.view.cells.*
 import com.scruge.scruge.view.ui.campaign.CampaignFragment.Block.*
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.faq.FaqVM
+import com.ysoftware.mvvm.array.ArrayViewModel
+import com.ysoftware.mvvm.array.ArrayViewModelDelegate
+import com.ysoftware.mvvm.array.Query
+import com.ysoftware.mvvm.array.Update
 import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
 import kotlinx.android.synthetic.main.fragment_campaign.*
 
-class CampaignFragment: NavigationFragment(), ViewModelDelegate {
+class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelDelegate {
 
     enum class Block(val rawValue:Int) {
         info(0),  economies(1), update(2), comments(3),
@@ -42,13 +47,13 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate {
     // PROPERTIES
 
     lateinit var vm: CampaignVM
-    var adapter:Adapter? = null
+    private var adapter:Adapter? = null
 
     // SETUP
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_featured, container, false)
+        return inflater.inflate(R.layout.fragment_campaign, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -69,6 +74,14 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate {
         recycler_view.adapter = adapter
     }
 
+    private fun setupNavigationBar() {
+        // todo subscribe button
+    }
+
+    private fun setupBottomButton() {
+        // todo invest and vote
+    }
+
     fun shouldDisplay(block:Block):Boolean {
         return when (block) {
             info, comments, about -> true
@@ -80,10 +93,44 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate {
         }
     }
 
+    private fun showData() {
+        vm.lastUpdateVM?.delegate = this
+        vm.currentMilestoneVM?.delegate = this
+        vm.topCommentsVM?.delegate = this
+        vm.economiesVM?.delegate = this
+        vm.milestonesVM?.delegate = this
+
+        adapter?.notifyDataSetChanged()
+        setupBottomButton()
+    }
+
     // DELEGATE
 
     override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
+        if (viewModel !== vm) {
+            adapter?.notifyDataSetChanged()
+            return
+        }
 
+        campaign_loading_view.state = vm.state
+
+        // todo
+        when (vm.state) {
+            ViewState.error -> {
+                //                refresh_control.endRefreshing
+            }
+            ViewState.ready -> {
+                showData()
+                //                refresh_control.endRefreshing
+            }
+            ViewState.loading -> { }
+        }
+    }
+
+    override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
+            arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
+        adapter?.notifyDataSetChanged()
+        setupNavigationBar()
     }
 
     // ADAPTER
