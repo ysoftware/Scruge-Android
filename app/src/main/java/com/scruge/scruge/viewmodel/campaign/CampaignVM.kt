@@ -154,6 +154,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
                 state = ViewState.error
                 state.errorMessage = ErrorHandler.message(error)
             }
+            resetViewModels()
         }
     }
 
