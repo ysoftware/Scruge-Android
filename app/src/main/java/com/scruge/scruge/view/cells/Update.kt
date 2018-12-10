@@ -3,6 +3,7 @@ package com.scruge.scruge.view.cells
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.viewmodel.update.UpdateVM
+import kotlinx.android.synthetic.main.cell_update_last.view.*
 
 class UpdateCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -10,18 +11,30 @@ class UpdateCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 class LastUpdateCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun setup(vm:UpdateVM):LastUpdateCell {
+    lateinit var vm:UpdateVM
+
+    fun setup(vm:UpdateVM, title:String = "Last update: "):LastUpdateCell {
+        this.vm = vm
+
+        itemView.last_update_large_title.text = "$title${vm.date}"
+        itemView.last_update_text.text = vm.description
+        itemView.last_update_title.text = vm.title
+        // image?
 
         return this
     }
 
     fun updateTap(tap: (UpdateVM)->Unit): LastUpdateCell {
-
+        itemView.last_update_tap.setOnClickListener {
+            tap(vm)
+        }
         return this
     }
 
     fun allUpdatesTap(tap: ()->Unit): LastUpdateCell {
-
+        itemView.last_update_see_all.setOnClickListener {
+            tap()
+        }
         return this
     }
 }

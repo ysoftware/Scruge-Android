@@ -154,7 +154,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                 economies -> EconomiesCell(i.inflate(R.layout.cell_economies, parent, false))
                 faq -> FaqCell(i.inflate(R.layout.cell_faq, parent, false))
                 milestone -> PagingCell(i.inflate(R.layout.cell_paging, parent, false))
-                update -> LastUpdateCell(i.inflate(R.layout.cell_paging, parent, false))
+                update -> LastUpdateCell(i.inflate(R.layout.cell_update_last, parent, false))
                 comments -> TopCommentCell(i.inflate(R.layout.cell_comment_top, parent, false))
                 documents -> DocumentCell(i.inflate(R.layout.cell_documents, parent, false))
             }

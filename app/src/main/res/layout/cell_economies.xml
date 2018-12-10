@@ -11,13 +11,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/medium"
             android:text="Token economies"
-            android:textColor="@color/black"
+            android:textColor="@color/text_title"
             android:textSize="17sp"/>
 
         <RelativeLayout
@@ -30,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
                 android:text="Total token supply"
-                android:textColor="@color/black"
+                android:textColor="@color/text_regular"
                 android:textSize="16sp"/>
 
             <TextView
@@ -62,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
                 android:text="Token percent for public sale"
-                android:textColor="@color/black"
+                android:textColor="@color/text_regular"
                 android:textSize="16sp"/>
 
             <TextView
@@ -93,8 +92,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="Initial release after successful funding"
-                android:textColor="@color/black"
+                android:text="Initial release after funding"
+                android:textColor="@color/text_regular"
                 android:textSize="16sp"/>
 
             <TextView
@@ -126,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
                 android:text="Annual inflation rate"
-                android:textColor="@color/black"
+                android:textColor="@color/text_regular"
                 android:textSize="16sp"/>
 
             <TextView
