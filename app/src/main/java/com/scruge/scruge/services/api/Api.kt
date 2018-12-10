@@ -11,6 +11,7 @@ import com.scruge.scruge.services.api.model.*
 import com.scruge.scruge.services.network.enqueue
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
 import com.scruge.scruge.viewmodel.comment.CommentQuery
+import com.scruge.scruge.viewmodel.comment.CommentSource
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -230,27 +231,30 @@ class Api {
 
     // COMMENTS
 
-    fun postUpdateComment(comment: String,
-                          updateId: String,
-                          completion: (Result<ResultResponse>) -> Unit) {
+    fun postComment(comment: String,
+                    source:CommentSource,
+                    completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
-            service.postUpdateComment(updateId, CommentRequest(comment, it)).enqueue(completion)
+            when (source) {
+                CommentSource.update ->
+                    service.postUpdateComment(source.updateObject!!.id,
+                                              CommentRequest(comment, it)).enqueue(completion)
+                CommentSource.campaign ->
+                    service.postCampaignComment(source.campaignObject!!.id,
+                                               CommentRequest(comment, it)).enqueue(completion)
+            }
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
-    fun postCampaignComment(comment: String,
-                            campaignId: Int,
-                            completion: (Result<ResultResponse>) -> Unit) {
-        Service.tokenManager.getToken()?.let {
-            service.postCampaignComment(campaignId, CommentRequest(comment, it)).enqueue(completion)
-        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    fun getComments(query:CommentQuery, completion: (Result<CommentListResponse>) -> Unit) {
+        when (query.source) {
+            CommentSource.update ->
+                service.getUpdateComments(query.source.updateObject!!.id,
+                                          CommentListRequest(query)).enqueue(completion)
+            CommentSource.campaign ->
+                service.getCampaignComments(query.source.campaignObject!!.id,
+                                            CommentListRequest(query)).enqueue(completion)
+        }
     }
 
-    fun getUpdateComments(query:CommentQuery, completion: (Result<CommentListResponse>) -> Unit) {
-        service.getUpdateComments(query.id, CommentListRequest(query)).enqueue(completion)
-    }
-
-    fun getCampaignComments(query:CommentQuery, completion: (Result<CommentListResponse>) -> Unit) {
-        service.getCampaignComments(query.id, CommentListRequest(query)).enqueue(completion)
-    }
 }

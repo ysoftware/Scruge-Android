@@ -1,12 +1,17 @@
 package com.scruge.scruge.viewmodel.comment
 
+import com.scruge.scruge.model.entity.Campaign
+import com.scruge.scruge.model.entity.Update
 import com.ysoftware.mvvm.array.Query
 
 enum class CommentSource {
-    update, campaign
+    update, campaign;
+
+    var updateObject: Update? = null
+    var campaignObject: Campaign? = null
 }
 
-class CommentQuery(val source: CommentSource, val id:String) : Query {
+class CommentQuery(val source: CommentSource) : Query {
 
     var page = 0
 

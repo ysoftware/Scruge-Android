@@ -12,8 +12,12 @@ class ErrorHandler {
             return "todo" // todo
         }
 
+        fun error(throwable:Throwable):ScrugeError? {
+            return NetworkingError.unknown // todo
+        }
+
         fun error(result:Int):ScrugeError? {
-            return NetworkingError.unknown
+            return NetworkingError.unknown // todo
         }
     }
 }

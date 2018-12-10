@@ -137,7 +137,7 @@ interface BackendApi {
                           @Body request:CommentRequest):Call<ResponseBody>
 
     @HTTP(method = "GET", path = "campaign/{campaignId}/comment", hasBody = true)
-    fun getCampaignComments(@Path("campaignId") campaignId:String,
+    fun getCampaignComments(@Path("campaignId") campaignId:Int,
                             @Body request:CommentListRequest):Call<ResponseBody>
 
     @HTTP(method = "GET", path = "update/{updateId}/comment", hasBody = true)
