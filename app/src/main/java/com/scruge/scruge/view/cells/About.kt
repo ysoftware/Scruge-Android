@@ -9,7 +9,7 @@ import com.scruge.scruge.viewmodel.campaign.CampaignVM
 class AboutCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setup(vm: CampaignVM):AboutCell {
-
+        itemView.
         return this
     }
 
