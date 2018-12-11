@@ -41,10 +41,6 @@ class PagingCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.paging_recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-
-            }
-
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val manager = recyclerView.layoutManager as? LinearLayoutManager ?: return
                 val position = manager.findFirstVisibleItemPosition()

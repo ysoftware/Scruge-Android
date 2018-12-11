@@ -23,5 +23,7 @@
     <color name="text_regular">#5F5D70</color>
     <color name="text_light">#C4CACC</color>
     <color name="text_comment">#969FA2</color>
+    <color name="text_gray">#9B99A9</color>
+    <color name="field_background">#FBFAFF</color>
 
 </resources>
