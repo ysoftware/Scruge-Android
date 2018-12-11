@@ -40,19 +40,19 @@ class Presenter {
         return block
     }
 
-    fun replaceWithLoginFragment(navigationController: NavigationController) {
-        navigationController.replaceWith(LoginFragment())
+    fun replaceWithLoginFragment(fragment:NavigationFragment) {
+        fragment.navigationController?.replaceWith(LoginFragment())
     }
 
-    fun replaceWithRegisterFragment(navigationController: NavigationController) {
-        navigationController.replaceWith(RegisterFragment())
+    fun replaceWithRegisterFragment(fragment:NavigationFragment) {
+        fragment.navigationController?.replaceWith(RegisterFragment())
     }
 
     // CAMPAIGN
 
-    fun presentCampaignFragment(vc: NavigationFragment, id:Int) {
-        val fr = CampaignFragment()
-        fr.vm = CampaignVM(id)
-        vc.navigationController?.navigateTo(fr)
+    fun presentCampaignFragment(fragment: NavigationFragment, id:Int) {
+        val new = CampaignFragment()
+        new.vm = CampaignVM(id)
+        fragment.navigationController?.navigateTo(new)
     }
 }

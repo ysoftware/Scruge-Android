@@ -7,6 +7,7 @@
     android:padding="15dp">
 
     <ImageButton
+        android:id="@+id/login_close_button"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_marginStart="15dp"
@@ -45,6 +46,8 @@
                     android:src="@drawable/profile"/>
 
                 <EditText
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/login_email"
                     android:maxLines="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -74,6 +77,8 @@
                     android:src="@drawable/lock"/>
 
                 <EditText
+                    android:inputType="textPassword"
+                    android:id="@+id/login_password"
                     android:maxLines="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -88,6 +93,24 @@
                     android:textSize="14sp"/>
 
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/login_forgot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/medium"
+                android:text="Forgot password?"
+                android:textAllCaps="false"
+                android:textColor="@color/purple"
+                android:textSize="12sp"/>
+
+            <com.scruge.scruge.view.views.ButtonView
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
     </ScrollView>
 
@@ -107,6 +130,7 @@
             android:textSize="14sp"/>
 
         <Button
+            android:id="@+id/login_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -118,6 +142,7 @@
             android:textSize="16sp"/>
 
         <Button
+            android:id="@+id/login_privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

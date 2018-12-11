@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="55dp">
 
     <RelativeLayout
         android:id="@+id/button_background"
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:background="@null"
         android:fontFamily="@font/bold"
-        android:text="invest"
+        android:text="button title"
         android:textColor="@color/white"
         android:textSize="12sp"/>
 
