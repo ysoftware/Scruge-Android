@@ -5,4 +5,10 @@
               android:background="@color/white"
               android:layout_height="match_parent">
 
+
+    <Button
+        android:id="@+id/profile_signout"
+        android:text="sign out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

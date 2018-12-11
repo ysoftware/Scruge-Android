@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.services.Service
+import com.scruge.scruge.view.main.TabbarActivity
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment: NavigationFragment() {
 
@@ -17,6 +20,9 @@ class ProfileFragment: NavigationFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
+        profile_signout.setOnClickListener {
+            Service.tokenManager.removeToken()
+            (activity as? TabbarActivity)?.selectTab(0)
+        }
     }
 }

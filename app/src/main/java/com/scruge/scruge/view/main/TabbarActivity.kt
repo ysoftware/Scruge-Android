@@ -16,7 +16,7 @@ class TabbarActivity : AppCompatActivity() {
                    NavigationController(supportFragmentManager, R.id.container_view_wallet),
                    NavigationController(supportFragmentManager, R.id.container_view_profile))
 
-    var selectedTab = 0; private set
+    var selectedTab = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +35,10 @@ class TabbarActivity : AppCompatActivity() {
     }
 
     private fun shouldSelectTab(index: Int):Boolean {
+        val id = tabbar.menu.getItem(index).itemId
+
         // if opening profile but not logged in yet
-        if (index == 3) { // todo change when add messages
+        if (id == R.id.menu_profile) { // todo change when add messages
             if (!Service.tokenManager.hasToken) {
                 Service.presenter.presentLoginActivity(this) { didLogIn ->
                     if (didLogIn) {
@@ -51,8 +53,10 @@ class TabbarActivity : AppCompatActivity() {
 
     fun selectTab(index:Int):Boolean {
         val shouldSelect = shouldSelectTab(index)
-        if (shouldSelect) {
+        if (shouldSelect && selectedTab != index) {
+            val id = tabbar.menu.getItem(index).itemId
             selectedTab = index
+            tabbar.selectedItemId = id
             for (i in 0 until navigationControllers.size) {
                 val view = findViewById<View>(navigationControllers[i].containerId)
                 view.visibility = if (index == i) View.VISIBLE else View.GONE
