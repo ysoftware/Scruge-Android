@@ -1,5 +1,6 @@
 package com.scruge.scruge.dependencies.view
 
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -9,4 +10,8 @@ fun RecyclerView.setupForVerticalLayout() {
 
 fun RecyclerView.setupForHorizontalLayout() {
     layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+}
+
+fun RecyclerView.setupForGridLayout(spanCount:Int) {
+    layoutManager = GridLayoutManager(context, spanCount)
 }

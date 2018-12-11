@@ -25,25 +25,27 @@
 
         <TextView
             android:id="@+id/about_text"
-            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/regular"
             android:text="About the team"
             android:textColor="@color/text_regular"
             android:textSize="14sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="15dp"
             android:id="@+id/about_members"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:nestedScrollingEnabled="false"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="15dp"
             android:id="@+id/about_social"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:nestedScrollingEnabled="false"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
