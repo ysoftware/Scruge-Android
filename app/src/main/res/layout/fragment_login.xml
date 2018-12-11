@@ -6,16 +6,6 @@
     android:background="@color/white"
     android:padding="15dp">
 
-    <ImageButton
-        android:id="@+id/login_close_button"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/transparent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/close"/>
-
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -154,4 +144,15 @@
             android:textSize="12sp"/>
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/login_close_button"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/close"/>
+
 </RelativeLayout>

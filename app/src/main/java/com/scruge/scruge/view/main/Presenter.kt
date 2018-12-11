@@ -2,6 +2,7 @@ package com.scruge.scruge.view.main
 
 import android.content.Context
 import android.content.Intent
+import androidx.fragment.app.Fragment
 import com.scruge.scruge.dependencies.navigation.NavigationController
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.view.ui.activity.ActivityFragment
@@ -46,6 +47,10 @@ class Presenter {
 
     fun replaceWithRegisterFragment(fragment:NavigationFragment) {
         fragment.navigationController?.replaceWith(RegisterFragment())
+    }
+
+    fun presentProfileSetupFragment(fragment:NavigationFragment) {
+        fragment.navigationController?.navigateTo(Fragment()) // todo
     }
 
     // CAMPAIGN
