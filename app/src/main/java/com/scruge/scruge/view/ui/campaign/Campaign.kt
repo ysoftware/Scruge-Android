@@ -152,7 +152,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                 about -> AboutCell(i.inflate(R.layout.cell_about, parent, false))
                 info -> CampaignInfoCell(i.inflate(R.layout.cell_campaign_info, parent, false))
                 economies -> EconomiesCell(i.inflate(R.layout.cell_economies, parent, false))
-                faq -> FaqCell(i.inflate(R.layout.cell_faq, parent, false))
+                faq -> PagingCell(i.inflate(R.layout.cell_paging, parent, false))
                 milestone -> PagingCell(i.inflate(R.layout.cell_paging, parent, false))
                 update -> LastUpdateCell(i.inflate(R.layout.cell_update_last, parent, false))
                 comments -> TopCommentCell(i.inflate(R.layout.cell_comment_top, parent, false))
@@ -175,14 +175,14 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                     }
                 faq -> fr.vm.faqVM?.let {
                         (holder as? PagingCell)?.setup(it)
-                                ?.tap { faqVM ->
+                                ?.faqTap { faqVM ->
 
                                 }
                     }
                 milestone -> fr.vm.milestonesVM?.let { vm ->
                         fr.vm.currentMilestoneVM?.let { cvm ->
                             (holder as? PagingCell)?.setup(vm, cvm)
-                                    ?.tap { milestoneVM ->
+                                    ?.milestoneTap { milestoneVM ->
 
                             }
                         }

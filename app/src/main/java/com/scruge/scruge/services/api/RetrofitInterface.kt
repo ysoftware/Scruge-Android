@@ -136,11 +136,11 @@ interface BackendApi {
     fun postUpdateComment(@Path("updateId") updateId:String,
                           @Body request:CommentRequest):Call<ResponseBody>
 
-    @HTTP(method = "GET", path = "campaign/{campaignId}/comment", hasBody = true)
+    @HTTP(method = "GET", path = "campaign/{campaignId}/comments", hasBody = true)
     fun getCampaignComments(@Path("campaignId") campaignId:Int,
                             @Body request:CommentListRequest):Call<ResponseBody>
 
-    @HTTP(method = "GET", path = "update/{updateId}/comment", hasBody = true)
+    @HTTP(method = "GET", path = "update/{updateId}/comments", hasBody = true)
     fun getUpdateComments(@Path("updateId") updateId:String,
                           @Body request:CommentListRequest):Call<ResponseBody>
 }
