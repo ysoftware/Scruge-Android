@@ -13,6 +13,7 @@ class ErrorHandler {
         }
 
         fun error(throwable:Throwable?):ScrugeError? {
+            if (throwable == null) { return null }
             return NetworkingError.unknown // todo
         }
 

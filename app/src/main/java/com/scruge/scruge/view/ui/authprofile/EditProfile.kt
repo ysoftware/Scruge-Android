@@ -71,10 +71,7 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
         val country = edit_profile_location.text.toString()
         val description = edit_profile_about.text.toString()
 
-        val selectedImage = selectedImageUri?.let {
-            MediaStore.Images.Media.getBitmap(activity?.contentResolver, it)
-        }
-        ProfileVM.updateProfile(name, country, description, selectedImage) { error ->
+        ProfileVM.updateProfile(name, country, description, selectedImageUri) { error ->
             if (error != null) {
                 alert(error)
                 return@updateProfile

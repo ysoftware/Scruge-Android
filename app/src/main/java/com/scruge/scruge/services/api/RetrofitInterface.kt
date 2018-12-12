@@ -1,6 +1,7 @@
 package com.scruge.scruge.services.api
 
 import com.scruge.scruge.services.api.model.*
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -29,8 +30,9 @@ interface BackendApi {
     @GET("user/{token}/id")
     fun getUserId(@Path("token") token:String): Call<ResponseBody>
 
-    @POST("avatar/{token}")
-    fun updateProfileImage(@Path("token") token:String): Call<ResponseBody>
+    @Multipart @POST("avatar/{token}")
+    fun updateProfileImage(@Part image: MultipartBody.Part,
+                           @Path("token") token:String): Call<ResponseBody>
 
     @PUT("profile/{token}")
     fun updateProfile(@Path("token") token:String,
@@ -54,13 +56,13 @@ interface BackendApi {
     fun getSubscribed(@Path("token") token:String): Call<ResponseBody>
 
     @GET("campaigns")
-    fun getCampaignList(@QueryMap map: Map<String, Any>): Call<ResponseBody>
+    fun getCampaignList(@QueryMap request: Map<String, Any>): Call<ResponseBody>
 
     // SUBSCRIPTIONS
 
-    @HTTP(method = "GET", path = "user/{token}/is_subscribed", hasBody = true)
+    @GET("user/{token}/is_subscribed")
     fun getSubscriptionStatus(@Path("token") token:String,
-                              @Body request: CampaignRequest): Call<ResponseBody>
+                              @QueryMap request: Map<String, Any>): Call<ResponseBody>
 
     @POST("user/{token}/campaign_subscribe")
     fun subscribe(@Path("token") token:String,
@@ -101,13 +103,13 @@ interface BackendApi {
 
     // CONTRIBUTIONS
 
-    @HTTP(method = "GET", path = "user/{token}/did_contribute", hasBody = true)
+    @GET("user/{token}/did_contribute")
     fun getDidContribute(@Path("token") token:String,
-                         @Body request:CampaignRequest): Call<ResponseBody>
+                         @QueryMap request:Map<String, Any>): Call<ResponseBody>
 
-    @HTTP(method = "GET", path = "user/token/did_vote", hasBody = true)
+    @GET("user/token/did_vote")
     fun getDidVote(@Path("token") token:String,
-                   @Body request:CampaignRequest): Call<ResponseBody>
+                   @QueryMap request:Map<String, Any>): Call<ResponseBody>
 
     @POST("user/{token}/vote")
     fun notifyVote(@Path("token") token:String,
@@ -136,11 +138,11 @@ interface BackendApi {
     fun postUpdateComment(@Path("updateId") updateId:String,
                           @Body request:CommentRequest):Call<ResponseBody>
 
-    @HTTP(method = "GET", path = "campaign/{campaignId}/comments", hasBody = true)
+    @GET("campaign/{campaignId}/comments")
     fun getCampaignComments(@Path("campaignId") campaignId:Int,
-                            @Body request:CommentListRequest):Call<ResponseBody>
+                            @QueryMap request:Map<String, Any>):Call<ResponseBody>
 
-    @HTTP(method = "GET", path = "update/{updateId}/comments", hasBody = true)
+    @GET("update/{updateId}/comments")
     fun getUpdateComments(@Path("updateId") updateId:String,
-                          @Body request:CommentListRequest):Call<ResponseBody>
+                          @QueryMap request:Map<String, Any>):Call<ResponseBody>
 }

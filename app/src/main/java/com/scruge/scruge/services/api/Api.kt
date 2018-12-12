@@ -1,6 +1,6 @@
 package com.scruge.scruge.services.api
 
-import android.graphics.Bitmap
+import android.net.Uri
 import com.scruge.scruge.dependencies.serialization.toMap
 import com.scruge.scruge.model.entity.Campaign
 import com.scruge.scruge.model.entity.Update
@@ -12,10 +12,15 @@ import com.scruge.scruge.services.network.enqueue
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
 import com.scruge.scruge.viewmodel.comment.CommentQuery
 import com.scruge.scruge.viewmodel.comment.CommentSource
+import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.net.URI
 
 class Api {
 
@@ -42,7 +47,7 @@ class Api {
 
     private fun createService(environment: Environment):BackendApi {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.HEADERS
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
         return Retrofit.Builder()
@@ -85,9 +90,12 @@ class Api {
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
-    fun updateProfileImage(image: Bitmap, completion: (Result<ResultResponse>) -> Unit) {
+    fun updateProfileImage(uri: Uri, completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
-            // todo
+            val f = File(URI(uri.toString()))
+            val reqFile = RequestBody.create(MediaType.parse("image/jpg"), f)
+            val body = MultipartBody.Part.createFormData("image", "image.jpg", reqFile)
+            service.updateProfileImage(body, it).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
@@ -133,7 +141,7 @@ class Api {
 
     fun getSubscriptionStatus(campaign: Campaign, completion: (Result<BoolResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
-            service.getSubscriptionStatus(it, CampaignRequest(campaign.id)).enqueue(completion)
+            service.getSubscriptionStatus(it, CampaignRequest(campaign.id).toMap()).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
@@ -191,13 +199,13 @@ class Api {
 
     fun getDidContribute(campaignId:Int, completion: (Result<BoolResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
-            service.getDidContribute(it, CampaignRequest(campaignId)).enqueue(completion)
+            service.getDidContribute(it, CampaignRequest(campaignId).toMap()).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
     fun getDidVote(campaignId:Int, completion: (Result<BoolResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
-            service.getDidVote(it, CampaignRequest(campaignId)).enqueue(completion)
+            service.getDidVote(it, CampaignRequest(campaignId).toMap()).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
@@ -254,10 +262,10 @@ class Api {
         when (query.source) {
             CommentSource.update ->
                 service.getUpdateComments(query.source.updateObject!!.id,
-                                          CommentListRequest(query)).enqueue(completion)
+                                          CommentListRequest(query).toMap()).enqueue(completion)
             CommentSource.campaign ->
                 service.getCampaignComments(query.source.campaignObject!!.id,
-                                            CommentListRequest(query)).enqueue(completion)
+                                            CommentListRequest(query).toMap()).enqueue(completion)
         }
     }
 

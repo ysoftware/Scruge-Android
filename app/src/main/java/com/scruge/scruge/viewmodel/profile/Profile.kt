@@ -1,6 +1,7 @@
 package com.scruge.scruge.viewmodel.profile
 
 import android.graphics.Bitmap
+import android.net.Uri
 import com.scruge.scruge.model.entity.Profile
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.ScrugeError
@@ -30,7 +31,7 @@ class ProfileVM(model: Profile? = null) : ViewModel<Profile>(model) {
 
     companion object {
 
-        fun updateProfile(name: String?, country: String?, description: String?, image: Bitmap?,
+        fun updateProfile(name: String?, country: String?, description: String?, image: Uri?,
                           completion: (ScrugeError?) -> Unit) {
             Service.api.updateProfile(name ?: "", country ?: "", description ?: "") { result ->
                 result.onSuccess {

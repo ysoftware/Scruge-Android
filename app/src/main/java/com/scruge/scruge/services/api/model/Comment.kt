@@ -1,5 +1,6 @@
 package com.scruge.scruge.services.api.model
 
+import com.scruge.scruge.dependencies.serialization.Codable
 import com.scruge.scruge.model.entity.Comment
 import com.scruge.scruge.viewmodel.comment.CommentQuery
 
@@ -9,9 +10,9 @@ data class CommentListResponse(val comments:List<Comment>)
 
 // request
 
-data class CommentRequest(val comment:String, val token:String)
+data class CommentRequest(val comment:String, val token:String): Codable
 
-data class CommentListRequest(val q: CommentQuery?) {
+data class CommentListRequest(val q: CommentQuery?):Codable {
 
     val page = q?.page ?: 0
 }
