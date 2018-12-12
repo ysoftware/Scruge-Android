@@ -56,5 +56,9 @@ enum class WalletError:ScrugeError {
 
     noKey,
 
-    incorrectPasscode
+    incorrectPasscode,
+
+    noSelectedAccount,
+
+    selectedAccountMissing
 }

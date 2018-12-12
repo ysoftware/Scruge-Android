@@ -1,10 +1,13 @@
 package com.scruge.scruge.services.api
 
 import android.net.Uri
+import android.util.Log
 import com.scruge.scruge.dependencies.serialization.toMap
 import com.scruge.scruge.model.entity.Campaign
 import com.scruge.scruge.model.entity.Update
 import com.scruge.scruge.model.error.AuthError
+import com.scruge.scruge.model.error.NetworkingError
+import com.scruge.scruge.model.error.ScrugeError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
@@ -24,6 +27,9 @@ import java.net.URI
 
 class Api {
 
+    var isLoggingEnabled = true
+    var logLimit = 300
+
     enum class Environment(val url: String) {
 
         test("http://testapi.scruge.world/"),
@@ -35,34 +41,27 @@ class Api {
 
     // Initialization
 
-    fun setEnvironment(env:Environment) {
+    fun setEnvironment(env: Environment) {
         service = createService(env)
         environment = env
     }
 
+    val serviceUrl get() = environment.url
     private var environment = Environment.test
     private var service = createService(Environment.test)
 
-    val serviceUrl = environment.url
-
-    private fun createService(environment: Environment):BackendApi {
+    private fun createService(environment: Environment): BackendApi {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        interceptor.level = HttpLoggingInterceptor.Level.BASIC
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
-        return Retrofit.Builder()
-                .baseUrl(environment.url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
-                .create(BackendApi::class.java)
+        return Retrofit.Builder().baseUrl(environment.url).addConverterFactory(GsonConverterFactory.create())
+                .client(client).build().create(BackendApi::class.java)
     }
 
     // WALLET
 
-    fun createAccount(accountName:String,
-                      publicKey:String,
-                      completion: (Result<LoginResponse>) -> Unit) {
+    fun createAccount(accountName: String, publicKey: String, completion: (Result<LoginResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             service.createAccount(it, AccountRequest(accountName, publicKey)).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
@@ -78,7 +77,7 @@ class Api {
         service.signUp(AuthRequest(email, password)).enqueue(completion)
     }
 
-    fun checkEmail(email:String, completion: (Result<ResultResponse>) -> Unit) {
+    fun checkEmail(email: String, completion: (Result<ResultResponse>) -> Unit) {
         service.checkEmail(EmailRequest(email)).enqueue(completion)
     }
 
@@ -99,9 +98,7 @@ class Api {
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
-    fun updateProfile(name:String,
-                      country:String,
-                      description:String,
+    fun updateProfile(name: String, country: String, description: String,
                       completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             service.updateProfile(it, ProfileRequest(name, country, description)).enqueue(completion)
@@ -118,11 +115,11 @@ class Api {
 
     // CAMPAIGNS
 
-    fun getCampaign(id:Int, completion:(Result<CampaignResponse>) -> Unit) {
+    fun getCampaign(id: Int, completion: (Result<CampaignResponse>) -> Unit) {
         service.getCampaign(id).enqueue(completion)
     }
 
-    fun getCampaignList(query:CampaignQuery?, completion: (Result<CampaignListResponse>) -> Unit) {
+    fun getCampaignList(query: CampaignQuery?, completion: (Result<CampaignListResponse>) -> Unit) {
         if (query != null && query.requestType != CampaignQuery.RequestType.regular) {
             Service.tokenManager.getToken()?.let {
                 when (query.requestType) {
@@ -145,19 +142,18 @@ class Api {
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
-    fun setSubscribing(subscribing:Boolean,
-                       campaign:Campaign,
+    fun setSubscribing(subscribing: Boolean, campaign: Campaign,
                        completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             val request = CampaignRequest(campaign.id)
-            if (subscribing) service.subscribe(it, request) else service.unsubscribe(it, request)
-                    .enqueue(completion)
+            if (subscribing) service.subscribe(it, request)
+            else service.unsubscribe(it, request).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
     // UPDATES
 
-    fun getUpdateList(campaign:Campaign, completion: (Result<UpdateListResponse>) -> Unit) {
+    fun getUpdateList(campaign: Campaign, completion: (Result<UpdateListResponse>) -> Unit) {
         service.getUpdateList(campaign.id).enqueue(completion)
     }
 
@@ -175,9 +171,7 @@ class Api {
 
     // HTML DESCRIPTION
 
-    fun getUpdateDescription(update: Update,
-                             campaign: Campaign,
-                             completion: (Result<HTMLResponse>) -> Unit) {
+    fun getUpdateDescription(update: Update, campaign: Campaign, completion: (Result<HTMLResponse>) -> Unit) {
         service.getUpdateDescription(campaign.id, update.id).enqueue(completion)
     }
 
@@ -185,33 +179,31 @@ class Api {
         service.getCampaignContent(campaign.id).enqueue(completion)
     }
 
-    fun getUpdateContent(update:Update, completion: (Result<HTMLResponse>) -> Unit) {
+    fun getUpdateContent(update: Update, completion: (Result<HTMLResponse>) -> Unit) {
         service.getUpdateContent(update.id).enqueue(completion)
     }
 
     // MILESTONES
 
-    fun getMilestones(campaign:Campaign, completion: (Result<MilestoneListResponse>) -> Unit) {
+    fun getMilestones(campaign: Campaign, completion: (Result<MilestoneListResponse>) -> Unit) {
         service.getMilestones(campaign.id).enqueue(completion)
     }
 
     // CONTRIBUTIONS
 
-    fun getDidContribute(campaignId:Int, completion: (Result<BoolResponse>) -> Unit) {
+    fun getDidContribute(campaignId: Int, completion: (Result<BoolResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             service.getDidContribute(it, CampaignRequest(campaignId).toMap()).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
-    fun getDidVote(campaignId:Int, completion: (Result<BoolResponse>) -> Unit) {
+    fun getDidVote(campaignId: Int, completion: (Result<BoolResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             service.getDidVote(it, CampaignRequest(campaignId).toMap()).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
-    fun notifyVote(campaignId: Int,
-                   value:Boolean,
-                   transactionId:String,
+    fun notifyVote(campaignId: Int, value: Boolean, transactionId: String,
                    completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             val request = VoteNotificationRequest(value, campaignId, transactionId)
@@ -243,30 +235,35 @@ class Api {
 
     // COMMENTS
 
-    fun postComment(comment: String,
-                    source:CommentSource,
-                    completion: (Result<ResultResponse>) -> Unit) {
+    fun postComment(comment: String, source: CommentSource, completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             when (source) {
-                CommentSource.update ->
-                    service.postUpdateComment(source.updateObject!!.id,
-                                              CommentRequest(comment, it)).enqueue(completion)
-                CommentSource.campaign ->
-                    service.postCampaignComment(source.campaignObject!!.id,
-                                               CommentRequest(comment, it)).enqueue(completion)
+                CommentSource.update -> service.postUpdateComment(source.updateObject!!.id,
+                                                                  CommentRequest(comment, it)).enqueue(
+                        completion)
+                CommentSource.campaign -> service.postCampaignComment(source.campaignObject!!.id,
+                                                                      CommentRequest(comment, it)).enqueue(
+                        completion)
             }
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
-    fun getComments(query:CommentQuery, completion: (Result<CommentListResponse>) -> Unit) {
+    fun getComments(query: CommentQuery, completion: (Result<CommentListResponse>) -> Unit) {
         when (query.source) {
-            CommentSource.update ->
-                service.getUpdateComments(query.source.updateObject!!.id,
-                                          CommentListRequest(query).toMap()).enqueue(completion)
-            CommentSource.campaign ->
-                service.getCampaignComments(query.source.campaignObject!!.id,
-                                            CommentListRequest(query).toMap()).enqueue(completion)
+            CommentSource.update -> service.getUpdateComments(query.source.updateObject!!.id,
+                                                              CommentListRequest(query).toMap()).enqueue(
+                    completion)
+            CommentSource.campaign -> service.getCampaignComments(query.source.campaignObject!!.id,
+                                                                  CommentListRequest(query).toMap()).enqueue(
+                    completion)
         }
     }
 
+    // LOGGING
+
+    fun log(message: String) {
+        if (isLoggingEnabled) {
+            Log.e("BACKEND API", message.take(logLimit))
+        }
+    }
 }

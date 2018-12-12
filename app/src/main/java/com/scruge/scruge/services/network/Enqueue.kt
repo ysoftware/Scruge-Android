@@ -28,7 +28,7 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Resul
             val body = it.body()?.string()
 
             if (body == null) {
-                log("Error: status code: ${it.code()}")
+                Service.api.log("Error: status code: ${it.code()}")
                 completion(Result.failure(BackendError.parsingError.wrap()))
                 return@let
             }
@@ -42,7 +42,7 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Resul
                     if (error.isAuthenticationFailureError) {
                         Service.tokenManager.removeToken()
                     }
-                    log("Error result: ${result.result}")
+                    Service.api.log("Result: ${ErrorHandler.message(error)}")
                     completion(Result.failure(error.wrap()))
                     return@let
                 }
@@ -60,30 +60,17 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Resul
             }
 
             if (obj != null) {
-                log(body)
+                Service.api.log(body)
                 completion(Result.success(obj))
                 return@let
             }
 
-            log("Could not parse object")
+            Service.api.log("Could not parse object")
             completion(Result.failure(BackendError.parsingError.wrap()))
         }
         t?.let {
-            log(t.localizedMessage)
-            completion(Result.failure(getNetworkError(t).wrap()))
+            Service.api.log(t.localizedMessage)
+            completion(Result.failure((ErrorHandler.error(t) ?: NetworkingError.unknown).wrap() ))
         }
     })
-}
-
-fun log(message:String) {
-    Log.e("backend", message)
-}
-
-fun handleResultError(t: Throwable):ScrugeError {
-    log(t.message ?: "---")
-    return NetworkingError.unknown
-}
-
-fun getNetworkError(t: Throwable):ScrugeError {
-    return NetworkingError.unknown
 }

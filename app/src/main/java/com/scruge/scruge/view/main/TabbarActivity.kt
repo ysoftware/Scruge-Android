@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController
+import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import kotlinx.android.synthetic.main.activity_main.*
 
