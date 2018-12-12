@@ -8,59 +8,122 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/edit_profile_cardview"
+        android:layout_above="@id/profile_cardview"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="-45dp"
         android:background="@drawable/gradient_profile"/>
 
-    <RelativeLayout
-        android:id="@+id/edit_profile_topview"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="15dp">
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/field_background"
-            android:orientation="vertical"
-            app:riv_corner_radius="50dp"/>
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:riv_corner_radius="50dp"
-            app:riv_mutate_background="true"/>
-    </RelativeLayout>
-
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="7dp"
-        app:cardElevation="5dp"
-        android:id="@+id/edit_profile_cardview"
+    <LinearLayout
+        android:id="@+id/profile_topview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_profile_topview"
-        android:layout_margin="15dp">
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="15dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/field_background"
+                android:orientation="vertical"
+                app:riv_corner_radius="50dp"
+                app:riv_mutate_background="true"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:riv_corner_radius="50dp"
+                app:riv_mutate_background="true"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
+            android:text="Anonymous"
+            android:textColor="@color/white"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/profile_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/regular"
+            android:text="RUSSIA"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profile_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_topview"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="15dp">
 
-            <Button
-                android:id="@+id/profile_signout"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="sign out"/>
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/regular"
+                android:textAlignment="center"
+                android:text="email@scruge.world"
+                android:textColor="@color/text_regular"
+                android:textSize="14sp"/>
 
-            <Button
-                android:id="@+id/profile_edit"
-                android:layout_width="wrap_content"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.05"
+                android:background="@color/black"/>
+
+            <TextView
+                android:id="@+id/profile_about"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="edit profile"/>
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/regular"
+                android:textAlignment="center"
+                android:text="Russian mobile developer I is."
+                android:textColor="@color/text_regular"
+                android:textSize="14sp"/>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <Button
+        android:id="@+id/profile_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sign out"/>
+
+    <Button
+        android:layout_alignParentEnd="true"
+        android:id="@+id/profile_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edit profile"/>
 </RelativeLayout>

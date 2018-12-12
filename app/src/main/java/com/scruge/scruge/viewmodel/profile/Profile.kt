@@ -14,9 +14,9 @@ class ProfileVM(model: Profile? = null) : ViewModel<Profile>(model) {
 
     val imageUrl get() = model?.imageUrl
 
-    val description get() = model?.description ?: ""
+    val description get() = model?.description
 
-    val name get() = model?.name ?: ""
+    val name get() = model?.name
 
     val country get() = model?.country ?: ""
 
