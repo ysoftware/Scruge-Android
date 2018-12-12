@@ -1,23 +1,50 @@
 package com.scruge.scruge.view.cells
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.scruge.scruge.R
+import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.viewmodel.document.DocumentAVM
 import com.scruge.scruge.viewmodel.document.DocumentVM
-
-class DocumentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-}
+import kotlinx.android.synthetic.main.cell_document.view.*
+import kotlinx.android.synthetic.main.cell_documents.view.*
 
 class DocumentsCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun setup(vm:DocumentAVM):DocumentsCell {
+    private lateinit var tap:(DocumentVM)->Unit
+    private lateinit var vm:DocumentAVM
 
+    fun setup(vm:DocumentAVM):DocumentsCell {
+        this.vm = vm
+        itemView.documents_recycler_view.setupForVerticalLayout()
+        itemView.documents_recycler_view.adapter = Adapter(this)
         return this
     }
 
     fun tap(tap: (DocumentVM)->Unit): DocumentsCell {
-
+        this.tap = tap
         return this
+    }
+
+    class Adapter(val cell:DocumentsCell): RecyclerView.Adapter<Adapter.ViewHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            return ViewHolder(LayoutInflater.from(parent.context)
+                                      .inflate(R.layout.cell_document, parent, false))
+        }
+
+        override fun getItemCount(): Int {
+            return cell.vm.numberOfItems
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val item = cell.vm.item(position)
+            holder.itemView.document_title.text = item.name
+            holder.itemView.setOnClickListener { cell.tap(item) }
+        }
+
+        class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     }
 }
