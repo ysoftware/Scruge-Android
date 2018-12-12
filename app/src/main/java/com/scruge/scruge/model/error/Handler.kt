@@ -17,6 +17,7 @@ class ErrorHandler {
         }
 
         fun error(result:Int):ScrugeError? {
+            if (result == 0) { return null }
             return NetworkingError.unknown // todo
         }
     }

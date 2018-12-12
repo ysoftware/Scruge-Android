@@ -120,6 +120,7 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
                 && resultCode == Activity.RESULT_OK) {
             val result = CropImage.getActivityResult(data)
             selectedImageUri = result.uri
+            edit_profile_image.setImageURI(selectedImageUri)
         }
     }
 

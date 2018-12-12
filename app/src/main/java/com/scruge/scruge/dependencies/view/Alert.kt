@@ -10,11 +10,11 @@ fun Fragment.alert(message:String, completion:(()->Unit)? = null) {
 }
 
 fun Fragment.alert(error:Throwable) {
-    alert("todo: throwable")
+    alert(error.localizedMessage)
 }
 
 fun Fragment.alert(error:ScrugeError) {
-    alert("todo: scruge error")
+    alert(error.toString())
 }
 
 fun ask(question:String, completion: (Boolean) -> Unit) {

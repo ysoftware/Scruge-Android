@@ -79,6 +79,6 @@ class Presenter {
     }
 
     fun presentCropImageActivity(fragment: NavigationFragment, imageUrl: Uri) {
-        fragment.activity?.let { CropImage.activity(imageUrl).start(it) }
+        fragment.activity?.let { CropImage.activity(imageUrl).start(it, fragment) }
     }
 }
