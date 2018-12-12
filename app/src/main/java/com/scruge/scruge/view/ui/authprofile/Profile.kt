@@ -56,9 +56,9 @@ class ProfileFragment: NavigationFragment(), ViewModelDelegate {
 
     private fun refreshProfile() {
         profile_email.text = vm.email
-        profile_name.text = vm.name ?: "Anonymous"
+        profile_name.text = if (vm.name.isBlank()) "Anonymous" else vm.name
         profile_location.text = vm.country
-        profile_about.text = vm.description ?: "No information provided"
+        profile_about.text = if (vm.description.isBlank()) "No information provided" else vm.description
         profile_image.setImage(vm.imageUrl)
     }
 }

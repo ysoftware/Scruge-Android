@@ -57,7 +57,7 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
 
     private fun setupEditing() {
         editingProfile?.let { vm ->
-            edit_profile_name.setText(vm.name)
+            edit_profile_name.setText(if (vm.name.isBlank()) "Anonymous" else vm.name)
             edit_profile_location.setText(vm.country)
             edit_profile_about.setText(vm.description)
             edit_profile_image.setImage(vm.imageUrl, hideOnFail = false)
@@ -67,9 +67,9 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
     // ACTIONS
 
     private fun save() {
-        val name = edit_profile_name.text.toString()
-        val country = edit_profile_location.text.toString()
-        val description = edit_profile_about.text.toString()
+        val name = edit_profile_name.text.toString().trim()
+        val country = edit_profile_location.text.toString().trim()
+        val description = edit_profile_about.text.toString().trim()
 
         ProfileVM.updateProfile(name, country, description, selectedImageUri) { error ->
             if (error != null) {
