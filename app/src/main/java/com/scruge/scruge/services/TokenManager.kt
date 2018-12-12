@@ -3,7 +3,7 @@ package com.scruge.scruge.services
 import android.content.Context
 import com.scruge.scruge.support.App
 
-class TokenManager() {
+class TokenManager {
 
     private val AUTH_TOKEN = "auth_token"
 

@@ -8,9 +8,12 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.main.TabbarActivity
+import com.scruge.scruge.viewmodel.profile.ProfileVM
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment: NavigationFragment() {
+
+    private var vm = ProfileVM()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -24,5 +27,15 @@ class ProfileFragment: NavigationFragment() {
             Service.tokenManager.removeToken()
             (activity as? TabbarActivity)?.selectTab(0)
         }
+
+        profile_edit.setOnClickListener {
+            Service.presenter.presentProfileEditFragment(this, vm)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        vm.load()
     }
 }

@@ -12,7 +12,7 @@ class ErrorHandler {
             return "todo" // todo
         }
 
-        fun error(throwable:Throwable):ScrugeError? {
+        fun error(throwable:Throwable?):ScrugeError? {
             return NetworkingError.unknown // todo
         }
 
@@ -22,9 +22,8 @@ class ErrorHandler {
     }
 }
 
-val ScrugeError.isAuthenticationFailureError:Boolean get() {
-    return when (this) {
+val ScrugeError.isAuthenticationFailureError:Boolean
+    get() = when (this) {
         AuthError.userNotFound, AuthError.invalidToken, AuthError.noToken -> true
         else -> false
     }
-}

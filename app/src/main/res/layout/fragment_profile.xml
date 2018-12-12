@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:background="@color/white"
-              android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/edit_profile_cardview"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="-45dp"
+        android:background="@drawable/gradient_profile"/>
 
-    <Button
-        android:id="@+id/profile_signout"
-        android:text="sign out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/edit_profile_topview"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="15dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/field_background"
+            android:orientation="vertical"
+            app:riv_corner_radius="50dp"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:riv_corner_radius="50dp"
+            app:riv_mutate_background="true"/>
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="7dp"
+        app:cardElevation="5dp"
+        android:id="@+id/edit_profile_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_profile_topview"
+        android:layout_margin="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <Button
+                android:id="@+id/profile_signout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sign out"/>
+
+            <Button
+                android:id="@+id/profile_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="edit profile"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

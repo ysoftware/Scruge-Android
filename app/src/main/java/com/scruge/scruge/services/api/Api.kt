@@ -96,7 +96,7 @@ class Api {
                       description:String,
                       completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
-            service.updateProfile(it, ProfileRequest(name, country, description))
+            service.updateProfile(it, ProfileRequest(name, country, description)).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
