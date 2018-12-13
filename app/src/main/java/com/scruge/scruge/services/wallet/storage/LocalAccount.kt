@@ -2,28 +2,18 @@ package com.scruge.scruge.services.wallet.storage
 
 import com.memtrip.eos.core.crypto.EosPrivateKey
 import com.memtrip.eos.core.crypto.EosPublicKey
+import com.scruge.scruge.services.Service
 
-class LocalAccount(string: String? = null) {
+/// Representing a secure eos keypair.
+class LocalAccount(val publicKey:EosPublicKey) {
 
-    var keyPair: KeyPair? = null
-
-    val rawPublicKey get() = keyPair?.publicKey?.toString()
-
-    init {
-        keyPair = KeyPair(string?.let { EosPrivateKey(it) } ?: EosPrivateKey())
-    }
-
-    companion object {
-
-        fun fromBytes(bytes: ByteArray): LocalAccount? {
-            val account = LocalAccount()
-            val pk = EosPrivateKey(bytes)
-            account.keyPair = KeyPair(pk)
-            return account
-        }
-    }
+    val rawPublicKey get() = publicKey.toString()
 
     override fun toString(): String {
-        return keyPair?.let { "Account with public Key: ${it.publicKey}}" } ?: "Empty account"
+        return "Account with public Key: $rawPublicKey}"
+    }
+
+    fun retrievePrivateKey(passcode:String, completion:(EosPrivateKey?)->Unit) {
+        completion(Service.wallet.storage.retrieveKey(passcode))
     }
 }

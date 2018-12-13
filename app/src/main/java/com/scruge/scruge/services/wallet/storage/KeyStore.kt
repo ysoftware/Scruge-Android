@@ -11,37 +11,48 @@ import java.io.File
 import android.content.ContextWrapper
 import com.facebook.crypto.keychain.KeyChain
 import com.facebook.crypto.keygen.PasswordBasedKeyDerivation
+import com.memtrip.eos.core.crypto.EosPrivateKey
+import com.memtrip.eos.core.crypto.EosPublicKey
+import java.security.PrivateKey
 
 class KeyStore {
 
+    private val SharedKey = "RawPublicKey"
+    private val keychain = App.context.getSharedPreferences("KEY_STORE", Context.MODE_PRIVATE)
     private val entity = Entity.create("Keystore")
-    private val fileName = "keystore.dat"
 
-    private val file: File
-        get() {
-            val cw = ContextWrapper(App.context)
-            val directory = cw.getDir("media", Context.MODE_PRIVATE)
-            return File(directory, fileName)
-        }
+    private fun file(key: String): File {
+        val cw = ContextWrapper(App.context)
+        val directory = cw.getDir("media", Context.MODE_PRIVATE)
+        return File(directory, key)
+    }
 
     private fun getCrypto(passcode: String): Crypto {
         /// FIXME: SECURITY CHECK REQUIRED
         val keychain = PasswordGeneratedKeyChain(CryptoConfig.KEY_256)
         keychain.setPassword(passcode)
-        keychain.salt = byteArrayOf(55, 12, 24, 17, 1, 1, 1, 5, 1, 21, 54, 94, 12, 12, 12, 14)
+        // todo use public key to create salt
+        keychain.salt = byteArrayOf(55, 12, 24, 17, 99, 1, 111, 5, 117, 21, 54, 94, 12, 12, 12, 14)
         keychain.generate()
         return AndroidConceal.get().createDefaultCrypto(keychain)
     }
 
     // PUBLIC
 
-    val hasAccount:Boolean get() {
-        return file.exists()
+    fun getAccount():LocalAccount? {
+        val rawPublicKey = keychain.getString(SharedKey, null) ?: return null
+        return LocalAccount(EosPublicKey(rawPublicKey))
     }
 
-    fun storeAccount(account: LocalAccount, passcode: String): Boolean {
+    val hasKey:Boolean get() {
+        val rawPublicKey = getAccount()?.rawPublicKey ?: return false
+        return file(rawPublicKey).exists() && keychain.contains(SharedKey)
+    }
+
+    fun storeKey(key: EosPrivateKey, passcode: String): Boolean {
         val crypto = getCrypto(passcode)
-        val bytes = account.keyPair?.privateKey?.bytes ?: return false
+        val rawPublicKey = key.publicKey.toString()
+        val bytes = key.bytes
         if (!crypto.isAvailable) {
             return false
         }
@@ -54,28 +65,32 @@ class KeyStore {
             return false
         }
 
-        file.writeBytes(encrypted)
+        file(rawPublicKey).writeBytes(encrypted)
+        keychain.edit().putString(SharedKey, rawPublicKey).apply()
         return true
     }
 
-    fun retrieveBytes(passcode: String): LocalAccount? {
+    fun retrieveKey(passcode: String): EosPrivateKey? {
+        val rawPublicKey = getAccount()?.rawPublicKey ?: return null
         val crypto = getCrypto(passcode)
         if (!crypto.isAvailable) {
             return null
         }
 
         val decrypted = try {
-            crypto.decrypt(file.readBytes(), entity)
+            crypto.decrypt(file(rawPublicKey).readBytes(), entity)
         }
         catch (ex: Exception) {
             ex.printStackTrace()
             return null
         }
 
-        return LocalAccount.fromBytes(decrypted)
+        return EosPrivateKey(decrypted)
     }
 
-    fun deleteAccount():Boolean {
-        return file.delete()
+    fun deleteAccount() {
+        val rawPublicKey = getAccount()?.publicKey?.toString() ?: return
+        keychain.edit().remove(SharedKey).apply()
+        file(rawPublicKey).delete()
     }
 }

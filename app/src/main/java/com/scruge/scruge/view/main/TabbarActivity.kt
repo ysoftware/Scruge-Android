@@ -8,6 +8,7 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.eos.AccountModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class TabbarActivity : AppCompatActivity() {

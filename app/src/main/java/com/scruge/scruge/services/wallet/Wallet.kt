@@ -1,15 +1,20 @@
 package com.scruge.scruge.services.wallet
 
 import com.memtrip.eos.core.crypto.EosPrivateKey
+import com.memtrip.eos.core.crypto.EosPublicKey
 import com.scruge.scruge.services.wallet.storage.KeyStore
 import com.scruge.scruge.services.wallet.storage.LocalAccount
 
 class Wallet {
 
-    private val storage = KeyStore()
+    val storage = KeyStore()
+
+    fun getAccount():LocalAccount? {
+        return storage.getAccount()
+    }
 
     val hasAccount:Boolean get() {
-        return storage.hasAccount
+        return storage.hasKey
     }
 
     fun deleteWallet() {
@@ -17,18 +22,14 @@ class Wallet {
     }
 
     fun createKey(passcode: String, completion: (LocalAccount?) -> Unit) {
-        val account = LocalAccount()
-        storage.storeAccount(account, passcode)
-        completion(account)
+        val privateKey = EosPrivateKey()
+        storage.storeKey(privateKey, passcode)
+        completion(LocalAccount(privateKey.publicKey))
     }
 
-    fun importKey(privateKey: String, passcode: String, completion: (LocalAccount?) -> Unit) {
-        val account = LocalAccount(privateKey)
-        storage.storeAccount(account, passcode)
-        completion(account)
-    }
-
-    fun getKey(passcode: String, completion: (LocalAccount?) -> Unit) {
-        completion(storage.retrieveBytes(passcode))
+    fun importKey(rawPrivateKey: String, passcode: String, completion: (LocalAccount?) -> Unit) {
+        val privateKey = EosPrivateKey(rawPrivateKey)
+        storage.storeKey(privateKey, passcode)
+        completion(LocalAccount(privateKey.publicKey))
     }
 }

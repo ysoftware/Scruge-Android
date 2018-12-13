@@ -1,7 +1,10 @@
 package com.scruge.scruge.services.eos
 
+import com.memtrip.eos.chain.actions.transaction.TransactionContext
+import com.memtrip.eos.chain.actions.transaction.transfer.TransferChain
 import com.memtrip.eos.http.rpc.Api
 import com.memtrip.eos.http.rpc.model.history.request.GetKeyAccounts
+import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.error.EOSError
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
@@ -27,9 +30,7 @@ class EOS {
     // METHODS
 
     fun getAccounts(wallet: LocalAccount, completion: (Result<List<String>>) -> Unit) {
-        val key = wallet.rawPublicKey ?: return completion(Result.failure(WalletError.noKey.wrap()))
-
-        service.history.getKeyAccounts(GetKeyAccounts(key))
+        service.history.getKeyAccounts(GetKeyAccounts(wallet.rawPublicKey))
                 .subscribeOn(Schedulers.newThread())
                 .subscribe({ response ->
                     val accounts = response.body()?.account_names
@@ -43,5 +44,37 @@ class EOS {
                     val e = ErrorHandler.error(error) ?: EOSError.unknown
                     completion(Result.failure(e.wrap()))
         })
+    }
+
+    fun sendMoney(account:AccountModel,
+                  recipient:String,
+                  amount:Double,
+                  symbol:String,
+                  memo:String,
+                  passcode:String,
+                  completion:(Result<String>)->Unit) {
+
+            account.getTransactionContext(account.name, passcode) {
+                val context = it ?:
+                return@getTransactionContext completion(Result.failure(WalletError.incorrectPasscode.wrap()))
+
+                val quantity = "${amount.formatRounding(4, 4)} $symbol".replace(",", ".")
+                val args = TransferChain.Args(account.name, recipient, quantity, memo)
+
+                TransferChain(service.chain).transfer("eosio.token", args, context)
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe({ response ->
+                            val id = response.body?.transaction_id
+                            if (id != null) {
+                                completion(Result.success(id))
+                            }
+                            else {
+                                completion(Result.failure(EOSError.unknown.wrap()))
+                            }
+                        }, { error ->
+                            val e = ErrorHandler.error(error) ?: EOSError.unknown
+                            completion(Result.failure(e.wrap()))
+                })
+            }
     }
 }
