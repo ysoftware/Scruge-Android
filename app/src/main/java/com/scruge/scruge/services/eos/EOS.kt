@@ -1,6 +1,5 @@
 package com.scruge.scruge.services.eos
 
-import com.memtrip.eos.chain.actions.transaction.TransactionContext
 import com.memtrip.eos.chain.actions.transaction.transfer.TransferChain
 import com.memtrip.eos.http.rpc.Api
 import com.memtrip.eos.http.rpc.model.history.request.GetKeyAccounts
@@ -9,6 +8,7 @@ import com.scruge.scruge.model.error.EOSError
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.model.error.wrap
+import com.scruge.scruge.services.wallet.AccountModel
 import com.scruge.scruge.services.wallet.storage.LocalAccount
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
@@ -16,6 +16,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
 class EOS {
+
+    val contractAccount = "testaccount1"
 
     val service: Api
 
@@ -46,7 +48,7 @@ class EOS {
         })
     }
 
-    fun sendMoney(account:AccountModel,
+    fun sendMoney(account: AccountModel,
                   recipient:String,
                   amount:Double,
                   symbol:String,
@@ -77,4 +79,14 @@ class EOS {
                 })
             }
     }
+
+//    fun sendAction(action:String,
+//                   contract:String = contractAccount,
+//                   account: AccountModel,
+//                   data:String,
+//                   passcode:String,
+//                   completion: (Result<String>)->Unit) {
+//        val args = ScrugeVote(account, )
+//        VoteTransaction(service.chain).vote(contract, )
+//    }
 }

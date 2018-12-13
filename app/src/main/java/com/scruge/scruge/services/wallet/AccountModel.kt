@@ -1,10 +1,8 @@
-package com.scruge.scruge.services.eos
+package com.scruge.scruge.services.wallet
 
 import com.memtrip.eos.chain.actions.transaction.TransactionContext
 import com.scruge.scruge.services.wallet.storage.LocalAccount
 import java.util.*
-
-data class Vote(val eosAccount:String, val userId:Int, val campaignId:Int, val vote:Boolean)
 
 data class AccountModel(val name:String, val wallet:LocalAccount):Comparable<AccountModel> {
 
