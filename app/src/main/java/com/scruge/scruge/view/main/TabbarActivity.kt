@@ -2,6 +2,7 @@ package com.scruge.scruge.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController

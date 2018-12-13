@@ -3,6 +3,7 @@ package com.scruge.scruge.support
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.facebook.soloader.SoLoader
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.Api
 
@@ -25,5 +26,6 @@ class App: Application() {
 
     private fun setupApp() {
         Service.api.setEnvironment(Api.Environment.prod)
+        SoLoader.init(this, false);
     }
 }

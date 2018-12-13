@@ -27,6 +27,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -52,6 +55,24 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
+    // eos
+    implementation ("com.memtrip.eos-jvm:eos-core:1.0.0-alpha26") {
+        exclude group: "com.lambdaworks", module: "scrypt"
+    }
+    implementation ("com.memtrip.eos-jvm:eos-http-rpc:1.0.0-alpha29") {
+        exclude group: "com.lambdaworks", module: "scrypt"
+    }
+    implementation ("com.memtrip.eos-jvm:eos-abi-writer:1.0.0-alpha26") {
+        exclude group: "com.lambdaworks", module: "scrypt"
+    }
+    implementation ("com.memtrip.eos-jvm:eos-chain-actions:1.0.0-alpha29") {
+        exclude group: "com.lambdaworks", module: "scrypt"
+    }
+    kapt 'com.memtrip.eos-jvm:eos-abi-writer-preprocessor:1.0.0-alpha26'
+
+    // encryption
+    implementation 'com.facebook.conceal:conceal:2.0.1@aar'
 
     // test
     testImplementation 'junit:junit:4.12'
