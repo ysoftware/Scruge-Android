@@ -7,6 +7,8 @@ class LocalAccount(string: String? = null) {
 
     var keyPair: KeyPair? = null
 
+    val rawPublicKey get() = keyPair?.publicKey?.toString()
+
     init {
         keyPair = KeyPair(string?.let { EosPrivateKey(it) } ?: EosPrivateKey())
     }
@@ -17,7 +19,7 @@ class LocalAccount(string: String? = null) {
             val account = LocalAccount()
             val pk = EosPrivateKey(bytes)
             account.keyPair = KeyPair(pk)
-            return null
+            return account
         }
     }
 
