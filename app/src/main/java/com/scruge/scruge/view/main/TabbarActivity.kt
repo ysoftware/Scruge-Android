@@ -59,8 +59,16 @@ class TabbarActivity : AppCompatActivity() {
             selectedTab = index
             tabbar.selectedItemId = id
             for (i in 0 until navigationControllers.size) {
-                val view = findViewById<View>(navigationControllers[i].containerId)
-                view.visibility = if (index == i) View.VISIBLE else View.GONE
+                val nav = navigationControllers[i]
+                val view = findViewById<View>(nav.containerId)
+                if (index == i) {
+                    view.visibility = View.VISIBLE
+                    nav.topFragment()?.onResume()
+                }
+                else {
+                    view.visibility = View.GONE
+                    nav.topFragment()?.onPause()
+                }
             }
         }
         return shouldSelect

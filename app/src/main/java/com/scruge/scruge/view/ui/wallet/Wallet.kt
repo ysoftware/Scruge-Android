@@ -110,6 +110,8 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
-        updateView()
+        activity?.runOnUiThread {
+            updateView()
+        }
     }
 }

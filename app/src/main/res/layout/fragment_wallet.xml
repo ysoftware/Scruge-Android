@@ -5,7 +5,6 @@
               android:background="@color/white"
               android:layout_height="match_parent">
 
-
     <TextView
         android:id="@+id/wallet_account_name"
         android:layout_width="match_parent"
@@ -13,6 +12,7 @@
 
 
     <TextView
+        android:maxLines="2"
         android:id="@+id/wallet_balance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
