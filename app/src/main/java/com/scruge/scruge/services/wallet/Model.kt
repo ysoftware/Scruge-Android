@@ -8,10 +8,10 @@ data class AccountModel(val name:String, val wallet:LocalAccount):Comparable<Acc
 
     override fun compareTo(other: AccountModel): Int = compareValuesBy(other, this) { it.name }
 
-    fun getTransactionContext(account:String, passcode:String, completion:(TransactionContext?)->Unit) {
+    fun getTransactionContext(passcode:String, completion:(TransactionContext?)->Unit) {
         wallet.retrievePrivateKey(passcode) { privateKey ->
             privateKey?.let {
-                completion(TransactionContext(account, it, transactionDefaultExpiry()))
+                completion(TransactionContext(name, it, transactionDefaultExpiry()))
             } ?: completion(null)
         }
     }
