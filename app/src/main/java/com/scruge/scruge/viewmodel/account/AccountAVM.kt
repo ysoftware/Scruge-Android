@@ -1,5 +1,6 @@
 package com.scruge.scruge.viewmodel.account
 
+import android.os.Handler
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.Service
@@ -23,4 +24,12 @@ class AccountAVM : SimpleArrayViewModel<AccountModel, AccountVM>() {
         }
     }
 
+    // METHODS
+
+//    val selectedAccountVM:AccountVM? = Service.settings
+
+    fun deleteWallet() {
+        Service.wallet.deleteWallet()
+        Handler().postDelayed({ reloadData() }, 400)
+    }
 }

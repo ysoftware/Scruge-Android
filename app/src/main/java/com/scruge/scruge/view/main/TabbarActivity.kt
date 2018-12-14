@@ -35,15 +35,6 @@ class TabbarActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        Service.eos.getBalance("yaroslav", listOf("SCR")) { balances ->
-
-            Log.e("test", balances.toString())
-        }
-    }
-
     private fun shouldSelectTab(index: Int):Boolean {
         val id = tabbar.menu.getItem(index).itemId
 

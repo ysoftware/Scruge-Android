@@ -106,7 +106,12 @@ class EOS {
 
                         val body = response.body()
                         if (body != null) {
-                            balances.add(Balance(body.first()))
+                            if (body.isNotEmpty()) {
+                                balances.add(Balance(body.first()))
+                            }
+                            else {
+                                balances.add(Balance(currency, 0.0))
+                            }
                         }
 
                         if (i == currencies.size) {

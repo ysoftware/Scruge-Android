@@ -15,8 +15,8 @@ class AccountVM(model: AccountModel):ViewModel<AccountModel>(model) {
     fun balanceString(separator:String = "\n"):String {
         return balances.fold("") { result, balance ->
             val amount = balance.amount.formatRounding(4, 4)
-            val separator = if (result.isBlank()) balance.symbol else ""
-            "$result$separator$balance.symbol $amount"
+            val sep = if (result.isBlank()) separator else ""
+            "$result$sep${balance.symbol} $amount"
         }
     }
 
