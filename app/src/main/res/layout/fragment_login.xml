@@ -3,156 +3,162 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="15dp">
-
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo"/>
+    android:background="@color/white">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:orientation="vertical"
             android:padding="15dp">
 
-            <RelativeLayout
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/logo"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/field_background">
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
-                    android:src="@drawable/profile"/>
-
-                <EditText
-                    android:inputType="textEmailAddress"
-                    android:id="@+id/login_email"
-                    android:maxLines="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/regular"
-                    android:hint="Email address"
-                    android:paddingStart="45dp"
-                    android:paddingEnd="0dp"
-                    android:textColor="@color/text_regular"
-                    android:textColorHint="@color/text_light"
-                    android:textSize="14sp"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/field_background">
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
-                    android:src="@drawable/lock"/>
-
-                <EditText
-                    android:inputType="textPassword"
-                    android:id="@+id/login_password"
-                    android:maxLines="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/regular"
-                    android:hint="Password"
-                    android:paddingStart="45dp"
-                    android:paddingEnd="0dp"
-                    android:textColor="@color/text_regular"
-                    android:textColorHint="@color/text_light"
-                    android:textSize="14sp"/>
-
-            </RelativeLayout>
-
-            <Button
-                android:id="@+id/login_forgot"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/field_background">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/profile"/>
+
+                    <EditText
+                        android:id="@+id/login_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/regular"
+                        android:hint="Email address"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:paddingStart="45dp"
+                        android:paddingEnd="0dp"
+                        android:textColor="@color/text_regular"
+                        android:textColorHint="@color/text_light"
+                        android:textSize="14sp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/field_background">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/lock"/>
+
+                    <EditText
+                        android:id="@+id/login_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/regular"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:paddingStart="45dp"
+                        android:paddingEnd="0dp"
+                        android:textColor="@color/text_regular"
+                        android:textColorHint="@color/text_light"
+                        android:textSize="14sp"/>
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/login_forgot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/medium"
+                    android:text="Forgot password?"
+                    android:textAllCaps="false"
+                    android:textColor="@color/purple"
+                    android:textSize="12sp"/>
+
+                <com.scruge.scruge.view.views.ButtonView
+                    android:id="@+id/login_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:fontFamily="@font/regular"
+                        android:text="Not a member yet?"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_gray"
+                        android:textSize="14sp"/>
+
+                    <Button
+                        android:id="@+id/login_signup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/medium"
+                        android:text="Sign Up"
+                        android:textAllCaps="false"
+                        android:textColor="@color/purple"
+                        android:textSize="16sp"/>
+
+                    <Button
+                        android:id="@+id/login_privacy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/medium"
+                        android:text="Privacy policy"
+                        android:textAllCaps="false"
+                        android:textColor="@color/purple"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <ImageButton
+                android:id="@+id/login_close_button"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
                 android:background="@android:color/transparent"
-                android:fontFamily="@font/medium"
-                android:text="Forgot password?"
-                android:textAllCaps="false"
-                android:textColor="@color/purple"
-                android:textSize="12sp"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/close"/>
 
-            <com.scruge.scruge.view.views.ButtonView
-                android:id="@+id/login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:text="Not a member yet?"
-            android:textAlignment="center"
-            android:textColor="@color/text_gray"
-            android:textSize="14sp"/>
-
-        <Button
-            android:id="@+id/login_signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/medium"
-            android:text="Sign Up"
-            android:textAllCaps="false"
-            android:textColor="@color/purple"
-            android:textSize="16sp"/>
-
-        <Button
-            android:id="@+id/login_privacy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/medium"
-            android:text="Privacy policy"
-            android:textAllCaps="false"
-            android:textColor="@color/purple"
-            android:textSize="12sp"/>
-
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/login_close_button"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/transparent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/close"/>
 
 </RelativeLayout>

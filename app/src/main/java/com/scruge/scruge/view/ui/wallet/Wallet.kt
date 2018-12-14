@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.services.Service
 
 class WalletFragment: NavigationFragment() {
 
@@ -17,6 +18,21 @@ class WalletFragment: NavigationFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setupVM()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        verifyWallet()
+    }
+
+    private fun setupVM() {
+
+    }
+
+    private fun verifyWallet() {
+        if (!Service.wallet.hasAccount) {
+            Service.presenter.replaceWithWalletStartFragment(this)
+        }
     }
 }

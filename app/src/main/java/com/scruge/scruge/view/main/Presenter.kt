@@ -81,4 +81,42 @@ class Presenter {
     fun presentCropImageActivity(fragment: NavigationFragment, imageUrl: Uri) {
         fragment.activity?.let { CropImage.activity(imageUrl).start(it, fragment) }
     }
+
+    // WALLET
+
+    fun presentWallerFragment(fragment: NavigationFragment) {
+
+    }
+
+    fun presentImporKeyFragment(fragment: NavigationFragment) {
+
+    }
+
+    fun presentCreateAccountFragment(fragment: NavigationFragment) {
+
+    }
+
+    fun replaceWithImporKeyFragment(fragment: NavigationFragment) {
+
+    }
+
+    fun replaceWithCreateAccountFragment(fragment: NavigationFragment) {
+
+    }
+
+    fun presentWalletPicker(fragment: NavigationFragment) {
+
+    }
+
+    fun replaceWithWalletFragment(fragment: NavigationFragment) {
+
+    }
+
+    fun replaceWithWalletStartFragment(fragment: NavigationFragment) {
+
+    }
+
+    fun replaceWithWalletNoAccountFragment(fragment: NavigationFragment) {
+
+    }
 }

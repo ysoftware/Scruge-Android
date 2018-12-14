@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/regular"
+                android:text="The key you imported does not have access to any EOS accounts"
+                android:textAlignment="center"
+                android:textColor="@color/text_regular"
+                android:textSize="18sp"/>
+
+
+            <com.scruge.scruge.view.views.ButtonView
+                android:id="@+id/wallet_no_accounts_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:fontFamily="@font/regular"
+                    android:text="Want to add another key?"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp"/>
+
+                <Button
+                    android:id="@+id/wallet_no_accounts_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/medium"
+                    android:text="Remove key and start over"
+                    android:textAllCaps="false"
+                    android:textColor="@color/purple"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/regular"
+                    android:text="All sensitive information is protected
+and follows the privacy policy"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
