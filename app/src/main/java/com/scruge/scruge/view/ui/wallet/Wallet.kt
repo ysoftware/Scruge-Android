@@ -10,6 +10,8 @@ import com.scruge.scruge.services.Service
 
 class WalletFragment: NavigationFragment() {
 
+//    val vm = AccountAVM()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_wallet, container, false)

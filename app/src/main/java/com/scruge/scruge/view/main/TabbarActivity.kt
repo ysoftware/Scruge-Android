@@ -6,9 +6,7 @@ import android.util.Log
 import android.view.View
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController
-import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
-import com.scruge.scruge.services.eos.AccountModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class TabbarActivity : AppCompatActivity() {
@@ -34,6 +32,15 @@ class TabbarActivity : AppCompatActivity() {
         selectTab(0)
         tabbar.setOnNavigationItemSelectedListener {
             selectTab(it.order)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Service.eos.getBalance("yaroslav", listOf("SCR")) { balances ->
+
+            Log.e("test", balances.toString())
         }
     }
 

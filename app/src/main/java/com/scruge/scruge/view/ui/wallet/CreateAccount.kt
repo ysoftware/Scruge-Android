@@ -32,7 +32,7 @@ class CreateAccountFragment: NavigationFragment() {
 
     private fun setupActions() {
         wallet_create_save.click { save() }
-        wallet_create_import.setOnClickListener { Service.presenter.replaceWithImporKeyFragment(this) }
+        wallet_create_import.setOnClickListener { Service.presenter.replaceWithImportKeyFragment(this) }
     }
 
     private fun save() {

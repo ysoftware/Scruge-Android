@@ -4,9 +4,11 @@ import android.util.Log
 import com.memtrip.eos.chain.actions.ChainResponse
 import com.memtrip.eos.chain.actions.transaction.transfer.TransferChain
 import com.memtrip.eos.http.rpc.Api
+import com.memtrip.eos.http.rpc.model.contract.request.GetCurrencyBalance
 import com.memtrip.eos.http.rpc.model.history.request.GetKeyAccounts
 import com.memtrip.eos.http.rpc.model.transaction.response.TransactionCommitted
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
+import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.model.error.EOSError
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
@@ -87,6 +89,30 @@ class EOS {
 
             Action(service.chain).push(contract, action, data, permission, context)
                     .subscribe(completion)
+        }
+    }
+
+    fun getBalance(account:String, currencies:List<String>, completion: (List<Balance>) -> Unit) {
+
+        var i = 0
+        val balances = arrayListOf<Balance>()
+
+        currencies.forEach { currency ->
+            service.chain.getCurrencyBalance(GetCurrencyBalance("eosio.token", account, currency))
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe { response, _ ->
+
+                        i += 1
+
+                        val body = response.body()
+                        if (body != null) {
+                            balances.add(Balance(body.first()))
+                        }
+
+                        if (i == currencies.size) {
+                            completion(balances)
+                        }
+                    }
         }
     }
 }

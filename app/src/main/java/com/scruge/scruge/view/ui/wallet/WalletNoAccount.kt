@@ -30,7 +30,7 @@ class WalletNoAccountFragment: NavigationFragment() {
     private fun setupActions() {
         wallet_no_accounts_remove.setOnClickListener {
             Service.wallet.deleteWallet()
-            Service.presenter.replaceWithImporKeyFragment(this)
+            Service.presenter.replaceWithImportKeyFragment(this)
         }
         wallet_no_accounts_button.click {
             Service.presenter.presentCreateAccountFragment(this)
