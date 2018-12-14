@@ -30,7 +30,7 @@
                     android:src="@drawable/profile"/>
 
                 <EditText
-                    android:id="@+id/login_email"
+                    android:id="@+id/wallet_create_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
@@ -92,7 +92,7 @@
                     android:src="@drawable/lock"/>
 
                 <EditText
-                    android:id="@+id/wallet_import_confirm"
+                    android:id="@+id/wallet_create_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"

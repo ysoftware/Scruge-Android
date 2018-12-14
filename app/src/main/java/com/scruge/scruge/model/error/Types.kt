@@ -2,6 +2,11 @@ package com.scruge.scruge.model.error
 
 interface ScrugeError
 
+enum class GeneralError:ScrugeError {
+
+    unknown
+}
+
 enum class AuthError:ScrugeError {
 
     accountBlocked,
@@ -40,7 +45,9 @@ enum class BackendError:ScrugeError {
 
     invalidResourceId,
 
-    notImplemented
+    notImplemented,
+
+    unknown
 }
 
 enum class NetworkingError:ScrugeError {
@@ -60,5 +67,7 @@ enum class WalletError:ScrugeError {
 
     noSelectedAccount,
 
-    selectedAccountMissing
+    selectedAccountMissing,
+
+    unknown
 }

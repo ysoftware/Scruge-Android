@@ -38,6 +38,7 @@ class ErrorHandler {
                     invalidResourceId -> "Malformed request"
                     resourceNotFound -> "Nothing was found for this request"
                     parsingError -> "Unexpected server response"
+                    BackendError.unknown -> "Unexpected server error"
                 }
             }
             (error as? WalletError)?.let {
@@ -47,6 +48,7 @@ class ErrorHandler {
                     noKey -> "You have no keys in your wallet"
                     noSelectedAccount -> "You did not verify any EOS accounts"
                     selectedAccountMissing -> "Your verified account is not accessible with imported EOS key"
+                    WalletError.unknown -> "Unexpected wallet error"
                 }
             }
             (error as? EOSError)?.let {
