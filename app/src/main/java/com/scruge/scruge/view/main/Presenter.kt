@@ -14,7 +14,7 @@ import com.scruge.scruge.view.ui.authprofile.ProfileFragment
 import com.scruge.scruge.view.ui.authprofile.RegisterFragment
 import com.scruge.scruge.view.ui.campaign.CampaignFragment
 import com.scruge.scruge.view.ui.campaign.FeaturedFragment
-import com.scruge.scruge.view.ui.wallet.WalletFragment
+import com.scruge.scruge.view.ui.wallet.*
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.profile.ProfileVM
 import com.theartofdev.edmodo.cropper.CropImage
@@ -84,39 +84,35 @@ class Presenter {
 
     // WALLET
 
-    fun presentWallerFragment(fragment: NavigationFragment) {
-
-    }
-
     fun presentImporKeyFragment(fragment: NavigationFragment) {
-
+        fragment.navigationController?.navigateTo(ImportKeyFragment())
     }
 
     fun presentCreateAccountFragment(fragment: NavigationFragment) {
-
+        fragment.navigationController?.navigateTo(CreateAccountFragment())
     }
 
-    fun replaceWithImporKeyFragment(fragment: NavigationFragment) {
-
+    fun replaceWithImportKeyFragment(fragment: NavigationFragment) {
+        fragment.navigationController?.replaceWith(ImportKeyFragment())
     }
 
     fun replaceWithCreateAccountFragment(fragment: NavigationFragment) {
-
+        fragment.navigationController?.replaceWith(CreateAccountFragment())
     }
 
     fun presentWalletPicker(fragment: NavigationFragment) {
-
+//        fragment.startActivity(Intent(fragment.context, ))
     }
 
     fun replaceWithWalletFragment(fragment: NavigationFragment) {
-
+        fragment.navigationController?.replaceWith(WalletFragment())
     }
 
     fun replaceWithWalletStartFragment(fragment: NavigationFragment) {
-
+        fragment.navigationController?.replaceWith(WalletStartFragment())
     }
 
     fun replaceWithWalletNoAccountFragment(fragment: NavigationFragment) {
-
+        fragment.navigationController?.replaceWith(WalletNoAccountFragment())
     }
 }
