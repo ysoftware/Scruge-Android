@@ -42,6 +42,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         
         (activity as? TabbarActivity)?.tabbarHidden = false
         verifyWallet()
+        setupVM()
     }
 
     private fun setupVM() {
@@ -87,7 +88,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     private fun presentWalletPicker() {
-        if (vm.numberOfItems == 0) { return }
+        if (vm.isEmpty()) { return }
 
         if (vm.numberOfItems == 1) {
             Service.settings.set(Settings.Setting.selectedAccount, vm.item(0).name)
