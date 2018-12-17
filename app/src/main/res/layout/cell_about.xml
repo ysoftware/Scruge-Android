@@ -10,7 +10,6 @@
     android:layout_marginEnd="15dp"
     android:layout_marginBottom="10dp"
     android:orientation="vertical"
-    app:cardCornerRadius="7dp"
     app:cardElevation="5dp">
 
     <LinearLayout

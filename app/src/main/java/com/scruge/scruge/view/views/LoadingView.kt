@@ -1,6 +1,8 @@
 package com.scruge.scruge.view.views
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -47,20 +49,22 @@ class LoadingView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
         set(value) {
             field = value
 
-            when (value) {
-                ViewState.loading -> {
-                    visibility = View.VISIBLE
-                    loading_indicator.visibility = View.VISIBLE
-                    error_view.visibility = View.GONE
-                }
-                ViewState.error -> {
-                    visibility = View.VISIBLE
-                    loading_indicator.visibility = View.GONE
-                    error_view.visibility = View.VISIBLE
-                    setMessage(field.errorMessage)
-                }
-                ViewState.ready -> {
-                    visibility = View.GONE
+            Handler(Looper.getMainLooper()).post {
+                when (value) {
+                    ViewState.loading -> {
+                        visibility = View.VISIBLE
+                        loading_indicator.visibility = View.VISIBLE
+                        error_view.visibility = View.GONE
+                    }
+                    ViewState.error -> {
+                        visibility = View.VISIBLE
+                        loading_indicator.visibility = View.GONE
+                        error_view.visibility = View.VISIBLE
+                        setMessage(field.errorMessage)
+                    }
+                    ViewState.ready -> {
+                        visibility = View.GONE
+                    }
                 }
             }
         }

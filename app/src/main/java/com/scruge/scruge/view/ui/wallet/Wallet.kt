@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.Service
@@ -34,6 +35,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
 
     override fun onResume() {
         super.onResume()
+
         verifyWallet()
         setupVM()
     }
@@ -58,15 +60,17 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
                     WalletError.noAccounts ->
                         Service.presenter.replaceWithWalletNoAccountFragment(this)
                     else -> {
-                        //                        loadingView.set(state: .error(ErrorHandler.message(for: error)))
+                        val e = ViewState.error
+                        e.errorMessage = ErrorHandler.message(error)
+                        wallet_loading_view.state = e
                     }
                 }
             }
             State.loading -> {
-//                loadingView.set(state:.loading)
+                wallet_loading_view.state = ViewState.loading
             }
             State.ready -> {
-//                loadingView.set(state: .ready)
+                wallet_loading_view.state = ViewState.ready
             }
             else -> { }
         }
@@ -77,7 +81,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     private fun selectVM() {
-        if (!vm.isEmpty) {
+        if (!vm.isEmpty()) {
             accountVM = vm.item(0)
             accountVM?.delegate = this
             accountVM?.updateBalance()
