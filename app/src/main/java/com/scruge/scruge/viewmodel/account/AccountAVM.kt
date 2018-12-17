@@ -4,6 +4,7 @@ import android.os.Handler
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.Settings
 import com.scruge.scruge.services.wallet.AccountModel
 import com.ysoftware.mvvm.array.SimpleArrayViewModel
 
@@ -26,7 +27,8 @@ class AccountAVM : SimpleArrayViewModel<AccountModel, AccountVM>() {
 
     // METHODS
 
-//    val selectedAccountVM:AccountVM? = Service.settings
+    val selectedAccount:AccountVM? get() = Service.settings.get<String>(Settings.Setting.selectedAccount)
+            ?.let { selected -> array.first { it.name == selected }}
 
     fun deleteWallet() {
         Service.wallet.deleteWallet()

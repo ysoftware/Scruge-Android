@@ -101,7 +101,7 @@ class Presenter {
     }
 
     fun presentWalletPicker(fragment: NavigationFragment) {
-//        fragment.startActivity(Intent(fragment.context, ))
+        fragment.startActivityForResult(Intent(fragment.context, WalletPickerActivity::class.java), 0)
     }
 
     fun replaceWithWalletFragment(fragment: NavigationFragment) {

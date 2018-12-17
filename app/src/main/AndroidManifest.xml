@@ -31,6 +31,10 @@
             android:name=".view.main.AuthActivity"
             android:windowSoftInputMode="adjustNothing"/>
 
+        <activity
+            android:name=".view.ui.wallet.WalletPickerActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+
     </application>
 
 </manifest>

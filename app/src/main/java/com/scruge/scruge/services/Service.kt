@@ -18,5 +18,7 @@ class Service {
         val eos = EOS()
 
         val wallet = Wallet()
+
+        val settings = Settings()
     }
 }

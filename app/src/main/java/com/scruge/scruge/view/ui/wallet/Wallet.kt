@@ -1,5 +1,6 @@
 package com.scruge.scruge.view.ui.wallet
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.Settings
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.account.AccountAVM
 import com.scruge.scruge.viewmodel.account.AccountVM
@@ -32,6 +34,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         super.onActivityCreated(savedInstanceState)
 
         setupVM()
+        setupActions()
     }
 
     override fun viewDidAppear() {
@@ -39,12 +42,17 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         
         (activity as? TabbarActivity)?.tabbarHidden = false
         verifyWallet()
-        setupVM()
     }
 
     private fun setupVM() {
         vm.delegate = this
         vm.reloadData()
+    }
+
+    private fun setupActions() {
+        wallet_settings.setOnClickListener {
+            Service.presenter.presentWalletPicker(this)
+        }
     }
 
     private fun updateView() {
@@ -79,24 +87,37 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     private fun presentWalletPicker() {
+        if (vm.numberOfItems == 0) { return }
 
+        if (vm.numberOfItems == 1) {
+            Service.settings.set(Settings.Setting.selectedAccount, vm.item(0).name)
+            vm.reloadData()
+            return
+        }
+
+        Service.presenter.presentWalletPicker(this)
     }
 
     private fun selectVM() {
-        if (!vm.isEmpty()) {
-            accountVM = vm.item(0)
+        val account = vm.selectedAccount
+        if (account != null) {
+            accountVM = account
             accountVM?.delegate = this
             accountVM?.updateBalance()
         }
-
-//        vm.selectedAccount?.let {
-//
-//            accountVM = account
-//            accountVM?.delegate = self
-//            accountVM?.updateBalance()
-//        } ?: presentWalletPicker()
+        else {
+            presentWalletPicker()
+        }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 0) {
+            if (Service.settings.get<String>(Settings.Setting.selectedAccount) == null) {
+                presentWalletPicker()
+            }
+        }
+    }
 
     private fun verifyWallet() {
         if (!Service.wallet.hasAccount) {

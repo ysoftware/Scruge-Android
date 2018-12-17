@@ -20,23 +20,39 @@
             android:layout_marginBottom="-45dp"
             android:background="@drawable/gradient_profile"/>
 
-        <TextView
-            android:id="@+id/wallet_title"
+        <RelativeLayout
             android:layout_marginTop="15dp"
-            android:layout_marginStart="15dp"
+            android:id="@+id/wallet_title_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:text="Wallet"
-            android:textColor="@color/white"
-            android:textSize="34sp"/>
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/wallet_settings"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/gear"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/medium"
+                android:text="Wallet"
+                android:textColor="@color/white"
+                android:textSize="24sp"/>
+        </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/wallet_balance_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/wallet_title_view"
             android:layout_margin="15dp"
-            android:layout_below="@id/wallet_title"
 
             app:cardElevation="5dp">
 
