@@ -10,6 +10,7 @@ import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.account.AccountAVM
 import com.scruge.scruge.viewmodel.account.AccountVM
 import com.ysoftware.mvvm.array.*
@@ -33,9 +34,10 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         setupVM()
     }
 
-    override fun onResume() {
-        super.onResume()
-
+    override fun viewDidAppear() {
+        super.viewDidAppear()
+        
+        (activity as? TabbarActivity)?.tabbarHidden = false
         verifyWallet()
         setupVM()
     }

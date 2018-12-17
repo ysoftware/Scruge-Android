@@ -30,9 +30,11 @@ class ProfileFragment: NavigationFragment(), ViewModelDelegate {
         setupActions()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun viewDidAppear() {
+        super.viewDidAppear()
+
         vm.load()
+        (activity as? TabbarActivity)?.tabbarHidden = false
     }
 
     private fun setupVM() {

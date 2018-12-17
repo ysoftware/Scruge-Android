@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.view.main.TabbarActivity
 
 class ActivityFragment: NavigationFragment() {
 
@@ -17,6 +18,10 @@ class ActivityFragment: NavigationFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+    }
 
+    override fun viewDidAppear() {
+        super.viewDidAppear()
+        (activity as? TabbarActivity)?.tabbarHidden = false
     }
 }
