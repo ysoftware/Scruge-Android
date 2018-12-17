@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/campaign_info_image_constraint"
@@ -15,7 +14,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/black"
-            app:layout_constraintDimensionRatio="H,1.2:1"
+            app:layout_constraintDimensionRatio="H,16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -34,34 +33,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/campaign_info_card_view"
-        android:layout_margin="15dp"
-        android:orientation="vertical"
-        android:paddingBottom="15dp">
-
-        <TextView
-            android:id="@+id/campaign_info_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="6 days left"
-            android:textColor="@color/white"
-            android:textSize="12sp"/>
-
-        <TextView
-            android:id="@+id/campaign_info_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/bold"
-            android:text="Me.guided"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/campaign_info_card_view"
         android:layout_width="match_parent"
@@ -70,7 +41,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="-15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +50,34 @@
             android:orientation="vertical"
             android:padding="15dp">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false">
+
+                <TextView
+                    android:id="@+id/campaign_info_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="6 days left"
+                    android:textColor="@color/text_light"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/campaign_info_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/bold"
+                    android:text="Me.guided"
+                    android:textColor="@color/text_regular"
+                    android:textSize="20sp"/>
+            </RelativeLayout>
+
             <TextView
+                android:layout_marginTop="15dp"
                 android:id="@+id/campaign_info_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
