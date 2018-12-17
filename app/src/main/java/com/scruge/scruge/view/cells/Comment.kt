@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.cell_comment_top.view.*
 class TopCommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setup(vm:CommentAVM?, allCommentsCount:Int):TopCommentCell {
-        if (vm != null && !vm.isEmpty) {
+        if (vm != null && vm.isNotEmpty()) {
             val comment = vm.item(0)
 
             itemView.top_comment_name.text = comment.authorName
