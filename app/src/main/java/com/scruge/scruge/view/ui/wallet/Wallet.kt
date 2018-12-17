@@ -39,15 +39,15 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
 
     override fun viewDidAppear() {
         super.viewDidAppear()
-        
+
         (activity as? TabbarActivity)?.tabbarHidden = false
-        verifyWallet()
         setupVM()
     }
 
     private fun setupVM() {
         vm.delegate = this
         vm.reloadData()
+        verifyWallet()
     }
 
     private fun setupActions() {
@@ -73,15 +73,15 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
                     else -> {
                         val e = ViewState.error
                         e.errorMessage = ErrorHandler.message(error)
-                        wallet_loading_view.state = e
+                        wallet_loading_view?.state = e
                     }
                 }
             }
             State.loading -> {
-                wallet_loading_view.state = ViewState.loading
+                wallet_loading_view?.state = ViewState.loading
             }
             State.ready -> {
-                wallet_loading_view.state = ViewState.ready
+                wallet_loading_view?.state = ViewState.ready
             }
             else -> { }
         }
@@ -114,9 +114,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0) {
-            if (Service.settings.get<String>(Settings.Setting.selectedAccount) == null) {
-                presentWalletPicker()
-            }
+            setupVM()
         }
     }
 

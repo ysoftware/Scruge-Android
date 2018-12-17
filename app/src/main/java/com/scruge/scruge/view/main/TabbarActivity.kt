@@ -31,6 +31,7 @@ class TabbarActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportActionBar?.hide()
+        navigationControllers.forEach { it.isVisible = false }
         Service.presenter.setupMainTabs(navigationControllers)
         setupTabbar()
     }
@@ -71,12 +72,14 @@ class TabbarActivity : AppCompatActivity() {
                 val view = findViewById<View>(nav.containerId)
                 if (index == i) {
                     view.visibility = View.VISIBLE
+                    nav.isVisible = true
 
                     (nav.topFragment() as? NavigationFragment)?.viewWillAppear()
                     (nav.topFragment() as? NavigationFragment)?.viewDidAppear()
                 }
                 else {
                     view.visibility = View.GONE
+                    nav.isVisible = false
 
                     if (previousSelectedTab == i) {
                         (nav.topFragment() as? NavigationFragment)?.viewWillDisappear()

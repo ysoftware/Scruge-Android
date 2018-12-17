@@ -23,6 +23,7 @@ public class NavigationController {
     private Stack<Fragment> fragmentStack = new Stack<>();
     private Fragment currentFragment;
     private int containerId;
+    public boolean isVisible = true;
 
     public NavigationController(FragmentManager fragmentManager, int containerId) {
         this.containerId = containerId;
@@ -135,6 +136,8 @@ public class NavigationController {
     // HELPER
 
     private void update(Fragment oldFragment, Fragment fragment, Update update) {
+        if (!isVisible) { return; }
+
         if (update == Update.will) {
             if (fragment instanceof NavigationFragment) {
                 ((NavigationFragment) fragment).viewWillAppear();
