@@ -11,6 +11,7 @@ import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.cells.CampaignSmallCell
+import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.campaign.CampaignAVM
 import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
@@ -36,6 +37,11 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
 
         setupVM()
         setupTable()
+    }
+
+    override fun viewDidAppear() {
+        super.viewDidAppear()
+        (activity as? TabbarActivity)?.tabbarHidden = false
     }
 
     private fun setupVM() {

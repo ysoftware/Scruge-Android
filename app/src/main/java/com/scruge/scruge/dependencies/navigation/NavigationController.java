@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 
 public class NavigationController {
 
+    private enum Update { will, did }
+
     /// return true if handled, false to pass further
     public interface OnBackPressedListener {
         boolean onBackPressedHandled();
@@ -31,60 +33,67 @@ public class NavigationController {
         return containerId;
     }
 
-    public void replaceWith(Fragment fragment) {
+    public void replaceWith(final Fragment fragment) {
+        final Fragment oldFragment = currentFragment;
         currentFragment = fragment;
+
+        fragmentStack = new Stack<>();
         manager.popBackStackImmediate(null,
                 FragmentManager.POP_BACK_STACK_INCLUSIVE);
         manager.beginTransaction()
-                .replace(containerId, fragment).commitAllowingStateLoss();
-        fragmentStack = new Stack<>();
+                .replace(containerId, fragment)
+                .commitAllowingStateLoss();
 
         if (fragment instanceof NavigationFragment) {
             ((NavigationFragment) fragment).setNavigationController(this);
         }
+
+        update(oldFragment, fragment, Update.will);
+        manager.executePendingTransactions();
+        update(oldFragment, fragment, Update.did);
     }
 
-    public void navigateTo(Fragment fragment) {
+    public void navigateTo(final Fragment fragment) {
+        final Fragment oldFragment = currentFragment;
         if (android.os.Build.VERSION.SDK_INT > 21) {
             fragment.setEnterTransition(new Slide(Gravity.END));
             fragment.setExitTransition(new Slide(Gravity.START));
         }
 
+        if (currentFragment == null) { return; }
+
+        fragmentStack.push(fragment);
+        resetClickable();
+        manager.beginTransaction()
+                .add(containerId, fragment)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
+
         if (fragment instanceof NavigationFragment) {
             ((NavigationFragment) fragment).setNavigationController(this);
         }
 
-        if (currentFragment != null) {
-            manager.beginTransaction()
-                    .add(containerId, fragment)
-                    .addToBackStack(null)
-                    .commitAllowingStateLoss();
-            fragmentStack.push(fragment);
-            resetClickable();
-        }
+        update(oldFragment, fragment, Update.will);
+        manager.executePendingTransactions();
+        update(oldFragment, fragment, Update.did);
     }
 
     public boolean navigateBack() {
+        final Fragment oldFragment = currentFragment;
         if (fragmentStack.size() > 0) {
             fragmentStack.pop();
         }
-        Fragment fr = topFragment();
-        if (fr != null) {
-            if (manager.getBackStackEntryCount() > 0) {
-                manager.popBackStackImmediate(null, 0);
-                fr.onResume();
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public void removeFragment() {
-        if (currentFragment != null) {
-            manager.beginTransaction()
-                    .remove(currentFragment).commitAllowingStateLoss();
-            currentFragment = null;
+        Fragment fragment = topFragment();
+        if (fragment == null || manager.getBackStackEntryCount() == 0) {
+            return false;
         }
+
+        update(oldFragment, fragment, Update.will);
+        manager.popBackStackImmediate(null, 0);
+        update(oldFragment, fragment, Update.did);
+
+        return true;
     }
 
     public boolean onBackPressed() {
@@ -119,6 +128,35 @@ public class NavigationController {
             View v = s.getView();
             if (v != null) {
                 v.setClickable(clickable);
+            }
+        }
+    }
+
+    // HELPER
+
+    private void update(Fragment oldFragment, Fragment fragment, Update update) {
+        if (update == Update.will) {
+            if (fragment instanceof NavigationFragment) {
+                ((NavigationFragment) fragment).viewWillAppear();
+            }
+
+            if (oldFragment instanceof NavigationFragment) {
+                ((NavigationFragment) oldFragment).viewWillDisappear();
+            }
+        }
+        else {
+            if (fragment instanceof NavigationFragment) {
+                ((NavigationFragment) fragment).viewDidAppear();
+            }
+            else {
+                fragment.onResume();
+            }
+
+            if (oldFragment instanceof NavigationFragment) {
+                ((NavigationFragment) oldFragment).viewDidDisappear();
+            }
+            else if (oldFragment != null) {
+                oldFragment.onPause();
             }
         }
     }

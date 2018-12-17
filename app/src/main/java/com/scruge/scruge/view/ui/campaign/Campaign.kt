@@ -10,6 +10,7 @@ import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.view.cells.*
+import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.view.ui.campaign.CampaignFragment.Block.*
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.faq.FaqVM
@@ -61,6 +62,11 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
 
         setupVM()
         setupTable()
+    }
+
+    override fun viewDidAppear() {
+        super.viewDidAppear()
+        (activity as? TabbarActivity)?.tabbarHidden = true
     }
 
     private fun setupVM() {

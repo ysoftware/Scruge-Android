@@ -4,8 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.Transformation
+import android.widget.RelativeLayout
+import androidx.fragment.app.Fragment
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController
+import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.Dimension
 import com.scruge.scruge.services.Service
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -56,6 +63,7 @@ class TabbarActivity : AppCompatActivity() {
         val shouldSelect = shouldSelectTab(index)
         if (shouldSelect && selectedTab != index) {
             val id = tabbar.menu.getItem(index).itemId
+            val previousSelectedTab = selectedTab
             selectedTab = index
             tabbar.selectedItemId = id
             for (i in 0 until navigationControllers.size) {
@@ -63,14 +71,33 @@ class TabbarActivity : AppCompatActivity() {
                 val view = findViewById<View>(nav.containerId)
                 if (index == i) {
                     view.visibility = View.VISIBLE
-                    nav.topFragment()?.onResume()
+
+                    (nav.topFragment() as? NavigationFragment)?.viewWillAppear()
+                    (nav.topFragment() as? NavigationFragment)?.viewDidAppear()
                 }
                 else {
                     view.visibility = View.GONE
-                    nav.topFragment()?.onPause()
+
+                    if (previousSelectedTab == i) {
+                        (nav.topFragment() as? NavigationFragment)?.viewWillDisappear()
+                        (nav.topFragment() as? NavigationFragment)?.viewDidDisappear()
+                    }
                 }
             }
         }
         return shouldSelect
+    }
+
+    var tabbarHidden = false
+        set(value) {
+            field = value
+
+            (tabbar.layoutParams as? ViewGroup.MarginLayoutParams)?.let {
+                it.bottomMargin = if (value) -Dimension.dp(55).px else 0
+            }
+        }
+
+    override fun onBackPressed() {
+        navigationControllers[selectedTab].onBackPressed()
     }
 }
