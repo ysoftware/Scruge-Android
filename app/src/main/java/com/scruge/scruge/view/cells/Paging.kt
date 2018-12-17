@@ -36,6 +36,10 @@ class PagingCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setupTable() {
         itemView.paging_recycler_view.setupForHorizontalLayout()
+
+        // fix for 'already set'
+        if (itemView.paging_recycler_view.onFlingListener != null) { return }
+
         LinearSnapHelper().attachToRecyclerView(itemView.paging_recycler_view)
         itemView.paging_recycler_view.adapter = Adapter(this)
 
