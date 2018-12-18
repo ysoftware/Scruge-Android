@@ -24,6 +24,7 @@ class ErrorHandler {
                     accountBlocked -> "This account was blocked"
                     accountExists -> "User already exists"
                     incorrectCredentials -> "Incorrect credentials"
+                    denied -> "Access is restricted"
                 }
             }
             (error as? NetworkingError)?.let {
@@ -77,6 +78,7 @@ class ErrorHandler {
                 11 -> invalidResourceId
                 12 -> resourceNotFound
                 13 -> userNotFound
+                14 -> denied
 
                 // auth
                 101 -> incorrectEmailLength

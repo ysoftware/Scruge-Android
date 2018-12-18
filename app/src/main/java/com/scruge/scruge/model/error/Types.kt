@@ -25,7 +25,9 @@ enum class AuthError:ScrugeError {
 
     incorrectEmailLength, // 5 to 254 symbols
 
-    incorrectPasswordLength // 5 to 50 symbols
+    incorrectPasswordLength, // 5 to 50 symbols
+
+    denied
 }
 
 enum class EOSError:ScrugeError {

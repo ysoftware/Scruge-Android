@@ -130,11 +130,11 @@ interface BackendApi {
 
     // COMMENTS
 
-    @POST("campaign/{campaignId}/comment")
+    @POST("campaign/{campaignId}/comments")
     fun postCampaignComment(@Path("campaignId") campaignId:Int,
                             @Body request:CommentRequest):Call<ResponseBody>
 
-    @POST("update/{updateId}/comment")
+    @POST("update/{updateId}/comments")
     fun postUpdateComment(@Path("updateId") updateId:String,
                           @Body request:CommentRequest):Call<ResponseBody>
 
