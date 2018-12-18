@@ -140,7 +140,7 @@ class VoteFragment: NavigationFragment() {
                     }
                 }
                 Block.update -> fr.vm.lastUpdateVM?.let {
-                    (holder as? LastUpdateCell)?.setup(it)
+                    (holder as? LastUpdateCell)?.setup(it, "Rationale: ")
                             ?.updateTap { update ->
 
                             }
@@ -148,12 +148,12 @@ class VoteFragment: NavigationFragment() {
 
                             }
                 }
-                Block.countdown -> {}
-                Block.controls -> {
+                Block.countdown ->
+                    (holder as? CountdownCell)?.setup("Vote ends in: ", fr.voting?.endTimestamp ?: 0)
+                Block.controls ->
                     (holder as? VoteControlsCell)?.setup { passcode, value ->
                         fr.vote(value, passcode)
                     }
-                }
             }
         }
     }
