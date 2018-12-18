@@ -2,13 +2,42 @@ package com.scruge.scruge.view.cells
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.scruge.scruge.dependencies.dataformatting.formatRounding
+import com.scruge.scruge.dependencies.view.Dimension
 import com.scruge.scruge.model.entity.VoteKind
+import com.scruge.scruge.model.entity.VoteResult
 import com.scruge.scruge.view.views.ButtonView
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import kotlinx.android.synthetic.main.cell_controls.view.*
 import kotlinx.android.synthetic.main.cell_countdown.view.*
 import kotlinx.android.synthetic.main.cell_vote_info.view.*
+import kotlinx.android.synthetic.main.cell_vote_result.view.*
 import java.util.*
+
+class VoteResultCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    fun setup(result:VoteResult?):VoteResultCell {
+        if (result != null) {
+            val onePercent = Math.max(0.01, result.voters.toDouble() / 100)
+            val positivePercent = result.positiveVotes.toDouble() / onePercent
+            val negativePercent = (result.voters - result.positiveVotes).toDouble() / onePercent
+
+            itemView.result_no.text = negativePercent.formatRounding() + "%"
+            itemView.result_yes.text = positivePercent.formatRounding() + "%"
+
+            itemView.result_background.viewTreeObserver.addOnGlobalLayoutListener {
+                val width = itemView.result_background.measuredWidth
+                itemView.result_view.layoutParams.width = width * (positivePercent / 100).toInt()
+            }
+        }
+        else {
+            itemView.result_no.text = "…"
+            itemView.result_yes.text = "…"
+        }
+
+        return this
+    }
+}
 
 class VoteInfoCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

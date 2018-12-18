@@ -16,6 +16,7 @@ import com.scruge.scruge.view.ui.campaign.CampaignFragment
 import com.scruge.scruge.view.ui.campaign.FeaturedFragment
 import com.scruge.scruge.view.ui.details.ContributeFragment
 import com.scruge.scruge.view.ui.details.VoteFragment
+import com.scruge.scruge.view.ui.details.VoteResultFragment
 import com.scruge.scruge.view.ui.wallet.*
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.profile.ProfileVM
@@ -99,7 +100,9 @@ class Presenter {
     }
 
     fun presentVoteResultsFragment(fragment: NavigationFragment, vm:CampaignVM) {
-
+        val fr = VoteResultFragment()
+        fr.vm = vm
+        fragment.navigationController?.navigateTo(fr)
     }
 
     // WALLET
