@@ -63,7 +63,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
-                        android:fontFamily="@font/medium"
+                        android:fontFamily="@font/regular"
                         android:text="0"
                         android:textColor="@color/purple"
                         android:textSize="24sp"/>
@@ -94,7 +94,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
-                        android:fontFamily="@font/medium"
+                        android:fontFamily="@font/regular"
                         android:text="0"
                         android:textColor="@color/purple"
                         android:textSize="24sp"/>
@@ -125,7 +125,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
-                        android:fontFamily="@font/medium"
+                        android:fontFamily="@font/regular"
                         android:text="0"
                         android:textColor="@color/purple"
                         android:textSize="24sp"/>
