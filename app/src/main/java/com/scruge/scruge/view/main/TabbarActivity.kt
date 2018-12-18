@@ -101,6 +101,8 @@ class TabbarActivity : AppCompatActivity() {
         }
 
     override fun onBackPressed() {
-        navigationControllers[selectedTab].onBackPressed()
+        if (!navigationControllers[selectedTab].onBackPressed()) {
+            super.onBackPressed()
+        }
     }
 }

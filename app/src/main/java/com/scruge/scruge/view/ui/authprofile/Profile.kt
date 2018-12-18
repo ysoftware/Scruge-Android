@@ -26,19 +26,19 @@ class ProfileFragment: NavigationFragment(), ViewModelDelegate {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setupVM()
         setupActions()
     }
 
     override fun viewDidAppear() {
         super.viewDidAppear()
 
-        vm.load()
+        setupVM()
         (activity as? TabbarActivity)?.tabbarHidden = false
     }
 
     private fun setupVM() {
         vm.delegate = this
+        vm.load()
     }
 
     private fun setupActions() {

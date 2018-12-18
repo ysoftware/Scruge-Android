@@ -21,6 +21,7 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.MediaStore
+import com.scruge.scruge.view.main.TabbarActivity
 
 class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPressedListener {
 
@@ -43,6 +44,11 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
         setupViews()
         setupActions()
         setupEditing()
+    }
+
+    override fun viewDidAppear() {
+        super.viewDidAppear()
+        (activity as? TabbarActivity)?.tabbarHidden = true
     }
 
     private fun setupViews() {
@@ -87,6 +93,8 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
     }
 
     override fun onBackPressedHandled(): Boolean {
+        if (editingProfile != null) { return false }
+
         ask("Are you sure that you want to quit?") { reply ->
             if (reply) {
                 Service.tokenManager.removeToken()
