@@ -41,20 +41,20 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
     private var id:Int
 
-    var isSubscribed:Boolean? = null
+    var isSubscribed:Boolean = false
         private set(value) {
             field = value
             notifyUpdated()
         }
 
-    var isBacker:Boolean? = null
+    var isBacker:Boolean = false
         private set(value) {
             field = value
             notifyUpdated()
         }
 
 
-    var canVote:Boolean? = null
+    var canVote:Boolean = false
         private set(value) {
             field = value
             notifyUpdated()
@@ -144,6 +144,10 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
     fun reloadData() {
         Service.api.getCampaign(id) { result ->
+            isBacker = false
+            isSubscribed = false
+            canVote = false
+
             result.onSuccess { response ->
                 model = response.campaign
                 reloadSubscribtionStatus()
@@ -159,15 +163,52 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
     }
 
     fun toggleSubscribing() {
+        if (model == null) { return }
 
+        val newValue = !isSubscribed
+        Service.api.setSubscribing(newValue, model!!) { result ->
+            if (result.getOrNull()?.result == 0) {
+                reloadSubscribtionStatus()
+            }
+        }
     }
 
     fun reloadSubscribtionStatus() {
+        if (model == null) { return }
 
+        Service.api.getSubscriptionStatus(model!!) { result ->
+            result.onSuccess {
+                isSubscribed = it.value
+            }.onFailure {
+                isSubscribed = false
+            }
+        }
     }
 
     fun reloadCanVote() {
+        if (model == null) { return }
 
+        Service.api.getDidContribute(model!!.id) { didContributeResult ->
+            didContributeResult.onSuccess {
+                isBacker = it.value
+
+                if (!it.value) {
+                    canVote = false
+                    return@onSuccess
+                }
+
+                Service.api.getDidVote(model!!.id) { didVoteResult ->
+                    didVoteResult.onSuccess {
+                        canVote = !it.value // if did vote, then can't vote now
+                    }.onFailure {
+                        canVote = false
+                    }
+                }
+            }.onFailure {
+                canVote = false
+                isBacker = false
+            }
+        }
     }
 
     // VIEW MODELS

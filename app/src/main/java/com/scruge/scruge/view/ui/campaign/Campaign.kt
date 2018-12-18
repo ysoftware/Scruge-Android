@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.Dimension
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.model.ViewState
+import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.cells.*
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.view.ui.campaign.CampaignFragment.Block.*
@@ -20,6 +22,7 @@ import com.ysoftware.mvvm.array.Query
 import com.ysoftware.mvvm.array.Update
 import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_campaign.*
 
 class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelDelegate {
@@ -80,12 +83,44 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
         recycler_view.adapter = adapter
     }
 
-    private fun setupNavigationBar() {
-        // todo subscribe button
+    private fun setupBottomButton() {
+        campaign_button.setBackgroundColor(resources.getColor(R.color.purple))
+        showContributionButton(true)
+
+        when (vm.status) {
+            CampaignVM.Status.activeVote -> {
+                if (!vm.isBacker) {
+                    showContributionButton(false)
+                }
+                else {
+                    if (vm.canVote) {
+                        campaign_button.text = "Vote"
+                    }
+                    else {
+                        campaign_button.text = "View Voting Progress"
+                    }
+                }
+            }
+            CampaignVM.Status.closed -> {
+                campaign_button.setBackgroundColor(resources.getColor(R.color.gray))
+                campaign_button.text = "Campaign over"
+            }
+            CampaignVM.Status.funding -> {
+                if (Service.tokenManager.hasToken) {
+                    campaign_button.text = "Contribute"
+                }
+                else {
+                    campaign_button.text = "Sign in to contribute"
+                }
+            }
+            else -> showContributionButton(false)
+        }
     }
 
-    private fun setupBottomButton() {
-        // todo invest and vote
+    private fun showContributionButton(visible:Boolean = true) {
+        (campaign_button.layoutParams as? ViewGroup.MarginLayoutParams)?.let {
+            it.bottomMargin = if (visible) 0 else -Dimension.dp(55).px
+        }
     }
 
     fun shouldDisplay(block:Block):Boolean {
@@ -136,7 +171,6 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
     override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
             arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
         adapter?.notifyDataSetChanged()
-        setupNavigationBar()
     }
 
     // ADAPTER

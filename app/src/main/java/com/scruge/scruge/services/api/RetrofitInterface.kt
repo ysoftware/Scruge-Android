@@ -107,7 +107,7 @@ interface BackendApi {
     fun getDidContribute(@Path("token") token:String,
                          @QueryMap request:Map<String, Any>): Call<ResponseBody>
 
-    @GET("user/token/did_vote")
+    @GET("user/{token}/did_vote")
     fun getDidVote(@Path("token") token:String,
                    @QueryMap request:Map<String, Any>): Call<ResponseBody>
 
