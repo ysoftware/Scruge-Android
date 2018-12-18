@@ -119,18 +119,32 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
 
     fun loadDescription(completion:((String)->Unit)) {
-
+        val model = model ?: return completion("")
+        Service.api.getCampaignContent(model) { result ->
+            completion(result.getOrNull()?.content ?: "")
+        }
     }
 
     fun loadVoteInfo(completion: (VoteInfo?) -> Unit) {
-
+        val model = model ?: return completion(null)
+        Service.api.getVoteInfo(model.id) { result ->
+            completion(result.getOrNull()?.voting)
+        }
     }
-    fun loadVoteResults(completion: (VoteResult?) -> Unit) {
 
+    fun loadVoteResults(completion: (VoteResult?) -> Unit) {
+        val model = model ?: return completion(null)
+        Service.api.getVoteResult(model.id) { result ->
+            completion(result.getOrNull()?.votings?.first { it.active })
+        }
     }
 
     fun loadAmountContributed(completion: (Double?) -> Unit) {
-
+        val model = model ?: return completion(null)
+        Service.api.getContributionHistory { result ->
+            val contrib = result.getOrNull()?.contributions?.first { it.campaignId == model.id }
+            completion(contrib?.amount)
+        }
     }
 
     fun contribute(amount:Double, account: AccountVM, passcode: String, completion: (ScrugeError?)->Unit) {

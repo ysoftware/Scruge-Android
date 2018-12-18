@@ -5,7 +5,7 @@ data class VoteResult(val voteId:Int, val active:Boolean, val positiveVotes:Int,
 
 data class Voting(val campaign: CampaignInfo, val voting: VoteInfo)
 
-data class VoteInfo(val kind: Int, val voteId: Int, val endTimestamp: Long)
+data class VoteInfo(val kind: Int, val voteId: Int, val endTimestamp: Long, val active:Boolean)
 
 enum class VoteKind(val kind:Int) {
 
