@@ -7,6 +7,8 @@ import com.ysoftware.mvvm.single.ViewModel
 
 class UpdateVM(model: Update?) : ViewModel<Update>(model) {
 
+    constructor(): this(null)
+
     val imageUrl get() = model?.imageUrl
 
     val date get() = model?.let { datePresent(it.timestamp, "d MMMM yyyy") } ?: ""

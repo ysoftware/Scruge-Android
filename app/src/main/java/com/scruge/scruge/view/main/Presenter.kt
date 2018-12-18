@@ -14,6 +14,7 @@ import com.scruge.scruge.view.ui.authprofile.ProfileFragment
 import com.scruge.scruge.view.ui.authprofile.RegisterFragment
 import com.scruge.scruge.view.ui.campaign.CampaignFragment
 import com.scruge.scruge.view.ui.campaign.FeaturedFragment
+import com.scruge.scruge.view.ui.details.VoteFragment
 import com.scruge.scruge.view.ui.wallet.*
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.profile.ProfileVM
@@ -80,6 +81,22 @@ class Presenter {
 
     fun presentCropImageActivity(fragment: NavigationFragment, imageUrl: Uri) {
         fragment.activity?.let { CropImage.activity(imageUrl).start(it, fragment) }
+    }
+
+    // CONTRIBUTION
+
+    fun presentContributeFragment(fragment: NavigationFragment, vm:CampaignVM) {
+
+    }
+
+    fun presentVoteFragment(fragment: NavigationFragment, vm:CampaignVM) {
+        val fr = VoteFragment()
+        fr.vm = vm
+        fragment.navigationController?.navigateTo(fr)
+    }
+
+    fun presentVoteResultsFragment(fragment: NavigationFragment, vm:CampaignVM) {
+
     }
 
     // WALLET

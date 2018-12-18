@@ -75,7 +75,7 @@ class EOS {
     }
 
     fun <M:AbiConvertible>sendAction(action:String,
-                                     contract:String,
+                                     contract:String = contractAccount,
                                      account:AccountModel,
                                      data:M,
                                      passcode:String,

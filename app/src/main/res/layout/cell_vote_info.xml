@@ -1,45 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/campaign_info_image_constraint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/black"
-            app:layout_constraintDimensionRatio="H,16:9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <WebView
-                android:id="@+id/campaign_info_web_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.5"/>
-
-            <ImageView
-                android:id="@+id/campaign_info_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.5"/>
-        </RelativeLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/campaign_info_card_view"
+        android:id="@+id/vote_info_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/campaign_info_image_constraint"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="5dp">
 
@@ -56,7 +27,7 @@
                 android:clipToPadding="false">
 
                 <TextView
-                    android:id="@+id/campaign_info_date"
+                    android:id="@+id/vote_info_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -67,7 +38,7 @@
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/campaign_info_title"
+                    android:id="@+id/vote_info_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -79,19 +50,13 @@
 
             <TextView
                 android:layout_marginTop="15dp"
-                android:id="@+id/campaign_info_description"
+                android:id="@+id/vote_info_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
                 android:text="Our goal is to install a water pump in Malawi to empower villagers to build a better future for themselves."
                 android:textColor="@color/text_regular"
                 android:textSize="15sp"/>
-
-            <com.scruge.scruge.view.views.ProgressView
-                android:id="@+id/campaign_progress_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

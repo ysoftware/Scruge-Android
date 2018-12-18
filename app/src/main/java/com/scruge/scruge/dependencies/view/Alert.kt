@@ -1,12 +1,17 @@
 package com.scruge.scruge.dependencies.view
 
+import android.app.AlertDialog
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.scruge.scruge.model.error.ScrugeError
+import android.content.DialogInterface
+import android.os.Handler
 
 fun Fragment.alert(message:String, completion:(()->Unit)? = null) {
-    Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
-    completion?.invoke()
+    activity?.runOnUiThread {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+        completion?.invoke()
+    }
 }
 
 fun Fragment.alert(error:Throwable) {
@@ -17,6 +22,17 @@ fun Fragment.alert(error:ScrugeError) {
     alert(error.toString())
 }
 
-fun ask(question:String, completion: (Boolean) -> Unit) {
-    completion(true) // todo
+fun Fragment.ask(question:String, completion: (Boolean) -> Unit) {
+    val context = activity ?: return
+    val dialogClickListener = DialogInterface.OnClickListener { _, which ->
+        when (which) {
+            DialogInterface.BUTTON_POSITIVE -> completion(true)
+            DialogInterface.BUTTON_NEGATIVE -> completion(false)
+        }
+    }
+
+    AlertDialog.Builder(context).setMessage(question)
+            .setPositiveButton("Yes", dialogClickListener)
+            .setNegativeButton("No", dialogClickListener)
+            .show()
 }

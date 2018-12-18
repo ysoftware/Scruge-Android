@@ -1,12 +1,18 @@
 package com.scruge.scruge.viewmodel.campaign
 
 import android.net.Uri
+import com.memtrip.eos.chain.actions.transaction.vote.actions.VoteArgs
 import com.scruge.scruge.dependencies.dataformatting.format
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.*
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.model.ViewState
+import com.scruge.scruge.model.error.ScrugeError
+import com.scruge.scruge.model.error.WalletError
+import com.scruge.scruge.model.error.wrap
+import com.scruge.scruge.services.eos.ScrugeVote
+import com.scruge.scruge.viewmodel.account.AccountVM
 import com.scruge.scruge.viewmodel.comment.CommentAVM
 import com.scruge.scruge.viewmodel.comment.CommentSource
 import com.scruge.scruge.viewmodel.document.DocumentAVM
@@ -127,13 +133,60 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
     }
 
-//    fun contribute(amount:Double, account: AccountVM, passcode: String, completion: (Error?)->Unit) {
-//
-//    }
+    fun contribute(amount:Double, account: AccountVM, passcode: String, completion: (ScrugeError?)->Unit) {
+        val model = this.model ?: return completion(WalletError.noAccounts)
+        val account = account.model ?: return completion(WalletError.noAccounts)
 
-//    fun vote(value: Boolean, account: AccountVM, passcode: String, completion: (Error?)->Unit) {
-//
-//    }
+        Service.api.getUserId { userResult ->
+            userResult.onSuccess {
+                Service.eos.sendMoney(account,
+                                      Service.eos.contractAccount,
+                                      amount,
+                                      "SCR",
+                                      "${it.userId}-${model.id}",
+                                      passcode) { transactionResult ->
+                    transactionResult.onSuccess { transactionId ->
+                        Service.api.notifyContribution(model.id, amount, transactionId) {
+                            completion(null)
+                        }
+                    }.onFailure {
+                        completion(ErrorHandler.error(it))
+                    }
+                }
+            }.onFailure {
+                completion(ErrorHandler.error(it))
+            }
+        }
+    }
+
+    fun vote(value: Boolean, account: AccountVM, passcode: String, completion: (ScrugeError?)->Unit) {
+        val model = this.model ?: return completion(WalletError.noAccounts)
+        val account = account.model ?: return completion(WalletError.noAccounts)
+
+        Service.api.getUserId { userResult ->
+            userResult.onSuccess {
+                val data = ScrugeVote(account.name,
+                                      it.userId,
+                                      model.id,
+                                      value)
+
+                Service.eos.sendAction("vote",
+                                       account = account,
+                                       data = data,
+                                       passcode = passcode) { transactionResult ->
+                    transactionResult.onSuccess { transactionId ->
+                        Service.api.notifyVote(model.id, value, transactionId) {
+                            completion(null)
+                        }
+                    }.onFailure {
+                        completion(ErrorHandler.error(it))
+                    }
+                }
+            }.onFailure {
+                completion(ErrorHandler.error(it))
+            }
+        }
+    }
 
     // ACTIONS
 

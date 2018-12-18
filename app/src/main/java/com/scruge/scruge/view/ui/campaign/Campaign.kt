@@ -65,6 +65,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
 
         setupVM()
         setupTable()
+        setupActions()
     }
 
     override fun viewDidAppear() {
@@ -76,6 +77,33 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
         vm.delegate = this
         vm.load()
         adapter = Adapter(this)
+    }
+
+    private fun setupActions() {
+        campaign_button.setOnClickListener {
+            when (vm.status) {
+                CampaignVM.Status.funding -> {
+                    if (Service.tokenManager.hasToken) {
+                        Service.presenter.presentContributeFragment(this, vm)
+                    }
+                    else {
+                        activity?.let {
+                            Service.presenter.presentLoginActivity(it) { isLoggedIn ->
+                                vm.reloadData()
+                            }
+                        }
+                    }
+                }
+                CampaignVM.Status.activeVote -> {
+                    if (vm.canVote) {
+                        Service.presenter.presentVoteFragment(this, vm)
+                    }
+                    else {
+                        Service.presenter.presentVoteResultsFragment(this, vm)
+                    }
+                }
+            }
+        }
     }
 
     private fun setupTable() {
