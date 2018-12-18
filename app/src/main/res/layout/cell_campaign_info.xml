@@ -21,14 +21,12 @@
             <WebView
                 android:id="@+id/campaign_info_web_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.5"/>
+                android:layout_height="match_parent"/>
 
             <ImageView
                 android:id="@+id/campaign_info_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.5"/>
+                android:layout_height="match_parent"/>
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
 import kotlinx.android.synthetic.main.fragment_vote.*
 
-class VoteFragment: NavigationFragment() {
+class VoteFragment: NavigationFragment(), ViewModelDelegate {
 
     enum class Block(val rawValue:Int) {
         info(0),  update(1), milestone(2),
@@ -84,6 +84,11 @@ class VoteFragment: NavigationFragment() {
             this.voting = voting
             adapter.notifyDataSetChanged()
         }
+    }
+
+    override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
+        super.didUpdateData(viewModel)
+        adapter.notifyDataSetChanged()
     }
 
     private fun vote(value:Boolean, passcode:String) {
