@@ -3,12 +3,17 @@ package com.scruge.scruge.dependencies.navigation;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.View;
+
+import com.scruge.scruge.view.views.NavigationBar;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Stack;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class NavigationController {
+public class NavigationController implements NavigationBar.Delegate {
 
     private enum Update { will, did }
 
@@ -19,6 +24,8 @@ public class NavigationController {
 
     // FRAGMENT
 
+    private boolean shouldHideNavigationBar = true;
+    private NavigationBar navigationBar;
     private FragmentManager manager;
     private Stack<Fragment> fragmentStack = new Stack<>();
     private Fragment currentFragment;
@@ -53,6 +60,8 @@ public class NavigationController {
         update(oldFragment, fragment, Update.will);
         manager.executePendingTransactions();
         update(oldFragment, fragment, Update.did);
+
+        setBackButtonHidden(true);
     }
 
     public void navigateTo(final Fragment fragment) {
@@ -79,6 +88,8 @@ public class NavigationController {
         update(oldFragment, fragment, Update.will);
         manager.executePendingTransactions();
         update(oldFragment, fragment, Update.did);
+
+        setBackButtonHidden(false);
     }
 
     public boolean navigateBack() {
@@ -97,6 +108,7 @@ public class NavigationController {
         manager.popBackStackImmediate(null, 0);
         update(oldFragment, fragment, Update.did);
 
+        setBackButtonHidden(fragmentStack.size() <= 1);
         return true;
     }
 
@@ -136,6 +148,26 @@ public class NavigationController {
         }
     }
 
+    // NAVIGATION BAR
+
+    @Nullable
+    public NavigationBar getNavigationBar() {
+        return navigationBar;
+    }
+
+    public void setNavigationBar(NavigationBar navigationBar) {
+        this.navigationBar = navigationBar;
+        navigationBar.setDelegate(this);
+        navigationBar.setBackButtonHidden(!shouldHideNavigationBar);
+    }
+
+    private void setBackButtonHidden(boolean value) {
+        shouldHideNavigationBar = value;
+        if (navigationBar != null) {
+            navigationBar.setBackButtonHidden(value);
+        }
+    }
+
     // HELPER
 
     private void update(Fragment oldFragment, Fragment fragment, Update update) {
@@ -165,5 +197,9 @@ public class NavigationController {
                 oldFragment.onPause();
             }
         }
+    }
+
+    @Override public void navigationBarDidClickBackButton(@NotNull NavigationBar instance) {
+        navigateBack();
     }
 }

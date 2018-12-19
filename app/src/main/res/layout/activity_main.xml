@@ -8,10 +8,16 @@
     android:background="@color/white"
     tools:context=".view.main.TabbarActivity">
 
+    <com.scruge.scruge.view.views.NavigationBar
+        android:id="@+id/navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/tabbar">
+        android:layout_above="@id/tabbar"
+        android:layout_below="@id/navigation_bar">
 
         <RelativeLayout
             android:id="@+id/container_view_featured"
