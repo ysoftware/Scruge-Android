@@ -41,13 +41,12 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         super.viewDidAppear()
 
         (activity as? TabbarActivity)?.tabbarHidden = false
-        setupVM()
+        verifyWallet()
     }
 
     private fun setupVM() {
         vm.delegate = this
         vm.reloadData()
-        verifyWallet()
     }
 
     private fun setupActions() {
@@ -121,6 +120,9 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     private fun verifyWallet() {
         if (!Service.wallet.hasAccount) {
             Service.presenter.replaceWithWalletStartFragment(this)
+        }
+        else {
+            setupVM()
         }
     }
 

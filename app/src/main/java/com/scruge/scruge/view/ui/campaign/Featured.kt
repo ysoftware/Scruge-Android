@@ -42,6 +42,14 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
     override fun viewDidAppear() {
         super.viewDidAppear()
         (activity as? TabbarActivity)?.tabbarHidden = false
+
+        when (vm.state) {
+            State.error, State.ready -> {
+                if (vm.isEmpty()) {
+                    vm.reloadData()
+                }
+            }
+        }
     }
 
     private fun setupVM() {

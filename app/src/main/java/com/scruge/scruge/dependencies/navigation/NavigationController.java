@@ -38,6 +38,7 @@ public class NavigationController {
         final Fragment oldFragment = currentFragment;
         currentFragment = fragment;
 
+        manager.executePendingTransactions();
         fragmentStack = new Stack<>();
         manager.popBackStackImmediate(null,
                 FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -63,6 +64,7 @@ public class NavigationController {
 
         if (currentFragment == null) { return; }
 
+        manager.executePendingTransactions();
         fragmentStack.push(fragment);
         resetClickable();
         manager.beginTransaction()
@@ -90,6 +92,7 @@ public class NavigationController {
             return false;
         }
 
+        manager.executePendingTransactions();
         update(oldFragment, fragment, Update.will);
         manager.popBackStackImmediate(null, 0);
         update(oldFragment, fragment, Update.did);
