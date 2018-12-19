@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import com.scruge.scruge.R
-import kotlinx.android.synthetic.main.navigation_bar.view.*
+import kotlinx.android.synthetic.main.view_navigation_bar.view.*
 
 data class NavigationBarButton(val imageResource: Int, val tap: () -> Unit)
 
@@ -21,7 +21,7 @@ class NavigationBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.navigation_bar, this, true)
+        LayoutInflater.from(context).inflate(R.layout.view_navigation_bar, this, true)
         navigation_bar_back_button.setOnClickListener { delegate?.navigationBarDidClickBackButton(this) }
     }
 

@@ -146,7 +146,7 @@ class Api {
                        completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             val request = CampaignRequest(campaign.id)
-            if (subscribing) service.subscribe(it, request)
+            if (subscribing) service.subscribe(it, request).enqueue(completion)
             else service.unsubscribe(it, request).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }

@@ -213,7 +213,6 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
     override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
             arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
         adapter?.notifyDataSetChanged()
-        setupNavigationBar()
     }
 
     // ADAPTER
