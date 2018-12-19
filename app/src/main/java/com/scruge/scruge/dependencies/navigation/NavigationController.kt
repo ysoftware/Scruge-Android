@@ -20,7 +20,7 @@ class NavigationController(private val manager: FragmentManager, val containerId
 
     // FRAGMENT
 
-    private var shouldHideNavigationBar = true
+    private var shouldHideNavigationBarBackButton = true
     private var fragmentStack = Stack<Fragment>()
     private var currentFragment: Fragment? = null
 
@@ -30,11 +30,9 @@ class NavigationController(private val manager: FragmentManager, val containerId
         set(navigationBar) {
             field = navigationBar
             navigationBar?.delegate = this
-            navigationBar?.isBackButtonHidden = shouldHideNavigationBar
+            navigationBar?.isBackButtonHidden = shouldHideNavigationBarBackButton
             refreshNavigationBar()
         }
-
-    val isPresenting: Boolean get() = topFragment() != null
 
     fun replaceWith(fragment: Fragment) {
         val oldFragment = currentFragment
@@ -49,9 +47,8 @@ class NavigationController(private val manager: FragmentManager, val containerId
             fragment.navigationController = this
         }
 
-        update(oldFragment, fragment, Update.will)
         manager.executePendingTransactions()
-        update(oldFragment, fragment, Update.did)
+        update(oldFragment, fragment)
 
         setBackButtonHidden(true)
         refreshNavigationBar()
@@ -75,9 +72,8 @@ class NavigationController(private val manager: FragmentManager, val containerId
             fragment.navigationController = this
         }
 
-        update(oldFragment, fragment, Update.will)
         manager.executePendingTransactions()
-        update(oldFragment, fragment, Update.did)
+        update(oldFragment, fragment)
 
         setBackButtonHidden(false)
         refreshNavigationBar()
@@ -95,17 +91,18 @@ class NavigationController(private val manager: FragmentManager, val containerId
         }
 
         manager.executePendingTransactions()
-        update(oldFragment, fragment, Update.will)
         manager.popBackStackImmediate(null, 0)
-        update(oldFragment, fragment, Update.did)
+        update(oldFragment, fragment)
 
         setBackButtonHidden(fragmentStack.size <= 1)
         refreshNavigationBar()
         return true
     }
 
-    fun onBackPressed(): Boolean
-            = (topFragment() as? OnBackPressedListener)?.onBackPressedHandled() ?: navigateBack()
+    fun onBackPressed(): Boolean {
+        val value = (topFragment() as? OnBackPressedListener)?.onBackPressedHandled() ?: return navigateBack()
+        return if (!value) { navigateBack() } else { value }
+    }
 
     @Nullable
     fun topFragment(): Fragment? {
@@ -132,31 +129,22 @@ class NavigationController(private val manager: FragmentManager, val containerId
                     ?.setTitle(it.title)
                     ?.setupRightActionButton(it.navigationBarButton)
                     ?.setupRightActionButton2(it.navigationBarButton2)
+                    ?.setHidden(it.shouldHideNavigationBar)
         }
     }
 
     private fun setBackButtonHidden(value: Boolean) {
-        shouldHideNavigationBar = value
+        shouldHideNavigationBarBackButton = value
         navigationBar?.isBackButtonHidden = value
     }
 
     // HELPER
 
-    private enum class Update { will, did }
+    private fun update(oldFragment: Fragment?, fragment: Fragment) {
+        if (!isVisible) { return }
 
-    private fun update(oldFragment: Fragment?, fragment: Fragment, update: Update) {
-        if (!isVisible) {
-            return
-        }
-
-        if (update == Update.will) {
-            (fragment as? NavigationFragment)?.viewWillAppear()
-            (oldFragment as? NavigationFragment)?.viewWillDisappear()
-        }
-        else {
-            (fragment as? NavigationFragment)?.viewDidAppear() ?: fragment.onResume()
-            (oldFragment as? NavigationFragment)?.viewDidDisappear() ?: oldFragment?.onPause()
-        }
+        (fragment as? NavigationFragment)?.viewDidAppear() ?: fragment.onResume()
+        (oldFragment as? NavigationFragment)?.viewDidDisappear() ?: oldFragment?.onPause()
     }
 
     override fun navigationBarDidClickBackButton(instance: NavigationBar) {

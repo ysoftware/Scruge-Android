@@ -33,6 +33,11 @@ class NavigationBar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
             navigation_bar_back_button.visibility = if (value) View.GONE else View.VISIBLE
         }
 
+    fun setHidden(value: Boolean): NavigationBar {
+        visibility  = if (value) View.GONE else View.VISIBLE
+        return this
+    }
+
     fun setTitle(value: String): NavigationBar {
         navigation_bar_title.text = value
         return this

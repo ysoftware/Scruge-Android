@@ -33,12 +33,17 @@ class ProfileFragment: NavigationFragment(), ViewModelDelegate {
         super.viewDidAppear()
 
         setupVM()
-        (activity as? TabbarActivity)?.tabbarHidden = false
+        setupNavigationBar()
     }
 
     private fun setupVM() {
         vm.delegate = this
         vm.load()
+    }
+
+    private fun setupNavigationBar() {
+        (activity as? TabbarActivity)?.tabbarHidden = false
+        shouldHideNavigationBar = true
     }
 
     private fun setupActions() {

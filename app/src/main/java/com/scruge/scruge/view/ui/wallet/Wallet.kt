@@ -40,13 +40,18 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     override fun viewDidAppear() {
         super.viewDidAppear()
 
-        (activity as? TabbarActivity)?.tabbarHidden = false
         verifyWallet()
+        setupNavigationBar()
     }
 
     private fun setupVM() {
         vm.delegate = this
         vm.reloadData()
+    }
+
+    private fun setupNavigationBar() {
+        (activity as? TabbarActivity)?.tabbarHidden = false
+        shouldHideNavigationBar = true
     }
 
     private fun setupActions() {

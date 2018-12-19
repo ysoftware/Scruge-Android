@@ -75,17 +75,13 @@ class TabbarActivity : AppCompatActivity() {
                     nav.isVisible = true
                     nav.navigationBar = navigation_bar
 
-                    (nav.topFragment() as? NavigationFragment)?.let {
-                        it.viewWillAppear()
-                        it.viewDidAppear()
-                    }
+                    (nav.topFragment() as? NavigationFragment)?.viewDidAppear()
                 }
                 else {
                     view.visibility = View.GONE
                     nav.isVisible = false
 
                     if (previousSelectedTab == i) {
-                        (nav.topFragment() as? NavigationFragment)?.viewWillDisappear()
                         (nav.topFragment() as? NavigationFragment)?.viewDidDisappear()
                     }
                 }

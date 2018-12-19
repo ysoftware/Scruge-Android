@@ -39,6 +39,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        title = "Activity"
         setupVM()
         setupTable()
     }

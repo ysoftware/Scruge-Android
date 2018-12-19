@@ -48,7 +48,8 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
 
     override fun viewDidAppear() {
         super.viewDidAppear()
-        (activity as? TabbarActivity)?.tabbarHidden = true
+
+        setupNavigationBar()
     }
 
     private fun setupViews() {
@@ -59,6 +60,11 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
         view?.setOnClickListener { hideKeyboard() }
         edit_profile_button.click { save() }
         edit_profile_image.setOnClickListener { Service.presenter.presentImagePickerActivity(this) }
+    }
+
+    private fun setupNavigationBar() {
+        (activity as? TabbarActivity)?.tabbarHidden = true
+        shouldHideNavigationBar = true
     }
 
     private fun setupEditing() {

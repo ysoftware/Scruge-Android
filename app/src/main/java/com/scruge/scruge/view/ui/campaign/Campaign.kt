@@ -107,6 +107,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
     }
 
     private fun setupNavigationBar() {
+        shouldHideNavigationBar = false
         title = vm.title
         navigationBarButton = if (Service.tokenManager.hasToken) {
             val icon = if (vm.isSubscribed) R.drawable.subscribe else R.drawable.unsubscribe
