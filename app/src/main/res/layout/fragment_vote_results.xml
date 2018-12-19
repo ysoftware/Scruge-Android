@@ -7,6 +7,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vote_recycler_view"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
