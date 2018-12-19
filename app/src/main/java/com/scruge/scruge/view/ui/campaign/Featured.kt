@@ -37,6 +37,7 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
 
         setupVM()
         setupTable()
+        title = "Featured"
     }
 
     override fun viewDidAppear() {

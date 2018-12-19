@@ -14,15 +14,14 @@ import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.cells.*
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.view.ui.campaign.CampaignFragment.Block.*
+import com.scruge.scruge.view.views.NavigationBarButton
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
-import com.scruge.scruge.viewmodel.faq.FaqVM
 import com.ysoftware.mvvm.array.ArrayViewModel
 import com.ysoftware.mvvm.array.ArrayViewModelDelegate
 import com.ysoftware.mvvm.array.Query
 import com.ysoftware.mvvm.array.Update
 import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_campaign.*
 
 class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelDelegate {
@@ -66,6 +65,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
         setupVM()
         setupTable()
         setupActions()
+        setupNavigationBar()
     }
 
     override fun viewDidAppear() {
@@ -103,6 +103,19 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                     }
                 }
             }
+        }
+    }
+
+    private fun setupNavigationBar() {
+        title = vm.title
+        navigationBarButton = if (Service.tokenManager.hasToken) {
+            val icon = if (vm.isSubscribed) R.drawable.subscribe else R.drawable.unsubscribe
+            NavigationBarButton(icon) {
+                vm.toggleSubscribing()
+            }
+        }
+        else {
+            null
         }
     }
 
@@ -181,6 +194,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
             return
         }
 
+        setupNavigationBar()
         campaign_loading_view.state = vm.state
 
         // todo
@@ -199,6 +213,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
     override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
             arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
         adapter?.notifyDataSetChanged()
+        setupNavigationBar()
     }
 
     // ADAPTER
