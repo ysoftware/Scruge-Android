@@ -94,16 +94,25 @@
     </androidx.cardview.widget.CardView>
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/cell_activity_image"
+        android:id="@+id/cell_activity_image_view"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:background="@color/green"
         android:scaleType="centerInside"
-        android:src="@drawable/checkmark"
         android:translationZ="10dp"
         app:riv_corner_radius="22.5dp"
         app:riv_mutate_background="true"/>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/cell_activity_image"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="30dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/checkmark"
+        android:translationZ="11dp"/>
 
 </RelativeLayout>

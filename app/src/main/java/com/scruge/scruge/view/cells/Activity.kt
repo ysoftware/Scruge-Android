@@ -2,12 +2,30 @@ package com.scruge.scruge.view.cells
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.scruge.scruge.dependencies.dataformatting.toRelative
+import com.scruge.scruge.model.entity.VoteKind
+import com.scruge.scruge.model.entity.Voting
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import kotlinx.android.synthetic.main.cell_activity.view.*
-
+import kotlinx.android.synthetic.main.cell_activity_vote.view.*
+import java.util.*
 
 class VotingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    private lateinit var voting:Voting
+
+    fun setup(vote: Voting):VotingViewHolder {
+        this.voting = vote
+        val voteKindText = if (vote.voting.kind == VoteKind.extend.kind) "extend deadline" else "continue campaign"
+        itemView.cell_activity_vote_text.text = "Voting to $voteKindText for ${vote.campaign.title}"
+        itemView.cell_activity_vote_date.text = Date(vote.voting.endTimestamp).toRelative()
+        return this
+    }
+
+    fun tap(tap:(Voting)->Unit):VotingViewHolder {
+        itemView.setOnClickListener { tap(voting) }
+        return this
+    }
 }
 
 class ActivityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
