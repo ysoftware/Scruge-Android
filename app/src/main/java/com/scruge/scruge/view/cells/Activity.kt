@@ -46,8 +46,8 @@ class ActivityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     }
 
     fun showDecor(isFirst:Boolean, isLast:Boolean):ActivityViewHolder {
-        itemView.activity_first_cell_decor.visibility = if (isLast) View.GONE else View.VISIBLE
-        itemView.activity_last_cell_decor.visibility = if (isFirst) View.GONE else View.VISIBLE
+//        itemView.activity_first_cell_decor.visibility = if (isLast) View.GONE else View.VISIBLE
+//        itemView.activity_last_cell_decor.visibility = if (isFirst) View.GONE else View.VISIBLE
         return this
     }
 
