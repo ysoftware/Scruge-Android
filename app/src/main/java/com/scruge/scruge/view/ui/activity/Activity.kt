@@ -138,6 +138,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
                 val pos = position - fr.activeVoting.size
                 val item = fr.vm.item(pos, true)
                 it.setup(item)
+                        .showDecor(pos == 0, pos == fr.vm.numberOfItems - 1)
                         .activityTap {
                             // open update or something else
                         }
