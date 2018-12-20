@@ -8,5 +8,5 @@
     android:layout_marginEnd="15dp"
     android:layout_marginBottom="15dp"
     android:background="@color/gray"
-    app:riv_corner_radius="30dp"
+    app:riv_corner_radius="5dp"
     app:riv_mutate_background="true"/>
