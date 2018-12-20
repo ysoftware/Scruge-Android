@@ -25,6 +25,9 @@ import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.theartofdev.edmodo.cropper.CropImage
 import androidx.core.content.ContextCompat.startActivity
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.model.entity.Milestone
+import com.scruge.scruge.viewmodel.faq.FaqVM
+import com.scruge.scruge.viewmodel.milestone.MilestoneVM
 
 
 class Presenter {
@@ -83,6 +86,18 @@ class Presenter {
     fun presentCampaignFragment(fragment: NavigationFragment, id:Int) {
         val new = CampaignFragment()
         new.vm = CampaignVM(id)
+        fragment.navigationController?.navigateTo(new)
+    }
+
+    fun presentFaqFragment(fragment: NavigationFragment, vm: FaqVM) {
+        val new = DetailFragment()
+        new.faq = vm
+        fragment.navigationController?.navigateTo(new)
+    }
+
+    fun presentMilestoneFragment(fragment: NavigationFragment, vm: MilestoneVM) {
+        val new = DetailFragment()
+        new.milestone = vm
         fragment.navigationController?.navigateTo(new)
     }
 

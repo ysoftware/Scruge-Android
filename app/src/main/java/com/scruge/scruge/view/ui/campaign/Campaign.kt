@@ -258,22 +258,22 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                     }
                 faq -> fr.vm.faqVM?.let {
                         (holder as? PagingCell)?.setup(it)
-                                ?.faqTap { faqVM ->
-
-                                }
+                            ?.faqTap { faqVM ->
+                                Service.presenter.presentFaqFragment(fr, faqVM)
+                            }
                     }
                 milestone -> fr.vm.milestonesVM?.let { vm ->
                         fr.vm.currentMilestoneVM?.let { cvm ->
                             (holder as? PagingCell)?.setup(vm, cvm)
                                     ?.milestoneTap { milestoneVM ->
-
-                            }
+                                        Service.presenter.presentMilestoneFragment(fr, milestoneVM)
+                                    }
                         }
                     }
                 update -> fr.vm.lastUpdateVM?.let {
                         (holder as? LastUpdateCell)?.setup(it)
                                 ?.updateTap { update ->
-
+                                    Service.presenter.presentContentFragment(fr, update)
                                 }
                                 ?.allUpdatesTap {
                                     Service.presenter.presentUpdatesFragment(fr, fr.vm)
