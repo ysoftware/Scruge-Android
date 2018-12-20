@@ -3,10 +3,17 @@ package com.scruge.scruge.view.cells
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.viewmodel.update.UpdateVM
+import kotlinx.android.synthetic.main.cell_update.view.*
 import kotlinx.android.synthetic.main.cell_update_last.view.*
 
 class UpdateCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    fun setup(vm:UpdateVM):UpdateCell {
+        itemView.cell_update_text.text = vm.description
+        itemView.cell_update_title.text = vm.title
+        // image?
+        return this
+    }
 }
 
 class LastUpdateCell(itemView: View) : RecyclerView.ViewHolder(itemView) {

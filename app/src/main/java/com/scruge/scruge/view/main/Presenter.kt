@@ -12,15 +12,13 @@ import com.scruge.scruge.view.ui.authprofile.ProfileFragment
 import com.scruge.scruge.view.ui.authprofile.RegisterFragment
 import com.scruge.scruge.view.ui.campaign.CampaignFragment
 import com.scruge.scruge.view.ui.campaign.FeaturedFragment
-import com.scruge.scruge.view.ui.details.CommentsFragment
-import com.scruge.scruge.view.ui.details.ContributeFragment
-import com.scruge.scruge.view.ui.details.VoteFragment
-import com.scruge.scruge.view.ui.details.VoteResultFragment
+import com.scruge.scruge.view.ui.details.*
 import com.scruge.scruge.view.ui.wallet.*
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.comment.CommentAVM
 import com.scruge.scruge.viewmodel.comment.CommentSource
 import com.scruge.scruge.viewmodel.profile.ProfileVM
+import com.scruge.scruge.viewmodel.update.UpdateAVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.theartofdev.edmodo.cropper.CropImage
 
@@ -93,6 +91,24 @@ class Presenter {
         source.updateObject = vm.model
         new.vm = CommentAVM(source)
         fragment.navigationController?.navigateTo(new)
+    }
+
+    // UPDATE
+
+    fun presentUpdatesFragment(fragment: NavigationFragment, vm:CampaignVM) {
+        val fr = UpdatesFragment()
+        val source = UpdateAVM.Source.campaign
+        source.campaignObject = vm.model!!
+        fr.vm = UpdateAVM(source)
+        fragment.navigationController?.navigateTo(fr)
+    }
+
+    fun presentContentFragment(fragment: NavigationFragment, vm:CampaignVM) {
+        // todo
+    }
+
+    fun presentContentFragment(fragment: NavigationFragment, vm:UpdateVM) {
+        // todo
     }
 
     // PROFILE

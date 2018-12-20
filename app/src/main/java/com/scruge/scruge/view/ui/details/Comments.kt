@@ -125,7 +125,7 @@ class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
 
     override fun didChangeState(state: State) {
         when (state) {
-            State.loading, State.initial -> comment_loading_view.state = ViewState.loading
+            State.initial -> comment_loading_view.state = ViewState.loading
             State.error -> {
                 comment_loading_view.state = ViewState.error
                 comment_loading_view.state.errorMessage = ErrorHandler.message(state.errorValue!!)
@@ -156,7 +156,7 @@ class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
         override fun getItemCount(): Int = fr.vm.numberOfItems
 
         override fun onBindViewHolder(holder: CommentCell, position: Int) {
-            holder.setup(fr.vm.item(position))
+            holder.setup(fr.vm.item(position, true))
         }
     }
 }

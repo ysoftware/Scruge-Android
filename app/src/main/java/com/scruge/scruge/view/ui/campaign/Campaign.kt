@@ -276,7 +276,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
 
                                 }
                                 ?.allUpdatesTap {
-
+                                    Service.presenter.presentUpdatesFragment(fr, fr.vm)
                                 }
                     }
                 comments -> (holder as? TopCommentCell)?.setup(fr.vm.topCommentsVM, fr.vm.commentsCount)
