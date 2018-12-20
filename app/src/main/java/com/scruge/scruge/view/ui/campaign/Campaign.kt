@@ -284,11 +284,18 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                             Service.presenter.presentCommentsViewController(fr, fr.vm)
                         }
                 documents -> fr.vm.documentsVM?.let {
-                            (holder as? DocumentsCell)?.setup(it)
-                                    ?.tap { doc ->
-
-                                    }
+                    (holder as? DocumentsCell)?.setup(it)?.tap { doc ->
+                        if (doc.documentUrl.contains("/content")) {
+                            Service.presenter.presentContentFragment(fr, fr.vm)
                         }
+                        else {
+                            Service.presenter
+                                    .presentBrowser(fr,
+                                                    "https://drive.google.com/viewerng/viewer?embedded=true&url=${doc.documentUrl}",
+                                                    doc.name)
+                        }
+                    }
+                }
             }
         }
     }

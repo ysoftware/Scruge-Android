@@ -9,5 +9,5 @@ class DocumentVM(model: Document?) : ViewModel<Document>(model) {
 
     val name get() = model?.name?.capitalize() ?: ""
 
-    val documentUrl get() = model?.url?.let { try { Uri.parse(it) } catch (ex:Exception) { null }}
+    val documentUrl get() = model?.url ?: ""
 }

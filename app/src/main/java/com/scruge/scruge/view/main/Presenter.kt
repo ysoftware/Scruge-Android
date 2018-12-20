@@ -23,12 +23,8 @@ import com.scruge.scruge.viewmodel.profile.ProfileVM
 import com.scruge.scruge.viewmodel.update.UpdateAVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.theartofdev.edmodo.cropper.CropImage
-import androidx.core.content.ContextCompat.startActivity
-import com.scruge.scruge.dependencies.view.alert
-import com.scruge.scruge.model.entity.Milestone
 import com.scruge.scruge.viewmodel.faq.FaqVM
 import com.scruge.scruge.viewmodel.milestone.MilestoneVM
-
 
 class Presenter {
 
@@ -130,11 +126,15 @@ class Presenter {
     }
 
     fun presentContentFragment(fragment: NavigationFragment, vm:CampaignVM) {
-        // todo
+        val new = BrowserFragment()
+        new.campaignVM = vm
+        fragment.navigationController?.navigateTo(new)
     }
 
     fun presentContentFragment(fragment: NavigationFragment, vm:UpdateVM) {
-        // todo
+        val new = BrowserFragment()
+        new.updateVM = vm
+        fragment.navigationController?.navigateTo(new)
     }
 
     // PROFILE
@@ -203,18 +203,10 @@ class Presenter {
 
     // OTHER
 
-    fun presentBrowser(fragment: NavigationFragment, url: String) {
-        // todo replace with in-app browser?
-        if (url.startsWith("http://") || url.startsWith("https://")) {
-            try {
-                val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(url)
-
-                fragment.activity?.startActivity(i)
-            }
-            catch (e: Exception) {
-                fragment.alert("Could not start browser activity")
-            }
-        }
+    fun presentBrowser(fragment: NavigationFragment, url: String, title:String = "Preview") {
+        val new = BrowserFragment()
+        new.title = title
+        new.url = url
+        fragment.navigationController?.navigateTo(new)
     }
 }
