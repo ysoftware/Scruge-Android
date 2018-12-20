@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/member_profile_cardview"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="-45dp"
+            android:background="@drawable/gradient_profile"/>
+
+        <LinearLayout
+            android:id="@+id/member_profile_topview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="15dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@color/field_background"
+                    android:orientation="vertical"
+                    app:riv_corner_radius="50dp"
+                    app:riv_mutate_background="true"/>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/member_profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:riv_corner_radius="50dp"
+                    app:riv_mutate_background="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/member_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bold"
+                android:text="Anonymous"
+                android:textColor="@color/white"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/member_profile_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/regular"
+                android:text="CEO"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/member_profile_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/member_profile_topview"
+            android:layout_margin="15dp"
+
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/semibold"
+                    android:text="About me"
+                    android:textColor="@color/text_title"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/member_profile_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/regular"
+                    android:text="Russian mobile developer I is."
+                    android:textColor="@color/text_regular"
+                    android:textSize="14sp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/member_social_recycler_view"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</ScrollView>

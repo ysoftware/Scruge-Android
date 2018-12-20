@@ -248,9 +248,9 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
             when (block) {
                 about -> (holder as? AboutCell)?.setup(fr.vm)
                             ?.memberTap { member ->
-
+                                Service.presenter.presentMemberProfileFragment(fr, member)
                             }?.socialTap { social ->
-
+                                Service.presenter.presentBrowser(fr, social.url)
                             }
                 info -> (holder as? CampaignInfoCell)?.setup(fr.vm)
                 economies -> fr.vm.economiesVM?.let {

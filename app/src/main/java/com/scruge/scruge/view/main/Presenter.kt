@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import com.scruge.scruge.dependencies.navigation.NavigationController
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.model.entity.Member
 import com.scruge.scruge.view.ui.activity.ActivityFragment
 import com.scruge.scruge.view.ui.authprofile.EditProfileFragment
 import com.scruge.scruge.view.ui.authprofile.LoginFragment
@@ -12,6 +13,7 @@ import com.scruge.scruge.view.ui.authprofile.ProfileFragment
 import com.scruge.scruge.view.ui.authprofile.RegisterFragment
 import com.scruge.scruge.view.ui.campaign.CampaignFragment
 import com.scruge.scruge.view.ui.campaign.FeaturedFragment
+import com.scruge.scruge.view.ui.campaign.MemberProfileFragment
 import com.scruge.scruge.view.ui.details.*
 import com.scruge.scruge.view.ui.wallet.*
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
@@ -21,6 +23,9 @@ import com.scruge.scruge.viewmodel.profile.ProfileVM
 import com.scruge.scruge.viewmodel.update.UpdateAVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.theartofdev.edmodo.cropper.CropImage
+import androidx.core.content.ContextCompat.startActivity
+import com.scruge.scruge.dependencies.view.alert
+
 
 class Presenter {
 
@@ -64,6 +69,12 @@ class Presenter {
     fun presentProfileEditFragment(fragment:NavigationFragment, vm: ProfileVM) {
         val fr = EditProfileFragment()
         fr.editingProfile = vm
+        fragment.navigationController?.navigateTo(fr)
+    }
+
+    fun presentMemberProfileFragment(fragment: NavigationFragment, member: Member) {
+        val fr = MemberProfileFragment()
+        fr.member = member
         fragment.navigationController?.navigateTo(fr)
     }
 
@@ -173,5 +184,22 @@ class Presenter {
 
     fun replaceWithWalletNoAccountFragment(fragment: NavigationFragment) {
         fragment.navigationController?.replaceRoot(WalletNoAccountFragment())
+    }
+
+    // OTHER
+
+    fun presentBrowser(fragment: NavigationFragment, url: String) {
+        // todo replace with in-app browser?
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+            try {
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(url)
+
+                fragment.activity?.startActivity(i)
+            }
+            catch (e: Exception) {
+                fragment.alert("Could not start browser activity")
+            }
+        }
     }
 }
