@@ -65,8 +65,7 @@ class VoteFragment: NavigationFragment(), ViewModelDelegate {
     }
 
     override fun viewDidAppear() {
-        super.viewDidAppear()
-        (activity as? TabbarActivity)?.tabbarHidden = true
+        setupNavigationBar()
     }
 
     private fun setupTable() {
@@ -77,6 +76,12 @@ class VoteFragment: NavigationFragment(), ViewModelDelegate {
     private fun setupVM() {
         vm.load()
         accountVM.reloadData()
+    }
+
+    private fun setupNavigationBar() {
+        (activity as? TabbarActivity)?.tabbarHidden = true
+        shouldHideNavigationBar = false
+        title = "Vote"
     }
 
     private fun loadVote() {

@@ -26,6 +26,10 @@ class CreateAccountFragment: NavigationFragment() {
         setupActions()
     }
 
+    override fun viewDidAppear() {
+        setupNavigationBar()
+    }
+
     private fun setupViews() {
         wallet_create_save.title = "REGISTER"
     }
@@ -34,6 +38,12 @@ class CreateAccountFragment: NavigationFragment() {
         wallet_create_save.click { save() }
         wallet_create_import.setOnClickListener { Service.presenter.replaceWithImportKeyFragment(this) }
     }
+
+    private fun setupNavigationBar() {
+        title = "Create Account"
+    }
+
+    // METHODS
 
     private fun save() {
         val name = wallet_create_name.text.toString()

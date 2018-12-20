@@ -66,28 +66,29 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     private fun updateStatus() {
-        when (vm.state) {
-            State.error -> {
-                val error = ErrorHandler.error(vm.state.errorValue)
-                when (error) {
-                    WalletError.noKey ->
-                        Service.presenter.replaceWithWalletStartFragment(this)
-                    WalletError.noAccounts ->
-                        Service.presenter.replaceWithWalletNoAccountFragment(this)
-                    else -> {
-                        val e = ViewState.error
-                        e.errorMessage = ErrorHandler.message(error)
-                        wallet_loading_view?.state = e
+        activity?.runOnUiThread {
+            when (vm.state) {
+                State.error -> {
+                    val error = ErrorHandler.error(vm.state.errorValue)
+                    when (error) {
+                        WalletError.noKey -> Service.presenter.replaceWithWalletStartFragment(this)
+                        WalletError.noAccounts -> Service.presenter.replaceWithWalletNoAccountFragment(this)
+                        else -> {
+                            val e = ViewState.error
+                            e.errorMessage = ErrorHandler.message(error)
+                            wallet_loading_view?.state = e
+                        }
                     }
                 }
+                State.loading -> {
+                    wallet_loading_view?.state = ViewState.loading
+                }
+                State.ready -> {
+                    wallet_loading_view?.state = ViewState.ready
+                }
+                else -> {
+                }
             }
-            State.loading -> {
-                wallet_loading_view?.state = ViewState.loading
-            }
-            State.ready -> {
-                wallet_loading_view?.state = ViewState.ready
-            }
-            else -> { }
         }
     }
 
@@ -135,11 +136,14 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
 
     override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
             arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
-        updateStatus()
 
         if (update == Update.reload) {
             selectVM()
         }
+    }
+
+    override fun didChangeState(state: State) {
+        updateStatus()
     }
 
     override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {

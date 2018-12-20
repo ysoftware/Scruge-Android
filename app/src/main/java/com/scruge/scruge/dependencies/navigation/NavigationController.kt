@@ -6,7 +6,6 @@ import android.view.Gravity
 import com.scruge.scruge.view.views.NavigationBar
 
 import java.util.Stack
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
@@ -22,7 +21,7 @@ class NavigationController(private val manager: FragmentManager, val containerId
 
     private var shouldHideNavigationBarBackButton = true
     private var fragmentStack = Stack<Fragment>()
-    private var currentFragment: Fragment? = null
+    private var rootFragment: Fragment? = null
 
     var isVisible = true
 
@@ -31,105 +30,103 @@ class NavigationController(private val manager: FragmentManager, val containerId
             field = navigationBar
             navigationBar?.delegate = this
             navigationBar?.isBackButtonHidden = shouldHideNavigationBarBackButton
-            refreshNavigationBar()
+            updateViews()
         }
 
-    fun replaceWith(fragment: Fragment) {
-        val oldFragment = currentFragment
-        currentFragment = fragment
+    val topFragment: Fragment? get() = if (fragmentStack.size == 0) rootFragment else fragmentStack.peek()
+
+    // METHODS
+
+    fun replaceRoot(fragment: Fragment) {
+        val oldFragment = rootFragment
+        rootFragment = fragment
 
         manager.executePendingTransactions()
         fragmentStack = Stack()
         manager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        manager.beginTransaction().replace(containerId, fragment).commitAllowingStateLoss()
+        manager.beginTransaction().replace(containerId, fragment).commitNowAllowingStateLoss()
 
         if (fragment is NavigationFragment) {
             fragment.navigationController = this
         }
 
-        manager.executePendingTransactions()
         update(oldFragment, fragment)
+        updateViews()
+    }
 
-        setBackButtonHidden(true)
-        refreshNavigationBar()
+    fun replaceTop(fragment: Fragment) {
+        if (navigateBack()) {
+            navigateTo(fragment)
+        }
+        else {
+            replaceRoot(fragment)
+        }
     }
 
     fun navigateTo(fragment: Fragment) {
-        val oldFragment = currentFragment
+        if (rootFragment == null) { return }
+
+        val oldFragment = rootFragment
         if (android.os.Build.VERSION.SDK_INT > 21) {
             fragment.enterTransition = Slide(Gravity.END)
             fragment.exitTransition = Slide(Gravity.START)
         }
 
-        if (currentFragment == null) { return }
-
         manager.executePendingTransactions()
         fragmentStack.push(fragment)
         resetClickable()
         manager.beginTransaction().add(containerId, fragment).addToBackStack(null).commitAllowingStateLoss()
+        manager.executePendingTransactions()
 
         if (fragment is NavigationFragment) {
             fragment.navigationController = this
         }
 
-        manager.executePendingTransactions()
         update(oldFragment, fragment)
-
-        setBackButtonHidden(false)
-        refreshNavigationBar()
+        updateViews()
     }
 
     fun navigateBack(): Boolean {
-        val oldFragment = currentFragment
-        if (fragmentStack.size > 0) {
-            fragmentStack.pop()
-        }
+        if (fragmentStack.isEmpty()) { return false }
 
-        val fragment = topFragment()
-        if (fragment == null || manager.backStackEntryCount == 0) {
-            return false
-        }
+        val oldFragment = fragmentStack.pop()
+        val fragment = topFragment!!
 
         manager.executePendingTransactions()
         manager.popBackStackImmediate(null, 0)
-        update(oldFragment, fragment)
+        manager.executePendingTransactions()
 
-        setBackButtonHidden(fragmentStack.size <= 1)
-        refreshNavigationBar()
+        update(oldFragment, fragment)
+        updateViews()
         return true
     }
 
     fun onBackPressed(): Boolean {
-        val value = (topFragment() as? OnBackPressedListener)?.onBackPressedHandled() ?: return navigateBack()
+        val value = (topFragment as? OnBackPressedListener)?.onBackPressedHandled() ?: return navigateBack()
         return if (!value) { navigateBack() } else { value }
     }
 
-    @Nullable
-    fun topFragment(): Fragment? {
-        return if (fragmentStack.size == 0) {
-            currentFragment
+    fun updateViews() {
+        setBackButtonHidden(fragmentStack.size == 0)
+        (topFragment as? NavigationFragment)?.let {
+            navigationBar
+                    ?.setTitle(it.title)
+                    ?.setupRightActionButton(it.navigationBarButton)
+                    ?.setupRightActionButton2(it.navigationBarButton2)
+                    ?.setHidden(it.shouldHideNavigationBar)
         }
-        else fragmentStack.peek()
     }
 
+    // PRIVATE
+
     private fun resetClickable() {
-        val top = topFragment()
+        val top = topFragment
         for (fragment in fragmentStack) {
             var clickable = false
             if (fragment === top) {
                 clickable = true
             }
             fragment.view?.isClickable = clickable
-        }
-    }
-
-    fun refreshNavigationBar() {
-        (topFragment() as? NavigationFragment)?.let {
-            navigationBar
-                    ?.setTitle(it.title)
-                    ?.setupRightActionButton(it.navigationBarButton)
-                    ?.setupRightActionButton2(it.navigationBarButton2)
-                    ?.setHidden(it.shouldHideNavigationBar)
         }
     }
 

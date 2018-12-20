@@ -23,8 +23,16 @@ class WalletNoAccountFragment: NavigationFragment() {
         setupActions()
     }
 
+    override fun viewDidAppear() {
+        setupNavigationBar()
+    }
+
     private fun setupViews() {
         wallet_no_accounts_button.title = "CREATE ACCOUNT"
+    }
+
+    private fun setupNavigationBar() {
+        title = "Wallet"
     }
 
     private fun setupActions() {

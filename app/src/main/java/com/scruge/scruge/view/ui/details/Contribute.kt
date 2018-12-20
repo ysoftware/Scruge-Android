@@ -42,6 +42,11 @@ class ContributeFragment : NavigationFragment() {
         setupButton()
     }
 
+    override fun viewDidAppear() {
+        super.viewDidAppear()
+        setupNavigationBar()
+    }
+
     private fun setupButton() {
         contribute_button_pay.title = "PAY"
         contribute_button_pay.color = ButtonView.Color.gray
@@ -59,6 +64,11 @@ class ContributeFragment : NavigationFragment() {
 
     private fun setupVM() {
         accountVM.reloadData()
+    }
+
+    private fun setupNavigationBar() {
+        shouldHideNavigationBar = false
+        title = "Invest in ${vm.title}"
     }
 
     private fun setupInformation() {

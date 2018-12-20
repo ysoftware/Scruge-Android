@@ -63,8 +63,7 @@ class VoteResultFragment: NavigationFragment(), ViewModelDelegate {
     }
 
     override fun viewDidAppear() {
-        super.viewDidAppear()
-        (activity as? TabbarActivity)?.tabbarHidden = true
+        setupNavigationBar()
     }
 
     private fun setupTable() {
@@ -77,6 +76,12 @@ class VoteResultFragment: NavigationFragment(), ViewModelDelegate {
         accountVM.reloadData()
     }
 
+    private fun setupNavigationBar() {
+        (activity as? TabbarActivity)?.tabbarHidden = true
+        shouldHideNavigationBar = false
+        title = "Voting Progress"
+    }
+
     private fun loadResult() {
         vm.loadVoteResults { voting ->
             this.voteResult = voting
@@ -87,23 +92,6 @@ class VoteResultFragment: NavigationFragment(), ViewModelDelegate {
     override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
         super.didUpdateData(viewModel)
         adapter.notifyDataSetChanged()
-    }
-
-    private fun vote(value:Boolean, passcode:String) {
-        val account = accountVM.selectedAccount ?: return alert("You don't have your blockchain account setup")
-
-        if (passcode.isEmpty()) {
-            return alert("Enter your wallet passcode")
-        }
-
-        vm.vote(value, account, passcode) { error ->
-            if (error != null) {
-                alert(error)
-            }
-            else {
-                alert("Transaction was successful") { navigationController?.navigateBack() }
-            }
-        }
     }
 
     // ADAPTER

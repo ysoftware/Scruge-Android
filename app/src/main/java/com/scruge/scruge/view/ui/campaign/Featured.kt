@@ -37,12 +37,12 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
 
         setupVM()
         setupTable()
-        title = "Featured"
     }
 
     override fun viewDidAppear() {
         super.viewDidAppear()
-        (activity as? TabbarActivity)?.tabbarHidden = false
+
+        setupNavigationBar()
 
         when (vm.state) {
             State.error, State.ready -> {
@@ -51,6 +51,11 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
                 }
             }
         }
+    }
+
+    private fun setupNavigationBar() {
+        (activity as? TabbarActivity)?.tabbarHidden = false
+        title = "Featured"
     }
 
     private fun setupVM() {

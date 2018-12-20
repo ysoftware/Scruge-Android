@@ -23,8 +23,16 @@ class WalletStartFragment: NavigationFragment() {
         setupActions()
     }
 
+    override fun viewDidAppear() {
+        setupNavigationBar()
+    }
+
     private fun setupViews() {
         wallet_start_button.title = "ADD ACCOUNT"
+    }
+
+    private fun setupNavigationBar() {
+        title = "Wallet"
     }
 
     private fun setupActions() {

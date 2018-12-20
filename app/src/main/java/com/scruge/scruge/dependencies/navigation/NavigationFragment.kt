@@ -14,24 +14,24 @@ open class NavigationFragment : Fragment() {
     open var title:String = ""
         set(value) {
             field = value
-            navigationController?.refreshNavigationBar()
+            navigationController?.updateViews()
         }
 
     var navigationBarButton:NavigationBarButton? = null
         set(value) {
             field = value
-            navigationController?.refreshNavigationBar()
+            navigationController?.updateViews()
         }
 
     var navigationBarButton2:NavigationBarButton? = null
         set(value) {
             field = value
-            navigationController?.refreshNavigationBar()
+            navigationController?.updateViews()
         }
 
     var shouldHideNavigationBar = false
         set(value) {
             field = value
-            navigationController?.refreshNavigationBar()
+            navigationController?.updateViews()
         }
 }

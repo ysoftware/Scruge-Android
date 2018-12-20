@@ -25,6 +25,10 @@ class ImportKeyFragment: NavigationFragment() {
         setupActions()
     }
 
+    override fun viewDidAppear() {
+        setupNavigationBar()
+    }
+
     private fun setupViews() {
         wallet_import_save.title = "IMPORT KEY"
     }
@@ -33,6 +37,12 @@ class ImportKeyFragment: NavigationFragment() {
         wallet_import_save.click { save() }
         wallet_import_create.setOnClickListener { Service.presenter.replaceWithCreateAccountFragment(this) }
     }
+
+    private fun setupNavigationBar() {
+        title = "Import Private Key"
+    }
+
+    // METHODS
 
     private fun save() {
         val key = wallet_import_key.text.toString()

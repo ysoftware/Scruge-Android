@@ -2,9 +2,7 @@ package com.scruge.scruge.view.main
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
-import androidx.fragment.app.Fragment
 import com.scruge.scruge.dependencies.navigation.NavigationController
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.view.ui.activity.ActivityFragment
@@ -25,10 +23,10 @@ import com.theartofdev.edmodo.cropper.CropImage
 class Presenter {
 
     fun setupMainTabs(navigationControllers:List<NavigationController>) {
-        navigationControllers[0].replaceWith(FeaturedFragment())
-        navigationControllers[1].replaceWith(ActivityFragment())
-        navigationControllers[2].replaceWith(WalletFragment())
-        navigationControllers[3].replaceWith(ProfileFragment())
+        navigationControllers[0].replaceRoot(FeaturedFragment())
+        navigationControllers[1].replaceRoot(ActivityFragment())
+        navigationControllers[2].replaceRoot(WalletFragment())
+        navigationControllers[3].replaceRoot(ProfileFragment())
     }
 
     // AUTH
@@ -43,18 +41,18 @@ class Presenter {
     }
 
     fun setupAuth(navigationController: NavigationController):(Boolean)->Unit {
-        navigationController.replaceWith(LoginFragment())
+        navigationController.replaceRoot(LoginFragment())
         val block = authCompletionBlock!!
         authCompletionBlock = null
         return block
     }
 
     fun replaceWithLoginFragment(fragment:NavigationFragment) {
-        fragment.navigationController?.replaceWith(LoginFragment())
+        fragment.navigationController?.replaceRoot(LoginFragment())
     }
 
     fun replaceWithRegisterFragment(fragment:NavigationFragment) {
-        fragment.navigationController?.replaceWith(RegisterFragment())
+        fragment.navigationController?.replaceRoot(RegisterFragment())
     }
 
     fun presentProfileSetupFragment(fragment:NavigationFragment) {
@@ -116,11 +114,11 @@ class Presenter {
     }
 
     fun replaceWithImportKeyFragment(fragment: NavigationFragment) {
-        fragment.navigationController?.replaceWith(ImportKeyFragment())
+        fragment.navigationController?.replaceTop(ImportKeyFragment())
     }
 
     fun replaceWithCreateAccountFragment(fragment: NavigationFragment) {
-        fragment.navigationController?.replaceWith(CreateAccountFragment())
+        fragment.navigationController?.replaceTop(CreateAccountFragment())
     }
 
     fun presentWalletPicker(fragment: NavigationFragment) {
@@ -128,14 +126,14 @@ class Presenter {
     }
 
     fun replaceWithWalletFragment(fragment: NavigationFragment) {
-        fragment.navigationController?.replaceWith(WalletFragment())
+        fragment.navigationController?.replaceRoot(WalletFragment())
     }
 
     fun replaceWithWalletStartFragment(fragment: NavigationFragment) {
-        fragment.navigationController?.replaceWith(WalletStartFragment())
+        fragment.navigationController?.replaceRoot(WalletStartFragment())
     }
 
     fun replaceWithWalletNoAccountFragment(fragment: NavigationFragment) {
-        fragment.navigationController?.replaceWith(WalletNoAccountFragment())
+        fragment.navigationController?.replaceRoot(WalletNoAccountFragment())
     }
 }
