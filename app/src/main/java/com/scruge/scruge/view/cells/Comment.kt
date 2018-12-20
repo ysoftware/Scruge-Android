@@ -4,11 +4,13 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.dependencies.view.setImage
 import com.scruge.scruge.viewmodel.comment.CommentAVM
+import com.scruge.scruge.viewmodel.comment.CommentVM
+import kotlinx.android.synthetic.main.cell_comment.view.*
 import kotlinx.android.synthetic.main.cell_comment_top.view.*
 
 class TopCommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun setup(vm:CommentAVM?, allCommentsCount:Int):TopCommentCell {
+    fun setup(vm: CommentAVM?, allCommentsCount: Int): TopCommentCell {
         if (vm != null && vm.isNotEmpty()) {
             val comment = vm.item(0)
 
@@ -22,7 +24,7 @@ class TopCommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
             } ?: itemView.top_comment_profile_image.setImageDrawable(null)
 
             itemView.top_comment_see_all.text = if (allCommentsCount == 1) "Add your comment"
-                else "See all $allCommentsCount comments"
+            else "See all $allCommentsCount comments"
 
             itemView.top_comment_view.visibility = View.VISIBLE
             itemView.top_comment_no_view.visibility = View.GONE
@@ -35,10 +37,27 @@ class TopCommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
         return this
     }
 
-    fun allComments(tap:()->Unit):TopCommentCell {
+    fun allComments(tap: () -> Unit): TopCommentCell {
         itemView.top_comment_see_all_view.setOnClickListener {
             tap()
         }
+        return this
+    }
+}
+
+class CommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    fun setup(vm: CommentVM): CommentCell {
+
+        itemView.comment_name.text = vm.authorName
+        itemView.comment_text.text = vm.comment
+        itemView.comment_date.text = vm.date
+        itemView.comment_likes.text = vm.likes
+
+        vm.authorPhoto?.let {
+            itemView.comment_profile_image.setImage(it)
+        } ?: itemView.comment_profile_image.setImageDrawable(null)
+
         return this
     }
 }

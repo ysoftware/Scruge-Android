@@ -281,7 +281,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                     }
                 comments -> (holder as? TopCommentCell)?.setup(fr.vm.topCommentsVM, fr.vm.commentsCount)
                         ?.allComments {
-
+                            Service.presenter.presentCommentsViewController(fr, fr.vm)
                         }
                 documents -> fr.vm.documentsVM?.let {
                             (holder as? DocumentsCell)?.setup(it)

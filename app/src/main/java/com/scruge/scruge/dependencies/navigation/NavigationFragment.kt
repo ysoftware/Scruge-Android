@@ -3,7 +3,7 @@ package com.scruge.scruge.dependencies.navigation
 import androidx.fragment.app.Fragment
 import com.scruge.scruge.view.views.NavigationBarButton
 
-open class NavigationFragment : Fragment() {
+open class NavigationFragment : Fragment(), NavigationController.OnBackPressedListener {
 
     var navigationController: NavigationController? = null
 
@@ -34,4 +34,6 @@ open class NavigationFragment : Fragment() {
             field = value
             navigationController?.updateViews()
         }
+
+    override fun onBackPressedHandled(): Boolean = false
 }

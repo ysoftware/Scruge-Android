@@ -21,9 +21,7 @@ class ContributeFragment : NavigationFragment() {
 
     lateinit var vm: CampaignVM
     private val accountVM = AccountAVM()
-
     private var checked = false
-
     private val amountSCR get() = contribute_usd.text.toString().toDoubleOrNull()?.let { convertToUSD(it) }
 
     // SETUP
