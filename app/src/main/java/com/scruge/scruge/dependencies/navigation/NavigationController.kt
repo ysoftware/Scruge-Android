@@ -96,6 +96,10 @@ class NavigationController(private val manager: FragmentManager, val containerId
         manager.popBackStackImmediate(null, 0)
         manager.executePendingTransactions()
 
+        if (fragment is NavigationFragment) {
+            fragment.navigationController = this
+        }
+
         update(oldFragment, fragment)
         updateViews()
         return true
