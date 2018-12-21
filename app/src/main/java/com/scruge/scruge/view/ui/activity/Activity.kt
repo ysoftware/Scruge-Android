@@ -13,7 +13,7 @@ import com.scruge.scruge.model.entity.Voting
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.cells.ActivityViewHolder
-import com.scruge.scruge.view.cells.VotingViewHolder
+import com.scruge.scruge.view.cells.VoteNotificationCell
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.update.UpdateAVM
 import com.ysoftware.mvvm.array.*
@@ -116,7 +116,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val i = LayoutInflater.from(parent.context)
             return if (viewType == 0) {
-                VotingViewHolder(i.inflate(R.layout.cell_activity_vote, parent, false))
+                VoteNotificationCell(i.inflate(R.layout.cell_activity_vote, parent, false))
             }
             else {
                 ActivityViewHolder(i.inflate(R.layout.cell_activity, parent, false))
@@ -128,7 +128,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            (holder as? VotingViewHolder)?.let {
+            (holder as? VoteNotificationCell)?.let {
                 it.setup(fr.activeVoting[position])
                         .tap {
                             // open voting
