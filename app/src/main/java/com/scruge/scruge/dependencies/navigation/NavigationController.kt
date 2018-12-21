@@ -44,7 +44,8 @@ class NavigationController(private val manager: FragmentManager, val containerId
         manager.executePendingTransactions()
         fragmentStack = Stack()
         manager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        manager.beginTransaction().replace(containerId, fragment).commitNowAllowingStateLoss()
+        manager.beginTransaction().replace(containerId, fragment).commitAllowingStateLoss()
+        manager.executePendingTransactions()
 
         if (fragment is NavigationFragment) {
             fragment.navigationController = this

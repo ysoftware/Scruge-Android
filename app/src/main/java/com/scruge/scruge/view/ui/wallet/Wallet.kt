@@ -2,6 +2,8 @@ package com.scruge.scruge.view.ui.wallet
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,10 +68,10 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     private fun updateStatus() {
-        activity?.runOnUiThread {
-            when (vm.state) {
-                State.error -> {
-                    val error = ErrorHandler.error(vm.state.errorValue)
+        when (vm.state) {
+            State.error -> {
+                val error = ErrorHandler.error(vm.state.errorValue)
+                Handler(Looper.getMainLooper()).postDelayed({
                     when (error) {
                         WalletError.noKey -> Service.presenter.replaceWithWalletStartFragment(this)
                         WalletError.noAccounts -> Service.presenter.replaceWithWalletNoAccountFragment(this)
@@ -79,15 +81,15 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
                             wallet_loading_view?.state = e
                         }
                     }
-                }
-                State.loading -> {
-                    wallet_loading_view?.state = ViewState.loading
-                }
-                State.ready -> {
-                    wallet_loading_view?.state = ViewState.ready
-                }
-                else -> {
-                }
+                }, 500)
+            }
+            State.loading -> {
+                wallet_loading_view?.state = ViewState.loading
+            }
+            State.ready -> {
+                wallet_loading_view?.state = ViewState.ready
+            }
+            else -> {
             }
         }
     }
