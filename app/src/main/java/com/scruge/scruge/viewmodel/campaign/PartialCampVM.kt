@@ -1,11 +1,8 @@
 package com.scruge.scruge.viewmodel.campaign
 
 import android.net.Uri
-import com.scruge.scruge.dependencies.dataformatting.format
-import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.PartialCampaign
 import com.ysoftware.mvvm.single.ViewModel
-import java.net.URL
 
 class PartialCampaignVM(model: PartialCampaign?) : ViewModel<PartialCampaign>(model),
         PartialCampaignModelHolder<PartialCampaign>,

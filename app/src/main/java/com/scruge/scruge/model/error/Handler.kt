@@ -56,7 +56,7 @@ class ErrorHandler {
                 return when (it) {
                     EOSError.overdrawnBalance -> "Overdrawn balance"
                     EOSError.unknown -> "Unknown error"
-                    EOSError.abiError -> "Incorrect transaction format"
+                    EOSError.abiError -> "Incorrect transaction formatDecimal"
                 }
             }
             return "Unexpected error"

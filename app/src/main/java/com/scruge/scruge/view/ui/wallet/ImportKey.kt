@@ -52,7 +52,7 @@ class ImportKeyFragment: NavigationFragment() {
             return alert("Enter your private key")
 
         if (key.length != 51 || !key.startsWith("5"))
-            return alert("Incorrect format of private key")
+            return alert("Incorrect formatDecimal of private key")
 
         if (passcode.isEmpty())
             return alert("Enter your new passcode")

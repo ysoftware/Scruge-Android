@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
-import com.scruge.scruge.dependencies.dataformatting.format
+import com.scruge.scruge.dependencies.dataformatting.formatDecimal
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.view.views.ButtonView
 import com.scruge.scruge.viewmodel.account.AccountAVM
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import kotlinx.android.synthetic.main.fragment_contribute.*
-import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 
 class ContributeFragment : NavigationFragment() {
@@ -72,7 +71,7 @@ class ContributeFragment : NavigationFragment() {
     private fun setupInformation() {
         vm.loadAmountContributed {
             it?.let {
-                val usd = convertToUSD(it).roundToLong().toDouble().format()
+                val usd = convertToUSD(it).roundToLong().toDouble().formatDecimal()
                 contribute_info.text = "You have already contributed $$usd in this project"
                 contribute_info.visibility = if (it != 0.0) View.VISIBLE else View.GONE
                 return@loadAmountContributed

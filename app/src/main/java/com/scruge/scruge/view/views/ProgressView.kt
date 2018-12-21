@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.core.content.res.ResourcesCompat
 import com.scruge.scruge.R
-import com.scruge.scruge.dependencies.dataformatting.format
+import com.scruge.scruge.dependencies.dataformatting.formatDecimal
 import com.scruge.scruge.dependencies.view.setHidden
 import kotlinx.android.synthetic.main.view_progress.view.*
-import kotlin.math.roundToInt
 
 class ProgressView(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
         RelativeLayout(context, attrs, defStyleAttr) {
@@ -37,9 +36,9 @@ class ProgressView(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
         val progress = Math.max(0.01, Math.min(1.0, value / firstGoal))
         val showLeftLabel = progress > 0.5
 
-        progress_total.text = "$prefix${total.format(" ")}$suffix"
-        progress_current.text = "$prefix${value.format(" ")}$suffix"
-        progress_current_right.text = "$prefix${value.format(" ")}$suffix"
+        progress_total.text = "$prefix${total.formatDecimal(" ")}$suffix"
+        progress_current.text = "$prefix${value.formatDecimal(" ")}$suffix"
+        progress_current_right.text = "$prefix${value.formatDecimal(" ")}$suffix"
 
         if (reachedGoal) {
             progress_total.setTextColor(greenLight)

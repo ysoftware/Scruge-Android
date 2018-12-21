@@ -1,16 +1,12 @@
 package com.scruge.scruge.viewmodel.campaign
 
 import android.net.Uri
-import com.memtrip.eos.chain.actions.transaction.vote.actions.VoteArgs
-import com.scruge.scruge.dependencies.dataformatting.format
-import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.*
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ScrugeError
 import com.scruge.scruge.model.error.WalletError
-import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.eos.ScrugeVote
 import com.scruge.scruge.viewmodel.account.AccountVM
 import com.scruge.scruge.viewmodel.comment.CommentAVM
@@ -22,7 +18,6 @@ import com.scruge.scruge.viewmodel.milestone.MilestoneAVM
 import com.scruge.scruge.viewmodel.milestone.MilestoneVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.ysoftware.mvvm.single.ViewModel
-import java.net.URL
 
 class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaignViewModel,
         PartialCampaignModelHolder<Campaign> {
