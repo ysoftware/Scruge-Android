@@ -1,8 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/gray"
-    android:layout_height="45dp">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/progress_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/medium"
+        android:text="$450"
+        android:layout_gravity="end"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/text_light"
+        android:textSize="12sp"/>
+
+    <RelativeLayout
+        android:id="@+id/progress_container"
+        android:layout_width="match_parent"
+        android:layout_height="19dp">
+
+        <com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout
+            app:top_right_corner_radius="3dp"
+            app:bottom_right_corner_radius="3dp"
+            android:id="@+id/progress_bar_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="#F1F3F5"/>
+
+        <com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout
+            app:top_left_corner_radius="3dp"
+            app:bottom_left_corner_radius="3dp"
+            android:id="@+id/progress_bar_view"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="#B079F4">
+
+            <TextView
+                android:id="@+id/progress_current"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="7dp"
+                android:fontFamily="@font/medium"
+                android:text="$450"
+                android:textColor="@color/white"
+                android:textSize="12sp"/>
+        </com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout>
+
+        <TextView
+            android:id="@+id/progress_current_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@id/progress_bar_view"
+            android:fontFamily="@font/medium"
+            android:text="$450"
+            android:textColor="#793FC1"
+            android:textSize="12sp"/>
+
+        <com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout
+            app:corner_radius="2dp"
+            android:id="@+id/progress_indicator"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="-2dp"
+            android:layout_toEndOf="@id/progress_bar_view"
+            android:background="#793FC1"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

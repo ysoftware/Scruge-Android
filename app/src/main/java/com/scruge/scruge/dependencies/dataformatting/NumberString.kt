@@ -11,7 +11,7 @@ fun Double.formatRounding(decimalPlaces:Int = 1,
     return String.format(format, this)
 }
 
-fun Double.format():String {
+fun Double.format(separateWith:String = ""):String {
     // todo
     return "$this"
 }

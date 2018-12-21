@@ -18,6 +18,10 @@ class CampaignSmallCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.campaign_small_date.text = vm.daysLeft
         itemView.campaign_small_description.text = vm.description
         itemView.campaign_small_image.setImage(vm.imageUrl)
+
+        itemView.campaign_small_progress_view.value = vm.raised
+        itemView.campaign_small_progress_view.total = vm.hardCap.toDouble()
+        itemView.campaign_small_progress_view.firstGoal = vm.softCap.toDouble()
     }
 }
 

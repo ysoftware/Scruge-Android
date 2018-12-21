@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+    implementation 'com.jcminarro:RoundKornerLayouts:0.4.0'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
     // eos
