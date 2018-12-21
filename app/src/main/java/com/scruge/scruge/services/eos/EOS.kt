@@ -19,6 +19,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class EOS {
@@ -30,8 +31,8 @@ class EOS {
     init {
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                .connectTimeout(5, TimeUnit.SECONDS).readTimeout(5, TimeUnit.SECONDS)
-                .writeTimeout(5, TimeUnit.SECONDS).build()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .build()
         service = Api("http://35.242.241.205:7777", okHttpClient)
     }
 
