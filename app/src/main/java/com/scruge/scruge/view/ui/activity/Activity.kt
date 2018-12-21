@@ -84,7 +84,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
         when (vm.state) {
             State.error -> {
                 refresh_control.isRefreshing = false
-                val message = ErrorHandler.message(vm.state.errorValue!!)
+                val message = ErrorHandler.message(vm.state.errorValue)
                 loading_view.state = ViewState.error
                 loading_view.state.errorMessage = message
             }

@@ -31,7 +31,7 @@ class KeyStore {
         /// FIXME: SECURITY CHECK REQUIRED
         val keychain = PasswordGeneratedKeyChain(CryptoConfig.KEY_256)
         keychain.setPassword(passcode)
-        // todo use public key to create salt
+        // todo use public key to create salt?
         keychain.salt = byteArrayOf(55, 12, 24, 17, 99, 1, 111, 5, 117, 21, 54, 94, 12, 12, 12, 14)
         keychain.generate()
         return AndroidConceal.get().createDefaultCrypto(keychain)

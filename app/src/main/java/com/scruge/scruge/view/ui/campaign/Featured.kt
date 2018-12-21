@@ -9,6 +9,7 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.model.ViewState
+import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.cells.CampaignSmallCell
 import com.scruge.scruge.view.main.TabbarActivity
@@ -87,7 +88,7 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
         when (state) {
             State.error -> {
                 loading_view.state = ViewState.error
-                loading_view.state.errorMessage = state.errorValue?.message ?: "" // todo
+                loading_view.state.errorMessage = ErrorHandler.message(state.errorValue)
                 refresh_control.isRefreshing = false
             }
             State.loading, State.initial -> {

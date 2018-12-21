@@ -36,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/regular"
-                android:maxLines="2"
                 android:text=""
                 android:textColor="@color/text_regular"
                 android:textSize="15sp"/>

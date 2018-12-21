@@ -128,7 +128,7 @@ class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
             State.initial -> comment_loading_view.state = ViewState.loading
             State.error -> {
                 comment_loading_view.state = ViewState.error
-                comment_loading_view.state.errorMessage = ErrorHandler.message(state.errorValue!!)
+                comment_loading_view.state.errorMessage = ErrorHandler.message(state.errorValue)
                 comment_refresh_control.isRefreshing = false
             }
             State.ready -> {

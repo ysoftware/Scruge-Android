@@ -10,7 +10,7 @@ class ErrorHandler {
 
     companion object {
 
-        fun message(throwable: Throwable):String {
+        fun message(throwable: Throwable?):String {
             return message(error(throwable))
         }
 
@@ -30,7 +30,7 @@ class ErrorHandler {
             (error as? NetworkingError)?.let {
                 return when (it) {
                     connectionProblem -> "Unable to connect to the server"
-                    unknown -> "Unknown error"
+                    unknown -> "Unknown network error"
                 }
             }
             (error as? BackendError)?.let {
@@ -67,7 +67,12 @@ class ErrorHandler {
             (throwable as? Error)?.let {
                 return it.error
             }
-            return unknown // todo
+            throwable.message?.let {
+                if (it.contains("resolve host")) {
+                    return NetworkingError.connectionProblem
+                }
+            }
+            return GeneralError.unknown
         }
 
         fun error(result: Int): ScrugeError? {
@@ -80,7 +85,7 @@ class ErrorHandler {
                 13 -> userNotFound
                 14 -> denied
 
-                // auth
+                // auth35.242.241.205
                 101 -> incorrectEmailLength
                 102 -> invalidEmail
                 103 -> incorrectPasswordLength

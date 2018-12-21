@@ -67,7 +67,7 @@ class UpdatesFragment : NavigationFragment(), ArrayViewModelDelegate {
             State.initial -> updates_loading_view.state = ViewState.loading
             State.error -> {
                 updates_loading_view.state = ViewState.error
-                updates_loading_view.state.errorMessage = ErrorHandler.message(state.errorValue!!)
+                updates_loading_view.state.errorMessage = ErrorHandler.message(state.errorValue)
                 updates_refresh_control.isRefreshing = false
             }
             State.ready -> {
