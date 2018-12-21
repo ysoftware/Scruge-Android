@@ -6,7 +6,7 @@ import com.ysoftware.mvvm.single.ViewModel
 
 class EconomiesVM(model: Economics?) : ViewModel<Economics>(model) {
 
-    val tokenSupply:String get() = model?.tokenSupply?.formatDecimal() ?: ""
+    val tokenSupply:String get() = model?.tokenSupply?.formatDecimal(" ") ?: ""
 
     val publicPercent:String get() = model?.publicTokenPercent?.formatDecimal()?.let { "$it%" } ?: ""
 

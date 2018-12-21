@@ -48,7 +48,7 @@
                 android:fontFamily="@font/regular"
                 android:text="300 000 000"
                 android:textAlignment="viewEnd"
-                android:textColor="@color/gray"
+                android:textColor="@color/text_gray"
                 android:textSize="16sp"/>
         </RelativeLayout>
 
@@ -80,7 +80,7 @@
                 android:fontFamily="@font/regular"
                 android:text="80%"
                 android:textAlignment="viewEnd"
-                android:textColor="@color/gray"
+                android:textColor="@color/text_gray"
                 android:textSize="16sp"/>
         </RelativeLayout>
 
@@ -112,7 +112,7 @@
                 android:fontFamily="@font/regular"
                 android:text="10%"
                 android:textAlignment="viewEnd"
-                android:textColor="@color/gray"
+                android:textColor="@color/text_gray"
                 android:textSize="16sp"/>
         </RelativeLayout>
 
@@ -144,7 +144,7 @@
                 android:fontFamily="@font/regular"
                 android:text="1-4%"
                 android:textAlignment="viewEnd"
-                android:textColor="@color/gray"
+                android:textColor="@color/text_gray"
                 android:textSize="16sp"/>
         </RelativeLayout>
     </LinearLayout>

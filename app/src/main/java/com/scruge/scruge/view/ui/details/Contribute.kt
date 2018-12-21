@@ -71,7 +71,7 @@ class ContributeFragment : NavigationFragment() {
     private fun setupInformation() {
         vm.loadAmountContributed {
             it?.let {
-                val usd = convertToUSD(it).roundToLong().toDouble().formatDecimal()
+                val usd = convertToUSD(it).roundToLong().toDouble().formatDecimal(" ")
                 contribute_info.text = "You have already contributed $$usd in this project"
                 contribute_info.visibility = if (it != 0.0) View.VISIBLE else View.GONE
                 return@loadAmountContributed
