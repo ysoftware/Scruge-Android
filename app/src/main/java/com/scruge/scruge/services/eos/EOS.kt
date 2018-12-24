@@ -40,6 +40,9 @@ class EOS {
 
     fun getAccounts(wallet: LocalAccount, completion: (Result<List<String>>) -> Unit) {
         service.history.getKeyAccounts(GetKeyAccounts(wallet.rawPublicKey))
+                .doOnError {
+                    completion(Result.failure(it))
+                }
                 .subscribeOn(Schedulers.newThread())
                 .subscribe({ response ->
                     val accounts = response.body()?.account_names
@@ -100,6 +103,9 @@ class EOS {
 
         currencies.forEach { currency ->
             service.chain.getCurrencyBalance(GetCurrencyBalance("eosio.token", account, currency))
+                    .doOnError {
+                        completion(listOf())
+                    }
                     .subscribeOn(Schedulers.newThread())
                     .subscribe { response, _ ->
 
@@ -124,6 +130,9 @@ class EOS {
 }
 
 fun Single<ChainResponse<TransactionCommitted>>.subscribe(completion: (Result<String>) -> Unit) {
+    doOnError {
+        completion(Result.failure(it))
+    }
     subscribeOn(Schedulers.newThread())
             .subscribe({ response ->
                            val id = response.body?.transaction_id
