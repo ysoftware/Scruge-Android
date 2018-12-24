@@ -16,7 +16,8 @@
             android:layout_height="match_parent"
             android:visibility="visible">
 
-            <ImageButton
+            <ImageView
+                android:layout_marginEnd="15dp"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
@@ -31,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="15dp"
             android:fontFamily="@font/medium"
             android:text="Scruge"
             android:textColor="@color/white"
