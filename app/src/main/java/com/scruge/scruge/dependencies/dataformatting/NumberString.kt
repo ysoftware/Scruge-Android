@@ -13,7 +13,7 @@ fun Double.formatRounding(decimalPlaces:Int = 1,
     for (i in min until decimalPlaces) {
         string = string.removeSuffix("0")
     }
-    return string.trim()
+    return string.trim().removeSuffix(".")
 }
 
 /// Rounds number to integer and uses separator grouping numbers by three.
