@@ -101,7 +101,7 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
     override fun onBackPressedHandled(): Boolean {
         if (editingProfile != null) { return false }
 
-        ask("Are you sure that you want to quit?") { reply ->
+        ask(question = "Are you sure that you want to quit?") { reply ->
             if (reply) {
                 Service.tokenManager.removeToken()
                 navigationController?.navigateBack()

@@ -21,7 +21,7 @@ fun Fragment.alert(error:ScrugeError) {
     alert(error.toString())
 }
 
-fun Fragment.ask(question:String, completion: (Boolean) -> Unit) {
+fun Fragment.ask(title:String = "Attention", question:String, completion: (Boolean) -> Unit) {
     val context = activity ?: return
     val dialogClickListener = DialogInterface.OnClickListener { _, which ->
         when (which) {
@@ -30,7 +30,9 @@ fun Fragment.ask(question:String, completion: (Boolean) -> Unit) {
         }
     }
 
-    AlertDialog.Builder(context).setMessage(question)
+    AlertDialog.Builder(context)
+            .setMessage(question)
+            .setTitle(title)
             .setPositiveButton("Yes", dialogClickListener)
             .setNegativeButton("No", dialogClickListener)
             .show()

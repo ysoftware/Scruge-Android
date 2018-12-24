@@ -7,8 +7,12 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.Dimension
+import com.scruge.scruge.dependencies.view.ask
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
@@ -21,6 +25,7 @@ import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
 import kotlinx.android.synthetic.main.fragment_wallet.*
+import kotlinx.android.synthetic.main.view_wallet_settings.view.*
 
 class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
@@ -58,7 +63,27 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
 
     private fun setupActions() {
         wallet_settings.setOnClickListener {
-            Service.presenter.presentWalletPicker(this)
+            val activity = activity ?: return@setOnClickListener
+
+            val dialog = BottomSheetDialog(activity, R.style.BottomSheetDialog)
+            val menu = LayoutInflater.from(activity).inflate(R.layout.view_wallet_settings, null)
+            if (vm.numberOfItems == 1) {
+                menu.wallet_settings_switch.visibility = View.GONE
+            }
+            else {
+                menu.wallet_settings_switch.setOnClickListener {
+                    dialog.hide()
+                    presentWalletPicker()
+                }
+            }
+
+            menu.wallet_settings_delete.setOnClickListener {
+                dialog.hide()
+                deleteWallet()
+            }
+
+            dialog.setContentView(menu)
+            dialog.show()
         }
     }
 
@@ -90,6 +115,18 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
                 wallet_loading_view?.state = ViewState.ready
             }
             else -> {
+            }
+        }
+    }
+
+    private fun deleteWallet() {
+        val t = "Are you sure to delete your wallet information?"
+        val q = "Make sure to export your private key because there is no way it can be retrieved later."
+
+        ask(t, q) { r ->
+            if (r) {
+                vm.deleteWallet()
+                Service.presenter.replaceWithWalletStartFragment(this)
             }
         }
     }
