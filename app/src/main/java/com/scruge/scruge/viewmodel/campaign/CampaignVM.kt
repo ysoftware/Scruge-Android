@@ -132,14 +132,14 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
     fun loadVoteResults(completion: (VoteResult?) -> Unit) {
         val model = model ?: return completion(null)
         Service.api.getVoteResult(model.id) { result ->
-            completion(result.getOrNull()?.votings?.first { it.active })
+            completion(result.getOrNull()?.votings?.firstOrNull { it.active })
         }
     }
 
     fun loadAmountContributed(completion: (Double?) -> Unit) {
         val model = model ?: return completion(null)
         Service.api.getContributionHistory { result ->
-            val contrib = result.getOrNull()?.contributions?.first { it.campaignId == model.id }
+            val contrib = result.getOrNull()?.contributions?.firstOrNull { it.campaignId == model.id }
             completion(contrib?.amount)
         }
     }
