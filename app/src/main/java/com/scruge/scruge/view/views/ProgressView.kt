@@ -22,6 +22,9 @@ class ProgressView(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_progress, this, true)
+        progress_bar_background.viewTreeObserver.addOnGlobalLayoutListener {
+            updateLayout()
+        }
     }
 
     var value = 0.0; set(value) { field = value; updateLayout() }
@@ -54,10 +57,8 @@ class ProgressView(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
         progress_current_right.setHidden(showLeftLabel)
 
         // bar width
-        progress_bar_background.viewTreeObserver.addOnGlobalLayoutListener {
-            val width = progress_bar_background.width
-            progress_bar_view.layoutParams.width = (width.toDouble() * progress).toInt()
-        }
+        val width = progress_bar_background.width
+        progress_bar_view.layoutParams.width = (width.toDouble() * progress).toInt()
     }
 
     override fun onAttachedToWindow() {
