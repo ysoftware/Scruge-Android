@@ -19,6 +19,7 @@ import com.scruge.scruge.viewmodel.milestone.MilestoneAVM
 import com.scruge.scruge.viewmodel.milestone.MilestoneVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.ysoftware.mvvm.single.ViewModel
+import kotlin.math.roundToInt
 
 class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaignViewModel,
         PartialCampaignModelHolder<Campaign> {
@@ -316,7 +317,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
         return null
     }
 
-    override val raised get() = model?.economics?.raised ?: 0.0
+    override val raised get() = model?.economics?.raised?.roundToInt()?.toDouble() ?: 0.0
 
     override val hardCap get() = model?.economics?.hardCap ?: 0
 

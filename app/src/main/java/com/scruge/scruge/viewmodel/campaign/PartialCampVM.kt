@@ -4,6 +4,7 @@ import android.net.Uri
 import com.scruge.scruge.dependencies.dataformatting.dateToRelative
 import com.scruge.scruge.model.entity.PartialCampaign
 import com.ysoftware.mvvm.single.ViewModel
+import kotlin.math.roundToInt
 
 class PartialCampaignVM(model: PartialCampaign?) : ViewModel<PartialCampaign>(model),
         PartialCampaignModelHolder<PartialCampaign>,
@@ -21,7 +22,7 @@ class PartialCampaignVM(model: PartialCampaign?) : ViewModel<PartialCampaign>(mo
         return null
     }
 
-    override val raised get() = model?.economics?.raised ?: 0.0
+    override val raised get() = model?.economics?.raised?.roundToInt()?.toDouble() ?: 0.0
 
     override val hardCap get() = model?.economics?.hardCap ?: 0
 
