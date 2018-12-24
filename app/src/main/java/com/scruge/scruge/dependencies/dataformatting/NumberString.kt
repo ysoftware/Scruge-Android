@@ -18,10 +18,10 @@ fun Double.formatRounding(decimalPlaces:Int = 1,
 
 /// Rounds number to integer and uses separator grouping numbers by three.
 fun Double.formatDecimal(separator:String = ""):String {
-    val systemSeparator = " " // warning: this is not a whitespace character
     val format = "%.4f"
     val temp = String.format(Locale.ENGLISH, format, this).replace(",", ".")
     val formatter = DecimalFormat("###,###,###,###,###")
+    val systemSeparator = formatter.decimalFormatSymbols.groupingSeparator.toString()
     val tempValue = temp.toDouble()
     var string = formatter.format(tempValue)
 

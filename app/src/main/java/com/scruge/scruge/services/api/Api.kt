@@ -34,7 +34,7 @@ class Api {
 
         test("http://testapi.scruge.world/"),
 
-        prod("http://api.scruge.world/"),
+        prod("https://api.scruge.world/"),
 
         dev("http://176.213.156.167/")
     }
