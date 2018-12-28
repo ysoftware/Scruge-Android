@@ -23,7 +23,8 @@ class PagingCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
     lateinit var currentMilestone: MilestoneVM
     private lateinit var faqTap:(FaqVM)->Unit
     private lateinit var milestneTap:(MilestoneVM)->Unit
-    var currentIndex = 0
+    private var currentIndex = 0
+    private var didScroll = false
 
     fun setup(vm: FaqAVM):PagingCell {
         itemView.paging_title.text = "Frequently answered questions"
@@ -79,8 +80,10 @@ class PagingCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         // scroll and select indicator to current index
-        itemView.paging_recycler_view.scrollToPosition(currentIndex)
-        itemView.paging_indicator.selection = currentIndex
+        if (vm.numberOfItems > currentIndex && !didScroll) {
+            itemView.paging_recycler_view.scrollToPosition(currentIndex)
+            itemView.paging_indicator.selection = currentIndex
+        }
 
         return this
     }
