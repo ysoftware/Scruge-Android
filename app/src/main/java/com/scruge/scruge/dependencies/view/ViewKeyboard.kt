@@ -19,8 +19,8 @@ fun Fragment.hideKeyboard() {
     activity?.hideKeyboard()
 }
 
-fun Context.showKeyboard(context: Context, view: View) {
+fun Context.showKeyboard(view: View) {
     view.requestFocus()
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
     imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
 }

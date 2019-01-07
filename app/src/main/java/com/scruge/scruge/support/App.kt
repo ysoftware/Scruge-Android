@@ -25,7 +25,7 @@ class App: Application() {
     }
 
     private fun setupApp() {
-        Service.api.setEnvironment(Api.Environment.prod)
-        SoLoader.init(this, false);
+        Service.api.setEnvironment(Api.Environment.test)
+        SoLoader.init(this, false)
     }
 }

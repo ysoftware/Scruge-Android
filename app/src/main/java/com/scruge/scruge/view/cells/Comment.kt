@@ -2,7 +2,10 @@ package com.scruge.scruge.view.cells
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.scruge.scruge.R
+import com.scruge.scruge.dependencies.view.setHidden
 import com.scruge.scruge.dependencies.view.setImage
+import com.scruge.scruge.services.Service
 import com.scruge.scruge.viewmodel.comment.CommentAVM
 import com.scruge.scruge.viewmodel.comment.CommentVM
 import kotlinx.android.synthetic.main.cell_comment.view.*
@@ -47,6 +50,8 @@ class TopCommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 class CommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    private var vm:CommentVM? = null
+
     fun setup(vm: CommentVM): CommentCell {
 
         itemView.comment_name.text = vm.authorName
@@ -58,6 +63,48 @@ class CommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.comment_profile_image.setImage(it)
         } ?: itemView.comment_profile_image.setImageDrawable(null)
 
+
+        vm.repliesText?.let {
+            itemView.comment_see_all.text = it
+            itemView.comment_see_all.setHidden(false)
+        } ?: itemView.comment_see_all.setHidden(true)
+
+        itemView.comment_reply.setHidden(!(vm.canReply && Service.tokenManager.hasToken))
+        itemView.comment_like_image.setImageResource(
+                if (vm.isLiking) R.drawable.like_active else R.drawable.like)
+
+        // actions
+
+        itemView.comment_like_tap.setOnClickListener {
+            likeBlock?.invoke(vm)
+        }
+
+        itemView.comment_reply.setOnClickListener {
+            replyBlock?.invoke(vm)
+        }
+
+        itemView.comment_see_all.setOnClickListener {
+            seeAllBlock?.invoke(vm)
+        }
         return this
     }
+
+    fun like(block:((CommentVM)->Unit)?):CommentCell {
+        likeBlock = block
+        return this
+    }
+
+    fun reply(block:((CommentVM)->Unit)?):CommentCell {
+        replyBlock = block
+        return this
+    }
+
+    fun seeAll(block:((CommentVM)->Unit)?):CommentCell {
+        seeAllBlock = block
+        return this
+    }
+
+    private var likeBlock:((CommentVM)->Unit)? = null
+    private var seeAllBlock:((CommentVM)->Unit)? = null
+    private var replyBlock:((CommentVM)->Unit)? = null
 }

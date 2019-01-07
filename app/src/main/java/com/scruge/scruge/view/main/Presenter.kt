@@ -19,6 +19,7 @@ import com.scruge.scruge.view.ui.wallet.*
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.comment.CommentAVM
 import com.scruge.scruge.viewmodel.comment.CommentSource
+import com.scruge.scruge.viewmodel.comment.CommentVM
 import com.scruge.scruge.viewmodel.profile.ProfileVM
 import com.scruge.scruge.viewmodel.update.UpdateAVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
@@ -112,6 +113,22 @@ class Presenter {
         val source = CommentSource.update
         source.updateObject = vm.model
         new.vm = CommentAVM(source)
+        fragment.navigationController?.navigateTo(new)
+    }
+
+    fun presentCommentsViewController(fragment:NavigationFragment,
+                                      avm:CommentAVM,
+                                      commentVM: CommentVM,
+                                      presentKeyboard:Boolean = false) {
+        val model = commentVM.model ?: return
+        val commentSource = avm.query?.source ?: return
+
+        val new = CommentsFragment()
+        val source = CommentSource.comment
+        source.commentObject = model
+        source.parentCommentSource = commentSource
+        new.vm = CommentAVM(source)
+        new.shouldOpenTyping = presentKeyboard
         fragment.navigationController?.navigateTo(new)
     }
 

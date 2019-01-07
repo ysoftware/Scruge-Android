@@ -11,6 +11,7 @@ import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.dependencies.view.showKeyboard
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_comments.*
 class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
 
     lateinit var vm: CommentAVM
+    var shouldOpenTyping = false
     private val adapter = Adapter(this)
     private val handler = ArrayViewModelUpdateHandler(adapter)
 
@@ -44,12 +46,21 @@ class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
 
     override fun viewDidAppear() {
         super.viewDidAppear()
+
         setupNavigationBar()
+        setupKeyboard()
     }
 
     override fun viewDidDisappear() {
         super.viewDidDisappear()
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+    }
+
+    private fun setupKeyboard() {
+        if (shouldOpenTyping) {
+            shouldOpenTyping = false
+            context?.showKeyboard(comment_field)
+        }
     }
 
     private fun setupTable() {
@@ -157,6 +168,15 @@ class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
 
         override fun onBindViewHolder(holder: CommentCell, position: Int) {
             holder.setup(fr.vm.item(position, true))
+                    .like {
+                        it.like()
+                    }
+                    .reply {
+                        Service.presenter.presentCommentsViewController(fr, fr.vm, it)
+                    }
+                    .seeAll {
+                        Service.presenter.presentCommentsViewController(fr, fr.vm, it, true)
+                    }
         }
     }
 }

@@ -130,19 +130,13 @@ interface BackendApi {
 
     // COMMENTS
 
-    @POST("campaign/{campaignId}/comments")
-    fun postCampaignComment(@Path("campaignId") campaignId:Int,
-                            @Body request:CommentRequest):Call<ResponseBody>
+    @POST("comment/{commentId}/like")
+    fun likeComment(@Path("commentId") commentId:String,
+                    @Body request:CommentLikeRequest):Call<ResponseBody>
 
-    @POST("update/{updateId}/comments")
-    fun postUpdateComment(@Path("updateId") updateId:String,
-                          @Body request:CommentRequest):Call<ResponseBody>
+    @POST("comments")
+    fun postComment(@Body request:CommentRequest):Call<ResponseBody>
 
-    @GET("campaign/{campaignId}/comments")
-    fun getCampaignComments(@Path("campaignId") campaignId:Int,
-                            @QueryMap request:Map<String, Any>):Call<ResponseBody>
-
-    @GET("update/{updateId}/comments")
-    fun getUpdateComments(@Path("updateId") updateId:String,
-                          @QueryMap request:Map<String, Any>):Call<ResponseBody>
+    @GET("comments")
+    fun getComments(@QueryMap request:Map<String, Any>):Call<ResponseBody>
 }

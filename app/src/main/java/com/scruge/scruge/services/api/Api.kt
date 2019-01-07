@@ -4,10 +4,9 @@ import android.net.Uri
 import android.util.Log
 import com.scruge.scruge.dependencies.serialization.toMap
 import com.scruge.scruge.model.entity.Campaign
+import com.scruge.scruge.model.entity.Comment
 import com.scruge.scruge.model.entity.Update
 import com.scruge.scruge.model.error.AuthError
-import com.scruge.scruge.model.error.NetworkingError
-import com.scruge.scruge.model.error.ScrugeError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
@@ -235,28 +234,23 @@ class Api {
 
     // COMMENTS
 
+    fun likeComment(comment: Comment, value: Boolean, completion: (Result<ResultResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            val request = CommentLikeRequest(it, value)
+            service.likeComment(comment.id, request).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
     fun postComment(comment: String, source: CommentSource, completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
-            when (source) {
-                CommentSource.update -> service.postUpdateComment(source.updateObject!!.id,
-                                                                  CommentRequest(comment, it)).enqueue(
-                        completion)
-                CommentSource.campaign -> service.postCampaignComment(source.campaignObject!!.id,
-                                                                      CommentRequest(comment, it)).enqueue(
-                        completion)
-            }
+            val request = CommentRequest(source, it, comment)
+            service.postComment(request).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 
     fun getComments(query: CommentQuery, completion: (Result<CommentListResponse>) -> Unit) {
-        when (query.source) {
-            CommentSource.update -> service.getUpdateComments(query.source.updateObject!!.id,
-                                                              CommentListRequest(query).toMap()).enqueue(
-                    completion)
-            CommentSource.campaign -> service.getCampaignComments(query.source.campaignObject!!.id,
-                                                                  CommentListRequest(query).toMap()).enqueue(
-                    completion)
-        }
+        val request = CommentListRequest(query, Service.tokenManager.getToken())
+        service.getComments(request.toMap()).enqueue(completion)
     }
 
     // LOGGING
