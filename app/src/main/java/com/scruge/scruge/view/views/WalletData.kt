@@ -51,9 +51,11 @@ class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
                                      "Unlock") { input ->
                     input?.let {
                         wallet.retrievePrivateKey(input) { key ->
-                            unlocked = true
-                            wallet_data_private_key.text = key.toString()
-                            context?.alert("Be careful not to share your private key with anyone!")
+                            key?.let {
+                                unlocked = true
+                                wallet_data_private_key.text = it.toString()
+                                context?.alert("Be careful not to share your private key with anyone!")
+                            } ?: context?.alert("Incorrect password")
                         }
                     }
                 }
