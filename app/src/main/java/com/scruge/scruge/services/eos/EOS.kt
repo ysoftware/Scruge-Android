@@ -72,12 +72,12 @@ class EOS {
                 .subscribeOn(Schedulers.newThread())
                 .subscribe({ response ->
                     response.body()?.actions?.let {
+                        val actions = it.sortedByDescending { it.global_action_seq }
 
-                        if (!it.isEmpty() && query?.position == -1L) {
+                        if (!actions.isEmpty() && query?.position == -1L) {
                             query.setLimit(it.first().account_action_seq)
                         }
-                        completion(Result.success(it))
-
+                        completion(Result.success(actions))
                     } ?: completion(Result.failure(EOSError.unknown.wrap()))
                            }, { error ->
                     val e = ErrorHandler.error(error) ?: EOSError.unknown

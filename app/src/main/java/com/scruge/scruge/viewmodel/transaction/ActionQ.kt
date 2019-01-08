@@ -5,6 +5,8 @@ import java.lang.Math.max
 
 class ActionsQuery:Query {
 
+    private val batchSize = 10
+
     var position:Long = -1
 
     var offset:Long = -1
@@ -12,7 +14,7 @@ class ActionsQuery:Query {
     override var size = 1
 
     fun setLimit(limit:Long) {
-        position = limit + 49L
+        position = limit
     }
 
     override fun resetPosition() {
@@ -23,9 +25,9 @@ class ActionsQuery:Query {
 
     override fun advance() {
         if (position != -1L) {
-            size = 50
-            offset = -50
-            position = max(0, position - size)
+            position -= size
+            offset = (-batchSize).toLong()
+            size = batchSize
         }
     }
 }
