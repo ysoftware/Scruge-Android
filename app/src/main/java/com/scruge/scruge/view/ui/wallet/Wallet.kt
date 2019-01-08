@@ -92,8 +92,15 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         }
 
         wallet_data_container.setOnClickListener {
-            wallet_data_view.toggleHidden()
-            wallet_data_view.updateViews()
+            if (!wallet_data_view.toggleHidden()) {
+                wallet_data_view.updateViews()
+            }
+        }
+
+        wallet_transactions_container.setOnClickListener {
+            if (!wallet_transactions_view.toggleHidden()) {
+                wallet_transactions_view.accountName = vm.selectedAccount?.name
+            }
         }
     }
 

@@ -7,6 +7,9 @@ fun View.setHidden(value:Boolean) {
     visibility = if (value) View.GONE else View.VISIBLE
 }
 
-fun View.toggleHidden() {
+val View.isHidden:Boolean get() = visibility == View.GONE
+
+fun View.toggleHidden():Boolean {
     setHidden(visibility == View.VISIBLE)
+    return isHidden
 }

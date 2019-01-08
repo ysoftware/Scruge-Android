@@ -76,7 +76,7 @@ fun Context.askForInput(title:String = "",
     val layout = RelativeLayout(this)
     layout.addView(editText)
     val pad = Dimension.dp(15).px
-    layout.setPadding(pad, 0, pad, 0)
+    layout.setPadding(pad, 0, 0, 0)
 
     editText.inputType = if (isSecure) EditorInfo.TYPE_TEXT_VARIATION_PASSWORD
         else EditorInfo.TYPE_TEXT_VARIATION_NORMAL

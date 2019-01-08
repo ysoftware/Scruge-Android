@@ -5,7 +5,9 @@ import com.memtrip.eos.chain.actions.ChainResponse
 import com.memtrip.eos.chain.actions.transaction.transfer.TransferChain
 import com.memtrip.eos.http.rpc.Api
 import com.memtrip.eos.http.rpc.model.contract.request.GetCurrencyBalance
+import com.memtrip.eos.http.rpc.model.history.request.GetActions
 import com.memtrip.eos.http.rpc.model.history.request.GetKeyAccounts
+import com.memtrip.eos.http.rpc.model.history.response.HistoricAccountAction
 import com.memtrip.eos.http.rpc.model.transaction.response.TransactionCommitted
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.Balance
@@ -15,6 +17,7 @@ import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.wallet.AccountModel
 import com.scruge.scruge.services.wallet.storage.LocalAccount
+import com.scruge.scruge.viewmodel.transaction.ActionsQuery
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
@@ -56,6 +59,30 @@ class EOS {
                     val e = ErrorHandler.error(error) ?: EOSError.unknown
                     completion(Result.failure(e.wrap()))
         })
+    }
+
+    fun getActions(account:String,
+                   query: ActionsQuery?,
+                   completion: (Result<List<HistoricAccountAction>>)->Unit) {
+        val params = GetActions(account, query?.position, query?.offset)
+        service.history.getActions(params)
+                .doOnError {
+                    completion(Result.failure(it))
+                }
+                .subscribeOn(Schedulers.newThread())
+                .subscribe({ response ->
+                    response.body()?.actions?.let {
+
+                        if (!it.isEmpty() && query?.position == -1L) {
+                            query.setLimit(it.first().account_action_seq)
+                        }
+                        completion(Result.success(it))
+
+                    } ?: completion(Result.failure(EOSError.unknown.wrap()))
+                           }, { error ->
+                    val e = ErrorHandler.error(error) ?: EOSError.unknown
+                    completion(Result.failure(e.wrap()))
+                })
     }
 
     fun sendMoney(account: AccountModel,

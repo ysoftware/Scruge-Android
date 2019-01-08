@@ -101,6 +101,7 @@ EOS 12.0000"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/wallet_transactions_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -148,6 +149,11 @@ EOS 12.0000"
                             android:textSize="14sp"/>
                     </LinearLayout>
 
+                    <com.scruge.scruge.view.views.WalletTransactionsView
+                        android:visibility="gone"
+                        android:id="@+id/wallet_transactions_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"/>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
