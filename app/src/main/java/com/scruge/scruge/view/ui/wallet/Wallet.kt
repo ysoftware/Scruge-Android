@@ -11,8 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
-import com.scruge.scruge.dependencies.view.Dimension
-import com.scruge.scruge.dependencies.view.ask
+import com.scruge.scruge.dependencies.view.*
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
@@ -26,6 +25,12 @@ import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
 import kotlinx.android.synthetic.main.fragment_wallet.*
 import kotlinx.android.synthetic.main.view_wallet_settings.view.*
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
+import androidx.core.content.ContextCompat.getSystemService
+
+
 
 class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
@@ -84,6 +89,11 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
 
             dialog.setContentView(menu)
             dialog.show()
+        }
+
+        wallet_data_container.setOnClickListener {
+            wallet_data_view.toggleHidden()
+            wallet_data_view.updateViews()
         }
     }
 
