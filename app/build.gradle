@@ -43,7 +43,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.1.0-alpha02'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
 
     // business logic
     implementation 'com.github.ysoftware:MVVM-Android:0.3.4'
@@ -57,6 +57,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
     implementation 'com.jcminarro:RoundKornerLayouts:0.4.0'
+    implementation 'com.github.aakira:expandable-layout:1.6.0@aar'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
     // eos
@@ -79,6 +80,6 @@ dependencies {
 
     // test
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
