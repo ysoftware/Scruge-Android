@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import com.scruge.scruge.R
+import com.scruge.scruge.dependencies.view.setHidden
 import com.scruge.scruge.viewmodel.resources.ResourcesVM
 import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
@@ -23,6 +24,14 @@ class WalletResourcesView(context: Context, attrs: AttributeSet?, defStyleAttr: 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_wallet_resources, this, true)
         setup()
+    }
+
+    fun hideRAM(value:Boolean) {
+        res_ram.setHidden(value)
+    }
+
+    fun hideControls(value:Boolean) {
+        res_controls.setHidden(value)
     }
 
     private fun setup() {
@@ -50,6 +59,18 @@ class WalletResourcesView(context: Context, attrs: AttributeSet?, defStyleAttr: 
             field = value
             vm.accountName = value
             vm.load()
+        }
+
+    var buyRamBlock:(()->Unit)? = null
+        set(value) {
+            field = value
+            res_ram_button.setOnClickListener { value?.invoke() }
+        }
+
+    var stakeBlock:(()->Unit)? = null
+        set(value) {
+            field = value
+            res_stake_button.setOnClickListener { value?.invoke() }
         }
 
     private fun updateViews() {

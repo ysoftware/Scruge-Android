@@ -24,7 +24,7 @@ fun Fragment.alert(message:String, completion:(()->Unit)? = null) {
 }
 
 fun Fragment.alert(error:Throwable) {
-    alert(error.localizedMessage)
+    alert(error.localizedMessage ?: "Error with no description")
 }
 
 fun Fragment.alert(error:ScrugeError) {

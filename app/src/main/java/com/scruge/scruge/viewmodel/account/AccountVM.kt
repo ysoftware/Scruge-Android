@@ -12,7 +12,13 @@ class AccountVM(model: AccountModel):ViewModel<AccountModel>(model) {
 
     val name get() = model?.name ?: ""
 
-    fun balanceString(separator:String = "\n"):String {
+    fun balanceString(separator:String = "\n", currency:String? = null):String {
+        currency?.let {
+            balances.find { it.symbol == currency }?.let {
+                return "${it.symbol} ${it.amount}"
+            } ?: return "$currency 0.0000"
+        }
+
         return balances.fold("") { result, balance ->
             val amount = balance.amount.formatRounding(4, 4)
             val sep = if (result.isBlank()) "" else separator

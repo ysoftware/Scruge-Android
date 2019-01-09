@@ -21,7 +21,7 @@ class ButtonView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
         LayoutInflater.from(context).inflate(R.layout.view_button, this, true)
     }
 
-    var click:((ButtonView)->Unit)? = null
+    private var click:((ButtonView)->Unit)? = null
 
     fun click(click:((ButtonView)->Unit)) {
         this.click = click

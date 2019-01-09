@@ -16,6 +16,7 @@ import com.scruge.scruge.view.ui.campaign.FeaturedFragment
 import com.scruge.scruge.view.ui.campaign.MemberProfileFragment
 import com.scruge.scruge.view.ui.details.*
 import com.scruge.scruge.view.ui.wallet.*
+import com.scruge.scruge.viewmodel.account.AccountVM
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.comment.CommentAVM
 import com.scruge.scruge.viewmodel.comment.CommentSource
@@ -216,6 +217,16 @@ class Presenter {
 
     fun replaceWithWalletNoAccountFragment(fragment: NavigationFragment) {
         fragment.navigationController?.replaceRoot(WalletNoAccountFragment())
+    }
+
+    fun presentStakeFragment(fragment: NavigationFragment, vm:AccountVM) {
+        val fr = StakeFragment()
+        fr.accountVM = vm
+        fragment.navigationController?.navigateTo(fr)
+    }
+
+    fun presentBuyRAMFragment(fragment: NavigationFragment) {
+        fragment.navigationController?.navigateTo(BuyRAMFragment())
     }
 
     // OTHER

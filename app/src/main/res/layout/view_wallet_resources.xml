@@ -20,9 +20,9 @@
 
         <TextView
             android:id="@+id/res_cpu_staked"
-            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:fontFamily="@font/regular"
             android:text=""
             android:textColor="@color/text_gray"
@@ -32,23 +32,23 @@
 
     <TextView
         android:id="@+id/res_cpu_label"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/regular"
         android:textColor="@color/text_gray"
         android:textSize="14sp"/>
 
     <com.scruge.scruge.view.views.ProgressView
         android:id="@+id/res_cpu_progress"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"/>
 
     <RelativeLayout
-        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,9 +60,9 @@
 
         <TextView
             android:id="@+id/res_net_staked"
-            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:fontFamily="@font/regular"
             android:textColor="@color/text_gray"
             android:textSize="14sp"/>
@@ -71,47 +71,80 @@
 
     <TextView
         android:id="@+id/res_net_label"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/regular"
         android:textColor="@color/text_gray"
         android:textSize="14sp"/>
 
     <com.scruge.scruge.view.views.ProgressView
         android:id="@+id/res_net_progress"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"/>
 
-    <RelativeLayout
-        android:layout_marginTop="15dp"
+    <LinearLayout
+        android:id="@+id/res_ram"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bold"
+                android:text="RAM"
+                android:textColor="@color/text_title"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
 
         <TextView
+            android:id="@+id/res_ram_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:text="RAM"
-            android:textColor="@color/text_title"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/text_gray"
             android:textSize="14sp"/>
 
-    </RelativeLayout>
+        <com.scruge.scruge.view.views.ProgressView
+            android:id="@+id/res_ram_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"/>
 
-    <TextView
-        android:id="@+id/res_ram_label"
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/regular"
-        android:textColor="@color/text_gray"
-        android:textSize="14sp"/>
+    </LinearLayout>
 
-    <com.scruge.scruge.view.views.ProgressView
-        android:id="@+id/res_ram_progress"
-        android:layout_marginTop="5dp"
+    <RelativeLayout
+        android:id="@+id/res_controls"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
 
+        <Button
+            android:id="@+id/res_ram_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/ram"
+            android:text="BUY RAM"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/res_stake_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/purple"
+            android:text="STAKE RESOURCES"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
 </LinearLayout>

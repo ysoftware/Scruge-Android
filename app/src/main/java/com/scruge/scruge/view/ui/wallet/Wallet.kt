@@ -31,8 +31,6 @@ import android.content.Context.CLIPBOARD_SERVICE
 import android.view.WindowManager
 import androidx.core.content.ContextCompat.getSystemService
 
-
-
 class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
     private val vm = AccountAVM()
@@ -55,6 +53,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
 
         verifyWallet()
         setupNavigationBar()
+        setupVM()
     }
 
     override fun viewDidDisappear() {
@@ -65,15 +64,18 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     private fun setupVM() {
         vm.delegate = this
         vm.reloadData()
-
-        wallet_data_view.setHidden(true)
-        wallet_transactions_view.setHidden(true)
-        wallet_resources_view.setHidden(true)
+        collapseAll()
     }
 
     private fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = false
         shouldHideNavigationBar = true
+    }
+
+    private fun collapseAll(view:View? = null) {
+        listOf(wallet_data_view,
+               wallet_transactions_view,
+               wallet_resources_view).forEach { if (view != it) it.setHidden(true) }
     }
 
     private fun setupActions() {
@@ -102,6 +104,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         }
 
         wallet_data_container.setOnClickListener {
+            collapseAll(wallet_data_view)
             if (!wallet_data_view.toggleHidden()) {
                 wallet_data_view.updateViews()
             }
@@ -111,14 +114,26 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         }
 
         wallet_transactions_container.setOnClickListener {
+            collapseAll(wallet_transactions_view)
             if (!wallet_transactions_view.toggleHidden()) {
                 wallet_transactions_view.accountName = vm.selectedAccount?.name
             }
         }
 
         wallet_resources_container.setOnClickListener {
+            collapseAll(wallet_resources_view)
             if (!wallet_resources_view.toggleHidden()) {
                 wallet_resources_view.accountName = vm.selectedAccount?.name
+            }
+        }
+
+        wallet_resources_view.buyRamBlock = {
+
+        }
+
+        wallet_resources_view.stakeBlock = {
+            accountVM?.let {
+                Service.presenter.presentStakeFragment(this, it)
             }
         }
     }

@@ -2,6 +2,7 @@ package com.scruge.scruge.services.eos
 
 import android.util.Log
 import com.memtrip.eos.chain.actions.ChainResponse
+import com.memtrip.eos.chain.actions.transaction.account.DelegateBandwidthChain
 import com.memtrip.eos.chain.actions.transaction.transfer.TransferChain
 import com.memtrip.eos.http.rpc.Api
 import com.memtrip.eos.http.rpc.model.account.request.AccountName
@@ -30,17 +31,25 @@ import java.util.concurrent.TimeUnit
 
 class EOS {
 
+    private val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .build()
+
     val contractAccount = "testaccount1"
 
-    val service: Api
+    private val testNodeUrl = "http://35.242.241.205:7777"
 
-    init {
-        val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .build()
-        service = Api("http://35.242.241.205:7777", okHttpClient)
-    }
+    val isMainNet get() = nodeUrl != testNodeUrl
+
+    var nodeUrl = testNodeUrl
+        set(value) {
+            field = value
+            service = Api(nodeUrl, okHttpClient)
+        }
+
+    var service = Api(nodeUrl, okHttpClient)
+        private set
 
     // METHODS
 
@@ -103,6 +112,21 @@ class EOS {
                     val e = ErrorHandler.error(error) ?: EOSError.unknown
                     completion(Result.failure(e.wrap()))
                 })
+    }
+
+    fun stakeResources(account: AccountModel,
+                       cpu:String,
+                       net:String,
+                       passcode:String,
+                       completion:(Result<String>)->Unit) {
+
+        account.getTransactionContext(passcode) {
+            val context = it ?: return@getTransactionContext completion(
+                    Result.failure(WalletError.incorrectPasscode.wrap()))
+
+            val args = DelegateBandwidthChain.Args(account.name, account.name, net, cpu, false)
+            DelegateBandwidthChain(service.chain).delegateBandwidth(args, context).subscribe(completion)
+        }
     }
 
     fun sendMoney(account: AccountModel,

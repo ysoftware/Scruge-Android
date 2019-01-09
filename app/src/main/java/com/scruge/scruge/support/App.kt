@@ -25,7 +25,7 @@ class App: Application() {
     }
 
     private fun setupApp() {
-        Service.api.setEnvironment(Api.Environment.test)
+        Service.api.environment = Api.Environment.test
         SoLoader.init(this, false)
     }
 }

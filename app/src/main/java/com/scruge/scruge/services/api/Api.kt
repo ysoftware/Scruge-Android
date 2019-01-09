@@ -40,13 +40,8 @@ class Api {
 
     // Initialization
 
-    fun setEnvironment(env: Environment) {
-        service = createService(env)
-        environment = env
-    }
-
     val serviceUrl get() = environment.url
-    private var environment = Environment.test
+    var environment = Environment.test; set(value) { field = value; service = createService(value) }
     private var service = createService(Environment.test)
 
     private fun createService(environment: Environment): BackendApi {
