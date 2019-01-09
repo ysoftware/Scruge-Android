@@ -54,10 +54,10 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
 
         stake_button.click {
             accountVM?.model?.let { model ->
-                val cpu = if (stake_cpu_edit.text.toString().isBlank()) ""
+                val cpu = if (stake_cpu_edit.text.toString().isBlank()) "0.0000"
                 else stake_cpu_edit.text.toString().toDoubleOrNull()?.formatRounding(4, 4, ".")
                         ?: return@let alert("Incorrect input")
-                val net = if (stake_net_edit.text.toString().isBlank()) ""
+                val net = if (stake_net_edit.text.toString().isBlank()) "0.0000"
                 else stake_net_edit.text.toString().toDoubleOrNull()?.formatRounding(4, 4, ".")
                         ?: return@let alert("Incorrect input")
 
