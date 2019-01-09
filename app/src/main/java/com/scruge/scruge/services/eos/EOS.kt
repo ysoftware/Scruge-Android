@@ -4,6 +4,7 @@ import android.util.Log
 import com.memtrip.eos.chain.actions.ChainResponse
 import com.memtrip.eos.chain.actions.transaction.transfer.TransferChain
 import com.memtrip.eos.http.rpc.Api
+import com.memtrip.eos.http.rpc.model.account.request.AccountName
 import com.memtrip.eos.http.rpc.model.contract.request.GetCurrencyBalance
 import com.memtrip.eos.http.rpc.model.history.request.GetActions
 import com.memtrip.eos.http.rpc.model.history.request.GetKeyAccounts
@@ -11,12 +12,14 @@ import com.memtrip.eos.http.rpc.model.history.response.HistoricAccountAction
 import com.memtrip.eos.http.rpc.model.transaction.response.TransactionCommitted
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.Balance
+import com.scruge.scruge.model.entity.Resources
 import com.scruge.scruge.model.error.EOSError
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.wallet.AccountModel
 import com.scruge.scruge.services.wallet.storage.LocalAccount
+import com.scruge.scruge.viewmodel.resources.ResourcesVM
 import com.scruge.scruge.viewmodel.transaction.ActionsQuery
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -59,6 +62,23 @@ class EOS {
                     val e = ErrorHandler.error(error) ?: EOSError.unknown
                     completion(Result.failure(e.wrap()))
         })
+    }
+
+    fun getResources(account:String, completion: (Result<Resources>)->Unit) {
+        service.chain.getAccount(AccountName(account))
+                .doOnError {
+                    completion(Result.failure(it))
+                }
+                .subscribeOn(Schedulers.newThread())
+                .subscribe({ response ->
+
+                    response.body()?.let {
+                        completion(Result.success(Resources(it)))
+                    }
+                }, { error ->
+                    val e = ErrorHandler.error(error) ?: EOSError.unknown
+                    completion(Result.failure(e.wrap()))
+                })
     }
 
     fun getActions(account:String,

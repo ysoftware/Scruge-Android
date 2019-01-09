@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.view_wallet_settings.view.*
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
+import android.view.WindowManager
 import androidx.core.content.ContextCompat.getSystemService
 
 
@@ -56,9 +57,18 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         setupNavigationBar()
     }
 
+    override fun viewDidDisappear() {
+        super.viewDidDisappear()
+        wallet_data_view.lock()
+    }
+
     private fun setupVM() {
         vm.delegate = this
         vm.reloadData()
+
+        wallet_data_view.setHidden(true)
+        wallet_transactions_view.setHidden(true)
+        wallet_resources_view.setHidden(true)
     }
 
     private fun setupNavigationBar() {
@@ -95,11 +105,20 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
             if (!wallet_data_view.toggleHidden()) {
                 wallet_data_view.updateViews()
             }
+            else {
+                wallet_data_view.lock()
+            }
         }
 
         wallet_transactions_container.setOnClickListener {
             if (!wallet_transactions_view.toggleHidden()) {
                 wallet_transactions_view.accountName = vm.selectedAccount?.name
+            }
+        }
+
+        wallet_resources_container.setOnClickListener {
+            if (!wallet_resources_view.toggleHidden()) {
+                wallet_resources_view.accountName = vm.selectedAccount?.name
             }
         }
     }

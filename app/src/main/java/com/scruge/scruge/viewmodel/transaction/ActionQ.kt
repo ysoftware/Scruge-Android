@@ -1,7 +1,6 @@
 package com.scruge.scruge.viewmodel.transaction
 
 import com.ysoftware.mvvm.array.Query
-import java.lang.Math.max
 
 class ActionsQuery:Query {
 

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
+            android:text="CPU"
+            android:textColor="@color/text_title"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/res_cpu_staked"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="0.9900 EOS"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/res_cpu_label"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/regular"
+        android:text="2.39ms / 199ms"
+        android:textColor="@color/text_gray"
+        android:textSize="14sp"/>
+
+    <com.scruge.scruge.view.views.ProgressView
+        android:id="@+id/res_cpu_progress"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
+            android:text="NET"
+            android:textColor="@color/text_title"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/res_net_staked"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="0.9900 EOS"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/res_net_label"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/regular"
+        android:text="2.39ms / 199ms"
+        android:textColor="@color/text_gray"
+        android:textSize="14sp"/>
+
+    <com.scruge.scruge.view.views.ProgressView
+        android:id="@+id/res_net_progress"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
+            android:text="RAM"
+            android:textColor="@color/text_title"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/res_ram_label"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/regular"
+        android:text="2.39ms / 199ms"
+        android:textColor="@color/text_gray"
+        android:textSize="14sp"/>
+
+    <com.scruge.scruge.view.views.ProgressView
+        android:id="@+id/res_ram_progress"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

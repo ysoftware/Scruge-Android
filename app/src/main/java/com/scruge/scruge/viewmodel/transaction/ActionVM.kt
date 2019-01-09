@@ -2,12 +2,8 @@ package com.scruge.scruge.viewmodel.transaction
 
 import com.memtrip.eos.http.rpc.model.history.response.HistoricAccountAction
 import com.scruge.scruge.dependencies.dataformatting.datePresent
+import com.scruge.scruge.model.entity.ActionReceipt
 import com.ysoftware.mvvm.single.ViewModel
-
-class ActionReceipt(val data: HistoricAccountAction):Comparable<ActionReceipt> {
-    override fun compareTo(other: ActionReceipt): Int
-            = compareValuesBy(this, other) { it.data.global_action_seq }
-}
 
 class ActionVM(model: ActionReceipt?) : ViewModel<ActionReceipt>(model) {
 

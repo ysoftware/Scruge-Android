@@ -1,10 +1,12 @@
 package com.scruge.scruge.view.views
 
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.WindowManager
 import android.widget.RelativeLayout
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.view.alert
@@ -14,19 +16,26 @@ import com.scruge.scruge.services.wallet.storage.LocalAccount
 import kotlinx.android.synthetic.main.view_wallet_data.view.*
 
 class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
-        RelativeLayout(context, attrs, defStyleAttr) {
+    RelativeLayout(context, attrs, defStyleAttr) {
 
-    constructor(context: Context) : this(context, null)
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+        constructor(context: Context) : this(context, null)
+        constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    init {
-        LayoutInflater.from(context).inflate(R.layout.view_wallet_data, this, true)
-    }
+        init {
+            LayoutInflater.from(context).inflate(R.layout.view_wallet_data, this, true)
+        }
 
     private var wallet:LocalAccount? = null
     private var unlocked = false
 
+    fun lock() {
+        makeSecure(false)
+        updateViews()
+    }
+
     fun updateViews() {
+        makeSecure(false)
+
         unlocked = false
         wallet_data_private_key.text = "5••••••••••••••••••••••••••••••••••••••••••••••••••"
 
@@ -53,6 +62,8 @@ class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
                         wallet.retrievePrivateKey(input) { key ->
                             key?.let {
                                 unlocked = true
+                                makeSecure(true)
+
                                 wallet_data_private_key.text = it.toString()
                                 context?.alert("Be careful not to share your private key with anyone!")
                             } ?: context?.alert("Incorrect password")
@@ -69,5 +80,10 @@ class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
                 context?.alert("Copied to clipboard")
             }
         }
+    }
+
+    private fun makeSecure(value:Boolean) {
+        val flags = if (value) WindowManager.LayoutParams.FLAG_SECURE else 0
+        (context as? Activity)?.window?.setFlags(flags, WindowManager.LayoutParams.FLAG_SECURE)
     }
 }

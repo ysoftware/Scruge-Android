@@ -1,5 +1,6 @@
 package com.scruge.scruge.viewmodel.transaction
 
+import com.scruge.scruge.model.entity.ActionReceipt
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.viewmodel.milestone.MilestoneVM
 import com.ysoftware.mvvm.array.ArrayViewModel

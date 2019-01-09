@@ -27,4 +27,12 @@
     <color name="text_gray">#9B99A9</color>
     <color name="field_background">#FBFAFF</color>
 
+    <color name="cpu">#ebac0e</color>
+    <color name="net">#127fe7</color>
+    <color name="ram">#508303</color>
+
+    <color name="cpu_background">#80692d</color>
+    <color name="net_background">#225b94</color>
+    <color name="ram_background">#4c7032</color>
+
 </resources>
