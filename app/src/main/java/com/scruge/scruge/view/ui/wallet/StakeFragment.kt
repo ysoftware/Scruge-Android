@@ -64,7 +64,9 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 Service.eos.stakeResources(model, "$cpu $systemToken", "$net $systemToken", passcode) { result ->
                     result.onSuccess {
                         alert(it)
-                        navigationController?.navigateBack()
+                        activity?.runOnUiThread {
+                            navigationController?.navigateBack()
+                        }
                     }.onFailure {
                         alert(it)
                     }
@@ -86,7 +88,6 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
     }
 
     override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
-
         activity?.runOnUiThread {
             updateViews()
         }
