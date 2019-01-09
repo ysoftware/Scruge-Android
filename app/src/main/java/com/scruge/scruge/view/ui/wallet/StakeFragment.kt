@@ -54,13 +54,22 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
 
         stake_button.click {
             accountVM?.model?.let { model ->
-                val cpu = if (stake_cpu_edit.text.toString().isBlank()) "0.0000"
-                else stake_cpu_edit.text.toString().toDoubleOrNull()?.formatRounding(4, 4, ".")
-                        ?: return@let alert("Incorrect input")
-                val net = if (stake_net_edit.text.toString().isBlank()) "0.0000"
-                else stake_net_edit.text.toString().toDoubleOrNull()?.formatRounding(4, 4, ".")
-                        ?: return@let alert("Incorrect input")
+                val cpuStr = stake_cpu_edit.text.toString()
+                val cpuString = if (cpuStr.isBlank()) "0" else cpuStr
+                val cpuValue = cpuString.toDoubleOrNull() ?: return@click alert("Incorrect CPU amount")
+                if (cpuValue < 0.0001 && cpuValue != 0.0) {
+                    return@click alert("CPU staking amount is too low")
+                }
 
+                val netStr = stake_net_edit.text.toString()
+                val netString = if (netStr.isBlank()) "0" else netStr
+                val netValue = netString.toDoubleOrNull() ?: return@click alert("Incorrect NET amount")
+                if (netValue < 0.0001 && netValue != 0.0) {
+                    return@click alert("NET staking amount is too low")
+                }
+
+                val cpu = cpuValue.formatRounding(4, 4, ".")
+                val net = netValue.formatRounding(4, 4, ".")
                 val passcode = stake_passcode.text.toString()
 
                 Service.eos.stakeResources(model, "$cpu $systemToken", "$net $systemToken", passcode) { result ->
