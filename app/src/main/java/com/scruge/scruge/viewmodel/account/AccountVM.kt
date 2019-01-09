@@ -27,7 +27,7 @@ class AccountVM(model: AccountModel):ViewModel<AccountModel>(model) {
     }
 
     fun updateBalance() {
-        Service.eos.getBalance(name, listOf("EOS", "SCR")) { balances ->
+        Service.eos.getBalance(name, listOf("EOS", "SCR", "SYS")) { balances ->
             this.balances = balances.sorted()
             notifyUpdated()
         }

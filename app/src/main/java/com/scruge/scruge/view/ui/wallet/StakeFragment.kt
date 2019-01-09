@@ -54,16 +54,18 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
 
         stake_button.click {
             accountVM?.model?.let { model ->
-                val cpu = stake_cpu_edit.text.toString().toDoubleOrNull()?.formatRounding(4, 4, ".") ?:
-                        return@let alert("Incorrect input")
-                val net = stake_net_edit.text.toString().toDoubleOrNull()?.formatRounding(4, 4, ".") ?:
-                        return@let alert("Incorrect input")
+                val cpu = if (stake_cpu_edit.text.toString().isBlank()) ""
+                else stake_cpu_edit.text.toString().toDoubleOrNull()?.formatRounding(4, 4, ".")
+                        ?: return@let alert("Incorrect input")
+                val net = if (stake_net_edit.text.toString().isBlank()) ""
+                else stake_net_edit.text.toString().toDoubleOrNull()?.formatRounding(4, 4, ".")
+                        ?: return@let alert("Incorrect input")
 
                 val passcode = stake_passcode.text.toString()
 
                 Service.eos.stakeResources(model, "$cpu $systemToken", "$net $systemToken", passcode) { result ->
                     result.onSuccess {
-                        alert(it)
+                        alert("Success!")
                         activity?.runOnUiThread {
                             navigationController?.navigateBack()
                         }
