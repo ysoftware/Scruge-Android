@@ -111,6 +111,43 @@ class EOS {
                 })
     }
 
+    fun getBalance(account:String,
+                   tokens:List<Token>,
+                   requestAll:Boolean = false,
+                   completion: (List<Balance>) -> Unit) {
+
+        var i = 0
+        val balances = arrayListOf<Balance>()
+
+        tokens.distinct().forEach { token ->
+            val sym = if (requestAll) null else token.symbol
+            service.chain.getCurrencyBalance(GetCurrencyBalance(token.contract, account, sym))
+                    .doOnError {
+                        completion(listOf())
+                    }
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe { response, _ ->
+                        i += 1
+
+                        val body = response.body()
+                        if (body != null) {
+                            if (body.isNotEmpty()) {
+                                body.forEach {
+                                    balances.add(Balance(it, token.contract))
+                                }
+                            }
+                            else {
+                                balances.add(Balance(token, 0.0))
+                            }
+                        }
+
+                        if (i == tokens.size) {
+                            completion(balances)
+                        }
+                    }
+        }
+    }
+
     fun stakeResources(account: AccountModel,
                        cpu:String,
                        net:String,
@@ -134,16 +171,16 @@ class EOS {
                   passcode:String,
                   completion:(Result<String>)->Unit) {
 
-            account.getTransactionContext(passcode) {
-                val context = it ?:
-                return@getTransactionContext completion(Result.failure(WalletError.incorrectPasscode.wrap()))
+        account.getTransactionContext(passcode) {
+            val context = it ?:
+            return@getTransactionContext completion(Result.failure(WalletError.incorrectPasscode.wrap()))
 
-                val quantity = Balance(token, amount).toString()
-                val args = TransferChain.Args(account.name, recipient, quantity, memo)
+            val quantity = Balance(token, amount).toString()
+            val args = TransferChain.Args(account.name, recipient, quantity, memo)
 
-                TransferChain(service.chain).transfer(token.contract, args, context)
-                        .subscribe(completion)
-            }
+            TransferChain(service.chain).transfer(token.contract, args, context)
+                    .subscribe(completion)
+        }
     }
 
     fun <M:AbiConvertible>sendAction(action:String,
@@ -161,40 +198,6 @@ class EOS {
 
             Action(service.chain).push(contract, action, data, permission, context)
                     .subscribe(completion)
-        }
-    }
-
-    fun getBalance(account:String,
-                   tokens:List<Token>,
-                   completion: (List<Balance>) -> Unit) {
-
-        var i = 0
-        val balances = arrayListOf<Balance>()
-
-        tokens.forEach { token ->
-            service.chain.getCurrencyBalance(GetCurrencyBalance(token.contract, account, token.symbol))
-                    .doOnError {
-                        completion(listOf())
-                    }
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe { response, _ ->
-
-                        i += 1
-
-                        val body = response.body()
-                        if (body != null) {
-                            if (body.isNotEmpty()) {
-                                balances.add(Balance(body.first(), token.contract))
-                            }
-                            else {
-                                balances.add(Balance(token, 0.0))
-                            }
-                        }
-
-                        if (i == tokens.size) {
-                            completion(balances)
-                        }
-                    }
         }
     }
 }

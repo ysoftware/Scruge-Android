@@ -33,10 +33,10 @@ fun Fragment.alert(error:ScrugeError) {
 
 // ask
 
-fun Fragment.ask(title:String = "Attention", question:String, completion: (Boolean) -> Unit)
+fun Fragment.ask(title:String = "", question:String, completion: (Boolean) -> Unit)
     = context?.ask(title, question, completion)
 
-fun Context.ask(title:String = "Attention", question:String, completion: (Boolean) -> Unit) {
+fun Context.ask(title:String = "", question:String, completion: (Boolean) -> Unit) {
     val dialogClickListener = DialogInterface.OnClickListener { _, which ->
         when (which) {
             DialogInterface.BUTTON_POSITIVE -> completion(true)

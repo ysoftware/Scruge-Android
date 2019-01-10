@@ -22,20 +22,12 @@ class Settings {
     }
 
     fun set(setting:Setting, value:Any) {
-        if (value is String) {
-            defaults.edit().putString(setting.name, value).apply()
-        }
-        else if (value is Int) {
-            defaults.edit().putInt(setting.name, value).apply()
-        }
-        else if (value is Float) {
-            defaults.edit().putFloat(setting.name, value).apply()
-        }
-        else if (value is Boolean) {
-            defaults.edit().putBoolean(setting.name, value).apply()
-        }
-        else if (value is Long) {
-            defaults.edit().putLong(setting.name, value).apply()
+        when (value) {
+            is String -> defaults.edit().putString(setting.name, value).apply()
+            is Int -> defaults.edit().putInt(setting.name, value).apply()
+            is Float -> defaults.edit().putFloat(setting.name, value).apply()
+            is Boolean -> defaults.edit().putBoolean(setting.name, value).apply()
+            is Long -> defaults.edit().putLong(setting.name, value).apply()
         }
     }
 

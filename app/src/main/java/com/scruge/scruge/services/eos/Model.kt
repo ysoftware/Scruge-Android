@@ -36,6 +36,10 @@ data class ScrugeVote(val eosAccount:String,
 data class Token(val contract:String,
                  val symbol:String) {
 
+    constructor(string: String) : this(string.split("-")[0], string.split("-")[1])
+
+    override fun toString(): String = "$contract-$symbol"
+
     companion object {
 
         // todo change on the main net
@@ -44,5 +48,7 @@ data class Token(val contract:String,
         val EOS = Token("eosio.token", "EOS")
 
         val SYS = Token("eosio.token", "SYS")
+
+        val default get() = listOf(Scruge, SYS, EOS)
     }
 }

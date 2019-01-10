@@ -7,7 +7,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
@@ -25,11 +24,6 @@ import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
 import kotlinx.android.synthetic.main.fragment_wallet.*
 import kotlinx.android.synthetic.main.view_wallet_settings.view.*
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context.CLIPBOARD_SERVICE
-import android.view.WindowManager
-import androidx.core.content.ContextCompat.getSystemService
 
 class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
@@ -58,7 +52,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
 
     override fun viewDidDisappear() {
         super.viewDidDisappear()
-        wallet_data_view.lock()
+        wallet_data_view?.lock()
     }
 
     private fun setupVM() {
@@ -138,7 +132,9 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         }
 
         wallet_transfer.setOnClickListener {
-            Service.presenter.presentTransferFragment(this)
+            accountVM?.let {
+                Service.presenter.presentTransferFragment(this, it)
+            }
         }
     }
 

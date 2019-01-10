@@ -6,6 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.model.entity.Balance
+import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.Settings
+import com.scruge.scruge.services.eos.Token
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.account.AccountVM
 import com.ysoftware.mvvm.array.ArrayViewModelDelegate
@@ -15,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_wallet.*
 class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
     var accountVM: AccountVM? = null
+    private var balances = listOf<Balance>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -24,7 +29,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setupVM()
+        setupViews()
     }
 
     override fun viewDidAppear() {
@@ -33,17 +38,29 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
         setupNavigationBar()
     }
 
-    override fun viewDidDisappear() {
-        super.viewDidDisappear()
-    }
-
     fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = true
         shouldHideNavigationBar = false
         title = "Transfer tokens"
     }
 
-    fun setupVM() {
+    fun setupViews() {
+        val account = accountVM?.name ?: return
+        Service.api.getDefaultTokens { result ->
 
+            val otherTokens = result.getOrNull() ?: listOf()
+            val userTokens =
+                    Service.settings.get<Set<String>>(Settings.Setting.userTokens)?.map { Token(it) } ?: listOf()
+            val list = Token.default + userTokens.toList() + otherTokens
+
+            Service.eos.getBalance(account, list, requestAll = true) { response ->
+                balances = response.filter { it.amount != 0.0 }
+
+                activity?.runOnUiThread {
+                    // refresh ui
+
+                }
+            }
+        }
     }
 }

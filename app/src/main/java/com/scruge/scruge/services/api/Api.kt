@@ -10,6 +10,7 @@ import com.scruge.scruge.model.error.AuthError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
+import com.scruge.scruge.services.eos.Token
 import com.scruge.scruge.services.network.enqueue
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
 import com.scruge.scruge.viewmodel.comment.CommentQuery
@@ -59,6 +60,35 @@ class Api {
         Service.tokenManager.getToken()?.let {
             service.createAccount(it, AccountRequest(accountName, publicKey)).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
+
+    fun getDefaultTokens(completion: (Result<List<Token>>)->Unit) {
+        val list = listOf("diatokencore-DIA",
+                          "eosblackteam-BLACK",
+                          "taketooktook-TOOK",
+                          "whaleextoken-WAL",
+                          "publytoken11-PUB",
+                          "everipediaiq-IQ",
+                          "betdicetoken-DICE",
+                          "prospectorsg-PGL",
+                          "ptitokenhome-PTI",
+                          "ectchaincoin-ECTT",
+                          "eosiochaince-CET",
+                          "newdexissuer-NDX",
+                          "eosiomeetone-MEETONE",
+                          "lihengyang13-GMC",
+                          "eosiotptoken-TPT",
+                          "octtothemoon-OCT",
+                          "uctokenowner-UCTT",
+                          "eoscancancan-CAN",
+                          "therealkarma-KARMA",
+                          "aeronaerozzz-ARN",
+                          "eosdyeosiody-DY",
+                          "bitpietokens-EETH",
+                          "ethsidechain-EETH",
+                          "endlesstoken-ET",
+                          "trusteamwins-TXT")
+        completion(Result.success(list.map { Token(it) }))
     }
 
     // AUTH
