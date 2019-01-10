@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.scruge.scruge.R
@@ -40,7 +41,13 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
     override fun viewDidAppear() {
         super.viewDidAppear()
 
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         setupNavigationBar()
+    }
+
+    override fun viewDidDisappear() {
+        super.viewDidDisappear()
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
     }
 
     fun setupNavigationBar() {
@@ -57,10 +64,50 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
                 transfer_balance_label.text = balances[position].toString()
             }
         }
+
+        transfer_button.click {
+            val i = transfer_spinner.selectedItemPosition
+            if (balances.size < i) {
+                alert("Error occured. Select correct token to transfer")
+                if (balances.isNotEmpty()) {
+                    transfer_spinner.setSelection(0)
+                    transfer_balance_label.text = balances[0].toString()
+                }
+                else {
+                    navigationController?.navigateBack()
+                }
+                return@click
+            }
+
+            val amount = transfer_amount.text.toString().toDoubleOrNull()
+                ?: return@click alert("Incorrect amount value")
+
+            val account = accountVM?.model
+                    ?: return@click alert("An error occured")
+
+            val token = balances[i].token
+            val recipient = transfer_receiver.text.toString()
+            val memo = transfer_memo.text.toString()
+            val passcode = transfer_passcode.text.toString()
+
+            Service.eos.sendMoney(account, recipient, amount, token, memo, passcode) { result ->
+                result.onSuccess {
+                    alert("Transaction was successful") {
+                        navigationController?.navigateBack()
+                    }
+                }.onFailure {
+                    alert(it)
+                }
+            }
+        }
     }
 
     private fun setupViews() {
+        transfer_button.title = "Transfer"
+
         val account = accountVM?.name ?: return
+        transfer_account_name.text = account
+
         Service.api.getDefaultTokens { result ->
 
             val otherTokens = result.getOrNull() ?: listOf()
@@ -71,13 +118,11 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
             Service.eos.getBalance(account, list, requestAll = true) { response ->
                 balances = response.filter { it.amount != 0.0 }.distinct()
 
-                if (balances.isEmpty()) {
-                    alert("This account has no tokens available to transfer")
-                    navigationController?.navigateBack()
-                    return@getBalance
-                }
-
                 activity?.runOnUiThread {
+                    if (balances.isEmpty()) {
+                        alert("Could not load your information")
+                        return@runOnUiThread
+                    }
 
                     // select eos or first element
                     var i = balances.indexOfFirst { it.token == Token.EOS }

@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
-        android:text="yaroslavero"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/text_title"
-        android:textSize="14sp"/>
+        android:textSize="17sp"/>
 
     <TextView
         android:id="@+id/transfer_balance_label"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/regular"
-        android:text="10403.0001 EETH"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/text_gray"
         android:textSize="12sp"/>
@@ -50,7 +50,8 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/regular"
             android:hint="Receiver"
-            android:inputType="textPassword"
+            android:inputType="text"
+            android:maxLength="12"
             android:maxLines="1"
             android:paddingStart="45dp"
             android:paddingEnd="0dp"
@@ -82,9 +83,9 @@
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/regular"
                 android:hint="Amount"
-                android:inputType="textPassword"
+                android:inputType="numberDecimal"
                 android:maxLines="1"
-                android:paddingStart="15dp"
+                android:paddingStart="45dp"
                 android:paddingEnd="0dp"
                 android:textColor="@color/text_regular"
                 android:textColorHint="@color/text_light"
@@ -141,5 +142,42 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/field_background">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/clip"/>
+
+        <EditText
+            android:id="@+id/transfer_memo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/regular"
+            android:hint="Memo"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="45dp"
+            android:paddingEnd="0dp"
+            android:textColor="@color/text_regular"
+            android:textColorHint="@color/text_light"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+    <com.scruge.scruge.view.views.ButtonView
+        android:id="@+id/transfer_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"/>
 
 </LinearLayout>
