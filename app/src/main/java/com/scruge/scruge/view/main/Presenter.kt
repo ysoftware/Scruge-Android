@@ -225,12 +225,16 @@ class Presenter {
         fragment.navigationController?.navigateTo(fr)
     }
 
-    fun presentBuyRAMFragment(fragment: NavigationFragment) {
-        fragment.navigationController?.navigateTo(BuyRAMFragment())
+    fun presentBuyRAMFragment(fragment: NavigationFragment, vm:AccountVM) {
+        val fr = BuyRAMFragment()
+        fr.accountVM = vm
+        fragment.navigationController?.navigateTo(fr)
     }
 
-    fun presentTransferFragment(fragment: NavigationFragment) {
-        fragment.navigationController?.navigateTo(TransferFragment())
+    fun presentTransferFragment(fragment: NavigationFragment, vm:AccountVM) {
+        val fr = TransferFragment()
+        fr.accountVM = vm
+        fragment.navigationController?.navigateTo(fr)
     }
 
     // OTHER

@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_wallet.*
 
 class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
-    private var accountVM: AccountVM? = null
+    var accountVM: AccountVM? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,7 +35,6 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
 
     override fun viewDidDisappear() {
         super.viewDidDisappear()
-        wallet_data_view.lock()
     }
 
     fun setupNavigationBar() {

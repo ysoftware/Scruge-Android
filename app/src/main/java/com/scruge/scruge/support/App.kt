@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import com.facebook.soloader.SoLoader
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.Settings
 import com.scruge.scruge.services.api.Api
 
 class App: Application() {
@@ -27,5 +28,9 @@ class App: Application() {
     private fun setupApp() {
         Service.api.environment = Api.Environment.test
         SoLoader.init(this, false)
+
+        Service.settings.get<String>(Settings.Setting.nodeUrl)?.let {
+            Service.eos.nodeUrl = it
+        }
     }
 }
