@@ -29,8 +29,6 @@ class App: Application() {
         Service.api.environment = Api.Environment.test
         SoLoader.init(this, false)
 
-        Service.settings.set(Settings.Setting.nodeUrl, "https://node.eosflare.io")
-
         Service.settings.get<String>(Settings.Setting.nodeUrl)?.let {
             Service.eos.nodeUrl = it
         }

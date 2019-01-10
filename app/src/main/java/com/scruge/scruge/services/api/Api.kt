@@ -63,31 +63,16 @@ class Api {
     }
 
     fun getDefaultTokens(completion: (Result<List<Token>>)->Unit) {
-        val list = listOf("diatokencore-DIA",
-                          "eosblackteam-BLACK",
-                          "taketooktook-TOOK",
-                          "whaleextoken-WAL",
-                          "publytoken11-PUB",
-                          "everipediaiq-IQ",
-                          "betdicetoken-DICE",
-                          "prospectorsg-PGL",
-                          "ptitokenhome-PTI",
-                          "ectchaincoin-ECTT",
-                          "eosiochaince-CET",
-                          "newdexissuer-NDX",
-                          "eosiomeetone-MEETONE",
-                          "lihengyang13-GMC",
-                          "eosiotptoken-TPT",
-                          "octtothemoon-OCT",
-                          "uctokenowner-UCTT",
-                          "eoscancancan-CAN",
-                          "therealkarma-KARMA",
-                          "aeronaerozzz-ARN",
-                          "eosdyeosiody-DY",
-                          "bitpietokens-EETH",
-                          "ethsidechain-EETH",
-                          "endlesstoken-ET",
-                          "trusteamwins-TXT")
+        val list = listOf("diatokencore DIA",       // arbitrary list of "top" tokens
+                          "eosblackteam BLACK",
+                          "taketooktook TOOK",
+                          "publytoken11 PUB",
+                          "everipediaiq IQ",
+                          "betdicetoken DICE",
+                          "zkstokensr4u ZKS",
+                          "hirevibeshvt HVT",
+                          "goldioioioio FGIO",
+                          "ethsidechain EETH")
         completion(Result.success(list.map { Token(it) }))
     }
 

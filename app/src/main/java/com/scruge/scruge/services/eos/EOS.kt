@@ -142,7 +142,7 @@ class EOS {
                         }
 
                         if (i == tokens.size) {
-                            completion(balances)
+                            completion(balances.sortedByDescending { it.amount })
                         }
                     }
         }
