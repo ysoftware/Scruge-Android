@@ -159,6 +159,7 @@ EOS 12.0000"
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/wallet_transfer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -185,7 +186,7 @@ EOS 12.0000"
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
                                 android:layout_centerInParent="true"
-                                android:src="@drawable/dollar"/>
+                                android:src="@drawable/transfer"/>
 
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:layout_width="match_parent"
@@ -201,7 +202,7 @@ EOS 12.0000"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
                             android:fontFamily="@font/regular"
-                            android:text="Investments"
+                            android:text="Transfer"
                             android:textColor="@color/text_title"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -295,7 +296,7 @@ EOS 12.0000"
                                 android:layout_width="15dp"
                                 android:layout_height="15dp"
                                 android:layout_centerInParent="true"
-                                android:src="@drawable/wallet_small"/>
+                                android:src="@drawable/dollar"/>
 
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:layout_width="match_parent"

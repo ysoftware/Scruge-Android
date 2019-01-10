@@ -32,3 +32,17 @@ data class ScrugeVote(val eosAccount:String,
         return writer.toBytes()
     }
 }
+
+data class Token(val contract:String,
+                 val symbol:String) {
+
+    companion object {
+
+        // todo change on the main net
+        val Scruge = Token("eosio.token", "SCR")
+
+        val EOS = Token("eosio.token", "EOS")
+
+        val SYS = Token("eosio.token", "SYS")
+    }
+}

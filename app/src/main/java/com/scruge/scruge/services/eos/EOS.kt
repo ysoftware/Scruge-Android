@@ -20,13 +20,11 @@ import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.wallet.AccountModel
 import com.scruge.scruge.services.wallet.storage.LocalAccount
-import com.scruge.scruge.viewmodel.resources.ResourcesVM
 import com.scruge.scruge.viewmodel.transaction.ActionsQuery
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class EOS {
@@ -48,8 +46,7 @@ class EOS {
             service = Api(nodeUrl, okHttpClient)
         }
 
-    var service = Api(nodeUrl, okHttpClient)
-        private set
+    var service = Api(nodeUrl, okHttpClient); private set
 
     // METHODS
 
@@ -132,7 +129,7 @@ class EOS {
     fun sendMoney(account: AccountModel,
                   recipient:String,
                   amount:Double,
-                  symbol:String,
+                  token:Token,
                   memo:String,
                   passcode:String,
                   completion:(Result<String>)->Unit) {
@@ -141,10 +138,10 @@ class EOS {
                 val context = it ?:
                 return@getTransactionContext completion(Result.failure(WalletError.incorrectPasscode.wrap()))
 
-                val quantity = "${amount.formatRounding(4, 4)} $symbol".replace(",", ".")
+                val quantity = Balance(token, amount).toString()
                 val args = TransferChain.Args(account.name, recipient, quantity, memo)
 
-                TransferChain(service.chain).transfer("eosio.token", args, context)
+                TransferChain(service.chain).transfer(token.contract, args, context)
                         .subscribe(completion)
             }
     }
@@ -167,13 +164,15 @@ class EOS {
         }
     }
 
-    fun getBalance(account:String, currencies:List<String>, completion: (List<Balance>) -> Unit) {
+    fun getBalance(account:String,
+                   tokens:List<Token>,
+                   completion: (List<Balance>) -> Unit) {
 
         var i = 0
         val balances = arrayListOf<Balance>()
 
-        currencies.forEach { currency ->
-            service.chain.getCurrencyBalance(GetCurrencyBalance("eosio.token", account, currency))
+        tokens.forEach { token ->
+            service.chain.getCurrencyBalance(GetCurrencyBalance(token.contract, account, token.symbol))
                     .doOnError {
                         completion(listOf())
                     }
@@ -185,14 +184,14 @@ class EOS {
                         val body = response.body()
                         if (body != null) {
                             if (body.isNotEmpty()) {
-                                balances.add(Balance(body.first()))
+                                balances.add(Balance(body.first(), token.contract))
                             }
                             else {
-                                balances.add(Balance(currency, 0.0))
+                                balances.add(Balance(token, 0.0))
                             }
                         }
 
-                        if (i == currencies.size) {
+                        if (i == tokens.size) {
                             completion(balances)
                         }
                     }

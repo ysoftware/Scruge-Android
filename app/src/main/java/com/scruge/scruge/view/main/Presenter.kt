@@ -229,6 +229,10 @@ class Presenter {
         fragment.navigationController?.navigateTo(BuyRAMFragment())
     }
 
+    fun presentTransferFragment(fragment: NavigationFragment) {
+        fragment.navigationController?.navigateTo(TransferFragment())
+    }
+
     // OTHER
 
     fun presentBrowser(fragment: NavigationFragment, url: String, title:String = "Preview") {

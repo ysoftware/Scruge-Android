@@ -136,6 +136,10 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
                 Service.presenter.presentStakeFragment(this, it)
             }
         }
+
+        wallet_transfer.setOnClickListener {
+            Service.presenter.presentTransferFragment(this)
+        }
     }
 
     private fun updateView() {

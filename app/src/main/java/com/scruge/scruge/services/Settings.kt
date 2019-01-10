@@ -8,7 +8,7 @@ class Settings {
 
     enum class Setting {
 
-        selectedAccount
+        selectedAccount, userTokens, nodeUrl
     }
 
     val defaults = App.context.getSharedPreferences("Settings", Context.MODE_PRIVATE)

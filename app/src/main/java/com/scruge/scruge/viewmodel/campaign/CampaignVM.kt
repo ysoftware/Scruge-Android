@@ -9,6 +9,7 @@ import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ScrugeError
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.eos.ScrugeVote
+import com.scruge.scruge.services.eos.Token
 import com.scruge.scruge.viewmodel.account.AccountVM
 import com.scruge.scruge.viewmodel.comment.CommentAVM
 import com.scruge.scruge.viewmodel.comment.CommentSource
@@ -153,7 +154,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
                 Service.eos.sendMoney(account,
                                       Service.eos.contractAccount,
                                       amount,
-                                      "SCR",
+                                      Token.Scruge,
                                       "${it.userId}-${model.id}",
                                       passcode) { transactionResult ->
                     transactionResult.onSuccess { transactionId ->

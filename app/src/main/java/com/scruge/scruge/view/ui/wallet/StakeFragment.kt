@@ -9,8 +9,10 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.Api
+import com.scruge.scruge.services.eos.Token
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.account.AccountVM
 import com.ysoftware.mvvm.array.ArrayViewModelDelegate
@@ -20,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_staking.*
 
 class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
-    private val systemToken = if (Service.eos.isMainNet) "EOS" else "SYS"
+    private val systemToken = if (Service.eos.isMainNet) Token.EOS else Token.SYS
     var accountVM: AccountVM? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -32,14 +34,14 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
         super.onActivityCreated(savedInstanceState)
 
         setupViews()
-        setupVM()
     }
 
     override fun viewDidAppear() {
         super.viewDidAppear()
 
-        setupNavigationBar()
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        setupNavigationBar()
+        updateViews()
     }
 
     override fun viewDidDisappear() {
@@ -68,11 +70,11 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                     return@click alert("NET staking amount is too low")
                 }
 
-                val cpu = cpuValue.formatRounding(4, 4, ".")
-                val net = netValue.formatRounding(4, 4, ".")
+                val cpu = Balance(systemToken, cpuValue)
+                val net = Balance(systemToken, netValue)
                 val passcode = stake_passcode.text.toString()
 
-                Service.eos.stakeResources(model, "$cpu $systemToken", "$net $systemToken", passcode) { result ->
+                Service.eos.stakeResources(model, cpu.toString(), net.toString(), passcode) { result ->
                     result.onSuccess {
                         alert("Success!")
                         activity?.runOnUiThread {
@@ -92,22 +94,21 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
         title = "Stake Resources"
     }
 
-    private fun setupVM() {
-        stake_resources_view.accountName = accountVM?.name
-        accountVM?.delegate = this
-        accountVM?.updateBalance()
-    }
-
-    override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
-        activity?.runOnUiThread {
-            updateViews()
-        }
-    }
-
     private fun updateViews() {
-        val eosBalance = accountVM?.balanceString(currency = systemToken) ?: "$systemToken 0.0000"
-        stake_avail.text = "${eosBalance} available"
-        stake_currency.text = systemToken
-        stake_currency_2.text = systemToken
+        stake_currency.text = systemToken.symbol
+        stake_currency_2.text = systemToken.symbol
+        stake_resources_view.accountName = accountVM?.name
+        accountVM?.name?.let {
+            Service.eos.getBalance(it, listOf(systemToken)) { response ->
+                activity?.runOnUiThread {
+                    stake_avail.text = if (it.isNotEmpty()) {
+                        "${response.first()} available"
+                    }
+                    else {
+                        "${Balance(systemToken, 0.0)} available"
+                    }
+                }
+            }
+        }
     }
 }
