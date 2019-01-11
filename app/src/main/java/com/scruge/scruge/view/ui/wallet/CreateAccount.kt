@@ -50,6 +50,9 @@ class CreateAccountFragment: NavigationFragment() {
         val passcode = wallet_create_password.text.toString()
         val confirm = wallet_create_confirm.text.toString()
 
+        if (!Service.wallet.hasAccount)
+            return alert("Generate keypair first")
+
         if (name.isBlank())
             return alert("Enter new account name")
 
@@ -61,10 +64,6 @@ class CreateAccountFragment: NavigationFragment() {
 
         if (passcode != confirm)
             return alert("Passwords do not match")
-
-        // todo refactor to view model
-
-        // todo check if key exists
 
         Service.wallet.createKey(passcode) { account ->
             val publicKey = account?.rawPublicKey ?: return@createKey alert(WalletError.unknown)

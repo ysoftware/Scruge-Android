@@ -43,7 +43,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
         }
     }
 
-    private var id:Int
+    private var id:Int? = null
 
     var isSubscribed:Boolean = false
         private set(value) {
@@ -73,7 +73,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
     // SETUP
 
     init {
-        id = model?.id ?: 0 // todo this should be fixed
+        id = model?.id
     }
 
     constructor(id:Int) : this(null) {
@@ -208,6 +208,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
     }
 
     fun reloadData() {
+        val id = this.id ?: return
         Service.api.getCampaign(id) { result ->
             isBacker = false
             isSubscribed = false

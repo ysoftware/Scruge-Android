@@ -27,12 +27,11 @@ class KeyStore {
         return File(directory, key)
     }
 
-    private fun getCrypto(passcode: String): Crypto {
+    private fun getCrypto(publicKey:String, passcode: String): Crypto {
         /// FIXME: SECURITY CHECK REQUIRED
         val keychain = PasswordGeneratedKeyChain(CryptoConfig.KEY_256)
         keychain.setPassword(passcode)
-        // todo use public key to create salt?
-        keychain.salt = byteArrayOf(55, 12, 24, 17, 99, 1, 111, 5, 117, 21, 54, 94, 12, 12, 12, 14)
+        keychain.salt = publicKey.toByteArray()
         keychain.generate()
         return AndroidConceal.get().createDefaultCrypto(keychain)
     }
@@ -50,8 +49,8 @@ class KeyStore {
     }
 
     fun storeKey(key: EosPrivateKey, passcode: String): Boolean {
-        val crypto = getCrypto(passcode)
         val rawPublicKey = key.publicKey.toString()
+        val crypto = getCrypto(rawPublicKey, passcode)
         val bytes = key.bytes
         if (!crypto.isAvailable) {
             return false
@@ -72,7 +71,7 @@ class KeyStore {
 
     fun retrieveKey(passcode: String): EosPrivateKey? {
         val rawPublicKey = getAccount()?.rawPublicKey ?: return null
-        val crypto = getCrypto(passcode)
+        val crypto = getCrypto(rawPublicKey, passcode)
         if (!crypto.isAvailable) {
             return null
         }
