@@ -47,13 +47,8 @@ class ProfileFragment: NavigationFragment(), ViewModelDelegate {
     }
 
     private fun setupActions() {
-        profile_signout.setOnClickListener {
-            Service.tokenManager.removeToken()
-            (activity as? TabbarActivity)?.selectTab(0)
-        }
-
-        profile_edit.setOnClickListener {
-            Service.presenter.presentProfileEditFragment(this, vm)
+        profile_settings.setOnClickListener {
+            Service.presenter.presentSettingsFragment(this, vm)
         }
     }
 

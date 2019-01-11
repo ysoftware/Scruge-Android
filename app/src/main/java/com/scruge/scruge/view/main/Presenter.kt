@@ -239,6 +239,12 @@ class Presenter {
 
     // OTHER
 
+    fun presentSettingsFragment(fragment: NavigationFragment, vm:ProfileVM) {
+        val fr = SettingsFragment()
+        fr.profileVM = vm
+        fragment.navigationController?.navigateTo(fr)
+    }
+
     fun presentBrowser(fragment: NavigationFragment, url: String, title:String = "Preview") {
         val new = BrowserFragment()
         new.title = title

@@ -55,6 +55,10 @@ class NavigationController(private val manager: FragmentManager, val containerId
         updateViews()
     }
 
+    fun popToRoot() {
+        rootFragment?.let { replaceRoot(it) }
+    }
+
     fun replaceTop(fragment: Fragment) {
         if (navigateBack()) {
             navigateTo(fragment)

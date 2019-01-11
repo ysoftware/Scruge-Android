@@ -50,9 +50,6 @@ class CreateAccountFragment: NavigationFragment() {
         val passcode = wallet_create_password.text.toString()
         val confirm = wallet_create_confirm.text.toString()
 
-        if (!Service.wallet.hasAccount)
-            return alert("Generate keypair first")
-
         if (name.isBlank())
             return alert("Enter new account name")
 
