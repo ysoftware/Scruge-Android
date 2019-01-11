@@ -19,6 +19,9 @@ interface BackendApi {
     @POST("auth/login")
     fun login(@Body request: AuthRequest): Call<ResponseBody>
 
+    @POST("auth/reset_password")
+    fun resetPassword(@Body request: LoginRequest): Call<ResponseBody>
+
     @POST("auth/register")
     fun signUp(@Body request: AuthRequest): Call<ResponseBody>
 

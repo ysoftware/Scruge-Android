@@ -78,6 +78,10 @@ class Api {
 
     // AUTH
 
+    fun resetPassword(email:String, completion: (Result<ResultResponse>) -> Unit) {
+        service.resetPassword(LoginRequest(email)).enqueue(completion)
+    }
+
     fun login(email: String, password: String, completion: (Result<LoginResponse>) -> Unit) {
         service.login(AuthRequest(email, password)).enqueue(completion)
     }

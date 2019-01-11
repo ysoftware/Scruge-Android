@@ -16,8 +16,11 @@ data class ProfileResponse(val profile: Profile)
 
 data class EmailRequest(val email:String)
 
+data class LoginRequest(val login:String)
+
 data class AuthRequest(val login:String, val password:String) {
-    var device = "Android ${Build.VERSION.RELEASE}"
+    val device = "Android ${Build.VERSION.RELEASE}"
+    val pushNotificationToken = ""
 }
 
 data class ProfileRequest(val name:String, val country:String, val description:String)
