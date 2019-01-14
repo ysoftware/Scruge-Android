@@ -4,16 +4,13 @@ import android.content.Context
 import com.facebook.android.crypto.keychain.AndroidConceal
 import com.facebook.crypto.Crypto
 import com.facebook.crypto.CryptoConfig
-import com.facebook.android.crypto.keychain.SharedPrefsBackedKeyChain
 import com.facebook.crypto.Entity
 import com.scruge.scruge.support.App
 import java.io.File
 import android.content.ContextWrapper
-import com.facebook.crypto.keychain.KeyChain
-import com.facebook.crypto.keygen.PasswordBasedKeyDerivation
 import com.memtrip.eos.core.crypto.EosPrivateKey
 import com.memtrip.eos.core.crypto.EosPublicKey
-import java.security.PrivateKey
+import kotlin.random.Random
 
 class KeyStore {
 
@@ -27,11 +24,11 @@ class KeyStore {
         return File(directory, key)
     }
 
-    private fun getCrypto(publicKey:String, passcode: String): Crypto {
+    private fun getCrypto(passcode: String, salt:String): Crypto {
         /// FIXME: SECURITY CHECK REQUIRED
         val keychain = PasswordGeneratedKeyChain(CryptoConfig.KEY_256)
         keychain.setPassword(passcode)
-        keychain.salt = publicKey.toByteArray()
+        keychain.salt = salt.toByteArray()
         keychain.generate()
         return AndroidConceal.get().createDefaultCrypto(keychain)
     }
@@ -50,14 +47,13 @@ class KeyStore {
 
     fun storeKey(key: EosPrivateKey, passcode: String): Boolean {
         val rawPublicKey = key.publicKey.toString()
-        val crypto = getCrypto(rawPublicKey, passcode)
-        val bytes = key.bytes
-        if (!crypto.isAvailable) {
-            return false
-        }
+        val salt = randomString(16)
+
+        val crypto = getCrypto(passcode, salt)
+        if (!crypto.isAvailable) { return false }
 
         val encrypted = try {
-            crypto.encrypt(bytes, entity)
+            crypto.encrypt(key.bytes, entity)
         }
         catch (ex:Exception) {
             ex.printStackTrace()
@@ -65,13 +61,18 @@ class KeyStore {
         }
 
         file(rawPublicKey).writeBytes(encrypted)
+        file("iv_$rawPublicKey").writeText(salt)
         keychain.edit().putString(SharedKey, rawPublicKey).apply()
         return true
     }
 
     fun retrieveKey(passcode: String): EosPrivateKey? {
         val rawPublicKey = getAccount()?.rawPublicKey ?: return null
-        val crypto = getCrypto(rawPublicKey, passcode)
+
+        val salt = file("iv_$rawPublicKey").readText()
+        if (salt.length != 16) { return null }
+
+        val crypto = getCrypto(passcode, salt)
         if (!crypto.isAvailable) {
             return null
         }
@@ -90,6 +91,15 @@ class KeyStore {
     fun deleteAccount() {
         val rawPublicKey = getAccount()?.publicKey?.toString() ?: return
         keychain.edit().remove(SharedKey).apply()
+        file("iv_$rawPublicKey").delete()
         file(rawPublicKey).delete()
+    }
+
+    private fun randomString(length:Int): String {
+        val charPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+                .toCharArray().map { it.toString() }
+        return (1..length).map { Random.nextInt(0, charPool.size) }
+                .joinToString("", transform = charPool::get)
+
     }
 }

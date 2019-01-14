@@ -60,6 +60,10 @@ dependencies {
     implementation 'com.github.josinSbazin:android_ExpandableLayout:0.5'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
+    // firebase
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+
+
     // eos
     implementation ("com.memtrip.eos-jvm:eos-core:1.0.0-alpha26") {
         exclude group: "com.lambdaworks", module: "scrypt"
@@ -83,3 +87,5 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
+
+apply plugin: 'com.google.gms.google-services'

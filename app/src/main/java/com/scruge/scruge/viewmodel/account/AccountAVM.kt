@@ -33,6 +33,7 @@ class AccountAVM : SimpleArrayViewModel<AccountModel, AccountVM>() {
 
     fun deleteWallet() {
         Service.wallet.deleteWallet()
+        Service.settings.remove(Settings.Setting.selectedAccount)
         Handler().postDelayed({ reloadData() }, 400)
     }
 }
