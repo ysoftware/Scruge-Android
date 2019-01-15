@@ -12,6 +12,7 @@ import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.dependencies.view.setHidden
+import com.scruge.scruge.model.error.EOSError
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.eos.EosName
@@ -96,7 +97,7 @@ class CreateAccountFragment: NavigationFragment() {
         if (name.length != 12)
             return alert("New account name should be exactly 12 symbols long")
 
-        val eosName = name.toEosName() ?: return alert("Incorrect name")
+        val eosName = name.toEosName() ?: return alert(EOSError.incorrectName)
 
         privateKey?.let {
 

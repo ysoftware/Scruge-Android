@@ -9,6 +9,7 @@ import android.content.DialogInterface
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.RelativeLayout
+import com.scruge.scruge.model.error.ErrorHandler
 
 // alert
 
@@ -28,7 +29,7 @@ fun Fragment.alert(error:Throwable) {
 }
 
 fun Fragment.alert(error:ScrugeError) {
-    alert(error.toString())
+    alert(ErrorHandler.message(error))
 }
 
 // ask
