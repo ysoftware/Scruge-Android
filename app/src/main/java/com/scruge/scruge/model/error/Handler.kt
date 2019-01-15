@@ -19,7 +19,7 @@ class ErrorHandler {
                 return when (it) {
                     incorrectEmailLength -> "Email should be longer than 5 and shorter than 254 symbols."
                     incorrectPasswordLength -> "Password should be longer than 5 and shorter than 50 symbols."
-                    noToken, invalidToken, userNotFound -> "Authentication failed. Please try signing in again."
+                    noToken, invalidToken, userNotFound -> "This action requires authentication. Please, sign in with your Scruge account."
                     invalidEmail -> "Incorrectly formatted email"
                     accountBlocked -> "This account was blocked"
                     accountExists -> "User already exists"
