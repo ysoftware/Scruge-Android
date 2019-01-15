@@ -9,6 +9,7 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.Api
@@ -74,6 +75,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 val net = Balance(systemToken, netValue)
                 val passcode = stake_passcode.text.toString()
 
+                hideKeyboard()
                 Service.eos.stakeResources(model, cpu.toString(), net.toString(), passcode) { result ->
                     result.onSuccess {
                         alert("Success!")

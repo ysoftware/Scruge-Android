@@ -33,12 +33,12 @@ class WalletNoAccountFragment: NavigationFragment() {
 
     override fun onPause() {
         super.onPause()
-        wallet_no_accounts_data.lock()
+        wallet_no_accounts_data?.lock()
     }
 
     override fun viewDidDisappear() {
         super.viewDidDisappear()
-        wallet_no_accounts_data.lock()
+        wallet_no_accounts_data?.lock()
     }
 
     private fun setupViews() {

@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.Settings
@@ -90,6 +91,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
             val memo = transfer_memo.text.toString()
             val passcode = transfer_passcode.text.toString()
 
+            hideKeyboard()
             Service.eos.sendMoney(account, recipient, amount, token, memo, passcode) { result ->
                 result.onSuccess {
                     alert("Transaction was successful") {

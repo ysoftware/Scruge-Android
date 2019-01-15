@@ -10,6 +10,7 @@ import com.memtrip.eos.core.crypto.EosPublicKey
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.dependencies.view.setHidden
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
@@ -109,11 +110,14 @@ class CreateAccountFragment: NavigationFragment() {
     }
 
     private fun createAccount(name:String, publicKey:String) {
+        hideKeyboard()
         Service.api.createAccount(name, publicKey) { result ->
             result.onSuccess {
                 ErrorHandler.error(it.result)?.let {
-                    alert(it)
-                } ?: Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 1000)
+                    return@onSuccess alert(it)
+                }
+                alert("Your account have been created.\n\nMake sure to save your private key in a safe place!\n\nIf you lose the key, your account will be lost forever!")
+                Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 1000)
             }.onFailure {
                 alert(ErrorHandler.message(it))
             }

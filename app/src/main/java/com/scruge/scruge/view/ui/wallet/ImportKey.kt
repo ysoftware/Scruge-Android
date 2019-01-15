@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.services.Service
 import kotlinx.android.synthetic.main.fragment_wallet_import.*
 
@@ -57,6 +58,7 @@ class ImportKeyFragment: NavigationFragment() {
         if (passcode.isEmpty())
             return alert("Enter your new passcode")
 
+        hideKeyboard()
         Service.wallet.deleteWallet()
 
         Service.wallet.importKey(key, passcode) { account ->
