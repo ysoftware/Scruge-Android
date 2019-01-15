@@ -2,6 +2,7 @@ package com.scruge.scruge.services.api
 
 import android.net.Uri
 import android.util.Log
+import com.memtrip.eos.core.crypto.EosPublicKey
 import com.scruge.scruge.dependencies.serialization.toMap
 import com.scruge.scruge.model.entity.Campaign
 import com.scruge.scruge.model.entity.Comment
@@ -10,6 +11,7 @@ import com.scruge.scruge.model.error.AuthError
 import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
+import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.services.eos.Token
 import com.scruge.scruge.services.network.enqueue
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
@@ -56,9 +58,9 @@ class Api {
 
     // WALLET
 
-    fun createAccount(accountName: String, publicKey: String, completion: (Result<ResultResponse>) -> Unit) {
+    fun createAccount(accountName: EosName, publicKey: EosPublicKey, completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
-            service.createAccount(it, AccountRequest(accountName, publicKey)).enqueue(completion)
+            service.createAccount(it, AccountRequest(accountName.toString(), publicKey.toString())).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))
     }
 

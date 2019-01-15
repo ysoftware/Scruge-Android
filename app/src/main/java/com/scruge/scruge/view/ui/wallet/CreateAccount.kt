@@ -13,8 +13,9 @@ import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.dependencies.view.setHidden
 import com.scruge.scruge.model.error.ErrorHandler
-import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.eos.EosName
+import com.scruge.scruge.services.eos.toEosName
 import kotlinx.android.synthetic.main.fragment_wallet_create.*
 
 class CreateAccountFragment: NavigationFragment() {
@@ -39,7 +40,7 @@ class CreateAccountFragment: NavigationFragment() {
     private fun setupViews() {
         wallet_create_save.title = "REGISTER"
         val generate = "Generate a new keypair and we will use it to create a new EOS account for you."
-        val imported = "Use the imported key to create a new EOS account."
+        val imported = "Use the imported publicKey to create a new EOS account."
 
         wallet_create_password_view.setHidden(Service.wallet.hasAccount)
         wallet_create_confirm_view.setHidden(Service.wallet.hasAccount)
@@ -56,8 +57,8 @@ class CreateAccountFragment: NavigationFragment() {
         title = "Create EOS Account"
     }
 
-    private lateinit var key:EosPublicKey
-    private var privateKey:EosPrivateKey? = null // null if key was imported earlier
+    private lateinit var publicKey:EosPublicKey
+    private var privateKey:EosPrivateKey? = null // null if publicKey was imported earlier
 
     // METHODS
 
@@ -66,7 +67,7 @@ class CreateAccountFragment: NavigationFragment() {
         wallet_create_shuffle.setHidden(account != null)
 
         if (account != null) {
-            key = account.publicKey
+            publicKey = account.publicKey
             showKey()
         }
         else {
@@ -75,12 +76,12 @@ class CreateAccountFragment: NavigationFragment() {
     }
 
     private fun showKey() {
-        wallet_create_key.text = "Public key:\n$key"
+        wallet_create_key.text = "Public publicKey:\n$publicKey"
     }
 
     private fun newKeypair() {
         privateKey = EosPrivateKey()
-        key = privateKey!!.publicKey
+        publicKey = privateKey!!.publicKey
         showKey()
     }
 
@@ -93,7 +94,9 @@ class CreateAccountFragment: NavigationFragment() {
             return alert("Enter new account name")
 
         if (name.length != 12)
-            return alert("Account name should be exactly 12 symbols long")
+            return alert("New account name should be exactly 12 symbols long")
+
+        val eosName = name.toEosName() ?: return alert("Incorrect name")
 
         privateKey?.let {
 
@@ -103,20 +106,20 @@ class CreateAccountFragment: NavigationFragment() {
 
             Service.wallet.importKey(it.toString(), passcode) {
                 if (it != null) {
-                    createAccount(name, it.rawPublicKey)
+                    createAccount(eosName, it.publicKey)
                 }
             }
-        } ?: createAccount(name, key.toString())
+        } ?: createAccount(eosName, publicKey)
     }
 
-    private fun createAccount(name:String, publicKey:String) {
+    private fun createAccount(name:EosName, publicKey:EosPublicKey) {
         hideKeyboard()
         Service.api.createAccount(name, publicKey) { result ->
             result.onSuccess {
                 ErrorHandler.error(it.result)?.let {
                     return@onSuccess alert(it)
                 }
-                alert("Your account have been created.\n\nMake sure to save your private key in a safe place!\n\nIf you lose the key, your account will be lost forever!")
+                alert("Your account have been created.\n\nMake sure to save your private publicKey in a safe place!\n\nIf you lose the publicKey, your account will be lost forever!")
                 Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 1000)
             }.onFailure {
                 alert(ErrorHandler.message(it))
