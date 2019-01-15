@@ -99,6 +99,9 @@ class CreateAccountFragment: NavigationFragment() {
 
         val eosName = name.toEosName() ?: return alert(EOSError.incorrectName)
 
+        if (name.contains("."))
+            return alert("We can not create an account name that contains a dot")
+
         privateKey?.let {
 
             if (passcode.isEmpty()) return alert("Enter your new passcode")
