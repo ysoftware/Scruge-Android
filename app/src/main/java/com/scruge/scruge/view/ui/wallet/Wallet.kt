@@ -50,6 +50,11 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         setupVM()
     }
 
+    override fun onPause() {
+        super.onPause()
+        wallet_data_view.lock()
+    }
+
     override fun viewDidDisappear() {
         super.viewDidDisappear()
         wallet_data_view?.lock()

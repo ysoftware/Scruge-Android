@@ -12,13 +12,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:orientation="vertical"
-            android:padding="30dp">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
                 android:fontFamily="@font/regular"
                 android:text="The key you imported does not have access to any EOS accounts.
 
@@ -31,7 +32,9 @@ We can create a free account for you."
                 android:id="@+id/wallet_no_accounts_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"/>
 
 
             <LinearLayout
@@ -42,7 +45,37 @@ We can create a free account for you."
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/regular"
+                    android:text="Want to export this key?"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp"/>
+
+                <Button
+                    android:id="@+id/wallet_no_accounts_export"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/medium"
+                    android:text="See wallet data"
+                    android:textAllCaps="false"
+                    android:textColor="@color/purple"
+                    android:textSize="16sp"/>
+
+                <com.scruge.scruge.view.views.WalletData
+                    android:id="@+id/wallet_no_accounts_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/regular"
                     android:text="Want to import different key?"
                     android:textAlignment="center"
@@ -65,6 +98,7 @@ We can create a free account for you."
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
                     android:fontFamily="@font/regular"
                     android:text="All sensitive information is protected
 and follows the privacy policy"

@@ -94,13 +94,12 @@ class CreateAccountFragment: NavigationFragment() {
         if (name.length != 12)
             return alert("Account name should be exactly 12 symbols long")
 
-        if (passcode.isEmpty())
-            return alert("Enter your new passcode")
-
-        if (passcode != confirm)
-            return alert("Passwords do not match")
-
         privateKey?.let {
+
+            if (passcode.isEmpty()) return alert("Enter your new passcode")
+
+            if (passcode != confirm) return alert("Passwords do not match")
+
             Service.wallet.importKey(it.toString(), passcode) {
                 if (it != null) {
                     createAccount(name, it.rawPublicKey)
