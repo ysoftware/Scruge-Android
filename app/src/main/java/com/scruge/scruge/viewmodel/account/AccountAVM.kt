@@ -29,7 +29,7 @@ class AccountAVM : SimpleArrayViewModel<AccountModel, AccountVM>() {
 
     val selectedAccount:AccountVM? get() =
         Service.settings.get<String>(Settings.Setting.selectedAccount)
-            ?.let { selected -> array.firstOrNull { it.name == selected }}
+            ?.let { selected -> array.firstOrNull { it.displayName == selected }}
 
     fun deleteWallet() {
         Service.wallet.deleteWallet()

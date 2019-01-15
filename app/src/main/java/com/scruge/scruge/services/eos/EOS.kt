@@ -34,7 +34,7 @@ class EOS {
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
 
-    val contractAccount = "testaccount1"
+    val contractAccount = EosName.from("testaccount1")!!
 
     private val testNodeUrl = "http://35.242.241.205:7777"
 
@@ -70,8 +70,8 @@ class EOS {
         })
     }
 
-    fun getResources(account:String, completion: (Result<Resources>)->Unit) {
-        service.chain.getAccount(AccountName(account))
+    fun getResources(account:EosName, completion: (Result<Resources>)->Unit) {
+        service.chain.getAccount(AccountName(account.toString()))
                 .doOnError {
                     completion(Result.failure(it))
                 }
@@ -87,10 +87,10 @@ class EOS {
                 })
     }
 
-    fun getActions(account:String,
+    fun getActions(account:EosName,
                    query: ActionsQuery?,
                    completion: (Result<List<HistoricAccountAction>>)->Unit) {
-        val params = GetActions(account, query?.position, query?.offset)
+        val params = GetActions(account.toString(), query?.position, query?.offset)
         service.history.getActions(params)
                 .doOnError {
                     completion(Result.failure(it))
@@ -111,7 +111,7 @@ class EOS {
                 })
     }
 
-    fun getBalance(account:String,
+    fun getBalance(account:EosName,
                    tokens:List<Token>,
                    requestAll:Boolean = false,
                    completion: (List<Balance>) -> Unit) {
@@ -121,7 +121,7 @@ class EOS {
 
         tokens.distinct().forEach { token ->
             val sym = if (requestAll) null else token.symbol
-            service.chain.getCurrencyBalance(GetCurrencyBalance(token.contract, account, sym))
+            service.chain.getCurrencyBalance(GetCurrencyBalance(token.contract, account.toString(), sym))
                     .doOnError {
                         completion(listOf())
                     }
@@ -164,7 +164,7 @@ class EOS {
     }
 
     fun sendMoney(account: AccountModel,
-                  recipient:String,
+                  recipient:EosName,
                   amount:Double,
                   token:Token,
                   memo:String,
@@ -176,15 +176,15 @@ class EOS {
             return@getTransactionContext completion(Result.failure(WalletError.incorrectPasscode.wrap()))
 
             val quantity = Balance(token, amount).toString()
-            val args = TransferChain.Args(account.name, recipient, quantity, memo)
+            val args = TransferChain.Args(account.name, recipient.toString(), quantity, memo)
 
             TransferChain(service.chain).transfer(token.contract, args, context)
                     .subscribe(completion)
         }
     }
 
-    fun <M:AbiConvertible>sendAction(action:String,
-                                     contract:String = contractAccount,
+    fun <M:AbiConvertible>sendAction(action:EosName,
+                                     contract:EosName = contractAccount,
                                      account:AccountModel,
                                      data:M,
                                      passcode:String,
@@ -196,7 +196,7 @@ class EOS {
                 return@getTransactionContext
             }
 
-            Action(service.chain).push(contract, action, data, permission, context)
+            Action(service.chain).push(contract.toString(), action.toString(), data, permission, context)
                     .subscribe(completion)
         }
     }

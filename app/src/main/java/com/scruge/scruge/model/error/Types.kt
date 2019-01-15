@@ -32,6 +32,8 @@ enum class AuthError:ScrugeError {
 
 enum class EOSError:ScrugeError {
 
+    incorrectName,
+
     overdrawnBalance, // TO-DO: use this maybe?
 
     unknown,

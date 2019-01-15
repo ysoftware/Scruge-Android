@@ -99,11 +99,12 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
     private fun updateViews() {
         stake_currency.text = systemToken.symbol
         stake_currency_2.text = systemToken.symbol
-        stake_resources_view.accountName = accountVM?.name
+        stake_resources_view.accountName = accountVM?.displayName
+
         accountVM?.name?.let {
             Service.eos.getBalance(it, listOf(systemToken)) { response ->
                 activity?.runOnUiThread {
-                    stake_avail.text = if (it.isNotEmpty()) {
+                    stake_avail.text = if (it.toString().isNotEmpty()) {
                         "${response.first()} available"
                     }
                     else {

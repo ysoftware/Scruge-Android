@@ -37,7 +37,7 @@ class WalletPickerActivity: AppCompatActivity(), ArrayViewModelDelegate {
         wallet_select_done.setOnClickListener {
             val index = adapter.selected
             val item = if (vm.numberOfItems > index && index != -1) vm.item(index) else null
-            item?.let { Service.settings.set(Settings.Setting.selectedAccount, it.name) }
+            item?.let { Service.settings.set(Settings.Setting.selectedAccount, it.displayName) }
             setResult(0)
             finish()
         }
@@ -74,7 +74,7 @@ class WalletPickerActivity: AppCompatActivity(), ArrayViewModelDelegate {
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             fun setup(vm: AccountVM, selected: Boolean) {
-                itemView.account_name.text = vm.name
+                itemView.account_name.text = vm.displayName
                 itemView.account_checkmark_image.visibility = if (selected) View.VISIBLE else View.GONE
                 itemView.account_checkmark.setBackgroundResource(
                         if (selected) R.drawable.checkmark_selected else R.drawable.checkmark_unselected)

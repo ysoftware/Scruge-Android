@@ -115,14 +115,14 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         wallet_transactions_container.setOnClickListener {
             collapseAll(wallet_transactions_view)
             if (!wallet_transactions_view.toggleHidden()) {
-                wallet_transactions_view.accountName = vm.selectedAccount?.name
+                wallet_transactions_view.accountName = vm.selectedAccount?.displayName
             }
         }
 
         wallet_resources_container.setOnClickListener {
             collapseAll(wallet_resources_view)
             if (!wallet_resources_view.toggleHidden()) {
-                wallet_resources_view.accountName = vm.selectedAccount?.name
+                wallet_resources_view.accountName = vm.selectedAccount?.displayName
             }
         }
 
@@ -144,7 +144,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     private fun updateView() {
-        wallet_account_name.text = accountVM?.name ?: ""
+        wallet_account_name.text = accountVM?.displayName ?: ""
         wallet_balance.text = accountVM?.balanceString() ?: ""
     }
 
@@ -191,7 +191,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         if (vm.isEmpty()) { return }
 
         if (vm.numberOfItems == 1) {
-            Service.settings.set(Settings.Setting.selectedAccount, vm.item(0).name)
+            Service.settings.set(Settings.Setting.selectedAccount, vm.item(0).displayName)
             vm.reloadData()
             return
         }

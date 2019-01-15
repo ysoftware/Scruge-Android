@@ -12,9 +12,11 @@ import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.model.entity.Balance
+import com.scruge.scruge.model.error.EOSError
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.Settings
 import com.scruge.scruge.services.eos.Token
+import com.scruge.scruge.services.eos.toEosName
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.account.AccountVM
 import com.ysoftware.mvvm.array.ArrayViewModelDelegate
@@ -68,6 +70,12 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
 
         transfer_button.click {
             val i = transfer_spinner.selectedItemPosition
+
+            val token = balances[i].token
+            val name = transfer_receiver.text.toString().toEosName()
+            val memo = transfer_memo.text.toString()
+            val passcode = transfer_passcode.text.toString()
+
             if (balances.size < i) {
                 alert("Error occured. Select correct token to transfer")
                 if (balances.isNotEmpty()) {
@@ -86,10 +94,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
             val account = accountVM?.model
                     ?: return@click alert("An error occured")
 
-            val token = balances[i].token
-            val recipient = transfer_receiver.text.toString()
-            val memo = transfer_memo.text.toString()
-            val passcode = transfer_passcode.text.toString()
+            val recipient = name ?: return@click alert(EOSError.incorrectName)
 
             hideKeyboard()
             Service.eos.sendMoney(account, recipient, amount, token, memo, passcode) { result ->
@@ -107,9 +112,10 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
     private fun setupViews() {
         transfer_button.title = "Transfer"
 
-        val account = accountVM?.name ?: return
-        transfer_account_name.text = account
+        val account = accountVM ?: return
+        transfer_account_name.text = account.displayName
 
+        val eosName = account.name ?: return
         Service.api.getDefaultTokens { result ->
 
             val otherTokens = result.getOrNull() ?: listOf()
@@ -117,7 +123,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
                     Service.settings.get<Set<String>>(Settings.Setting.userTokens)?.map { Token(it) } ?: listOf()
             val list = Token.default + userTokens.toList() + otherTokens
 
-            Service.eos.getBalance(account, list, requestAll = true) { response ->
+            Service.eos.getBalance(eosName, list, requestAll = true) { response ->
                 balances = response.filter { it.amount != 0.0 }.distinct()
 
                 activity?.runOnUiThread {

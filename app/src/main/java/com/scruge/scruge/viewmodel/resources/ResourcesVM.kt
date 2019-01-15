@@ -3,6 +3,7 @@ package com.scruge.scruge.viewmodel.resources
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.Resources
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.eos.toEosName
 import com.ysoftware.mvvm.single.ViewModel
 
 class ResourcesVM : ViewModel<Resources>(null) {
@@ -16,7 +17,8 @@ class ResourcesVM : ViewModel<Resources>(null) {
             return notifyUpdated()
         }
 
-        Service.eos.getResources(name) { result ->
+        val eosName = name.toEosName() ?: return
+        Service.eos.getResources(eosName) { result ->
             result.onSuccess {
                 model = result.getOrNull()
                 notifyUpdated()
