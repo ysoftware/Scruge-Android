@@ -87,7 +87,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/regular"
                 android:text="Don't have an EOS account?"
                 android:textAlignment="center"

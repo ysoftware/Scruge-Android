@@ -56,7 +56,7 @@ class Api {
 
     // WALLET
 
-    fun createAccount(accountName: String, publicKey: String, completion: (Result<LoginResponse>) -> Unit) {
+    fun createAccount(accountName: String, publicKey: String, completion: (Result<ResultResponse>) -> Unit) {
         Service.tokenManager.getToken()?.let {
             service.createAccount(it, AccountRequest(accountName, publicKey)).enqueue(completion)
         } ?: completion(Result.failure(AuthError.noToken.wrap()))

@@ -86,6 +86,8 @@ class LoginFragment: NavigationFragment() {
                 hideKeyboard()
                 (activity as? AuthActivity)?.didLogIn = true
                 activity?.finish()
+            }.onFailure {
+                alert(it)
             }
         }
     }

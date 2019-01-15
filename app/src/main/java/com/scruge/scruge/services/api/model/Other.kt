@@ -2,7 +2,7 @@ package com.scruge.scruge.services.api.model
 
 // request
 
-data class AccountRequest(val accountName:String, val publicKey:String)
+data class AccountRequest(val name:String, val publicKey:String)
 
 // response
 

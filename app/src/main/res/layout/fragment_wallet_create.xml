@@ -17,7 +17,18 @@
             android:orientation="vertical"
             android:padding="15dp">
 
+            <TextView
+                android:id="@+id/create_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/regular"
+                android:text="We will generate a new keypair, save it with your password and create a new EOS account."
+                android:textAlignment="center"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
             <RelativeLayout
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@color/field_background">
@@ -48,6 +59,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/wallet_create_password_view"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="5dp"
@@ -67,7 +79,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/regular"
-                    android:hint="New password"
+                    android:hint="New wallet password"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingStart="45dp"
@@ -79,6 +91,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/wallet_create_confirm_view"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="5dp"
@@ -98,7 +111,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/regular"
-                    android:hint="Confirm password"
+                    android:hint="Confirm wallet password"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingStart="45dp"
@@ -109,6 +122,32 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/wallet_create_key"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/regular"
+                android:text="Public key:
+EOSrandompublickey123"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:textAlignment="center"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/wallet_create_shuffle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/medium"
+                android:text="Generate new key"
+                android:textAllCaps="false"
+                android:textColor="@color/purple"
+                android:textSize="16sp"/>
+
             <com.scruge.scruge.view.views.ButtonView
                 android:id="@+id/wallet_create_save"
                 android:layout_width="match_parent"
@@ -118,7 +157,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/regular"
                 android:text="Already have an EOS account?"
                 android:textAlignment="center"

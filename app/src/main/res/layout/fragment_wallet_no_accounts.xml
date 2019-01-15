@@ -20,17 +20,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="The key you imported does not have access to any EOS accounts"
+                android:text="The key you imported does not have access to any EOS accounts.
+
+We can create a free account for you."
                 android:textAlignment="center"
                 android:textColor="@color/text_regular"
                 android:textSize="18sp"/>
-
 
             <com.scruge.scruge.view.views.ButtonView
                 android:id="@+id/wallet_no_accounts_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"/>
+                android:layout_marginTop="30dp"/>
 
 
             <LinearLayout
@@ -43,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
                     android:fontFamily="@font/regular"
-                    android:text="Want to add another key?"
+                    android:text="Want to import different key?"
                     android:textAlignment="center"
                     android:textColor="@color/text_gray"
                     android:textSize="14sp"/>

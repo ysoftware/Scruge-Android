@@ -78,6 +78,8 @@ class RegisterFragment: NavigationFragment() {
                 (activity as? AuthActivity)?.didLogIn = true
                 hideKeyboard()
                 Service.presenter.presentProfileSetupFragment(this)
+            }.onFailure {
+                alert(it)
             }
         }
     }

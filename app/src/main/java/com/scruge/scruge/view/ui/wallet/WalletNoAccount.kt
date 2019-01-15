@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.ask
 import com.scruge.scruge.services.Service
 import kotlinx.android.synthetic.main.fragment_wallet_no_accounts.*
 
@@ -37,10 +39,20 @@ class WalletNoAccountFragment: NavigationFragment() {
 
     private fun setupActions() {
         wallet_no_accounts_remove.setOnClickListener {
-            Service.wallet.deleteWallet()
-            Service.presenter.replaceWithImportKeyFragment(this)
+            val t = "Are you sure to delete your wallet information?"
+            val q = "Make sure to export your private key first because there is no way it can be retrieved later."
+
+            ask(t, q) { r ->
+                if (r) {
+                    Service.wallet.deleteWallet()
+                    Service.presenter.replaceWithImportKeyFragment(this)
+                }
+            }
         }
         wallet_no_accounts_button.click {
+            if (!Service.tokenManager.hasToken) {
+                return@click alert("Please sign in with your Scruge account first.")
+            }
             Service.presenter.presentCreateAccountFragment(this)
         }
     }

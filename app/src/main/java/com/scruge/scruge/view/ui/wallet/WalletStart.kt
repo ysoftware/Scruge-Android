@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.services.Service
 import kotlinx.android.synthetic.main.fragment_wallet_start.*
 
@@ -37,6 +38,9 @@ class WalletStartFragment: NavigationFragment() {
 
     private fun setupActions() {
         wallet_start_create.setOnClickListener {
+            if (!Service.tokenManager.hasToken) {
+                return@setOnClickListener alert("Please sign in with your Scruge account first.")
+            }
             Service.presenter.presentCreateAccountFragment(this)
         }
         wallet_start_button.click {
