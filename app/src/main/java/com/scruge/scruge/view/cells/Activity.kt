@@ -3,8 +3,11 @@ package com.scruge.scruge.view.cells
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.dependencies.dataformatting.dateToRelative
+import com.scruge.scruge.dependencies.view.setHidden
+import com.scruge.scruge.model.entity.ActivityType
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.model.entity.Voting
+import com.scruge.scruge.viewmodel.activity.ActivityVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import kotlinx.android.synthetic.main.cell_activity.view.*
 import kotlinx.android.synthetic.main.cell_activity_vote.view.*
@@ -30,33 +33,67 @@ class VoteNotificationCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 class ActivityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-    private lateinit var vm:UpdateVM
+    private lateinit var vm:ActivityVM
 
-    fun setup(vm: UpdateVM):ActivityViewHolder {
+    fun setup(vm: ActivityVM):ActivityViewHolder {
         this.vm = vm
 
-        itemView.cell_activity_date.text = vm.date
-        itemView.cell_activity_title.text = vm.title
-        itemView.cell_activity_text.text = vm.description
-        // todo image?
+        val date:String
+        val title:String
+        var title2:String? = null
+        val description:String
 
-        itemView.cell_activity_campaign.text = "${vm.campaignTitle}  posted an update"
+        when (vm.type) {
+            ActivityType.reply -> {
+                date = vm.replyDate
+                title = "${vm.replyAuthorName} replied to your comment"
+                description = vm.replyText
+            }
+            ActivityType.update -> {
+                date = vm.updateDate
+                title = vm.updateTitle
+                title2 = vm.updateCampaignTitle
+                description = vm.updateDescription
+            }
+            ActivityType.voting -> {
+                date = vm.votingDate
+                title = vm.votingTitle
+                description = vm.votingDescription
+            }
+            ActivityType.fundingInfo -> {
+                date = ""
+                title = ""
+                description = ""
+            }
+        }
+
+        itemView.cell_activity_image.setImageResource(vm.icon)
+        itemView.cell_activity_image_view.setBackgroundResource(vm.color)
+        itemView.cell_activity_date.text = date
+        itemView.cell_activity_title.text = title
+        itemView.cell_activity_text.text = description
+        itemView.cell_activity_campaign.text = title2
+        itemView.cell_activity_campaign.setHidden(title2 == null)
+        // todo image?
 
         return this
     }
 
     fun showDecor(isFirst:Boolean, isLast:Boolean):ActivityViewHolder {
-//        itemView.activity_first_cell_decor.visibility = if (isLast) View.GONE else View.VISIBLE
-//        itemView.activity_last_cell_decor.visibility = if (isFirst) View.GONE else View.VISIBLE
+        // top
+        itemView.activity_first_cell_decor.visibility = if (isLast) View.GONE else View.VISIBLE
+
+        // bottom
+        itemView.activity_last_cell_decor.visibility = if (isFirst) View.GONE else View.VISIBLE
         return this
     }
 
-    fun campaignTap(tap:(UpdateVM)->Unit):ActivityViewHolder {
+    fun campaignTap(tap:(ActivityVM)->Unit):ActivityViewHolder {
         itemView.cell_activity_campaign.setOnClickListener { tap(vm) }
         return this
     }
 
-    fun activityTap(tap:(UpdateVM)->Unit):ActivityViewHolder {
+    fun activityTap(tap:(ActivityVM)->Unit):ActivityViewHolder {
         itemView.cell_activity_view.setOnClickListener { tap(vm) }
         return this
     }

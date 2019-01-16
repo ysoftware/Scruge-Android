@@ -80,7 +80,7 @@ interface BackendApi {
     @GET("campaign/{campaignId}/updates")
     fun getUpdateList(@Path("campaignId") campaignId:Int): Call<ResponseBody>
 
-    @GET("user/{token}/campaign_updates")
+    @GET("user/{token}/activity")
     fun getActivity(@Path("token") token:String): Call<ResponseBody>
 
     @GET("user/{token}/votes")

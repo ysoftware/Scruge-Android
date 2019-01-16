@@ -8,7 +8,7 @@ import com.ysoftware.mvvm.array.SimpleArrayViewModel
 class UpdateAVM(val source:Source): SimpleArrayViewModel<Update, UpdateVM>() {
 
     enum class Source {
-        campaign, activity;
+        campaign;
 
         var campaignObject: Campaign? = null
     }
@@ -23,17 +23,6 @@ class UpdateAVM(val source:Source): SimpleArrayViewModel<Update, UpdateVM>() {
             Source.campaign -> {
                 Service.api.getUpdateList(source.campaignObject!!) { result ->
                     block(result.map { it.updates.map { UpdateVM(it) }})
-                }
-            }
-            Source.activity -> {
-                Service.api.getActivity { result ->
-                    block(result.map {
-                        it.updates.map { activity ->
-                            val update = activity.update
-                            update.campaignInfo = activity.campaign
-                            UpdateVM(update)
-                        }
-                    })
                 }
             }
         }

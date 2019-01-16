@@ -15,6 +15,7 @@ import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.cells.ActivityViewHolder
 import com.scruge.scruge.view.cells.VoteNotificationCell
 import com.scruge.scruge.view.main.TabbarActivity
+import com.scruge.scruge.viewmodel.activity.ActivityAVM
 import com.scruge.scruge.viewmodel.update.UpdateAVM
 import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
@@ -25,7 +26,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
     // PROPERTIES
 
     private var activeVoting:List<Voting> = listOf()
-    private val vm = UpdateAVM(UpdateAVM.Source.activity)
+    private val vm = ActivityAVM()
     private val adapter = Adapter(this)
     private val handler = ArrayViewModelUpdateHandler(adapter)
 
@@ -144,7 +145,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
                             // open update or something else
                         }
                         .campaignTap {
-                            Service.presenter.presentCampaignFragment(fr, item.campaignId)
+//                            Service.presenter.presentCampaignFragment(fr, item.campaignId)
                         }
             }
         }

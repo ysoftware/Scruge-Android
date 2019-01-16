@@ -13,7 +13,6 @@ import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
 import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.services.eos.Token
-import com.scruge.scruge.services.network.enqueue
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
 import com.scruge.scruge.viewmodel.comment.CommentQuery
 import com.scruge.scruge.viewmodel.comment.CommentSource

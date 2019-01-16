@@ -26,7 +26,7 @@ class App: Application() {
     }
 
     private fun setupApp() {
-        Service.api.environment = Api.Environment.test
+        Service.api.environment = Api.Environment.prod
         SoLoader.init(this, false)
 
         Service.settings.get<String>(Settings.Setting.nodeUrl)?.let {

@@ -35,8 +35,6 @@ class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
 
     fun updateViews() {
         makeSecure(false)
-
-        unlocked = false
         wallet_data_private_key.text = "5••••••••••••••••••••••••••••••••••••••••••••••••••"
 
         wallet = Service.wallet.getAccount()
@@ -61,7 +59,6 @@ class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
                     input?.let {
                         wallet.retrievePrivateKey(input) { key ->
                             key?.let {
-                                unlocked = true
                                 makeSecure(true)
 
                                 wallet_data_private_key.text = it.toString()
@@ -83,6 +80,7 @@ class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
     }
 
     private fun makeSecure(value:Boolean) {
+        unlocked = value
         val flags = if (value) WindowManager.LayoutParams.FLAG_SECURE else 0
         (context as? Activity)?.window?.setFlags(flags, WindowManager.LayoutParams.FLAG_SECURE)
     }

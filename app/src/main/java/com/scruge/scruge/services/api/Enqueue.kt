@@ -1,18 +1,15 @@
-package com.scruge.scruge.services.network
+package com.scruge.scruge.services.api
 
-import android.util.Log
 import com.google.gson.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.google.gson.internal.LinkedTreeMap
 import com.scruge.scruge.model.error.*
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.api.model.ActivityListResponse
 import com.scruge.scruge.services.api.model.ResultResponse
 import java.lang.Exception
-import java.lang.reflect.Type
-import java.util.*
 
 fun <T> callback(fn: (Throwable?, Response<T>?) -> Unit): Callback<T> {
     return object : Callback<T> {
@@ -22,7 +19,7 @@ fun <T> callback(fn: (Throwable?, Response<T>?) -> Unit): Callback<T> {
 }
 
 inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Result<T>) -> Unit) {
-    enqueue(callback { t:Throwable?, r:Response<ResponseBody>? ->
+    enqueue(callback { t: Throwable?, r: Response<ResponseBody>? ->
         r?.let {
             val gson = Gson()
             val body = it.body()?.string()
@@ -49,10 +46,15 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Resul
             }
 
             // try parsing response to T
-            val obj:T
+            val obj: T
 
             try {
-                obj = gson.fromJson(body, T::class.java)
+                obj = if (T::class.java == ActivityListResponse::class.java) {
+                    CustomParser.parseActivityListResponse(body) as T
+                }
+                else {
+                    gson.fromJson(body, T::class.java)
+                }
             }
             catch (exception: Exception) {
                 completion(Result.failure(BackendError.parsingError.wrap()))
@@ -70,7 +72,7 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Resul
         }
         t?.let {
             Service.api.log(t.localizedMessage)
-            completion(Result.failure((ErrorHandler.error(t) ?: NetworkingError.unknown).wrap() ))
+            completion(Result.failure((ErrorHandler.error(t) ?: NetworkingError.unknown).wrap()))
         }
     })
 }
