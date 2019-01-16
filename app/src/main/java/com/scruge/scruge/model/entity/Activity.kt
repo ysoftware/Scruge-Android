@@ -2,22 +2,6 @@ package com.scruge.scruge.model.entity
 
 interface ActivityModel:Comparable<ActivityModel> { val type:String }
 
-enum class ActivityType {
-    reply, update, voting, fundingInfo;
-
-    companion object {
-
-        fun from(string: String?): ActivityType {
-            return when (string) {
-                "Reply" -> reply
-                "Update" -> update
-                "Voting" -> voting
-                else -> update // todo add others
-            }
-        }
-    }
-}
-
 // todo if needed, this should be changed
 fun compareTo(t:ActivityModel, other: ActivityModel): Int = compareValuesBy(t, other) { it.type }
 

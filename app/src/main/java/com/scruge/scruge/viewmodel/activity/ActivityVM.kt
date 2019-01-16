@@ -4,9 +4,24 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.datePresent
 import com.scruge.scruge.model.entity.ActivityModel
 import com.scruge.scruge.model.entity.ActivityReply
-import com.scruge.scruge.model.entity.ActivityType
 import com.scruge.scruge.model.entity.ActivityUpdate
 import com.ysoftware.mvvm.single.ViewModel
+
+enum class ActivityType {
+    reply, update, voting, fundingInfo;
+
+    companion object {
+
+        fun from(string: String?): ActivityType {
+            return when (string) {
+                "Reply" -> reply
+                "Update" -> update
+                "Voting" -> voting
+                else -> update // todo add others
+            }
+        }
+    }
+}
 
 class ActivityVM(model: ActivityModel?): ViewModel<ActivityModel>(model) {
 
