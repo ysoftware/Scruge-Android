@@ -4,11 +4,10 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.dependencies.dataformatting.dateToRelative
 import com.scruge.scruge.dependencies.view.setHidden
-import com.scruge.scruge.model.entity.ActivityType
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.model.entity.Voting
+import com.scruge.scruge.viewmodel.activity.ActivityType
 import com.scruge.scruge.viewmodel.activity.ActivityVM
-import com.scruge.scruge.viewmodel.update.UpdateVM
 import kotlinx.android.synthetic.main.cell_activity.view.*
 import kotlinx.android.synthetic.main.cell_activity_vote.view.*
 import java.util.*

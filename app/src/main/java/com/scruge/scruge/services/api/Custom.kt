@@ -10,6 +10,7 @@ import com.scruge.scruge.model.error.*
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.ActivityListResponse
 import com.scruge.scruge.services.api.model.ResultResponse
+import com.scruge.scruge.viewmodel.activity.ActivityType
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import retrofit2.Call

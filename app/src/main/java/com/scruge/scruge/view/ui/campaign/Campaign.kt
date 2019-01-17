@@ -31,7 +31,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
         about(4), faq(5), milestone(6), documents(7);
 
         companion object {
-            fun from(rawValue: Int):Block {
+            fun fromType(rawValue: Int):Block {
                 return when (rawValue) {
                     0 -> info
                     1 -> economies
@@ -43,6 +43,10 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                     7 -> documents
                     else -> info
                 }
+            }
+
+            fun fromPosition(fr:CampaignFragment, position:Int):Block {
+                return Block.values().filter { fr.shouldDisplay(it) }[position]
             }
         }
     }
@@ -230,7 +234,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val i = LayoutInflater.from(parent.context)
-            val block = Block.from(viewType)
+            val block = Block.fromType(viewType)
             return when (block) {
                 about -> AboutCell(i.inflate(R.layout.cell_about, parent, false))
                 info -> CampaignInfoCell(i.inflate(R.layout.cell_campaign_info, parent, false))
@@ -244,7 +248,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            val block = Block.from(position)
+            val block = Block.fromPosition(fr, position)
             when (block) {
                 about -> (holder as? AboutCell)?.setup(fr.vm)
                             ?.memberTap { member ->

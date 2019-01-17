@@ -116,7 +116,6 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
     // METHODS
 
-
     fun loadDescription(completion:((String)->Unit)) {
         val model = model ?: return completion("")
         Service.api.getCampaignContent(model) { result ->
