@@ -52,9 +52,7 @@ class EOS {
 
     fun getAccounts(wallet: LocalAccount, completion: (Result<List<String>>) -> Unit) {
         service.history.getKeyAccounts(GetKeyAccounts(wallet.rawPublicKey))
-                .doOnError {
-                    completion(Result.failure(it))
-                }
+                .doOnError { completion(Result.failure(it)) }
                 .subscribeOn(Schedulers.newThread())
                 .subscribe({ response ->
                     val accounts = response.body()?.account_names
@@ -72,9 +70,7 @@ class EOS {
 
     fun getResources(account:EosName, completion: (Result<Resources>)->Unit) {
         service.chain.getAccount(AccountName(account.toString()))
-                .doOnError {
-                    completion(Result.failure(it))
-                }
+                .doOnError { completion(Result.failure(it)) }
                 .subscribeOn(Schedulers.newThread())
                 .subscribe({ response ->
 
@@ -92,9 +88,7 @@ class EOS {
                    completion: (Result<List<HistoricAccountAction>>)->Unit) {
         val params = GetActions(account.toString(), query?.position, query?.offset)
         service.history.getActions(params)
-                .doOnError {
-                    completion(Result.failure(it))
-                }
+                .doOnError { completion(Result.failure(it)) }
                 .subscribeOn(Schedulers.newThread())
                 .subscribe({ response ->
                     response.body()?.actions?.let {
@@ -122,9 +116,7 @@ class EOS {
         tokens.distinct().forEach { token ->
             val sym = if (requestAll) null else token.symbol
             service.chain.getCurrencyBalance(GetCurrencyBalance(token.contract, account.toString(), sym))
-                    .doOnError {
-                        completion(listOf())
-                    }
+                    .doOnError { completion(listOf()) }
                     .subscribeOn(Schedulers.newThread())
                     .subscribe { response, _ ->
                         i += 1

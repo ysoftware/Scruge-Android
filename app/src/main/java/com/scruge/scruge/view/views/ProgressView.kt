@@ -50,21 +50,20 @@ class ProgressView(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
         needsLayout = false
 
         val progress = Math.max(0.01, Math.min(1.0, value / firstGoal))
-        val showLeftLabel = progress > 0.5
-        progress_current.setHidden(!showLeftLabel)
-        progress_current_right.setHidden(showLeftLabel)
+        val width = progress_bar_background.width
+        progress_bar_view.layoutParams.width = (width.toDouble() * progress).toInt()
+        progress_indicator.setHidden(reachedGoal)
 
         progress_current.text = "$prefix${value.formatDecimal(" ")}$suffix"
         progress_current_right.text = "$prefix${value.formatDecimal(" ")}$suffix"
-        progress_indicator.setHidden(reachedGoal)
-
-        // bar width
-        val width = progress_bar_background.width
-        progress_bar_view.layoutParams.width = (width.toDouble() * progress).toInt()
 
         if (mode == Mode.funding) {
+            val showLeftLabel = progress > 0.5
             progress_total.visibility = View.VISIBLE
             progress_total.text = "$prefix${total.formatDecimal(" ")}$suffix"
+
+            progress_current.setHidden(!showLeftLabel)
+            progress_current_right.setHidden(showLeftLabel)
 
             if (reachedGoal) {
                 progress_total.setTextColor(greenLight)
@@ -80,10 +79,8 @@ class ProgressView(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
             progress_indicator.setBackgroundColor(backColor)
             progress_bar_view.setBackgroundColor(tintColor)
 
-            if (!showLabels) {
-                progress_current.visibility = View.GONE
-                progress_current_right.visibility = View.GONE
-            }
+            progress_current.visibility = if (showLabels) View.VISIBLE else View.GONE
+            progress_current_right.visibility = if (showLabels) View.VISIBLE else View.GONE
         }
     }
 

@@ -205,6 +205,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
             accountVM = account
             accountVM?.delegate = this
             accountVM?.updateBalance()
+            collapseAll()
         }
         else {
             presentWalletPicker()

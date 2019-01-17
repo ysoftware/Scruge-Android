@@ -29,9 +29,9 @@ class ResourcesVM : ViewModel<Resources>(null) {
         }
     }
 
-    // strings
-
     private val data get() = model?.data
+
+    // strings
 
     val cpuWeight get() = data?.total_resources?.cpu_weight ?: ""
 
