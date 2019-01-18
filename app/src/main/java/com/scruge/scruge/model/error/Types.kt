@@ -38,6 +38,8 @@ enum class EOSError:ScrugeError {
 
     unknown,
 
+    incorrectToken,
+
     abiError
 }
 

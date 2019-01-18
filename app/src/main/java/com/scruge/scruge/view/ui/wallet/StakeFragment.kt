@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_staking.*
 class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
     private val systemToken = if (Service.eos.isMainNet) Token.EOS else Token.SYS
-    var accountVM: AccountVM? = null
+    lateinit var accountVM: AccountVM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -56,7 +56,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
         stake_button.title = "Send"
 
         stake_button.click {
-            accountVM?.model?.let { model ->
+            accountVM.model?.let { model ->
                 val cpuStr = stake_cpu_edit.text.toString()
                 val cpuString = if (cpuStr.isBlank()) "0" else cpuStr
                 val cpuValue = cpuString.toDoubleOrNull() ?: return@click alert("Incorrect CPU amount")
@@ -76,7 +76,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 val passcode = stake_passcode.text.toString()
 
                 hideKeyboard()
-                Service.eos.stakeResources(model, cpu.toString(), net.toString(), passcode) { result ->
+                Service.eos.stakeResources(model, cpu, net, passcode) { result ->
                     result.onSuccess {
                         alert("Success!")
                         activity?.runOnUiThread {

@@ -58,6 +58,7 @@ class ErrorHandler {
                     EOSError.unknown -> "Unknown error"
                     EOSError.abiError -> "Incorrect transaction format"
                     EOSError.incorrectName -> "Incorrect name: it can only contain letters, numbers from 1 to 5 and a dot"
+                    EOSError.incorrectToken -> "Incorrect token input"
                 }
             }
             return "Unexpected error"
