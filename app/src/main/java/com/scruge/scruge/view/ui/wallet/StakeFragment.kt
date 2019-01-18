@@ -53,7 +53,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
     private fun setupViews() {
         stake_resources_view.hideControls(true)
         stake_resources_view.hideRAM(true)
-        stake_button.title = "Send"
+        stake_button.title = "Send action"
 
         stake_button.click {
             accountVM.model?.let { model ->
@@ -71,6 +71,10 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                     return@click alert("NET staking amount is too low")
                 }
 
+                if (netValue == 0.0 && cpuValue == 0.0) {
+                    return@click alert("Incorrect staking amount")
+                }
+
                 val cpu = Balance(systemToken, cpuValue)
                 val net = Balance(systemToken, netValue)
                 val passcode = stake_passcode.text.toString()
@@ -78,7 +82,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 hideKeyboard()
                 Service.eos.stakeResources(model, cpu, net, passcode) { result ->
                     result.onSuccess {
-                        alert("Success!")
+                        alert("Transaction was successful")
                         activity?.runOnUiThread {
                             navigationController?.navigateBack()
                         }
@@ -99,9 +103,9 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
     private fun updateViews() {
         stake_currency.text = systemToken.symbol
         stake_currency_2.text = systemToken.symbol
-        stake_resources_view.accountName = accountVM?.displayName
+        stake_resources_view.accountName = accountVM.displayName
 
-        accountVM?.name?.let {
+        accountVM.name?.let {
             Service.eos.getBalance(it, listOf(systemToken)) { response ->
                 activity?.runOnUiThread {
                     stake_avail.text = if (it.toString().isNotEmpty()) {

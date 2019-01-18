@@ -3,12 +3,13 @@ package com.scruge.scruge.viewmodel.resources
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.Resources
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.services.eos.toEosName
 import com.ysoftware.mvvm.single.ViewModel
 
 class ResourcesVM : ViewModel<Resources>(null) {
 
-    var accountName:String? = null
+    var accountName: EosName? = null
 
     fun load() {
         val name = accountName
@@ -17,8 +18,7 @@ class ResourcesVM : ViewModel<Resources>(null) {
             return notifyUpdated()
         }
 
-        val eosName = name.toEosName() ?: return
-        Service.eos.getResources(eosName) { result ->
+        Service.eos.getResources(name) { result ->
             result.onSuccess {
                 model = result.getOrNull()
                 notifyUpdated()
@@ -30,6 +30,8 @@ class ResourcesVM : ViewModel<Resources>(null) {
     }
 
     private val data get() = model?.data
+
+    val displayName:String get() = accountName?.toString() ?: ""
 
     // strings
 
