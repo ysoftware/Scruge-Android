@@ -6,6 +6,8 @@ class EosName private constructor(private val string: String) {
 
     companion object {
 
+        fun create(name:String):EosName = from(name)!!
+
         fun from(name:String):EosName? = if (name.isValidEOSName()) EosName(name) else null
     }
 }

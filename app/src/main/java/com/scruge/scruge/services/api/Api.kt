@@ -74,7 +74,7 @@ class Api {
                           "hirevibeshvt HVT",
                           "goldioioioio FGIO",
                           "ethsidechain EETH")
-        completion(Result.success(list.map { Token(it) }))
+        completion(Result.success(list.mapNotNull { Token.from(it) }))
     }
 
     // AUTH

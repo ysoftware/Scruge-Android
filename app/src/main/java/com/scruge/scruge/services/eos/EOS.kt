@@ -115,7 +115,8 @@ class EOS {
 
         tokens.distinct().forEach { token ->
             val sym = if (requestAll) null else token.symbol
-            service.chain.getCurrencyBalance(GetCurrencyBalance(token.contract, account.toString(), sym))
+            val params = GetCurrencyBalance(token.contract.toString(), account.toString(), sym)
+            service.chain.getCurrencyBalance(params)
                     .doOnError { completion(listOf()) }
                     .subscribeOn(Schedulers.newThread())
                     .subscribe { response, _ ->
@@ -125,7 +126,7 @@ class EOS {
                         if (body != null) {
                             if (body.isNotEmpty()) {
                                 body.forEach {
-                                    balances.add(Balance(it, token.contract))
+                                    Balance.from(it, token.contract)?.let { balances.add(it) }
                                 }
                             }
                             else {
@@ -170,7 +171,7 @@ class EOS {
             val quantity = Balance(token, amount).toString()
             val args = TransferChain.Args(account.name, recipient.toString(), quantity, memo)
 
-            TransferChain(service.chain).transfer(token.contract, args, context)
+            TransferChain(service.chain).transfer(token.contract.toString(), args, context)
                     .subscribe(completion)
         }
     }

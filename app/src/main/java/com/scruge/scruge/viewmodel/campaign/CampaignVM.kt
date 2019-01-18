@@ -8,6 +8,7 @@ import com.scruge.scruge.services.Service
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ScrugeError
 import com.scruge.scruge.model.error.WalletError
+import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.services.eos.ScrugeVote
 import com.scruge.scruge.services.eos.Token
 import com.scruge.scruge.services.eos.toEosName
@@ -182,7 +183,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
                                       model.id,
                                       value)
 
-                Service.eos.sendAction("vote".toEosName()!!,
+                Service.eos.sendAction(EosName.create("vote"),
                                        account = account,
                                        data = data,
                                        passcode = passcode) { transactionResult ->

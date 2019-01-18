@@ -25,7 +25,7 @@ class AccountVM(model: AccountModel):ViewModel<AccountModel>(model) {
 
     fun updateBalance() {
         val name = name ?: return
-        Service.eos.getBalance(name, listOf(Token.EOS, Token.Scruge)) { balances ->
+        Service.eos.getBalance(name, Token.default) { balances ->
             this.balances = balances.sorted()
             notifyUpdated()
         }

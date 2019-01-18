@@ -33,22 +33,31 @@ data class ScrugeVote(val eosAccount:String,
     }
 }
 
-data class Token(val contract:String,
+data class Token(val contract:EosName,
                  val symbol:String) {
-
-    constructor(string: String) : this(string.split(" ")[0], string.split(" ")[1])
 
     override fun toString(): String = "$contract $symbol"
 
     companion object {
 
         // todo change on the main net
-        val Scruge = Token("eosio.token", "SCR")
+        val Scruge = Token(EosName.create("eosio.token"), "SCR")
 
-        val EOS = Token("eosio.token", "EOS")
+        val EOS = Token(EosName.create("eosio.token"), "EOS")
 
-        val SYS = Token("eosio.token", "SYS")
+        val SYS = Token(EosName.create("eosio.token"), "SYS")
 
-        val default get() = listOf(Scruge, SYS, EOS)
+        val default = listOf(Scruge, EOS)
+
+        fun from(string:String):Token? {
+            val array = string.split(" ")
+            if (array.size == 2) {
+                val contract = EosName.from(array[0])
+                if (contract != null) {
+                    return Token(contract, array[1])
+                }
+            }
+            return null
+        }
     }
 }

@@ -58,6 +58,7 @@
                         android:textSize="14sp"/>
 
                     <EditText
+                        android:hint="0.0000"
                         android:id="@+id/stake_cpu_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -111,6 +112,7 @@
 
                     <EditText
                         android:id="@+id/stake_net_edit"
+                        android:hint="0.0000"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -155,7 +157,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/regular"
-                    android:hint="Wallet password"
+                    android:hint="Wallet password…"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingBottom="5dp"

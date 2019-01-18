@@ -120,7 +120,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
 
             val otherTokens = result.getOrNull() ?: listOf()
             val userTokens =
-                    Service.settings.get<Set<String>>(Settings.Setting.userTokens)?.map { Token(it) } ?: listOf()
+                    Service.settings.get<Set<String>>(Settings.Setting.userTokens)?.mapNotNull { Token.from(it) } ?: listOf()
             val list = Token.default + userTokens.toList() + otherTokens
 
             Service.eos.getBalance(eosName, list, requestAll = true) { response ->
