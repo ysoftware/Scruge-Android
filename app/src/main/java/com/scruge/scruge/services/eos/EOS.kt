@@ -18,6 +18,7 @@ import com.scruge.scruge.model.error.EOSError
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.model.error.wrap
+import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.wallet.AccountModel
 import com.scruge.scruge.services.wallet.storage.LocalAccount
 import com.scruge.scruge.viewmodel.transaction.ActionsQuery
@@ -28,6 +29,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
 class EOS {
+
+    val systemToken = if (Service.eos.isMainNet) Token.EOS else Token.SYS
 
     private val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))

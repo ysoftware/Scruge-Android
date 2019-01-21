@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.fragment_staking.*
 
 class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
-    private val systemToken = if (Service.eos.isMainNet) Token.EOS else Token.SYS
     lateinit var accountVM: AccountVM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -74,7 +73,8 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 if (netValue == 0.0 && cpuValue == 0.0) {
                     return@click alert("Incorrect staking amount")
                 }
-
+                
+                val systemToken = Service.eos.systemToken
                 val cpu = Balance(systemToken, cpuValue)
                 val net = Balance(systemToken, netValue)
                 val passcode = stake_passcode.text.toString()
@@ -101,6 +101,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
     }
 
     private fun updateViews() {
+        val systemToken = Service.eos.systemToken
         stake_currency.text = systemToken.symbol
         stake_currency_2.text = systemToken.symbol
         stake_resources_view.accountName = accountVM.displayName
