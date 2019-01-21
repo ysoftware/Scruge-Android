@@ -115,9 +115,10 @@ class EOS {
 
         var i = 0
         val balances = arrayListOf<Balance>()
+        val requestTokens = tokens.distinctBy { if (requestAll) it.contract else it }
 
-        tokens.distinct().forEach { token ->
-            val sym = if (requestAll) null else token.symbol
+        requestTokens.forEach { token ->
+            val sym = if (!requestAll) token.symbol else null
             val params = GetCurrencyBalance(token.contract.toString(), account.toString(), sym)
             service.chain.getCurrencyBalance(params)
                     .doOnError { completion(listOf()) }
@@ -129,15 +130,28 @@ class EOS {
                         if (body != null) {
                             if (body.isNotEmpty()) {
                                 body.forEach {
-                                    Balance.from(it, token.contract)?.let { balances.add(it) }
+                                    Balance.from(it, token.contract)?.let {
+                                        if (requestAll || tokens.contains(it.token)) {
+                                            if (!balances.contains(it)) {
+                                                balances.add(it)
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             else {
-                                balances.add(Balance(token, 0.0))
+                                tokens.firstOrNull { it.contract == token.contract }?.let {
+                                    balances.add(Balance(it, 0.0))
+                                }
+                            }
+                        }
+                        else {
+                            tokens.firstOrNull { it.contract == token.contract }?.let {
+                                balances.add(Balance(it, 0.0))
                             }
                         }
 
-                        if (i == tokens.size) {
+                        if (i == requestTokens.size) {
                             completion(balances.sortedByDescending { it.amount })
                         }
                     }

@@ -25,4 +25,11 @@ data class Balance(val token: Token, val amount:Double): Comparable<Balance> {
             return null
         }
     }
+
+    override fun hashCode(): Int = token.hashCode()
+
+    override fun equals(other: Any?): Boolean {
+        if (other is Balance) { return token == other.token }
+        return super.equals(other)
+    }
 }

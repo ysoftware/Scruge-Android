@@ -15,6 +15,7 @@ import com.memtrip.eos.core.hex.DefaultHexWriter
 import com.memtrip.eos.http.rpc.ChainApi
 import com.memtrip.eos.http.rpc.model.transaction.response.TransactionCommitted
 import io.reactivex.Single
+import java.util.*
 import java.util.Arrays.asList
 
 @Abi
@@ -59,5 +60,12 @@ data class Token(val contract:EosName,
             }
             return null
         }
+    }
+
+    override fun hashCode(): Int = Objects.hash(contract, symbol)
+
+    override fun equals(other: Any?): Boolean {
+        if (other is Token) { return other.contract == contract && other.symbol == symbol  }
+        return super.equals(other)
     }
 }
