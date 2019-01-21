@@ -101,13 +101,6 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
         documentsVM = model?.let { model ->
             val documents = arrayListOf<Document>()
 
-            if (model.pitchUrl != null) {
-                documents.add(Document("Pitch", model.pitchUrl))
-            }
-            else {
-                val url = Service.api.serviceUrl + "campaign/${model.id}/content"
-                documents.add(Document("Pitch", url))
-            }
             model.documents?.let {
                 documents.addAll(it)
             }
@@ -152,10 +145,10 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
         Service.api.getUserId { userResult ->
             userResult.onSuccess {
+                val balance = Balance(Token.Scruge, amount)
                 Service.eos.sendMoney(account,
                                       Service.eos.contractAccount,
-                                      amount,
-                                      Token.Scruge,
+                                      balance,
                                       "${it.userId}-${model.id}",
                                       passcode) { transactionResult ->
                     transactionResult.onSuccess { transactionId ->

@@ -77,7 +77,7 @@ class CreateAccountFragment: NavigationFragment() {
     }
 
     private fun showKey() {
-        wallet_create_key.text = "Public publicKey:\n$publicKey"
+        wallet_create_key.text = "Public key:\n$publicKey"
     }
 
     private fun newKeypair() {

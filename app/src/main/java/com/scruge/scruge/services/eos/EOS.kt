@@ -140,7 +140,7 @@ class EOS {
                                 }
                             }
                             else {
-                                tokens.firstOrNull { it.contract == token.contract }?.let {
+                                tokens.firstOrNull { it == token }?.let {
                                     balances.add(Balance(it, 0.0))
                                 }
                             }

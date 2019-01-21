@@ -75,7 +75,7 @@ class ContributeFragment : NavigationFragment() {
                 contribute_info.text = "You have already contributed $$usd in this project"
                 contribute_info.visibility = if (it != 0.0) View.VISIBLE else View.GONE
                 return@loadAmountContributed
-            } ?: alert("Could not load information")
+            } ?: alert("You don't seem to have any transferable tokens")
         }
         contribute_title.text = "Investing in ${vm.title}"
     }

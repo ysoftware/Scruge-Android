@@ -136,7 +136,9 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
                 balances = response.filter { it.amount != 0.0 }.distinct()
 
                 if (balances.isEmpty()) {
-                    alert("Could not load your information")
+                    alert("You don't seem to have any transferable tokens") {
+                        navigationController?.navigateBack()
+                    }
                     return@getBalance
                 }
 
