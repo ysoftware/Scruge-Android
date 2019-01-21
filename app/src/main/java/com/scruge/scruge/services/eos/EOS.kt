@@ -181,8 +181,7 @@ class EOS {
 
     fun sendMoney(account: AccountModel,
                   recipient:EosName,
-                  amount:Double,
-                  token:Token,
+                  balance: Balance,
                   memo:String,
                   passcode:String,
                   completion:(Result<String>)->Unit) {
@@ -191,10 +190,9 @@ class EOS {
             val context = it ?:
             return@getTransactionContext completion(Result.failure(WalletError.incorrectPasscode.wrap()))
 
-            val quantity = Balance(token, amount).toString()
-            val args = TransferChain.Args(account.name, recipient.toString(), quantity, memo)
+            val args = TransferChain.Args(account.name, recipient.toString(), balance.toString(), memo)
 
-            TransferChain(service.chain).transfer(token.contract.toString(), args, context)
+            TransferChain(service.chain).transfer(balance.token.contract.toString(), args, context)
                     .subscribe(completion)
         }
     }

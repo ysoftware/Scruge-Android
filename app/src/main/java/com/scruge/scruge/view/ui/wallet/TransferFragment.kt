@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_wallet.*
 
 class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 
-    var accountVM: AccountVM? = null
+    lateinit var accountVM: AccountVM
     private var balances = listOf<Balance>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -69,15 +69,11 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
         }
 
         transfer_button.click {
+            hideKeyboard()
             val i = transfer_spinner.selectedItemPosition
 
-            val token = balances[i].token
-            val name = transfer_receiver.text.toString().toEosName()
-            val memo = transfer_memo.text.toString()
-            val passcode = transfer_passcode.text.toString()
-
-            if (balances.size < i) {
-                alert("Error occured. Select correct token to transfer")
+            if (balances.size <= i) {
+                alert("An error occured. Select correct token to transfer")
                 if (balances.isNotEmpty()) {
                     transfer_spinner.setSelection(0)
                     transfer_balance_label.text = balances[0].toString()
@@ -88,16 +84,30 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
                 return@click
             }
 
+            val token = balances[i].token
+            val name = transfer_receiver.text.toString()
+            val memo = transfer_memo.text.toString()
+            val passcode = transfer_passcode.text.toString()
+
             val amount = transfer_amount.text.toString().toDoubleOrNull()
                 ?: return@click alert("Incorrect amount value")
 
-            val account = accountVM?.model
+            val account = accountVM.model
                     ?: return@click alert("An error occured")
 
-            val recipient = name ?: return@click alert(EOSError.incorrectName)
+            val recipient = name.toEosName() ?: return@click alert(EOSError.incorrectName)
 
-            hideKeyboard()
-            Service.eos.sendMoney(account, recipient, amount, token, memo, passcode) { result ->
+            if (amount < 0.0001) {
+                return@click alert("Incorrect amount value")
+            }
+
+            if (passcode.isEmpty()) {
+                return@click alert("Enter your wallet password")
+            }
+
+
+            val balance = Balance(token, amount)
+            Service.eos.sendMoney(account, recipient, balance, memo, passcode) { result ->
                 result.onSuccess {
                     alert("Transaction was successful") {
                         navigationController?.navigateBack()
@@ -112,41 +122,38 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
     private fun setupViews() {
         transfer_button.title = "Transfer"
 
-        val account = accountVM ?: return
-        transfer_account_name.text = account.displayName
+        transfer_account_name.text = accountVM.displayName
 
-        val eosName = account.name ?: return
+        val eosName = accountVM.name ?: return
         Service.api.getDefaultTokens { result ->
 
             val otherTokens = result.getOrNull() ?: listOf()
-            val userTokens =
-                    Service.settings.get<Set<String>>(Settings.Setting.userTokens)?.mapNotNull { Token.from(it) } ?: listOf()
-            val list = Token.default + userTokens.toList() + otherTokens
+            val userTokens = Service.settings.get<Set<String>>(Settings.Setting.userTokens)?.toList()
+                    ?.mapNotNull { Token.from(it) } ?: listOf()
+            val list = Token.default + userTokens + otherTokens
 
             Service.eos.getBalance(eosName, list, requestAll = true) { response ->
                 balances = response.filter { it.amount != 0.0 }.distinct()
 
-                activity?.runOnUiThread {
-                    if (balances.isEmpty()) {
-                        alert("Could not load your information")
-                        return@runOnUiThread
-                    }
+                if (balances.isEmpty()) {
+                    alert("Could not load your information")
+                    return@getBalance
+                }
 
-                    val context = activity ?: return@runOnUiThread
-                    val adapter = ArrayAdapter(context,
-                                               android.R.layout.simple_spinner_dropdown_item,
+                val context = activity ?: return@getBalance
+
+                activity?.runOnUiThread {
+                    val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item,
                                                balances.map { it.token.symbol })
                     transfer_spinner.adapter = adapter
 
-                    activity?.runOnUiThread {
-                        // select eos or first element
-                        var i = balances.indexOfFirst { it.token == Token.EOS }
-                        if (i == -1) {
-                            i = 0
-                        }
-                        transfer_spinner.setSelection(i)
-                        transfer_balance_label.text = balances[i].toString()
+                    // select eos or first element
+                    var i = balances.indexOfFirst { it.token == Service.eos.systemToken }
+                    if (i == -1) {
+                        i = 0
                     }
+                    transfer_spinner.setSelection(i)
+                    transfer_balance_label.text = balances[i].toString()
                 }
             }
         }

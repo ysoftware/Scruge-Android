@@ -122,17 +122,18 @@
             android:layout_height="15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
-            android:src="@drawable/lock"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/clip"/>
 
         <EditText
-            android:id="@+id/transfer_passcode"
+            android:id="@+id/transfer_memo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
             android:fontFamily="@font/regular"
-            android:hint="Wallet password"
-            android:inputType="textPassword"
+            android:hint="Memo"
+            android:inputType="text"
             android:maxLines="1"
             android:paddingStart="45dp"
             android:paddingEnd="0dp"
@@ -153,18 +154,17 @@
             android:layout_height="15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/clip"/>
+            android:src="@drawable/lock"/>
 
         <EditText
-            android:id="@+id/transfer_memo"
+            android:id="@+id/transfer_passcode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
             android:fontFamily="@font/regular"
-            android:hint="Memo"
-            android:inputType="text"
+            android:hint="Wallet password"
+            android:inputType="textPassword"
             android:maxLines="1"
             android:paddingStart="45dp"
             android:paddingEnd="0dp"
