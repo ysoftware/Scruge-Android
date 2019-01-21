@@ -8,7 +8,10 @@ class EosName private constructor(private val string: String) {
 
         fun create(name: String): EosName = from(name)!!
 
-        fun from(name: String): EosName? = if (name.isValidEOSName()) EosName(name) else null
+        fun from(name: String): EosName? {
+            val string = name.trim()
+            return if (string.isValidEOSName()) EosName(string) else null
+        }
     }
 
     override fun equals(other: Any?): Boolean {
