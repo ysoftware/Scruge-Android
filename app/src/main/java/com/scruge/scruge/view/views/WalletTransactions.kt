@@ -10,6 +10,7 @@ import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.viewmodel.transaction.ActionVM
 import com.scruge.scruge.viewmodel.transaction.ActionsAVM
 import com.scruge.scruge.viewmodel.transaction.ActionsQuery
@@ -33,7 +34,7 @@ class WalletTransactionsView(context: Context, attrs: AttributeSet?, defStyleAtt
         recyclerView.adapter = adapter
     }
 
-    var accountName:String? = null
+    var accountName: EosName? = null
         set(value) {
             field = value
 

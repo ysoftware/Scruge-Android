@@ -115,14 +115,14 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         wallet_transactions_container.setOnClickListener {
             collapseAll(wallet_transactions_view)
             if (!wallet_transactions_view.toggleHidden()) {
-                wallet_transactions_view.accountName = vm.selectedAccount?.displayName
+                wallet_transactions_view.accountName = vm.selectedAccount?.name
             }
         }
 
         wallet_resources_container.setOnClickListener {
             collapseAll(wallet_resources_view)
             if (!wallet_resources_view.toggleHidden()) {
-                wallet_resources_view.accountName = vm.selectedAccount?.displayName
+                wallet_resources_view.accountName = vm.selectedAccount?.name
             }
         }
 

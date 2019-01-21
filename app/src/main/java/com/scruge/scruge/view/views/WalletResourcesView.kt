@@ -8,6 +8,7 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.view.setHidden
+import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.viewmodel.resources.ResourcesVM
 import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
@@ -54,7 +55,7 @@ class WalletResourcesView(context: Context, attrs: AttributeSet?, defStyleAttr: 
         res_ram_progress.backColor = ContextCompat.getColor(context, R.color.ram_background)
     }
 
-    var accountName: String? = null
+    var accountName: EosName? = null
         set(value) {
             field = value
             vm.accountName = value

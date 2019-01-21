@@ -132,17 +132,21 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
                         return@runOnUiThread
                     }
 
-                    // select eos or first element
-                    var i = balances.indexOfFirst { it.token == Token.EOS }
-                    if (i == -1) { i = 0 }
-                    transfer_spinner.setSelection(i)
-                    transfer_balance_label.text = balances[i].toString()
-
                     val context = activity ?: return@runOnUiThread
                     val adapter = ArrayAdapter(context,
                                                android.R.layout.simple_spinner_dropdown_item,
                                                balances.map { it.token.symbol })
                     transfer_spinner.adapter = adapter
+
+                    activity?.runOnUiThread {
+                        // select eos or first element
+                        var i = balances.indexOfFirst { it.token == Token.EOS }
+                        if (i == -1) {
+                            i = 0
+                        }
+                        transfer_spinner.setSelection(i)
+                        transfer_balance_label.text = balances[i].toString()
+                    }
                 }
             }
         }

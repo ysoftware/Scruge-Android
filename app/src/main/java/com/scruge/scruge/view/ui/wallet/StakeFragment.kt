@@ -73,7 +73,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 if (netValue == 0.0 && cpuValue == 0.0) {
                     return@click alert("Incorrect staking amount")
                 }
-                
+
                 val systemToken = Service.eos.systemToken
                 val cpu = Balance(systemToken, cpuValue)
                 val net = Balance(systemToken, netValue)
@@ -104,7 +104,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
         val systemToken = Service.eos.systemToken
         stake_currency.text = systemToken.symbol
         stake_currency_2.text = systemToken.symbol
-        stake_resources_view.accountName = accountVM.displayName
+        stake_resources_view.accountName = accountVM.name
 
         accountVM.name?.let {
             Service.eos.getBalance(it, listOf(systemToken)) { response ->

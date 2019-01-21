@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit
 
 class EOS {
 
-    val systemToken = if (Service.eos.isMainNet) Token.EOS else Token.SYS
+    val systemToken get() = if (Service.eos.isMainNet) Token.EOS else Token.SYS
 
     private val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
