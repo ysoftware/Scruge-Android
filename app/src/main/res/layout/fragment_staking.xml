@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:clipToPadding="false"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:orientation="vertical">
 
         <com.scruge.scruge.view.views.WalletResourcesView
             android:id="@+id/stake_resources_view"
@@ -22,6 +21,8 @@
             android:layout_height="wrap_content"/>
 
         <androidx.cardview.widget.CardView
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:id="@+id/edit_profile_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,6 +171,8 @@
         </androidx.cardview.widget.CardView>
 
         <com.scruge.scruge.view.views.ButtonView
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:id="@+id/stake_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
