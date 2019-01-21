@@ -95,7 +95,7 @@ class CreateAccountFragment: NavigationFragment() {
             return alert("Enter new account name")
 
         if (name.length != 12)
-            return alert("New account name should be exactly 12 symbols long")
+            return alert("New account name has to be exactly 12 symbols long")
 
         val eosName = name.toEosName() ?: return alert(EOSError.incorrectName)
 
@@ -112,12 +112,16 @@ class CreateAccountFragment: NavigationFragment() {
                 if (it != null) {
                     createAccount(eosName, it.publicKey)
                 }
+                else {
+                    alert("An error occured. Please try again")
+                }
             }
         } ?: createAccount(eosName, publicKey)
+
+        hideKeyboard()
     }
 
     private fun createAccount(name:EosName, publicKey:EosPublicKey) {
-        hideKeyboard()
         Service.api.createAccount(name, publicKey) { result ->
             result.onSuccess {
                 ErrorHandler.error(it.result)?.let {
