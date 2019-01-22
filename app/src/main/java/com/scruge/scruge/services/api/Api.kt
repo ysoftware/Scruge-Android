@@ -2,6 +2,8 @@ package com.scruge.scruge.services.api
 
 import android.net.Uri
 import android.util.Log
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import com.memtrip.eos.core.crypto.EosPublicKey
 import com.scruge.scruge.dependencies.serialization.toMap
 import com.scruge.scruge.model.entity.Campaign
@@ -28,7 +30,7 @@ import java.net.URI
 
 class Api {
 
-    var isLoggingEnabled = false
+    var isLoggingEnabled = true
     var logLimit = 2000
 
     enum class Environment(val url: String) {
@@ -84,11 +86,14 @@ class Api {
     }
 
     fun login(email: String, password: String, completion: (Result<LoginResponse>) -> Unit) {
-        service.login(AuthRequest(email, password)).enqueue(completion)
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
+            val token = it.result?.token
+            service.login(AuthRequest(email, password, token)).enqueue(completion)
+        }
     }
 
     fun signUp(email: String, password: String, completion: (Result<ResultResponse>) -> Unit) {
-        service.signUp(AuthRequest(email, password)).enqueue(completion)
+        service.signUp(RegisterRequest(email, password)).enqueue(completion)
     }
 
     fun checkEmail(email: String, completion: (Result<ResultResponse>) -> Unit) {

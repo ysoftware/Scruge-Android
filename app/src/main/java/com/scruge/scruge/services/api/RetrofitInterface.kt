@@ -23,7 +23,7 @@ interface BackendApi {
     fun resetPassword(@Body request: LoginRequest): Call<ResponseBody>
 
     @POST("auth/register")
-    fun signUp(@Body request: AuthRequest): Call<ResponseBody>
+    fun signUp(@Body request: RegisterRequest): Call<ResponseBody>
 
     @POST("auth/check_email")
     fun checkEmail(@Body request: EmailRequest): Call<ResponseBody>
