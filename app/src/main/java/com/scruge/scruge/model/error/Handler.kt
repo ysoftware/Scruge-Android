@@ -61,7 +61,7 @@ class ErrorHandler {
                     abiError -> "Incorrect transaction format"
                     incorrectName -> "Incorrect name: it can only contain letters, numbers from 1 to 5 and a dot"
                     incorrectToken -> "Incorrect token input"
-                    actionError -> "Server was unable to complete blockchain transaction"
+                    actionError -> "Server was unable to complete blockchain transaction, please try again"
                     notSupported -> "EOS: Not supported"
                 }
             }
