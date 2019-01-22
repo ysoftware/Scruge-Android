@@ -10,6 +10,8 @@ import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.askForInput
 import com.scruge.scruge.dependencies.view.hideKeyboard
+import com.scruge.scruge.model.error.AuthError
+import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.main.AuthActivity
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -51,20 +53,22 @@ class LoginFragment: NavigationFragment() {
         view?.setOnClickListener { hideKeyboard() }
         login_signup.setOnClickListener { Service.presenter.replaceWithRegisterFragment(this) }
         login_privacy.setOnClickListener { Service.presenter.presentPrivacyPolicy(this) }
+
         login_forgot.setOnClickListener {
             askForInput("Reset password", "Enter your email", "Your email address", false, "Send") { string ->
                 string?.let {
                     if (it.isValidEmail()) {
                         Service.api.resetPassword(string) {
                             it.onSuccess {
-                                alert("Check your email address for the letter with password recovery instructions.")
+                                    ErrorHandler.error(it.result)?.let { alert(it) }
+                                            ?: alert("Check your email address for the letter with password recovery instructions")
                             }.onFailure {
                                 alert(it)
                             }
                         }
                     }
                     else {
-                        alert("Invalid email format")
+                        alert(AuthError.invalidEmail)
                     }
                 }
             }
