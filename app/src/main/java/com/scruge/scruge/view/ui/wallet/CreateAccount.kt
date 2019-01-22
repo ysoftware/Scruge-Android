@@ -103,6 +103,10 @@ class CreateAccountFragment: NavigationFragment() {
     }
 
     private fun save() {
+        if (!Service.tokenManager.hasToken) {
+            return alert("Please sign in with your Scruge account first")
+        }
+        
         val name = wallet_create_name.text.toString()
         val passcode = wallet_create_password.text.toString()
         val confirm = wallet_create_confirm.text.toString()

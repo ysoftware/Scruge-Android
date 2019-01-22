@@ -36,7 +36,12 @@ class ImportKeyFragment: NavigationFragment() {
 
     private fun setupActions() {
         wallet_import_save.click { save() }
-        wallet_import_create.setOnClickListener { Service.presenter.replaceWithCreateAccountFragment(this) }
+        wallet_import_create.setOnClickListener {
+            if (!Service.tokenManager.hasToken) {
+                return@setOnClickListener alert("Please sign in with your Scruge account first")
+            }
+            Service.presenter.replaceWithCreateAccountFragment(this)
+        }
     }
 
     private fun setupNavigationBar() {

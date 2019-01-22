@@ -39,7 +39,7 @@ class WalletStartFragment: NavigationFragment() {
     private fun setupActions() {
         wallet_start_create.setOnClickListener {
             if (!Service.tokenManager.hasToken) {
-                return@setOnClickListener alert("Please sign in with your Scruge account first.")
+                return@setOnClickListener alert("Please sign in with your Scruge account first")
             }
             Service.presenter.presentCreateAccountFragment(this)
         }
