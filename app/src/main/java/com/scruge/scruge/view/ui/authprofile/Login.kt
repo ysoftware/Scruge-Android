@@ -55,7 +55,7 @@ class LoginFragment: NavigationFragment() {
         login_privacy.setOnClickListener { Service.presenter.presentPrivacyPolicy(this) }
 
         login_forgot.setOnClickListener {
-            askForInput("Reset password", "Enter your email", "Your email address", false, "Send") { string ->
+            askForInput("Reset password", "Enter your email", "Email…", false, "Send") { string ->
                 string?.let {
                     if (it.isValidEmail()) {
                         Service.api.resetPassword(string) {
