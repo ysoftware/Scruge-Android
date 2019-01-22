@@ -64,7 +64,7 @@ class WalletNoAccountFragment: NavigationFragment() {
             ask(t, q) { r ->
                 if (r) {
                     Service.wallet.deleteWallet()
-                    Service.presenter.replaceWithImportKeyFragment(this)
+                    Service.presenter.replaceWithWalletStartFragment(this)
                 }
             }
         }

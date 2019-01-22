@@ -47,7 +47,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/regular"
-                    android:hint="Account name"
+                    android:hint="Account name (12 symbols)"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingStart="45dp"

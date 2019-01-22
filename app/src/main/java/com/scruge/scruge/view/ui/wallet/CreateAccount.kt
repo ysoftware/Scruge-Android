@@ -10,6 +10,7 @@ import com.memtrip.eos.core.crypto.EosPublicKey
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.ask
 import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.dependencies.view.setHidden
 import com.scruge.scruge.model.error.EOSError
@@ -40,8 +41,8 @@ class CreateAccountFragment: NavigationFragment() {
 
     private fun setupViews() {
         wallet_create_save.title = "REGISTER"
-        val generate = "Generate a new keypair and we will use it to create a new EOS account for you."
-        val imported = "Use the imported publicKey to create a new EOS account."
+        val generate = "Generate a new keypair and we will use it to create a new EOS account for you"
+        val imported = "Use the imported key to create a new EOS account"
 
         wallet_create_password_view.setHidden(Service.wallet.hasAccount)
         wallet_create_confirm_view.setHidden(Service.wallet.hasAccount)
@@ -50,7 +51,22 @@ class CreateAccountFragment: NavigationFragment() {
 
     private fun setupActions() {
         wallet_create_save.click { save() }
-        wallet_create_import.setOnClickListener { Service.presenter.replaceWithImportKeyFragment(this) }
+        wallet_create_import.setOnClickListener {
+            val t = "Are you sure to delete your wallet information?"
+            val q = "Make sure to export your private key first because there is no way it can be retrieved later."
+
+            if (Service.wallet.hasAccount) {
+                ask(t, q) { r ->
+                    if (r) {
+                        Service.wallet.deleteWallet()
+                        Service.presenter.replaceWithWalletStartFragment(this)
+                    }
+                }
+            }
+            else {
+                Service.presenter.replaceWithImportKeyFragment(this)
+            }
+        }
         wallet_create_shuffle.setOnClickListener { newKeypair() }
     }
 
