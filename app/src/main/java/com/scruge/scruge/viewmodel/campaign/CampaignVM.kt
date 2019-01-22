@@ -1,6 +1,7 @@
 package com.scruge.scruge.viewmodel.campaign
 
 import android.net.Uri
+import com.scruge.scruge.dependencies.dataformatting.datePresent
 import com.scruge.scruge.dependencies.dataformatting.dateToRelative
 import com.scruge.scruge.model.entity.*
 import com.scruge.scruge.model.error.ErrorHandler
@@ -29,7 +30,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
     enum class Status(val value:Int) {
 
-        funding(0), milestone(1), activeVote(2), waiting(3), closed(4);
+        funding(0), milestone(1), activeVote(2), waiting(3), closed(4), preparing(100);
 
         companion object {
             fun fromValue(v:Int):Status {
@@ -39,6 +40,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
                     2 -> activeVote
                     3 -> waiting
                     4 -> closed
+                    100 -> preparing
                     else -> funding
                 }
             }
@@ -288,6 +290,8 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
     var faqVM: FaqAVM? = null; private set
 
     // PROPERTIES
+
+    val startDate:String get() = model?.startTimestamp?.let { datePresent(it, "MMMM d") } ?: ""
 
     val team:List<Member> get() = model?.team ?: listOf()
 

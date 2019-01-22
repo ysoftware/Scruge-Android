@@ -106,6 +106,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                         Service.presenter.presentVoteResultsFragment(this, vm)
                     }
                 }
+                else -> return@setOnClickListener
             }
         }
     }
@@ -158,6 +159,10 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                 else {
                     campaign_button.text = "Sign in to contribute"
                 }
+            }
+            CampaignVM.Status.preparing -> {
+                campaign_button.setBackgroundColor(resources.getColor(R.color.gray))
+                campaign_button.text = "Starts on ${vm.startDate}"
             }
             else -> showContributionButton(false)
         }
