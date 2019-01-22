@@ -2,6 +2,7 @@ package com.scruge.scruge.model.error
 
 import com.scruge.scruge.model.error.AuthError.*
 import com.scruge.scruge.model.error.BackendError.*
+import com.scruge.scruge.model.error.EOSError.*
 import com.scruge.scruge.model.error.NetworkingError.*
 import com.scruge.scruge.model.error.NetworkingError.unknown
 import com.scruge.scruge.model.error.WalletError.*
@@ -40,6 +41,7 @@ class ErrorHandler {
                     resourceNotFound -> "Nothing was found for this request"
                     parsingError -> "Unexpected server response"
                     BackendError.unknown -> "Unexpected server error"
+                    emailSendError -> "Unable to send email"
                 }
             }
             (error as? WalletError)?.let {
@@ -54,11 +56,13 @@ class ErrorHandler {
             }
             (error as? EOSError)?.let {
                 return when (it) {
-                    EOSError.overdrawnBalance -> "Overdrawn balance"
+                    overdrawnBalance -> "Overdrawn balance"
                     EOSError.unknown -> "Unknown error"
-                    EOSError.abiError -> "Incorrect transaction format"
-                    EOSError.incorrectName -> "Incorrect name: it can only contain letters, numbers from 1 to 5 and a dot"
-                    EOSError.incorrectToken -> "Incorrect token input"
+                    abiError -> "Incorrect transaction format"
+                    incorrectName -> "Incorrect name: it can only contain letters, numbers from 1 to 5 and a dot"
+                    incorrectToken -> "Incorrect token input"
+                    actionError -> "Server was unable to complete blockchain transaction"
+                    notSupported -> "EOS: Not supported"
                 }
             }
             return "Unexpected error"
@@ -78,16 +82,17 @@ class ErrorHandler {
         }
 
         fun error(result: Int): ScrugeError? {
-            if (result == 0) { return null }
-
             return when (result) {
+                0 -> null
+
+                // common
                 10 -> invalidToken
                 11 -> invalidResourceId
                 12 -> resourceNotFound
                 13 -> userNotFound
                 14 -> denied
 
-                // auth35.242.241.205
+                // auth
                 101 -> incorrectEmailLength
                 102 -> invalidEmail
                 103 -> incorrectPasswordLength
@@ -95,6 +100,11 @@ class ErrorHandler {
                 105 -> accountExists
                 106 -> incorrectCredentials
                 107 -> accountBlocked
+
+                // eos
+                501, 503 -> null
+                505 -> actionError
+                599 -> notSupported
 
                 // special
                 999 -> notImplemented

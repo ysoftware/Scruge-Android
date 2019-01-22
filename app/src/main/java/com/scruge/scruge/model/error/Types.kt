@@ -40,7 +40,11 @@ enum class EOSError:ScrugeError {
 
     incorrectToken,
 
-    abiError
+    abiError,
+
+    actionError,
+
+    notSupported
 }
 
 enum class BackendError:ScrugeError {
@@ -53,7 +57,9 @@ enum class BackendError:ScrugeError {
 
     notImplemented,
 
-    unknown
+    unknown,
+
+    emailSendError
 }
 
 enum class NetworkingError:ScrugeError {
