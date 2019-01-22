@@ -49,7 +49,7 @@ class RegisterFragment: NavigationFragment() {
         register_button.click { signUp() }
         view?.setOnClickListener { hideKeyboard() }
         register_login.setOnClickListener { Service.presenter.replaceWithLoginFragment(this) }
-        register_privacy.setOnClickListener { TODO("privacy") }
+        register_privacy.setOnClickListener { Service.presenter.presentPrivacyPolicy(this) }
     }
 
     private fun signUp() {

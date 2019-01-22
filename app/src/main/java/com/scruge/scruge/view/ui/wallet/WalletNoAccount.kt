@@ -50,6 +50,8 @@ class WalletNoAccountFragment: NavigationFragment() {
     }
 
     private fun setupActions() {
+        wallet_no_accounts_privacy.setOnClickListener { Service.presenter.presentPrivacyPolicy(this) }
+
         wallet_no_accounts_export.setOnClickListener {
             wallet_no_accounts_data.toggleHidden()
             wallet_no_accounts_data.updateViews()

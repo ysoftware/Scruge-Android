@@ -50,7 +50,7 @@ class LoginFragment: NavigationFragment() {
         login_button.click { login() }
         view?.setOnClickListener { hideKeyboard() }
         login_signup.setOnClickListener { Service.presenter.replaceWithRegisterFragment(this) }
-        login_privacy.setOnClickListener { TODO("privacy") }
+        login_privacy.setOnClickListener { Service.presenter.presentPrivacyPolicy(this) }
         login_forgot.setOnClickListener {
             askForInput("Reset password", "Enter your email", "Your email address", false, "Send") { string ->
                 string?.let {

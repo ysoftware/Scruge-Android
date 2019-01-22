@@ -37,14 +37,15 @@ class WalletStartFragment: NavigationFragment() {
     }
 
     private fun setupActions() {
+        wallet_start_privacy.setOnClickListener { Service.presenter.presentPrivacyPolicy(this) }
+        wallet_start_button.click { Service.presenter.presentImporKeyFragment(this) }
+
         wallet_start_create.setOnClickListener {
             if (!Service.tokenManager.hasToken) {
                 return@setOnClickListener alert("Please sign in with your Scruge account first")
             }
             Service.presenter.presentCreateAccountFragment(this)
         }
-        wallet_start_button.click {
-            Service.presenter.presentImporKeyFragment(this)
-        }
+
     }
 }

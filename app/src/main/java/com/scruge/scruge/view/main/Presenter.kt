@@ -27,6 +27,7 @@ import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.theartofdev.edmodo.cropper.CropImage
 import com.scruge.scruge.viewmodel.faq.FaqVM
 import com.scruge.scruge.viewmodel.milestone.MilestoneVM
+import java.net.URL
 
 class Presenter {
 
@@ -238,6 +239,11 @@ class Presenter {
     }
 
     // OTHER
+
+    fun presentPrivacyPolicy(fragment: NavigationFragment) {
+        val url = "https://scruge.world/privacy"
+        presentBrowser(fragment, url, "Privacy policy")
+    }
 
     fun presentSettingsFragment(fragment: NavigationFragment, vm:ProfileVM) {
         val fr = SettingsFragment()
