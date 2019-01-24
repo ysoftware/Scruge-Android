@@ -4,7 +4,9 @@ interface ScrugeError
 
 enum class GeneralError:ScrugeError {
 
-    unknown
+    unknown;
+
+    var code:Int = 0
 }
 
 enum class AuthError:ScrugeError {
@@ -44,7 +46,9 @@ enum class EOSError:ScrugeError {
 
     actionError,
 
-    notSupported
+    notSupported,
+
+    eosAccountExists
 }
 
 enum class BackendError:ScrugeError {
@@ -59,7 +63,11 @@ enum class BackendError:ScrugeError {
 
     unknown,
 
-    emailSendError
+    emailSendError,
+
+    paramsConflict,
+
+    replyNotSupported
 }
 
 enum class NetworkingError:ScrugeError {

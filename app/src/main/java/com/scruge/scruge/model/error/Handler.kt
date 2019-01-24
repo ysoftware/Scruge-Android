@@ -42,6 +42,8 @@ class ErrorHandler {
                     parsingError -> "Unexpected server response"
                     BackendError.unknown -> "Unexpected server error"
                     emailSendError -> "Unable to send email"
+                    paramsConflict -> "Parameters conflict with each other"
+                    replyNotSupported -> "Replying to this is not allowed"
                 }
             }
             (error as? WalletError)?.let {
@@ -63,6 +65,12 @@ class ErrorHandler {
                     incorrectToken -> "Incorrect token input"
                     actionError -> "Server was unable to complete blockchain transaction, please try again"
                     notSupported -> "EOS: Not supported"
+                    eosAccountExists -> "EOS account with this name already exists"
+                }
+            }
+            (error as? GeneralError)?.let {
+                if (it.code != 0) {
+                    return "Error ${it.code}"
                 }
             }
             return "Unexpected error"
@@ -91,6 +99,8 @@ class ErrorHandler {
                 12 -> resourceNotFound
                 13 -> userNotFound
                 14 -> denied
+                15 -> paramsConflict
+                16 -> replyNotSupported
 
                 // auth
                 101 -> incorrectEmailLength
@@ -102,13 +112,18 @@ class ErrorHandler {
                 107 -> accountBlocked
 
                 // eos
-                501, 503 -> null
+                501 -> incorrectName
+                502 -> eosAccountExists
                 505 -> actionError
                 599 -> notSupported
 
                 // special
                 999 -> notImplemented
-                else -> unknown
+                else -> {
+                    val error = GeneralError.unknown
+                    error.code = result
+                    error
+                }
             }
         }
     }
