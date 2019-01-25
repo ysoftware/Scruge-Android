@@ -4,7 +4,7 @@ import com.ysoftware.mvvm.array.Query
 
 class ActionsQuery:Query {
 
-    private val batchSize = 10
+    private val batchSize = 30
 
     var position:Long = -1
 

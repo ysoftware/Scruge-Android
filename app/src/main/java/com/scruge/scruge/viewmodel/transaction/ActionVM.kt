@@ -85,7 +85,7 @@ class ActionVM(model: ActionReceipt?) : ViewModel<ActionReceipt>(model) {
         if (type == ActionType.other) {
             return type.otherObject.data.toString()  // todo parse
         }
-        else if (type == ActionType.sent || type == ActionType.transfer || type == ActionType.received) {
+        else if (model.data.action_trace.act.name == "transfer") {
             if (type.transferObj.memo.isNotBlank()) {
                 return type.transferObj.memo
             }
