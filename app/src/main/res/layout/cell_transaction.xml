@@ -25,20 +25,30 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:fontFamily="@font/regular"
-            android:text="Private key"
+            android:text="21/05/02 15:03"
             android:textColor="@color/text_gray"
             android:textSize="14sp"/>
 
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/cell_action_details"
+        android:id="@+id/cell_action_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/regular"
         android:text="0.0500 EOS from endlesschat"
         android:textColor="@color/text_regular"
         android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/cell_action_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/regular"
+        android:text="hello from other world"
+        android:textColor="@color/gray"
+        android:textSize="12sp"/>
 
 </LinearLayout>

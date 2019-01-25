@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
+import com.scruge.scruge.dependencies.view.setHidden
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.viewmodel.transaction.ActionVM
@@ -76,9 +78,16 @@ class WalletTransactionsView(context: Context, attrs: AttributeSet?, defStyleAtt
 
         class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             fun setup(vm: ActionVM) {
+                val c = ContextCompat.getColor(itemView.context, vm.actionColor)
+                itemView.cell_action_name.setTextColor(c)
+
                 itemView.cell_action_name.text = vm.actionName
                 itemView.cell_action_time.text = vm.time
+                itemView.cell_action_description.text = vm.actionDescription
                 itemView.cell_action_details.text = vm.actionDetails
+
+                itemView.cell_action_description.setHidden(vm.actionDescription == null)
+                itemView.cell_action_details.setHidden(vm.actionDetails == null)
             }
         }
     }

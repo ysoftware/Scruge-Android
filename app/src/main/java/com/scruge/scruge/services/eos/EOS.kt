@@ -37,7 +37,7 @@ class EOS {
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
 
-    val contractAccount = EosName.from("testaccount1")!!
+    val contractAccount = EosName.create("testaccount1")
 
     private val testNodeUrl = "http://35.242.241.205:7777"
 

@@ -29,8 +29,7 @@ class App: Application() {
         Service.api.environment = Api.Environment.prod
         SoLoader.init(this, false)
 
-        Service.settings.get<String>(Settings.Setting.nodeUrl)?.let {
-            Service.eos.nodeUrl = it
-        }
+        Service.eos.nodeUrl = Service.settings.get<String>(Settings.Setting.nodeUrl)
+                ?.let { it } ?: "https://node.eosflare.io"
     }
 }
