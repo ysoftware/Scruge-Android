@@ -30,7 +30,7 @@ import java.net.URI
 
 class Api {
 
-    var isLoggingEnabled = true
+    var isLoggingEnabled = false
     var logLimit = 2000
 
     enum class Environment(val url: String) {
