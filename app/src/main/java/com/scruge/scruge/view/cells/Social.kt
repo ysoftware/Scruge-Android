@@ -46,6 +46,7 @@ class SocialViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             "telegram" -> R.drawable.telegram
             "slack" -> R.drawable.slack
             "linkedIn" -> R.drawable.linked_in
+            "medium" -> R.drawable.medium
             else -> R.drawable.website
         }
     }
