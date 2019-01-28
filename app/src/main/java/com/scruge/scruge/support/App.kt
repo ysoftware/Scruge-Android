@@ -30,6 +30,6 @@ class App: Application() {
         SoLoader.init(this, false)
 
         Service.eos.nodeUrl = Service.settings.get<String>(Settings.Setting.nodeUrl)
-                ?.let { it } ?: "https://node.eosflare.io"
+                ?.let { it } ?: "https://eos.greymass.com"
     }
 }
