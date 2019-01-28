@@ -1,15 +1,21 @@
 package com.scruge.scruge.dependencies.view
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.scruge.scruge.model.error.ScrugeError
 import android.content.DialogInterface
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.RelativeLayout
 import com.scruge.scruge.model.error.ErrorHandler
+import android.view.WindowManager
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 
 // alert
 
@@ -60,43 +66,33 @@ fun Fragment.askForInput(title:String = "",
                          placeholder:String = "",
                          isSecure:Boolean = false,
                          actionTitle:String = "OK",
-                         completion: (String?) -> Unit) = context?.askForInput(title,
-                                                                               question,
-                                                                               placeholder,
-                                                                               isSecure,
-                                                                               actionTitle,
-                                                                               completion)
+                         initial:String = "",
+                         completion: (String?) -> Unit) {
+    activity?.askForInput(title, question, placeholder, isSecure, actionTitle, initial, completion)
+}
 
-fun Context.askForInput(title:String = "",
+fun Activity.askForInput(title:String = "",
                          question:String,
                          placeholder:String = "",
                          isSecure:Boolean = false,
                          actionTitle:String = "OK",
+                         initial:String = "",
                          completion: (String?) -> Unit) {
-    val editText = EditText(this)
-    val layout = RelativeLayout(this)
-    layout.addView(editText)
-    val pad = Dimension.dp(15).px
-    layout.setPadding(pad, 0, 0, 0)
 
-    editText.inputType = if (isSecure) EditorInfo.TYPE_TEXT_VARIATION_PASSWORD
-        else EditorInfo.TYPE_TEXT_VARIATION_NORMAL
-    editText.hint = placeholder
+    MaterialDialog(this).show {
 
-    val dialogClickListener = DialogInterface.OnClickListener { _, which ->
-        when (which) {
-            DialogInterface.BUTTON_POSITIVE -> completion(editText.text.toString())
-            DialogInterface.BUTTON_NEGATIVE -> completion(null)
+        val inputType = if (isSecure) EditorInfo.TYPE_TEXT_VARIATION_PASSWORD
+            else EditorInfo.TYPE_TEXT_VARIATION_NORMAL
+
+        title(text = title)
+        message(text = question)
+
+        input(hint = placeholder,
+              inputType = inputType,
+              prefill = initial) { _, text ->
+            completion(text.toString())
         }
+        negativeButton()
+        positiveButton(text = actionTitle)
     }
-
-    AlertDialog.Builder(this)
-            .setMessage(question)
-            .setTitle(title)
-            .setPositiveButton(actionTitle, dialogClickListener)
-            .setNegativeButton("Cancel", dialogClickListener)
-            .setView(layout)
-            .show()
-
-    showKeyboard(editText)
 }

@@ -51,7 +51,7 @@ class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
                 }
             }
             else {
-                context?.askForInput("Export private key",
+                (context as? Activity)?.askForInput("Export private key",
                                      "Enter your wallet password",
                                      "Wallet password…",
                                      true,

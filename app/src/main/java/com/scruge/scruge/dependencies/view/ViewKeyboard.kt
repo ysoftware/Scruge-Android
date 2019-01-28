@@ -15,9 +15,7 @@ fun Activity.hideKeyboard() {
     }
 }
 
-fun Fragment.hideKeyboard() {
-    activity?.hideKeyboard()
-}
+fun Fragment.hideKeyboard() = activity?.hideKeyboard()
 
 fun Context.showKeyboard(view: View) {
     view.requestFocus()

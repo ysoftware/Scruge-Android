@@ -20,6 +20,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url "https://dl.bintray.com/drummer-aidan/maven/" }
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
