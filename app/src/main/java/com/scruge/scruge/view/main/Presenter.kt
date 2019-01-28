@@ -5,7 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import com.scruge.scruge.dependencies.navigation.NavigationController
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.model.entity.Member
+import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.ui.activity.ActivityFragment
 import com.scruge.scruge.view.ui.authprofile.EditProfileFragment
 import com.scruge.scruge.view.ui.authprofile.LoginFragment
@@ -193,6 +195,11 @@ class Presenter {
     }
 
     fun presentCreateAccountFragment(fragment: NavigationFragment) {
+        if (Service.settings.didCreateEosAccount) {
+            val msg = "You have previously created an eos account. Please, import the private key."
+            fragment.alert(msg)
+            return
+        }
         fragment.navigationController?.navigateTo(CreateAccountFragment())
     }
 

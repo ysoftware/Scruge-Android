@@ -147,6 +147,7 @@ class CreateAccountFragment: NavigationFragment() {
                 ErrorHandler.error(it.result)?.let {
                     return@onSuccess alert(it)
                 }
+                Service.settings.setDidCreateEosAccount()
                 alert("Your account have been created.\n\nMake sure to save your private publicKey in a safe place!\n\nIf you lose the publicKey, your account will be lost forever!")
                 Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 1000)
             }.onFailure {

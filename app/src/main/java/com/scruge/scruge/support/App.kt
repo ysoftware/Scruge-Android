@@ -27,6 +27,7 @@ class App: Application() {
 
     private fun setupApp() {
         Service.api.environment = Api.Environment.prod
+
         SoLoader.init(this, false)
 
         Service.eos.nodeUrl = Service.settings.get<String>(Settings.Setting.nodeUrl)

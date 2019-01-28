@@ -2,6 +2,7 @@ package com.scruge.scruge.services
 
 import android.content.Context
 import com.scruge.scruge.support.App
+import java.io.File
 
 
 class Settings {
@@ -38,4 +39,12 @@ class Settings {
     fun remove(setting:Setting) {
         defaults.edit().remove(setting.name).apply()
     }
+
+    // special eos account creation check
+
+    private val url = "${App.context.filesDir}/e"
+
+    fun setDidCreateEosAccount() = File(url).writeBytes(ByteArray(1))
+
+    val didCreateEosAccount:Boolean get() = File(url).readBytes().contentEquals(ByteArray(1))
 }
