@@ -48,7 +48,7 @@ data class Token(val contract:EosName,
 
         val SYS = Token(EosName.create("eosio.token"), "SYS")
 
-        val default = listOf(Scruge, EOS)
+        val default = listOf(EOS) // Scruge
 
         fun from(string:String):Token? {
             val array = string.split(" ")
