@@ -117,6 +117,10 @@ class ErrorHandler {
                 505 -> actionError
                 599 -> notSupported
 
+                // http
+                400 -> paramsConflict
+                404 -> resourceNotFound
+
                 // special
                 999 -> notImplemented
                 else -> {

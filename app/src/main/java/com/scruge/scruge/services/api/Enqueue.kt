@@ -24,6 +24,11 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Resul
             val gson = Gson()
             val body = it.body()?.string()
 
+            if (r.code() != 200) {
+                completion(Result.failure((ErrorHandler.error(r.code()) ?: BackendError.unknown).wrap()))
+                return@let
+            }
+
             if (body == null) {
                 Service.api.log("Error: status code: ${it.code()}")
                 completion(Result.failure(BackendError.parsingError.wrap()))

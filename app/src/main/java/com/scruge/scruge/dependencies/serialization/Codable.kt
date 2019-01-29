@@ -13,6 +13,5 @@ fun Codable.toMap(): Map<String, Any> {
                                                  MapDeserializerDoubleAsIntFix()).create()
     val json = gson.toJson(this)
     val map: Map<String, Any> = gson.fromJson(json, object : TypeToken<Map<String, Any>>() {}.type)
-    Log.e("Parsing", "Request: $map")
     return map
 }
