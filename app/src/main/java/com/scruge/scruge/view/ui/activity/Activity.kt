@@ -52,7 +52,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
         when (vm.state) {
             State.error, State.ready -> {
                 if (vm.isEmpty()) {
-                    vm.reloadData()
+                    reloadData()
                 }
             }
         }
@@ -60,16 +60,29 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
 
     private fun setupVM() {
         vm.delegate = this
-        vm.reloadData()
+        reloadData()
     }
 
     private fun setupTable() {
         refresh_control.setOnRefreshListener {
-            vm.reloadData()
+            reloadData()
         }
 
         activity_recycler_view.setupForVerticalLayout()
         activity_recycler_view.adapter = adapter
+    }
+
+    private fun reloadData() {
+        vm.reloadData()
+
+        // todo vote notifications
+//        Service.api.getVoteNotifications { result ->
+//            result.onSuccess {
+//
+//            }.onFailure {
+//
+//            }
+//        }
     }
 
     // DELEGATE

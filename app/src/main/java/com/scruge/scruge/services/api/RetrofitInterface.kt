@@ -81,7 +81,11 @@ interface BackendApi {
     fun getUpdateList(@Path("campaignId") campaignId:Int): Call<ResponseBody>
 
     @GET("user/{token}/activity")
-    fun getActivity(@Path("token") token:String): Call<ResponseBody>
+    fun getActivity(@Path("token") token:String,
+                    @QueryMap request: Map<String, Any>): Call<ResponseBody>
+
+    @GET("activity")
+    fun getActivity(@QueryMap request: Map<String, Any>): Call<ResponseBody>
 
     @GET("user/{token}/votes")
     fun getVoteNotifications(@Path("token") token:String): Call<ResponseBody>

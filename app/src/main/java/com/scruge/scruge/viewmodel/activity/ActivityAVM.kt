@@ -9,7 +9,7 @@ import com.ysoftware.mvvm.array.ArrayViewModel
 class ActivityAVM: ArrayViewModel<ActivityModel, ActivityVM, ActivityQ>() {
 
     override fun fetchData(query: ActivityQ?, block: (Result<Collection<ActivityVM>>) -> Unit) {
-        Service.api.getActivity { result ->
+        Service.api.getActivity(query) { result ->
             block(result.map { it.activity.map { ActivityVM(it) } })
         }
     }

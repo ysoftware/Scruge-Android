@@ -15,6 +15,7 @@ import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
 import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.services.eos.Token
+import com.scruge.scruge.viewmodel.activity.ActivityQ
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
 import com.scruge.scruge.viewmodel.comment.CommentQuery
 import com.scruge.scruge.viewmodel.comment.CommentSource
@@ -176,10 +177,11 @@ class Api {
         service.getUpdateList(campaign.id).enqueue(completion)
     }
 
-    fun getActivity(completion: (Result<ActivityListResponse>) -> Unit) {
+    fun getActivity(query: ActivityQ?, completion: (Result<ActivityListResponse>) -> Unit) {
+        val params = ActivityListRequest(query?.page ?: 0).toMap()
         Service.tokenManager.getToken()?.let {
-            service.getActivity(it).enqueue(completion)
-        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+            service.getActivity(it, params).enqueue(completion)
+        } ?: service.getActivity(params).enqueue(completion)
     }
 
     fun getVoteNotifications(completion: (Result<ActiveVotesResponse>) -> Unit) {
