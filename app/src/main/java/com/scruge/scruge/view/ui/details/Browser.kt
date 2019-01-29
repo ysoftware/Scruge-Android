@@ -17,7 +17,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 
 
-
 class BrowserFragment : NavigationFragment() {
 
     var url:String? = null
@@ -80,9 +79,10 @@ class BrowserFragment : NavigationFragment() {
     private fun setData(html:String) {
         web_view.setInitialScale(1)
         web_view.scrollBarStyle = WebView.SCROLLBARS_OUTSIDE_OVERLAY
+        web_view.loadDataWithBaseURL(null, html, "text/html; charset=utf-8", "UTF-8", null)
+        web_view.settings.useWideViewPort = true
         web_view.settings.loadWithOverviewMode = true
         web_view.settings.builtInZoomControls = true
         web_view.settings.displayZoomControls = false
-        web_view.loadDataWithBaseURL(null, html, "text/html; charset=utf-8", "UTF-8", null)
     }
 }
