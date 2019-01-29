@@ -141,11 +141,15 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
                 val item = fr.vm.item(pos, true)
                 it.setup(item)
                         .showDecor(pos == 0, pos == fr.vm.numberOfItems - 1)
-                        .activityTap {
+                        .updateTap {
                             // open update or something else
+                            // todo
+                        }
+                        .replyTap {
+                            // todo
                         }
                         .campaignTap {
-//                            Service.presenter.presentCampaignFragment(fr, item.campaignId)
+                            Service.presenter.presentCampaignFragment(fr, it)
                         }
             }
         }

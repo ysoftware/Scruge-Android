@@ -7,9 +7,13 @@ import java.lang.Exception
 
 fun ImageView.setImage(url: Uri?, hideOnFail:Boolean = true) {
     Picasso.Builder(context)
-            .listener { _, _, _ ->
-                if (hideOnFail) {
+            .listener { _, _, ex ->
+                if (ex != null && hideOnFail) {
                     setImageDrawable(null)
+                    setHidden(false)
+                }
+                else if (ex == null) {
+                    setHidden(false)
                 }
             }
             .build()
@@ -24,5 +28,10 @@ fun ImageView.setImage(url: String?, hideOnFail:Boolean = true) {
         val uri = Uri.parse(url)
         setImage(uri, hideOnFail)
     }
-    catch (ex:Exception) { }
+    catch (ex:Exception) {
+        if (hideOnFail) {
+            setImageDrawable(null)
+            setHidden(true)
+        }
+    }
 }
