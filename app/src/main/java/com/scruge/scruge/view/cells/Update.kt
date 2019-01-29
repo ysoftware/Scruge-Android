@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.cell_update_last.view.*
 class UpdateCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setup(vm:UpdateVM):UpdateCell {
+        itemView.cell_update_date.text = vm.date
         itemView.cell_update_text.text = vm.description
         itemView.cell_update_title.text = vm.title
         // image?

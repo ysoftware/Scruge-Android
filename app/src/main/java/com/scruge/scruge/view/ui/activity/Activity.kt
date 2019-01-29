@@ -156,7 +156,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
                         .showDecor(pos == 0, pos == fr.vm.numberOfItems - 1)
                         .updateTap {
                             // open update or something else
-                            // todo
+                            Service.presenter.presentContentFragment(fr, it)
                         }
                         .replyTap {
                             // todo

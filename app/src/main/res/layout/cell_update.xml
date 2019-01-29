@@ -18,6 +18,16 @@
         android:padding="15dp">
 
         <TextView
+            android:id="@+id/cell_update_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Title"
+            android:textColor="@color/gray"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/cell_update_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +40,7 @@
             android:id="@+id/cell_update_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/regular"
             android:text="article text"
             android:textColor="@color/text_regular"

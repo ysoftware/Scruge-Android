@@ -42,19 +42,19 @@ class ActivityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val date:String
         val title:String
         val description:String
-        var title2:String? = null
+        var updateTitle:String? = null
         var image:String? = null
 
         when (vm.type) {
             ActivityType.reply -> {
                 date = vm.replyDate
-                title = "${vm.replyAuthorName} replied to your comment"
+                title = vm.replyAuthorName
                 description = vm.replyText
             }
             ActivityType.update -> {
                 date = vm.updateDate
                 title = vm.updateTitle
-                title2 = vm.updateCampaignTitle
+                updateTitle = vm.updateCampaignTitle
                 description = vm.updateDescription
                 image = vm.updateImage
             }
@@ -80,11 +80,11 @@ class ActivityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         itemView.cell_activity_image.setImageResource(vm.icon)
         itemView.cell_activity_image_view.setBackgroundResource(vm.color)
         itemView.cell_activity_date.text = date
-        itemView.cell_activity_title.text = title
+        itemView.cell_activity_campaign.text = title
         itemView.cell_activity_text.text = description
-        itemView.cell_activity_campaign.text = title2
-        itemView.cell_activity_campaign.setHidden(title2 == null)
-        // todo image?
+        // update title
+        itemView.cell_activity_title.text = updateTitle
+        itemView.cell_activity_title.setHidden(updateTitle == null)
 
         return this
     }
