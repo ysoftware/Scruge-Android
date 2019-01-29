@@ -54,7 +54,7 @@ class ActivityVM(model: ActivityModel?): ViewModel<ActivityModel>(model) {
     val replyText get() = (model as? ActivityReply)?.replyCommentText ?: ""
 
     val replyAuthorName get()
-        = (model as? ActivityReply)?.replyUserName?.let { if (it.isBlank()) it else null }
+        = (model as? ActivityReply)?.replyUserName?.let { if (it.isNotBlank()) it else null }
                 ?: "Anonymous" + " replied to your comment"
 
     // funding result
