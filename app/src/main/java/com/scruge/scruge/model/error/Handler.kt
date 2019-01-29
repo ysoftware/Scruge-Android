@@ -6,10 +6,32 @@ import com.scruge.scruge.model.error.EOSError.*
 import com.scruge.scruge.model.error.NetworkingError.*
 import com.scruge.scruge.model.error.NetworkingError.unknown
 import com.scruge.scruge.model.error.WalletError.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.Exception
+
 
 class ErrorHandler {
 
     companion object {
+
+        @Suppress("UNCHECKED_CAST")
+        fun parse(eosError:String?):ErrorMessage? {
+            try {
+                val map: Map<String, Any>
+                        = Gson().fromJson(eosError, object : TypeToken<Map<String, Any>>() {}.type)
+                val error = map["error"] as? Map<String, Any> ?: return null
+                val details = error["details"] as? List<Map<String, Any>> ?: return null
+                val msg = details.mapNotNull { it["message"] as? String }
+                        .joinToString("")
+                        .replace("assertion failure with message:", "")
+                        .replace("pending console output:", "")
+                        .trim()
+                return ErrorMessage(msg)
+            }
+            catch (ex:Exception) { }
+            return null
+        }
 
         fun message(throwable: Throwable?):String {
             return message(error(throwable))
@@ -72,6 +94,9 @@ class ErrorHandler {
                 if (it.code != 0) {
                     return "Error ${it.code}"
                 }
+            }
+            (error as? ErrorMessage)?.let {
+                return error.message
             }
             return "Unexpected error"
         }

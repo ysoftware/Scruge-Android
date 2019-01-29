@@ -228,7 +228,8 @@ fun Single<ChainResponse<TransactionCommitted>>.subscribe(completion: (Result<St
                            }
                            else {
                                Log.e("EOS", response.errorBody)
-                               completion(Result.failure(EOSError.unknown.wrap()))
+                               val e = ErrorHandler.parse(response.errorBody) ?: EOSError.unknown
+                               completion(Result.failure(e.wrap()))
                            }
                        }, { error ->
                            val e = ErrorHandler.error(error) ?: EOSError.unknown

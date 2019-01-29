@@ -2,6 +2,8 @@ package com.scruge.scruge.model.error
 
 interface ScrugeError
 
+data class ErrorMessage(val message:String):ScrugeError
+
 enum class GeneralError:ScrugeError {
 
     unknown;
