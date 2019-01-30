@@ -7,15 +7,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.scruge.scruge.model.error.ScrugeError
 import android.content.DialogInterface
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.RelativeLayout
 import com.scruge.scruge.model.error.ErrorHandler
-import android.view.WindowManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
+import com.scruge.scruge.R
 
 // alert
 
@@ -54,8 +50,8 @@ fun Context.ask(title:String = "", question:String, completion: (Boolean) -> Uni
     AlertDialog.Builder(this)
             .setMessage(question)
             .setTitle(title)
-            .setPositiveButton("Yes", dialogClickListener)
-            .setNegativeButton("No", dialogClickListener)
+            .setPositiveButton(R.string.label_yes, dialogClickListener)
+            .setNegativeButton(R.string.label_no, dialogClickListener)
             .show()
 }
 
@@ -65,7 +61,7 @@ fun Fragment.askForInput(title:String = "",
                          question:String,
                          placeholder:String = "",
                          isSecure:Boolean = false,
-                         actionTitle:String = "OK",
+                         actionTitle:String = R.string.label_ok.string(),
                          initial:String = "",
                          completion: (String?) -> Unit) {
     activity?.askForInput(title, question, placeholder, isSecure, actionTitle, initial, completion)
@@ -75,7 +71,7 @@ fun Activity.askForInput(title:String = "",
                          question:String,
                          placeholder:String = "",
                          isSecure:Boolean = false,
-                         actionTitle:String = "OK",
+                         actionTitle:String = R.string.label_ok.string(),
                          initial:String = "",
                          completion: (String?) -> Unit) {
 

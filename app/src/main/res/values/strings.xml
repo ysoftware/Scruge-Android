@@ -19,6 +19,7 @@
     <string name="title_vote_results">Results</string>
     <string name="label_no">No</string>
     <string name="label_yes">Yes</string>
+    <string name="label_ok">OK</string>
     <string name="hint_write_a_comment">Write a comment</string>
     <string name="do_send_cap">SEND</string>
     <string name="label_i_agree_terms">I agree to the terms of the offer and take all the risks on myself</string>
