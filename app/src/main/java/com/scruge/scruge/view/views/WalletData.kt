@@ -11,6 +11,7 @@ import android.widget.RelativeLayout
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.askForInput
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.wallet.storage.LocalAccount
 import kotlinx.android.synthetic.main.view_wallet_data.view.*
@@ -45,25 +46,25 @@ class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
         wallet_data_copy_private.setOnClickListener {
             if (unlocked) {
                 (context?.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager)?.let { clipboard ->
-                    val clip = ClipData.newPlainText("EOS Private key", wallet_data_private_key.text)
+                    val clip = ClipData.newPlainText(R.string.title_private_key.string(), wallet_data_private_key.text)
                     clipboard.primaryClip = clip
-                    context?.alert("Copied to clipboard")
+                    context?.alert(R.string.alert_copied_to_clipboard.string())
                 }
             }
             else {
-                (context as? Activity)?.askForInput("Export private key",
-                                     "Enter your wallet password",
-                                     "Wallet password…",
-                                     true,
-                                     "Unlock") { input ->
+                (context as? Activity)?.askForInput(R.string.title_export_private_key.string(),
+                                                    R.string.label_export_private_key.string(),
+                                                    R.string.hint_wallet_password.string(),
+                                                    true,
+                                                    R.string.do_unlock_wallet.string()) { input ->
                     input?.let {
                         wallet.retrievePrivateKey(input) { key ->
                             key?.let {
                                 makeSecure(true)
 
                                 wallet_data_private_key.text = it.toString()
-                                context?.alert("Be careful not to share your private key with anyone!")
-                            } ?: context?.alert("Incorrect password")
+                                context?.alert(R.string.alert_private_key_warning.string())
+                            } ?: context?.alert(R.string.error_incorrectPassword.string())
                         }
                     }
                 }
@@ -72,9 +73,10 @@ class WalletData(context: Context, attrs: AttributeSet?, defStyleAttr:Int):
 
         wallet_data_copy_public.setOnClickListener {
             (context?.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager)?.let { clipboard ->
-                val clip = ClipData.newPlainText("EOS Public key", wallet.publicKey.toString())
+                val clip = ClipData.newPlainText(R.string.title_public_key.string(), 
+                                                 wallet.publicKey.toString())
                 clipboard.primaryClip = clip
-                context?.alert("Copied to clipboard")
+                context?.alert(R.string.alert_copied_to_clipboard.string())
             }
         }
     }

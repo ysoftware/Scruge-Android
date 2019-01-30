@@ -157,4 +157,12 @@
     <string name="title_privacy">Privacy Policy</string>
     <string name="title_settings">Settings</string>
 
+    <!-- from views view code -->
+    <string name="title_export_private_key">Export private key</string>
+    <string name="label_export_private_key">Enter your password to unlock wallet</string>
+    <string name="do_unlock_wallet">Unlock</string>
+    <string name="error_incorrectPassword">Incorrect password</string>
+    <string name="alert_private_key_warning">Be careful not to share your private key with anyone!</string>
+    <string name="alert_copied_to_clipboard">Copied to clipboard</string>
+
 </resources>

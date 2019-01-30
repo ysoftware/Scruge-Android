@@ -34,7 +34,7 @@ class ButtonView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
             button_background.setBackgroundResource(value.id)
         }
 
-    var title:String = "invest"
+    var title:String = ""
         set(value) {
             field = value
             button_view_button.text = title
