@@ -1,5 +1,6 @@
 package com.scruge.scruge.model.error
 
+import androidx.core.content.ContextCompat
 import com.scruge.scruge.model.error.AuthError.*
 import com.scruge.scruge.model.error.BackendError.*
 import com.scruge.scruge.model.error.EOSError.*
@@ -8,6 +9,10 @@ import com.scruge.scruge.model.error.NetworkingError.unknown
 import com.scruge.scruge.model.error.WalletError.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.scruge.scruge.R
+import com.scruge.scruge.dependencies.view.string
+import com.scruge.scruge.support.App
+import com.scruge.scruge.support.App.Companion.context
 import java.lang.Exception
 
 
@@ -39,66 +44,66 @@ class ErrorHandler {
 
         fun message(error: ScrugeError?):String {
             (error as? AuthError)?.let {
-                return when (it) {
-                    incorrectEmailLength -> "Email should be longer than 5 and shorter than 254 symbols."
-                    incorrectPasswordLength -> "Password should be longer than 5 and shorter than 50 symbols."
-                    noToken, invalidToken, userNotFound -> "This action requires authentication. Please, sign in with your Scruge account."
-                    invalidEmail -> "Incorrectly formatted email"
-                    accountBlocked -> "This account was blocked"
-                    accountExists -> "User already exists"
-                    incorrectCredentials -> "Incorrect credentials"
-                    denied -> "Access is restricted"
+                 return when (it) {
+                    incorrectEmailLength -> R.string.error_auth_incorrectEmailLength.string()
+                    incorrectPasswordLength -> R.string.error_auth_incorrectPasswordLength.string()
+                    noToken, invalidToken, userNotFound -> R.string.error_auth_notAuthorized.string()
+                    invalidEmail -> R.string.error_auth_invalidEmail.string()
+                    accountBlocked -> R.string.error_auth_accountBlocked.string()
+                    accountExists -> R.string.error_auth_accountExists.string()
+                    incorrectCredentials -> R.string.error_auth_incorrectCredentials.string()
+                    denied -> R.string.error_auth_denied.string()
                 }
             }
             (error as? NetworkingError)?.let {
                 return when (it) {
-                    connectionProblem -> "Unable to connect to the server"
-                    unknown -> "Unknown network error"
+                    connectionProblem -> R.string.error_network_connectionProblem.string()
+                    unknown -> R.string.error_network_unknown.string()
                 }
             }
             (error as? BackendError)?.let {
                 return when (it) {
-                    notImplemented -> "Not implemented"
-                    invalidResourceId -> "Malformed request"
-                    resourceNotFound -> "Nothing was found for this request"
-                    parsingError -> "Unexpected server response"
-                    BackendError.unknown -> "Unexpected server error"
-                    emailSendError -> "Unable to send email"
-                    paramsConflict -> "Parameters conflict with each other"
-                    replyNotSupported -> "Replying to this is not allowed"
+                    notImplemented -> R.string.error_backend_notImplemented.string()
+                    invalidResourceId -> R.string.error_backend_invalidResourceId.string()
+                    resourceNotFound -> R.string.error_backend_resourceNotFound.string()
+                    parsingError -> R.string.error_backend_parsingError.string()
+                    BackendError.unknown -> R.string.error_backend_unknown.string()
+                    emailSendError -> R.string.error_backend_emailSendError.string()
+                    paramsConflict -> R.string.error_backend_paramsConflict.string()
+                    replyNotSupported -> R.string.error_backend_replyNotSupported.string()
                 }
             }
             (error as? WalletError)?.let {
                 return when (it) {
-                    incorrectPasscode -> "Incorrect passcode"
-                    noAccounts -> "No accounts are associated with imported public key"
-                    noKey -> "You have no keys in your wallet"
-                    noSelectedAccount -> "You did not verify any EOS accounts"
-                    selectedAccountMissing -> "Your verified account is not accessible with imported EOS key"
-                    WalletError.unknown -> "Unexpected wallet error"
+                    incorrectPasscode -> R.string.error_wallet_incorrectPasscode.string()
+                    noAccounts -> R.string.error_wallet_noAccounts.string()
+                    noKey -> R.string.error_wallet_noKey.string()
+                    noSelectedAccount -> R.string.error_wallet_noSelectedAccount.string()
+                    selectedAccountMissing -> R.string.error_wallet_selectedAccountMissing.string()
+                    WalletError.unknown -> R.string.error_wallet_unknown.string()
                 }
             }
             (error as? EOSError)?.let {
                 return when (it) {
-                    overdrawnBalance -> "Overdrawn balance"
-                    EOSError.unknown -> "Unknown error"
-                    abiError -> "Incorrect transaction format"
-                    incorrectName -> "Incorrect name: it can only contain letters, numbers from 1 to 5 and a dot"
-                    incorrectToken -> "Incorrect token input"
-                    actionError -> "Server was unable to complete blockchain transaction, please try again"
-                    notSupported -> "EOS: Not supported"
-                    eosAccountExists -> "EOS account with this name already exists"
+                    overdrawnBalance -> R.string.error_eos_overdrawnBalance.string()
+                    EOSError.unknown -> R.string.error_eos_unknown.string()
+                    abiError -> R.string.error_eos_abiError.string()
+                    incorrectName -> R.string.error_eos_incorrectName.string()
+                    incorrectToken -> R.string.error_eos_incorrectToken.string()
+                    actionError -> R.string.error_eos_actionError.string()
+                    notSupported -> R.string.error_eos_notSupported.string()
+                    eosAccountExists -> R.string.error_eos_eosAccountExists.string()
                 }
             }
             (error as? GeneralError)?.let {
                 if (it.code != 0) {
-                    return "Error ${it.code}"
+                    return  R.string.error_general_code.string(it.code)
                 }
             }
             (error as? ErrorMessage)?.let {
                 return error.message
             }
-            return "Unexpected error"
+            return R.string.error_general_unexpected.string()
         }
 
         fun error(throwable:Throwable?):ScrugeError? {
@@ -145,6 +150,7 @@ class ErrorHandler {
                 // http
                 400 -> paramsConflict
                 404 -> resourceNotFound
+                500 -> BackendError.unknown
 
                 // special
                 999 -> notImplemented

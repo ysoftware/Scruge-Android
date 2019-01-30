@@ -77,4 +77,40 @@
     <string name="do_unstake_resources">UNSTAKE RESOURCES</string>
     <string name="do_switch_eos_account">Switch account</string>
     <string name="do_delete_wallet">Delete Wallet</string>
+
+    <!-- errors -->
+    <string name="error_auth_incorrectEmailLength">Email should be longer than 5 and shorter than 254 symbols.</string>
+    <string name="error_auth_incorrectPasswordLength">Password should be longer than 5 and shorter than 50 symbols.</string>
+    <string name="error_auth_notAuthorized">This action requires authentication. Please, sign in with your Scruge account.</string>
+    <string name="error_auth_invalidEmail">Incorrectly formatted email</string>
+    <string name="error_auth_accountBlocked">This account was blocked</string>
+    <string name="error_auth_accountExists">User already exists</string>
+    <string name="error_auth_incorrectCredentials">Incorrect credentials</string>
+    <string name="error_auth_denied">Access is restricted</string>
+    <string name="error_network_connectionProblem">Unable to connect to the server</string>
+    <string name="error_network_unknown">Unknown network error</string>
+    <string name="error_backend_notImplemented">Not implemented</string>
+    <string name="error_backend_invalidResourceId">Malformed request</string>
+    <string name="error_backend_resourceNotFound">Nothing was found for this request</string>
+    <string name="error_backend_parsingError">Unexpected server response</string>
+    <string name="error_backend_unknown">Unexpected server error</string>
+    <string name="error_backend_emailSendError">Unable to send email</string>
+    <string name="error_backend_paramsConflict">Parameters conflict with each other</string>
+    <string name="error_backend_replyNotSupported">Replying to this is not allowed</string>
+    <string name="error_wallet_incorrectPasscode">Incorrect passcode</string>
+    <string name="error_wallet_noAccounts">No accounts are associated with imported public key</string>
+    <string name="error_wallet_noKey">You have no keys in your wallet</string>
+    <string name="error_wallet_noSelectedAccount">You did not verify any EOS accounts</string>
+    <string name="error_wallet_selectedAccountMissing">Your verified account is not accessible with imported EOS key</string>
+    <string name="error_wallet_unknown">Unexpected wallet error</string>
+    <string name="error_eos_overdrawnBalance">Overdrawn balance</string>
+    <string name="error_eos_unknown">Unknown error</string>
+    <string name="error_eos_abiError">Incorrect transaction format</string>
+    <string name="error_eos_incorrectName">Incorrect name: it can only contain letters, numbers from 1 to 5 and a dot</string>
+    <string name="error_eos_incorrectToken">Incorrect token input</string>
+    <string name="error_eos_actionError">Server was unable to complete blockchain transaction, please try again</string>
+    <string name="error_eos_notSupported">EOS: Not supported</string>
+    <string name="error_eos_eosAccountExists">EOS account with this name already exists</string>
+    <string name="error_general_unexpected">Unexpected error</string>
+    <string name="error_general_code">Error %1$s</string>
 </resources>
