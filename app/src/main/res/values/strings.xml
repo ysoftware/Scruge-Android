@@ -211,7 +211,7 @@
     <string name="label_sure_to_delete_wallet">Make sure to export your private key first because there is no way it can be retrieved later.</string>
     <string name="alert_sign_in_first">Please sign in with your Scruge account first</string>
     <string name="title_transfer_tokens">Transfer tokens</string>
-    <string name="alert_select_correct_token">An error occured. Select correct token to transfer</string>
+    <string name="alert_select_correct_token">An error occurred. Select correct token to transfer</string>
     <string name="do_transfer_tokens">Transfer</string>
     <string name="title_manage_resources">Manage Resources</string>
     <string name="tokens_available">%1$s available</string>
