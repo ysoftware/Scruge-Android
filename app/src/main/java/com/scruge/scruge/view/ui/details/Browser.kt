@@ -15,6 +15,7 @@ import com.scruge.scruge.viewmodel.update.UpdateVM
 import kotlinx.android.synthetic.main.fragment_browser.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.scruge.scruge.dependencies.view.string
 
 
 class BrowserFragment : NavigationFragment() {
@@ -60,13 +61,13 @@ class BrowserFragment : NavigationFragment() {
         } ?:
         campaignVM?.lastUpdateVM?.let {
             it.loadDescription {
-                title = "Pitch"
+                title = "Pitch" // todo should not be here
                 setData(it)
             }
         } ?:
         updateVM?.let { vm ->
             vm.loadDescription {
-                title = "Update"
+                title = R.string.title_update.string()
                 setData(it)
 
                 navigationBarButton = NavigationBarButton(R.drawable.comments) {

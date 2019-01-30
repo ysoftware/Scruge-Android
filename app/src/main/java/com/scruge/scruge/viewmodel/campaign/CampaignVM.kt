@@ -1,8 +1,10 @@
 package com.scruge.scruge.viewmodel.campaign
 
 import android.net.Uri
+import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.datePresent
 import com.scruge.scruge.dependencies.dataformatting.dateToRelative
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.*
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
@@ -323,6 +325,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
     override val softCap get() = model?.economics?.softCap ?: 0
 
-    // todo plurals
-    override val daysLeft:String get() = model?.let { dateToRelative(it.endTimestamp, "ends", "ended") } ?: ""
+    override val daysLeft:String get() = model?.let {
+        dateToRelative(it.endTimestamp,
+                R.string.label_campaign_ends.string(), R.string.label_campaign_ended.string()) } ?: ""
 }

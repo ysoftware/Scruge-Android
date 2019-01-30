@@ -6,5 +6,8 @@ fun Int.string():String = App.context.getString(this)
 
 fun Int.string(vararg args:String):String = App.context.getString(this, args)
 
-// todo plurals
-//fun Int.plural()
+fun Int.plural(quantity:Int):String
+        = App.context.resources.getQuantityString(this, quantity)
+
+fun Int.plural(quantity:Int, vararg args:String):String
+        = App.context.resources.getQuantityString(this, quantity, args)

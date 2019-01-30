@@ -3,6 +3,7 @@ package com.scruge.scruge.view.cells
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
+import com.scruge.scruge.dependencies.view.plural
 import com.scruge.scruge.dependencies.view.setHidden
 import com.scruge.scruge.dependencies.view.setImage
 import com.scruge.scruge.dependencies.view.string
@@ -27,10 +28,7 @@ class TopCommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 itemView.top_comment_profile_image.setImage(it)
             } ?: itemView.top_comment_profile_image.setImageDrawable(null)
 
-            itemView.top_comment_see_all.text =
-                    if (allCommentsCount == 1) R.string.do_add_your_comment.string()
-                    else "See all $allCommentsCount comments" // todo plurals
-
+            itemView.top_comment_see_all.text = R.plurals.see_all_comments.plural(allCommentsCount)
             itemView.top_comment_view.visibility = View.VISIBLE
             itemView.top_comment_no_view.visibility = View.GONE
         }

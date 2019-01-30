@@ -8,10 +8,7 @@ import android.view.WindowManager
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
-import com.scruge.scruge.dependencies.view.alert
-import com.scruge.scruge.dependencies.view.hideKeyboard
-import com.scruge.scruge.dependencies.view.setupForVerticalLayout
-import com.scruge.scruge.dependencies.view.showKeyboard
+import com.scruge.scruge.dependencies.view.*
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
@@ -72,7 +69,8 @@ class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
         comment_refresh_control.setOnRefreshListener { vm.reloadData() }
         comment_send.setOnClickListener {
             if (Service.tokenManager.hasToken) {
-                val comment = comment ?: return@setOnClickListener alert("Message is too short")
+                val comment = comment
+                        ?: return@setOnClickListener alert(R.string.error_comment_too_short.string())
 
                 comment_send_progress.visibility = View.VISIBLE
                 comment_send.visibility = View.GONE
@@ -107,7 +105,7 @@ class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
 
     private fun setupNavigationBar() {
         shouldHideNavigationBar = false
-        title = "Comments"
+        title = R.string.title_comments.string()
     }
 
     val comment: String?
@@ -118,14 +116,14 @@ class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
 
     private fun checkAuthentication() {
         if (Service.tokenManager.hasToken) {
-            comment_field.hint = "Add your comment…"
+            comment_field.hint = R.string.hint_add_comment.string()
             comment_field.isEnabled = true
-            comment_send.text = "Send"
+            comment_send.text = R.string.do_send.string()
         }
         else {
-            comment_field.hint = "Sign in to add comments"
+            comment_field.hint = R.string.hint_sign_in_to_comment.string()
             comment_field.isEnabled = false
-            comment_send.text = "Sign In"
+            comment_send.text = R.string.do_sign_in.string()
         }
     }
 
@@ -146,7 +144,7 @@ class CommentsFragment : NavigationFragment(), ArrayViewModelDelegate {
                 comment_refresh_control.isRefreshing = false
                 if (vm.isEmpty()) {
                     comment_loading_view.state = ViewState.error
-                    comment_loading_view.state.errorMessage = "No comments"
+                    comment_loading_view.state.errorMessage = R.string.error_no_comments.string()
                 }
                 else {
                     comment_loading_view.state = ViewState.ready

@@ -235,4 +235,27 @@ Make sure to save your private publicKey in a safe place!
 
 If you lose the publicKey, your account will be lost forever!</string>
     <string name="public_key_display">Public key: %1$s</string>
+    <string name="label_campaign_ends">ends</string>
+    <string name="label_campaign_ended">ended</string>
+    <string name="error_comment_too_short">Message is too short</string>
+    <string name="hint_add_comment">Add your comment…</string>
+    <string name="hint_sign_in_to_comment">Sign in to add comments</string>
+    <string name="do_sign_in">Sign In</string>
+    <string name="title_comments">Comments</string>
+    <string name="title_update">Update</string>
+    <string name="title_featured">Featured</string>
+
+    <!-- plurals  -->
+    <plurals name="see_all_comments">
+        <item quantity="zero">No comments</item>
+        <item quantity="one">See %1$d comment</item>
+        <item quantity="other">See all %1$s comments</item>
+    </plurals>
+
+    <plurals name="see_replies">
+        <item quantity="zero">No replies</item>
+        <item quantity="one">See %1$d reply</item>
+        <item quantity="other">See all %1$d replies</item>
+    </plurals>
+
 </resources>

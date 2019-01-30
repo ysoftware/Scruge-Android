@@ -58,7 +58,7 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
     private fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = false
         shouldHideNavigationBar = false
-        title = "Featured"
+        title = R.string.title_featured.string()
     }
 
     private fun setupVM() {

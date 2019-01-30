@@ -3,6 +3,7 @@ package com.scruge.scruge.viewmodel.comment
 import android.net.Uri
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.datePresent
+import com.scruge.scruge.dependencies.view.plural
 import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Comment
 import com.scruge.scruge.model.error.ErrorHandler
@@ -26,13 +27,8 @@ class CommentVM(model: Comment?) : ViewModel<Comment>(model) {
 
     val isLiking get() = model?.isLiking == true
 
-    val repliesText:String? get() {
-        return model?.repliesCount?.let { number ->
-            if (number == 0) { return "" }
-            val replies = if (number == 1) "reply" else "replies" // todo plurals
-            return "See $number $replies"
-        }
-    }
+    val repliesText:String? get() = model?.repliesCount?.let { R.plurals.see_replies.plural(it) }
+    
 
     fun like() {
         model?.let { model ->
