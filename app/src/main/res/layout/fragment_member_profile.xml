@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -53,7 +52,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold"
-                android:text="Anonymous"
                 android:textColor="@color/white"
                 android:textSize="24sp"/>
 
@@ -64,7 +62,6 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/regular"
-                android:text="CEO"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="14sp"/>
@@ -90,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/semibold"
-                    android:text="About me"
+                    android:text="@string/title_about_me"
                     android:textColor="@color/text_title"
                     android:textSize="16sp"/>
 
@@ -100,7 +97,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/regular"
-                    android:text="Russian mobile developer I is."
                     android:textColor="@color/text_regular"
                     android:textSize="14sp"/>
 

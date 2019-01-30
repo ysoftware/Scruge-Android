@@ -22,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/medium"
-            android:text="Last update: "
             android:textColor="@color/text_title"
             android:textSize="17sp"/>
 
@@ -40,7 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold"
-                android:text="Title"
                 android:textColor="@color/text_title"
                 android:textSize="14sp"/>
 
@@ -50,7 +48,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="article text"
                 android:textColor="@color/text_regular"
                 android:textSize="14sp"/>
 
@@ -62,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/regular"
-            android:text="See all updates"
+            android:text="@string/do_see_all_updates"
             android:textColor="@color/text_title"
             android:textSize="14sp"/>
 

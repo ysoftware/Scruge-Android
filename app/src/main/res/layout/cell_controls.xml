@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/semibold"
-                android:text="Place your vote"
+                android:text="@string/title_place_your_vote"
                 android:textColor="@color/text_title"
                 android:textSize="14sp"/>
 
@@ -52,7 +52,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/regular"
-                    android:hint="Wallet password"
+                    android:hint="@string/hint_wallet_password"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingStart="45dp"

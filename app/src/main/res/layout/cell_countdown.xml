@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/semibold"
-                android:text="Vote ends in:"
+                android:text="@string/title_vote_ends_in"
                 android:textColor="@color/text_title"
                 android:textSize="14sp"/>
 
@@ -52,7 +52,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/regular"
-                        android:text="Days"
+                        android:text="@string/timer_days"
                         android:textColor="@color/text_regular"
                         android:textSize="12sp"/>
 
@@ -64,7 +64,6 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/regular"
-                        android:text="0"
                         android:textColor="@color/purple"
                         android:textSize="24sp"/>
                 </RelativeLayout>
@@ -83,7 +82,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/regular"
-                        android:text="Hours"
+                        android:text="@string/timer_hours"
                         android:textColor="@color/text_regular"
                         android:textSize="12sp"/>
 
@@ -95,7 +94,6 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/regular"
-                        android:text="0"
                         android:textColor="@color/purple"
                         android:textSize="24sp"/>
                 </RelativeLayout>
@@ -114,7 +112,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/regular"
-                        android:text="Minutes"
+                        android:text="@string/timer_minutes"
                         android:textColor="@color/text_regular"
                         android:textSize="12sp"/>
 
@@ -126,7 +124,6 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/regular"
-                        android:text="0"
                         android:textColor="@color/purple"
                         android:textSize="24sp"/>
                 </RelativeLayout>

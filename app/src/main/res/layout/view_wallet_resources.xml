@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bold"
-            android:text="CPU"
+            android:text="@string/title_eos_cpu"
             android:textColor="@color/text_title"
             android:textSize="14sp"/>
 
@@ -24,7 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:fontFamily="@font/regular"
-            android:text=""
             android:textColor="@color/text_gray"
             android:textSize="14sp"/>
 
@@ -54,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bold"
-            android:text="NET"
+            android:text="@string/title_eos_net"
             android:textColor="@color/text_title"
             android:textSize="14sp"/>
 
@@ -99,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold"
-                android:text="RAM"
+                android:text="@string/title_eos_ram"
                 android:textColor="@color/text_title"
                 android:textSize="14sp"/>
 
@@ -133,7 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ram"
-            android:text="BUY RAM"
+            android:text="@string/do_buy_eos_ram"
             android:textColor="@color/white"
             android:visibility="gone"/>
 
@@ -143,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:backgroundTint="@color/purple"
-            android:text="STAKE RESOURCES"
+            android:text="@string/do_stake_resources"
             android:textColor="@color/white"/>
 
     </RelativeLayout>

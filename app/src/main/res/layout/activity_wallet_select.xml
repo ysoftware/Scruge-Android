@@ -54,7 +54,7 @@ You will not be able to change it after you make first investment."
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/purple"
-        android:text="DONE"
+        android:text="@string/action_done_cap"
         android:textColor="@color/white"/>
 
 </RelativeLayout>

@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/semibold"
-            android:text="Invest in Scruge"
             android:textAlignment="center"
             android:textColor="@color/text_title"
             android:textSize="16sp"/>
@@ -54,7 +53,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/regular"
-                android:hint="Your wallet password"
+                android:hint="@string/hint_wallet_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingStart="45dp"
@@ -89,6 +88,8 @@
                     android:layout_marginEnd="25dp"
                     android:layout_weight="1"
                     android:background="@color/field_background">
+
+                    <!-- todo usd? scr? -->
 
                     <EditText
                         android:id="@+id/contribute_usd"
@@ -175,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/regular"
-                android:text="I agree to the terms of the offer and take all the risks on myself"
+                android:text="@string/label_i_agree_terms"
                 android:textColor="@color/text_gray"
                 android:textSize="13sp"/>
 

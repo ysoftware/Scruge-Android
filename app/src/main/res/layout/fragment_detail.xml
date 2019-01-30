@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold"
                 android:maxLines="2"
-                android:text=""
                 android:textColor="@color/text_title"
                 android:textSize="15sp"/>
 
@@ -36,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/regular"
-                android:text=""
                 android:textColor="@color/text_regular"
                 android:textSize="15sp"/>
 

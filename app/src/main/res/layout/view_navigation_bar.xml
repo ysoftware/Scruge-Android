@@ -34,7 +34,6 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="15dp"
             android:fontFamily="@font/medium"
-            android:text="Scruge"
             android:textColor="@color/white"
             android:textSize="20sp"/>
 

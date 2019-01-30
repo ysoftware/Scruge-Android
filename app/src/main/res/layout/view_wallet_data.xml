@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="Public key"
+                android:text="@string/title_public_key"
                 android:textColor="@color/text_regular"
                 android:textSize="14sp"/>
 
@@ -30,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/regular"
-                android:text="EOS6fGNKxasURKBQ1RkmMMHXtYJ9gDxRR2uLWGpqmaUMAwoNzU895"
                 android:textColor="@color/purple"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -74,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="Private key"
+                android:text="@string/title_private_key"
                 android:textColor="@color/text_regular"
                 android:textSize="14sp"/>
 
@@ -84,7 +83,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/regular"
-                android:text="5••••••••••••••••••••••••••••••••••••••••••••••••••"
                 android:textColor="@color/purple"
                 android:textSize="14sp"/>
 

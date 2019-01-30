@@ -15,7 +15,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/regular"
-            android:text="Received"
             android:textColor="@color/purple"
             android:textSize="14sp"/>
 
@@ -25,7 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:fontFamily="@font/regular"
-            android:text="21/05/02 15:03"
             android:textColor="@color/text_gray"
             android:textSize="14sp"/>
 
@@ -37,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/regular"
-        android:text="0.0500 EOS from endlesschat"
         android:textColor="@color/text_regular"
         android:textSize="14sp"/>
 
@@ -47,7 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/regular"
-        android:text="hello from other world"
         android:textColor="@color/gray"
         android:textSize="12sp"/>
 

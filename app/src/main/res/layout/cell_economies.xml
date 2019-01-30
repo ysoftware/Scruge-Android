@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/medium"
-            android:text="Token economies"
+            android:text="@string/title_token_economies"
             android:textColor="@color/text_title"
             android:textSize="17sp"/>
 
@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="Total token supply"
+                android:text="@string/label_total_token_supply"
                 android:textColor="@color/text_regular"
                 android:textSize="16sp"/>
 
@@ -46,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/regular"
-                android:text="300 000 000"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/text_gray"
                 android:textSize="16sp"/>
@@ -68,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="Token percent for public sale"
+                android:text="@string/label_token_percent_for_public_sale"
                 android:textColor="@color/text_regular"
                 android:textSize="16sp"/>
 
@@ -78,7 +77,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/regular"
-                android:text="80%"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/text_gray"
                 android:textSize="16sp"/>
@@ -100,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="Initial release after funding"
+                android:text="@string/label_initial_release_after_funding"
                 android:textColor="@color/text_regular"
                 android:textSize="16sp"/>
 
@@ -110,7 +108,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/regular"
-                android:text="10%"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/text_gray"
                 android:textSize="16sp"/>
@@ -132,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="Annual inflation rate"
+                android:text="@string/label_annual_inflation_rate"
                 android:textColor="@color/text_regular"
                 android:textSize="16sp"/>
 
@@ -142,7 +139,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/regular"
-                android:text="1-4%"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/text_gray"
                 android:textSize="16sp"/>

@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/medium"
-                android:text="Wallet"
+                android:text="@string/title_wallet"
                 android:textColor="@color/white"
                 android:textSize="24sp"/>
         </RelativeLayout>
@@ -66,7 +66,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
-                    android:text="yaroslavero1"
                     android:textColor="@color/text_title"
                     android:textSize="24sp"/>
 
@@ -77,8 +76,6 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/medium"
                     android:maxLines="2"
-                    android:text="SCR 10.0000
-EOS 12.0000"
                     android:textColor="@color/text_regular"
                     android:textSize="20sp"/>
 
@@ -144,7 +141,7 @@ EOS 12.0000"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
                             android:fontFamily="@font/regular"
-                            android:text="Transactions"
+                            android:text="@string/title_transactions"
                             android:textColor="@color/text_title"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -202,7 +199,7 @@ EOS 12.0000"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
                             android:fontFamily="@font/regular"
-                            android:text="Transfer"
+                            android:text="@string/title_transfer"
                             android:textColor="@color/text_title"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -255,7 +252,7 @@ EOS 12.0000"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
                             android:fontFamily="@font/regular"
-                            android:text="Wallet Data"
+                            android:text="@string/title_wallet_data"
                             android:textColor="@color/text_title"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -312,7 +309,7 @@ EOS 12.0000"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
                             android:fontFamily="@font/regular"
-                            android:text="Resources"
+                            android:text="@string/title_resources"
                             android:textColor="@color/text_title"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -370,7 +367,7 @@ EOS 12.0000"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
                             android:fontFamily="@font/regular"
-                            android:text="Exchange"
+                            android:text="@string/title_exchange"
                             android:textColor="@color/text_title"
                             android:textSize="14sp"/>
                     </LinearLayout>

@@ -32,7 +32,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="6 days left"
                     android:fontFamily="@font/medium"
                     android:textColor="@color/text_light"
                     android:textSize="12sp"/>
@@ -43,7 +42,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/bold"
-                    android:text="Me.guided"
                     android:textColor="@color/text_regular"
                     android:textSize="16sp"/>
             </RelativeLayout>
@@ -54,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="Our goal is to install a water pump in Malawi to empower villagers to build a better future for themselves."
                 android:textColor="@color/text_regular"
                 android:textSize="15sp"/>
 

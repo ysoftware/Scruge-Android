@@ -47,7 +47,7 @@
             android:layout_marginEnd="15dp"
             android:layout_toStartOf="@id/comment_send_view"
             android:fontFamily="@font/regular"
-            android:hint="Write a comment"
+            android:hint="@string/hint_write_a_comment"
             android:textColor="@color/text_regular"
             android:textSize="17sp"/>
 
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                android:text="SEND"
+                android:text="@string/do_send_cap"
                 android:textColor="@color/purple"/>
 
             <ProgressBar

@@ -25,7 +25,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bold"
-                android:text="Vote to extend deadline is taking place for Scruge"
                 android:textColor="@color/white"
                 android:textSize="22sp"/>
 
@@ -35,7 +34,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/regular"
-                android:text="10 hours to go"
                 android:textColor="@color/white"
                 android:textSize="14sp"/>
 

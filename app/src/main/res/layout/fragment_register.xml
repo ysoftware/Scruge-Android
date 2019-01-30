@@ -41,7 +41,7 @@
                         android:layout_gravity="center_vertical"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/regular"
-                        android:hint="Email address"
+                        android:hint="@string/hint_email_address"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:paddingStart="45dp"
@@ -72,7 +72,7 @@
                         android:layout_gravity="center_vertical"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/regular"
-                        android:hint="New password"
+                        android:hint="@string/hint_new_password"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:paddingStart="45dp"
@@ -103,7 +103,7 @@
                         android:layout_gravity="center_vertical"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/regular"
-                        android:hint="Confirm password"
+                        android:hint="@string/hint_confirm_password"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:paddingStart="45dp"
@@ -130,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="45dp"
                         android:fontFamily="@font/regular"
-                        android:text="Already have an account?"
+                        android:text="@string/label_already_have_an_account"
                         android:textAlignment="center"
                         android:textColor="@color/text_gray"
                         android:textSize="14sp"/>
@@ -142,7 +142,7 @@
                         android:layout_gravity="center_horizontal"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/medium"
-                        android:text="Log In"
+                        android:text="@string/do_log_in"
                         android:textAllCaps="false"
                         android:textColor="@color/purple"
                         android:textSize="16sp"/>
@@ -155,7 +155,7 @@
                         android:layout_gravity="center_horizontal"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/medium"
-                        android:text="Privacy policy"
+                        android:text="@string/do_privacy_policy"
                         android:textAllCaps="false"
                         android:textColor="@color/purple"
                         android:textSize="12sp"/>
@@ -163,7 +163,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
 
             <ImageView
                 android:id="@+id/logo"

@@ -47,7 +47,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bold"
-            android:text="Anonymous"
             android:textColor="@color/white"
             android:textSize="24sp"/>
 
@@ -58,7 +57,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/regular"
-            android:text="RUSSIA"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="14sp"/>
@@ -87,7 +85,6 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/regular"
-                android:text="email@scruge.world"
                 android:textAlignment="center"
                 android:textColor="@color/text_regular"
                 android:textSize="14sp"/>
@@ -105,7 +102,6 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/regular"
-                android:text="Russian mobile developer I is."
                 android:textAlignment="center"
                 android:textColor="@color/text_regular"
                 android:textSize="14sp"/>

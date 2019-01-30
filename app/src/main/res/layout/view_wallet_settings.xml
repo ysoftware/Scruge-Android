@@ -20,7 +20,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/medium"
-            android:text="Switch account"
+            android:text="@string/do_switch_eos_account"
             android:textColor="@color/text_regular"
             android:textSize="20sp"/>
 
@@ -38,7 +38,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/medium"
-            android:text="Delete Wallet"
+            android:text="@string/do_delete_wallet"
             android:textColor="#9b1c1c"
             android:textSize="20sp"/>
     </LinearLayout>

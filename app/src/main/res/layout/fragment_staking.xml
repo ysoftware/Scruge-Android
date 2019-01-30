@@ -40,7 +40,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/regular"
-                    android:text="Available 1.9900 EOS"
                     android:textColorHint="@color/text_title"
                     android:textSize="14sp"/>
 
@@ -54,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/regular"
-                        android:text="Stake CPU"
+                        android:text="@string/hint_stake_cpu"
                         android:textColorHint="@color/text_gray"
                         android:textSize="14sp"/>
 
@@ -84,7 +83,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="180dp"
                         android:fontFamily="@font/regular"
-                        android:text="EOS"
+                        android:text="@string/eos"
                         android:textColorHint="@color/text_gray"
                         android:textSize="14sp"/>
 
@@ -107,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/regular"
-                        android:text="Stake NET"
+                        android:text="@string/hint_stake_net"
                         android:textColorHint="@color/text_gray"
                         android:textSize="14sp"/>
 
@@ -137,7 +136,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="180dp"
                         android:fontFamily="@font/regular"
-                        android:text="EOS"
+                        android:text="@string/eos"
                         android:textColorHint="@color/text_gray"
                         android:textSize="14sp"/>
 
@@ -158,7 +157,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/regular"
-                    android:hint="Wallet password…"
+                    android:hint="@string/hint_wallet_password"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingBottom="5dp"

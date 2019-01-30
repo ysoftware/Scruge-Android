@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
-                android:text="Add your existing EOS blockchain account or create a new one to invest in projects!"
+                android:text="@string/label_wallet_start_text"
                 android:textAlignment="center"
                 android:textColor="@color/text_regular"
                 android:textSize="18sp"/>
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
                     android:fontFamily="@font/regular"
-                    android:text="Don't have a blockchain account?"
+                    android:text="@string/label_no_eos_account"
                     android:textAlignment="center"
                     android:textColor="@color/text_gray"
                     android:textSize="14sp"/>
@@ -55,7 +55,7 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/medium"
-                    android:text="Create Account"
+                    android:text="@string/do_create_account"
                     android:textAllCaps="false"
                     android:textColor="@color/purple"
                     android:textSize="16sp"/>
@@ -67,8 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/regular"
-                    android:text="All sensitive information is protected
-and follows the privacy policy"
+                    android:text="@string/label_protected_by_privacy_policy"
                     android:textAlignment="center"
                     android:textColor="@color/text_gray"
                     android:textSize="14sp"/>

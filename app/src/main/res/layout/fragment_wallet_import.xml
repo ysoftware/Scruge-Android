@@ -12,7 +12,7 @@
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical"
             android:padding="15dp">
@@ -36,7 +36,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/regular"
-                    android:hint="Private key"
+                    android:hint="@string/hint_private_key"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingStart="45dp"
@@ -67,7 +67,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/regular"
-                    android:hint="New password"
+                    android:hint="@string/hint_new_wallet_password"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingStart="45dp"
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/regular"
-                android:text="Don't have an EOS account?"
+                android:text="@string/label_no_eos_account"
                 android:textAlignment="center"
                 android:textColor="@color/text_gray"
                 android:textSize="14sp"/>
@@ -101,7 +101,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/medium"
-                android:text="Create Account"
+                android:text="@string/do_create_account"
                 android:textAllCaps="false"
                 android:textColor="@color/purple"
                 android:textSize="16sp"/>
