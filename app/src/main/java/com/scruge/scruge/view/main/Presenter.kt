@@ -3,9 +3,11 @@ package com.scruge.scruge.view.main
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Member
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.ui.activity.ActivityFragment
@@ -249,7 +251,7 @@ class Presenter {
 
     fun presentPrivacyPolicy(fragment: NavigationFragment) {
         val url = "https://scruge.world/privacy"
-        presentBrowser(fragment, url, "Privacy policy")
+        presentBrowser(fragment, url, R.string.title_privacy.string())
     }
 
     fun presentSettingsFragment(fragment: NavigationFragment, vm:ProfileVM) {
@@ -258,7 +260,9 @@ class Presenter {
         fragment.navigationController?.navigateTo(fr)
     }
 
-    fun presentBrowser(fragment: NavigationFragment, url: String, title:String = "Preview") {
+    fun presentBrowser(fragment: NavigationFragment,
+                       url: String,
+                       title:String = R.string.title_preview.string()) {
         val new = BrowserFragment()
         new.title = title
         new.url = url

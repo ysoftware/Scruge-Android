@@ -136,7 +136,7 @@
     <string name="transaction_invested_in_description">%1$s in %2$s</string>
     <string name="label_milestone_funds_release">Releasing next %1$s of funds</string>
 
-    <!-- from view code -->
+    <!-- from cell view code -->
     <string name="do_add_your_comment">Add your comment</string>
     <string name="label_voting_to_for">Voting to %1$s for %2$s</string>
     <string name="title_faq">Frequently answered questions</string>
@@ -150,5 +150,11 @@
     <string name="do_vote_against">VOTE AGAINST</string>
     <string name="label_vote_extend_description">Voting whether to extend deadlines of the milestone.</string>
     <string name="label_vote_release_description">Voting to accept milestone results and release next portions of funds to the founders of the campaign or to return remaining funds to backers and close the campaign.</string>
+
+
+    <!-- from main view code -->
+    <string name="title_preview">Preview</string>
+    <string name="title_privacy">Privacy Policy</string>
+    <string name="title_settings">Settings</string>
 
 </resources>

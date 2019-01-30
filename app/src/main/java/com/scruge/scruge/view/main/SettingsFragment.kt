@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.viewmodel.profile.ProfileVM
 import com.ysoftware.mvvm.array.ArrayViewModelDelegate
@@ -21,7 +22,7 @@ class SettingsFragment: NavigationFragment(), ArrayViewModelDelegate {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        title = "Settings"
+        title = R.string.title_settings.string()
         setupActions()
     }
 
