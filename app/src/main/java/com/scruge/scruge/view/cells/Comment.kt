@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.view.setHidden
 import com.scruge.scruge.dependencies.view.setImage
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.viewmodel.comment.CommentAVM
 import com.scruge.scruge.viewmodel.comment.CommentVM
@@ -26,14 +27,15 @@ class TopCommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 itemView.top_comment_profile_image.setImage(it)
             } ?: itemView.top_comment_profile_image.setImageDrawable(null)
 
-            itemView.top_comment_see_all.text = if (allCommentsCount == 1) "Add your comment"
-            else "See all $allCommentsCount comments"
+            itemView.top_comment_see_all.text =
+                    if (allCommentsCount == 1) R.string.do_add_your_comment.string()
+                    else "See all $allCommentsCount comments" // todo plurals
 
             itemView.top_comment_view.visibility = View.VISIBLE
             itemView.top_comment_no_view.visibility = View.GONE
         }
         else {
-            itemView.top_comment_see_all.text = "Add your comment"
+            itemView.top_comment_see_all.text = R.string.do_add_your_comment.string()
             itemView.top_comment_view.visibility = View.GONE
             itemView.top_comment_no_view.visibility = View.VISIBLE
         }

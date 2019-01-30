@@ -1,5 +1,9 @@
 <resources>
+
+    <!-- general -->
     <string name="app_name">Scruge</string>
+
+    <!-- from layout -->
     <string name="action_done_cap">DONE</string>
     <string name="title_about_the_team">About the team</string>
     <string name="do_reply">Reply</string>
@@ -114,6 +118,8 @@
     <string name="error_eos_eosAccountExists">EOS account with this name already exists</string>
     <string name="error_general_unexpected">Unexpected error</string>
     <string name="error_general_code">Error %1$s</string>
+
+    <!-- view model -->
     <string name="label_anonymous">Anonymous</string>
     <string name="label_ms_current">%1$sms / %2$sms</string>
     <string name="label_kb_current">%1$sKB / %2$sKB</string>
@@ -129,4 +135,20 @@
     <string name="transaction_received_from_description">%1$s from %2$s</string>
     <string name="transaction_invested_in_description">%1$s in %2$s</string>
     <string name="label_milestone_funds_release">Releasing next %1$s of funds</string>
+
+    <!-- from view code -->
+    <string name="do_add_your_comment">Add your comment</string>
+    <string name="label_voting_to_for">Voting to %1$s for %2$s</string>
+    <string name="title_faq">Frequently answered questions</string>
+    <string name="title_milestones">Milestones</string>
+    <string name="title_current_milestone">Current milestone</string>
+    <string name="title_next_milestone">Next milestone</string>
+    <string name="title_previous_milestone">Previous milestone</string>
+    <string name="title_future_milestone">Future milestone</string>
+    <string name="title_last_update">Last update</string>
+    <string name="do_vote_for">VOTE FOR</string>
+    <string name="do_vote_against">VOTE AGAINST</string>
+    <string name="label_vote_extend_description">Voting whether to extend deadlines of the milestone.</string>
+    <string name="label_vote_release_description">Voting to accept milestone results and release next portions of funds to the founders of the campaign or to return remaining funds to backers and close the campaign.</string>
+
 </resources>

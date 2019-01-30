@@ -2,9 +2,11 @@ package com.scruge.scruge.view.cells
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.dateToRelative
 import com.scruge.scruge.dependencies.view.setHidden
 import com.scruge.scruge.dependencies.view.setImage
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.model.entity.Voting
 import com.scruge.scruge.viewmodel.activity.ActivityType
@@ -20,8 +22,11 @@ class VoteNotificationCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setup(vote: Voting):VoteNotificationCell {
         this.voting = vote
-        val voteKindText = if (vote.voting.kind == VoteKind.extend.kind) "extend deadline" else "continue campaign"
-        itemView.cell_activity_vote_text.text = "Voting to $voteKindText for ${vote.campaign.title}"
+        val voteKindText =
+                if (vote.voting.kind == VoteKind.extend.kind) R.string.label_voting_to_extend.string()
+                else R.string.label_voting_to_release_funds.string()
+        itemView.cell_activity_vote_text.text = R.string.label_voting_to_for.string(voteKindText,
+                                                                                    vote.campaign.title)
         itemView.cell_activity_vote_date.text = dateToRelative(vote.voting.endTimestamp)
         return this
     }

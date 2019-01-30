@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.view.setupForHorizontalLayout
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.viewmodel.faq.FaqAVM
 import com.scruge.scruge.viewmodel.faq.FaqVM
 import com.scruge.scruge.viewmodel.milestone.MilestoneAVM
@@ -27,7 +28,7 @@ class PagingCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var didScroll = false
 
     fun setup(vm: FaqAVM):PagingCell {
-        itemView.paging_title.text = "Frequently answered questions"
+        itemView.paging_title.text = R.string.title_faq.string()
         faqVM = vm
         itemView.paging_indicator.count = vm.numberOfItems
         setupTable()
@@ -54,10 +55,10 @@ class PagingCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
                 if (milestoneVM != null) {
                     itemView.paging_title.text = when (position) {
-                        currentIndex -> "Current milestone"
-                        currentIndex + 1 -> "Next milestone"
-                        in 0 until currentIndex -> "Previous milestone"
-                        else -> "Future milestone"
+                        currentIndex -> R.string.title_current_milestone.string()
+                        currentIndex + 1 -> R.string.title_next_milestone.string()
+                        in 0 until currentIndex -> R.string.title_previous_milestone.string()
+                        else -> R.string.title_future_milestone.string()
                     }
                 }
             }
@@ -65,7 +66,7 @@ class PagingCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun setup(vm:MilestoneAVM, currentMilestone:MilestoneVM):PagingCell {
-        itemView.paging_title.text = "Milestones"
+        itemView.paging_title.text = R.string.title_milestones.string()
         milestoneVM = vm
         this.currentMilestone = currentMilestone
         setupTable()

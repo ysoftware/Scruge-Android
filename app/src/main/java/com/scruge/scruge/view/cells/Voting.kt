@@ -2,8 +2,10 @@ package com.scruge.scruge.view.cells
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.dependencies.view.Dimension
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.model.entity.VoteResult
 import com.scruge.scruge.view.views.ButtonView
@@ -46,10 +48,10 @@ class VoteInfoCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.vote_info_date.text = vm.daysLeft
 
         if (kind == VoteKind.extend) {
-            itemView.vote_info_description.text = "Voting whether to extend deadlines of the milestone."
+            itemView.vote_info_description.text = R.string.label_vote_extend_description.string()
         }
         else {
-            itemView.vote_info_description.text = "Voting to accept milestone results and release next portions of funds to the founders of the campaign or to return remaining funds to backers and close the campaign."
+            itemView.vote_info_description.text = R.string.label_vote_release_description.string()
         }
     }
 }
@@ -58,8 +60,8 @@ class VoteControlsCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setup(block:(String, Boolean)->Unit): VoteControlsCell {
         itemView.controls_yes.color = ButtonView.Color.green
-        itemView.controls_yes.title = "VOTE FOR"
-        itemView.controls_no.title = "VOTE AGAINST"
+        itemView.controls_yes.title = R.string.do_vote_for.string()
+        itemView.controls_no.title = R.string.do_vote_against.string()
 
         itemView.controls_no.click { block(itemView.controls_password.text.toString(), false) }
         itemView.controls_yes.click { block(itemView.controls_password.text.toString(), true) }
