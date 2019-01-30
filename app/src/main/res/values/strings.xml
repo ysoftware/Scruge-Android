@@ -114,4 +114,19 @@
     <string name="error_eos_eosAccountExists">EOS account with this name already exists</string>
     <string name="error_general_unexpected">Unexpected error</string>
     <string name="error_general_code">Error %1$s</string>
+    <string name="label_anonymous">Anonymous</string>
+    <string name="label_ms_current">%1$sms / %2$sms</string>
+    <string name="label_kb_current">%1$sKB / %2$sKB</string>
+    <string name="transaction_sent">Sent</string>
+    <string name="transaction_received">Received</string>
+    <string name="transaction_transfer">Transfer</string>
+    <string name="transaction_invested">Invested</string>
+    <string name="transaction_voted">Voted</string>
+    <string name="label_voting_to_extend">extend deadline</string>
+    <string name="label_voting_to_release_funds">release funds</string>
+    <string name="label_voting_participated">Participated in voting to %1$s for campaign %2$s</string>
+    <string name="transaction_sent_to_description">%1$s to %2$s</string>
+    <string name="transaction_received_from_description">%1$s from %2$s</string>
+    <string name="transaction_invested_in_description">%1$s in %2$s</string>
+    <string name="label_milestone_funds_release">Releasing next %1$s of funds</string>
 </resources>

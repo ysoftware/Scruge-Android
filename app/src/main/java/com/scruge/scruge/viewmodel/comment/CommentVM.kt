@@ -1,7 +1,9 @@
 package com.scruge.scruge.viewmodel.comment
 
 import android.net.Uri
+import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.datePresent
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Comment
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
@@ -10,7 +12,7 @@ import java.lang.Exception
 
 class CommentVM(model: Comment?) : ViewModel<Comment>(model) {
 
-    val authorName get() = model?.authorName ?: "Anonymous"
+    val authorName get() = model?.authorName ?: R.string.label_anonymous.string()
 
     val authorPhoto:Uri? get() = model?.authorAvatar?.let { try { Uri.parse(it) } catch(e:Exception) { null }}
 
@@ -27,7 +29,7 @@ class CommentVM(model: Comment?) : ViewModel<Comment>(model) {
     val repliesText:String? get() {
         return model?.repliesCount?.let { number ->
             if (number == 0) { return "" }
-            val replies = if (number == 1) "reply" else "replies"
+            val replies = if (number == 1) "reply" else "replies" // todo plurals
             return "See $number $replies"
         }
     }

@@ -10,10 +10,12 @@ import com.memtrip.eos.http.rpc.model.history.response.HistoricAccountAction
 import com.memtrip.eos.http.rpc.model.transaction.response.TransactionAct
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.datePresent
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.ActionReceipt
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.eos.EosName
+import com.scruge.scruge.support.App.Companion.context
 import com.ysoftware.mvvm.single.ViewModel
 
 class ActionVM(model: ActionReceipt?) : ViewModel<ActionReceipt>(model) {
@@ -46,11 +48,11 @@ class ActionVM(model: ActionReceipt?) : ViewModel<ActionReceipt>(model) {
         val type = ActionType.from(model.data.action_trace.act, accountName)
 
         return when (type) {
-            ActionType.sent -> "Sent"
-            ActionType.received -> "Received"
-            ActionType.transfer -> "transfer"
-            ActionType.invested -> "Invested"
-            ActionType.voted -> "Voted"
+            ActionType.sent -> R.string.transaction_sent.string()
+            ActionType.received -> R.string.transaction_received.string()
+            ActionType.transfer -> R.string.transaction_transfer.string()
+            ActionType.invested -> R.string.transaction_invested.string()
+            ActionType.voted -> R.string.transaction_voted.string()
             ActionType.other -> "${type.otherObject.account} -> ${type.otherObject.name}"
         }
     }
@@ -61,17 +63,23 @@ class ActionVM(model: ActionReceipt?) : ViewModel<ActionReceipt>(model) {
         val type = ActionType.from(model.data.action_trace.act, accountName)
 
         return when (type) {
-            ActionType.sent -> "${type.transferObj.quantity} to ${type.transferObj.to}"
-            ActionType.received -> "${type.transferObj.quantity} from ${type.transferObj.from}"
+            ActionType.sent ->
+                R.string.transaction_received_from_description.string(type.transferObj.quantity,
+                                                                      type.transferObj.to)
+            ActionType.received ->
+                R.string.transaction_received_from_description.string(type.transferObj.quantity,
+                                                                      type.transferObj.from)
             ActionType.transfer -> {
                 val tr = type.transferObj
                 "${tr.from} -> ${tr.to}: ${tr.quantity}"
             }
-            ActionType.invested -> "${type.amount} in ${type.campaignTitle}"
+            ActionType.invested ->
+                R.string.transaction_invested_in_description.string(type.amount, type.campaignTitle)
             ActionType.voted -> {
                 val ct = type.campaignTitle
-                val vt = if (type.voteKind == VoteKind.extend) "extend deadline" else "release funds"
-                "Participated in voting to $vt for campaign $ct"
+                val vt = if (type.voteKind == VoteKind.extend) R.string.label_voting_to_extend.string()
+                                        else R.string.label_voting_to_release_funds.string()
+                R.string.label_voting_participated.string(vt, ct)
             }
             ActionType.other -> null
         }
@@ -83,7 +91,7 @@ class ActionVM(model: ActionReceipt?) : ViewModel<ActionReceipt>(model) {
         val type = ActionType.from(model.data.action_trace.act, accountName)
 
         if (type == ActionType.other) {
-            return type.otherObject.data.toString()  // todo parse
+            return type.otherObject.data.toString()
         }
         else if (model.data.action_trace.act.name == "transfer") {
             if (type.transferObj.memo.isNotBlank()) {
@@ -122,7 +130,7 @@ enum class ActionType {
                         if (accountName == data.from) {
                             if (data.to == Service.eos.contractAccount.toString()) {
                                 val type = invested
-                                type.campaignTitle = "-campaign-"
+                                type.campaignTitle = "-campaign-" // todo
                                 type.amount = data.quantity
                                 return type
                             }
@@ -146,7 +154,7 @@ enum class ActionType {
             }
             else if (action.name == "vote" && action.account == Service.eos.contractAccount.toString()) {
                 val type = voted
-                type.campaignTitle = "-campaign-"
+                type.campaignTitle = "-campaign-" // todo
                 type.voteKind = VoteKind.extend // todo
                 return type
             }

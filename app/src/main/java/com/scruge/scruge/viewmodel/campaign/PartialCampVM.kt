@@ -28,5 +28,6 @@ class PartialCampaignVM(model: PartialCampaign?) : ViewModel<PartialCampaign>(mo
 
     override val softCap get() = model?.economics?.softCap ?: 0
 
+    // todo plurals
     override val daysLeft:String get() = model?.let { dateToRelative(it.endTimestamp, "ends", "ended") } ?: ""
 }

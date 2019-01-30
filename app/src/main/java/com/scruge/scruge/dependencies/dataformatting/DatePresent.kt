@@ -12,6 +12,7 @@ fun datePresent(milliseconds:Long, format:String):String {
     return SimpleDateFormat(format, Locale.ENGLISH).format(Date(milliseconds))
 }
 
+// todo plurals
 fun dateToRelative(milliseconds:Long, future:String = "", past:String = ""):String {
     val current = ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
     val string = if (Date().time > milliseconds) past else future
