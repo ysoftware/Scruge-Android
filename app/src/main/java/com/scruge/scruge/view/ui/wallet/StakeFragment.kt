@@ -10,6 +10,7 @@ import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.hideKeyboard
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.Api
@@ -52,26 +53,28 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
     private fun setupViews() {
         stake_resources_view.hideControls(true)
         stake_resources_view.hideRAM(true)
-        stake_button.title = "Send action"
+        stake_button.title = R.string.do_stake.string()
 
         stake_button.click {
             accountVM.model?.let { model ->
                 val cpuStr = stake_cpu_edit.text.toString()
                 val cpuString = if (cpuStr.isBlank()) "0" else cpuStr
-                val cpuValue = cpuString.toDoubleOrNull() ?: return@click alert("Incorrect CPU amount")
+                val cpuValue = cpuString.toDoubleOrNull()
+                        ?: return@click alert(R.string.error_wallet_invalid_amount.string())
                 if (cpuValue < 0.0001 && cpuValue != 0.0) {
-                    return@click alert("CPU staking amount is too low")
+                    return@click alert(R.string.error_wallet_invalid_amount.string())
                 }
 
                 val netStr = stake_net_edit.text.toString()
                 val netString = if (netStr.isBlank()) "0" else netStr
-                val netValue = netString.toDoubleOrNull() ?: return@click alert("Incorrect NET amount")
+                val netValue = netString.toDoubleOrNull()
+                        ?: return@click alert(R.string.error_wallet_invalid_amount.string())
                 if (netValue < 0.0001 && netValue != 0.0) {
-                    return@click alert("NET staking amount is too low")
+                    return@click alert(R.string.error_wallet_invalid_amount.string())
                 }
 
                 if (netValue == 0.0 && cpuValue == 0.0) {
-                    return@click alert("Incorrect staking amount")
+                    return@click alert(R.string.error_wallet_invalid_amount.string())
                 }
 
                 val systemToken = Service.eos.systemToken
@@ -82,7 +85,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 hideKeyboard()
                 Service.eos.stakeResources(model, cpu, net, passcode) { result ->
                     result.onSuccess {
-                        alert("Transaction was successful")
+                        alert(R.string.alert_transaction_success.string())
                         activity?.runOnUiThread {
                             navigationController?.navigateBack()
                         }
@@ -97,7 +100,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
     private fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = true
         shouldHideNavigationBar = false
-        title = "Stake Resources"
+        title = R.string.title_manage_resources.string()
     }
 
     private fun updateViews() {
@@ -109,12 +112,9 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
         accountVM.name?.let {
             Service.eos.getBalance(it, listOf(systemToken)) { response ->
                 activity?.runOnUiThread {
-                    stake_avail.text = if (it.toString().isNotEmpty()) {
-                        "${response.first()} available"
-                    }
-                    else {
-                        "${Balance(systemToken, 0.0)} available"
-                    }
+                    val tokens = if (it.toString().isNotEmpty()) response.first().toString()
+                    else Balance(systemToken, 0.0).toString()
+                    stake_avail.text = R.string.tokens_available.string(tokens)
                 }
             }
         }

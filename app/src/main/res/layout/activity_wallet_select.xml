@@ -10,9 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:fontFamily="@font/regular"
-        android:text="Select an account that you want to make investments with and receive ICO tokens on.
-
-You will not be able to change it after you make first investment."
+        android:text="@string/label_wallet_picker_info"
         android:textAlignment="center"
         android:textColor="@color/text_gray"
         android:textSize="16sp"/>

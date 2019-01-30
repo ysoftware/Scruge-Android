@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
@@ -50,7 +51,7 @@ class UpdatesFragment : NavigationFragment(), ArrayViewModelDelegate {
 
     private fun setupNavigationBar() {
         shouldHideNavigationBar = false
-        title = "Updates"
+        title = R.string.title_updates.string()
     }
 
     private fun setupTable() {
@@ -74,7 +75,7 @@ class UpdatesFragment : NavigationFragment(), ArrayViewModelDelegate {
                 updates_refresh_control.isRefreshing = false
                 if (vm.isEmpty()) {
                     updates_loading_view.state = ViewState.error
-                    updates_loading_view.state.errorMessage = "No comments"
+                    updates_loading_view.state.errorMessage = R.string.error_no_comments.string()
                 }
                 else {
                     updates_loading_view.state = ViewState.ready

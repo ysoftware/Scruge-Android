@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
-import com.scruge.scruge.dependencies.view.alert
-import com.scruge.scruge.dependencies.view.ask
-import com.scruge.scruge.dependencies.view.isHidden
-import com.scruge.scruge.dependencies.view.toggleHidden
+import com.scruge.scruge.dependencies.view.*
 import com.scruge.scruge.services.Service
 import kotlinx.android.synthetic.main.fragment_wallet_no_accounts.*
 
@@ -42,11 +39,11 @@ class WalletNoAccountFragment: NavigationFragment() {
     }
 
     private fun setupViews() {
-        wallet_no_accounts_button.title = "CREATE ACCOUNT"
+        wallet_no_accounts_button.title = R.string.do_create_account.string().toUpperCase()
     }
 
     private fun setupNavigationBar() {
-        title = "Wallet"
+        title = R.string.title_wallet.string()
     }
 
     private fun setupActions() {
@@ -56,12 +53,14 @@ class WalletNoAccountFragment: NavigationFragment() {
             wallet_no_accounts_data.toggleHidden()
             wallet_no_accounts_data.updateViews()
             wallet_no_accounts_data.lock()
-            wallet_no_accounts_export.text = if (wallet_no_accounts_data.isHidden) "See wallet data" else "Hide wallet data"
+            wallet_no_accounts_export.text =
+                    if (wallet_no_accounts_data.isHidden) R.string.do_see_wallet_data.string()
+                    else R.string.do_hide_wallet_data.string()
         }
 
         wallet_no_accounts_remove.setOnClickListener {
-            val t = "Are you sure to delete your wallet information?"
-            val q = "Make sure to export your private key first because there is no way it can be retrieved later."
+            val t = R.string.title_sure_to_delete_wallet.string()
+            val q = R.string.label_sure_to_delete_wallet.string()
 
             ask(t, q) { r ->
                 if (r) {
@@ -72,7 +71,7 @@ class WalletNoAccountFragment: NavigationFragment() {
         }
         wallet_no_accounts_button.click {
             if (!Service.tokenManager.hasToken) {
-                return@click alert("Please sign in with your Scruge account first.")
+                return@click alert(R.string.alert_sign_in_first.string())
             }
             Service.presenter.presentCreateAccountFragment(this)
         }

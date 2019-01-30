@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.entity.Voting
 import com.scruge.scruge.model.error.ErrorHandler
@@ -40,7 +41,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        title = "Activity"
+        title = R.string.title_activity.string()
         setupVM()
         setupTable()
     }
@@ -109,7 +110,7 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
                 refresh_control.isRefreshing = false
                 if (vm.numberOfItems == 0) {
                     loading_view.state = ViewState.error
-                    loading_view.state.errorMessage = "No updates"
+                    loading_view.state.errorMessage = R.string.error_activity_noActions.string()
                 }
                 else {
                     loading_view.state = ViewState.ready

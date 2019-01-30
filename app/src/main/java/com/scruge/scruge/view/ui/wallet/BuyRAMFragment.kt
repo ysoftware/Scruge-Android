@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.account.AccountVM
 import com.ysoftware.mvvm.array.ArrayViewModelDelegate
@@ -40,7 +41,7 @@ class BuyRAMFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = false
         shouldHideNavigationBar = true
-        title = "Buy RAM"
+        title = R.string.title_buy_ram.string()
     }
 
     fun setupVM() {

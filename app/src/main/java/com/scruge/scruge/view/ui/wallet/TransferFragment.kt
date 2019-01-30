@@ -11,8 +11,10 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.hideKeyboard
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.model.error.EOSError
+import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.Settings
 import com.scruge.scruge.services.eos.Token
@@ -56,7 +58,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
     fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = true
         shouldHideNavigationBar = false
-        title = "Transfer tokens"
+        title = R.string.title_transfer_tokens.string()
     }
 
     private fun setupActions() {
@@ -73,7 +75,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
             val i = transfer_spinner.selectedItemPosition
 
             if (balances.size <= i) {
-                alert("An error occured. Select correct token to transfer")
+                alert(R.string.alert_select_correct_token.string())
                 if (balances.isNotEmpty()) {
                     transfer_spinner.setSelection(0)
                     transfer_balance_label.text = balances[0].toString()
@@ -90,26 +92,26 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
             val passcode = transfer_passcode.text.toString()
 
             val amount = transfer_amount.text.toString().toDoubleOrNull()
-                ?: return@click alert("Incorrect amount value")
+                ?: return@click alert(EOSError.incorrectToken)
 
             val account = accountVM.model
-                    ?: return@click alert("An error occured")
+                    ?: return@click alert(WalletError.unknown)
 
             val recipient = name.toEosName() ?: return@click alert(EOSError.incorrectName)
 
             if (amount < 0.0001) {
-                return@click alert("Incorrect amount value")
+                return@click alert(R.string.error_wallet_invalid_amount.string())
             }
 
             if (passcode.isEmpty()) {
-                return@click alert("Enter your wallet password")
+                return@click alert(R.string.error_wallet_enter_wallet_password.string())
             }
 
 
             val balance = Balance(token, amount)
             Service.eos.sendMoney(account, recipient, balance, memo, passcode) { result ->
                 result.onSuccess {
-                    alert("Transaction was successful") {
+                    alert(R.string.alert_transaction_success.string()) {
                         navigationController?.navigateBack()
                     }
                 }.onFailure {
@@ -120,7 +122,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
     }
 
     private fun setupViews() {
-        transfer_button.title = "Transfer"
+        transfer_button.title = R.string.do_transfer_tokens.string()
 
         transfer_account_name.text = accountVM.displayName
 
@@ -136,7 +138,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
                 balances = response.filter { it.amount != 0.0 }.distinct()
 
                 if (balances.isEmpty()) {
-                    alert("You don't seem to have any transferable tokens") {
+                    alert(R.string.error_wallet_no_transferable_tokens.string()) {
                         navigationController?.navigateBack()
                     }
                     return@getBalance

@@ -176,8 +176,8 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     private fun deleteWallet() {
-        val t = "Are you sure to delete your wallet information?"
-        val q = "Make sure to export your private key first because there is no way it can be retrieved later."
+        val t = R.string.title_sure_to_delete_wallet.string()
+        val q = R.string.label_sure_to_delete_wallet.string()
 
         ask(t, q) { r ->
             if (r) {

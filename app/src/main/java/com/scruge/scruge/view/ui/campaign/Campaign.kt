@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.Dimension
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.cells.*
@@ -141,28 +143,28 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                 }
                 else {
                     if (vm.canVote) {
-                        campaign_button.text = "Vote"
+                        campaign_button.text = R.string.do_vote.string()
                     }
                     else {
-                        campaign_button.text = "View Voting Progress"
+                        campaign_button.text = R.string.do_view_voting_progress.string()
                     }
                 }
             }
             CampaignVM.Status.closed -> {
-                campaign_button.setBackgroundColor(resources.getColor(R.color.gray))
-                campaign_button.text = "Campaign over"
+                campaign_button.setBackgroundColor(ContextCompat.getColor(campaign_button.context, R.color.gray))
+                campaign_button.text = R.string.button_campaign_over.string()
             }
             CampaignVM.Status.funding -> {
                 if (Service.tokenManager.hasToken) {
-                    campaign_button.text = "Contribute"
+                    campaign_button.text = R.string.do_contribute.string()
                 }
                 else {
-                    campaign_button.text = "Sign in to contribute"
+                    campaign_button.text = R.string.do_sign_in_to_contribute.string()
                 }
             }
             CampaignVM.Status.preparing -> {
                 campaign_button.setBackgroundColor(resources.getColor(R.color.gray))
-                campaign_button.text = "Starts on ${vm.startDate}"
+                campaign_button.text = R.string.button_campaign_starts_on.string(vm.startDate)
             }
             else -> showContributionButton(false)
         }

@@ -8,6 +8,7 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.formatDecimal
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.view.views.ButtonView
 import com.scruge.scruge.viewmodel.account.AccountAVM
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
@@ -45,7 +46,7 @@ class ContributeFragment : NavigationFragment() {
     }
 
     private fun setupButton() {
-        contribute_button_pay.title = "PAY"
+        contribute_button_pay.title = R.string.do_pay_cap.string()
         contribute_button_pay.color = ButtonView.Color.gray
     }
 
@@ -65,19 +66,19 @@ class ContributeFragment : NavigationFragment() {
 
     private fun setupNavigationBar() {
         shouldHideNavigationBar = false
-        title = "Invest in ${vm.title}"
+        title = R.string.do_invest_in.string(vm.title)
     }
 
     private fun setupInformation() {
         vm.loadAmountContributed {
             it?.let {
                 val usd = convertToUSD(it).roundToLong().toDouble().formatDecimal(" ")
-                contribute_info.text = "You have already contributed $$usd in this project"
+                contribute_info.text = R.string.label_you_have_contributed_usd.string(usd)
                 contribute_info.visibility = if (it != 0.0) View.VISIBLE else View.GONE
                 return@loadAmountContributed
-            } ?: alert("You don't seem to have any transferable tokens")
+            } ?: alert(R.string.error_wallet_no_transferable_tokens.string())
         }
-        contribute_title.text = "Investing in ${vm.title}"
+        contribute_title.text = R.string.label_investing_in.string(vm.title)
     }
 
     // METHODS
@@ -86,15 +87,15 @@ class ContributeFragment : NavigationFragment() {
         if (!checked) { return }
 
         val account = accountVM.selectedAccount
-                ?: return alert("You don't have your blockchain account set up")
+                ?: return alert(R.string.error_wallet_not_setup.string())
 
         val amountSCR = amountSCR
-                 ?: return alert("Enter valid contribution amount")
+                 ?: return alert(R.string.error_wallet_invalid_amount.string())
 
         val passcode = contribute_password.text.toString()
 
         if (passcode.isEmpty()) {
-            return alert("Enter your wallet password")
+            return alert(R.string.error_wallet_enter_wallet_password.string())
         }
 
         vm.contribute(amountSCR, account, passcode) { error ->
@@ -102,7 +103,7 @@ class ContributeFragment : NavigationFragment() {
                 alert(error)
             }
             else {
-                alert("Transaction was successful") {
+                alert(R.string.alert_transaction_success.string()) {
                     navigationController?.navigateBack()
                 }
             }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
@@ -99,7 +100,7 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
                 refresh_control.isRefreshing = false
                 if (vm.numberOfItems == 0) {
                     loading_view.state = ViewState.error
-                    loading_view.state.errorMessage = "No campaigns were found for your request"
+                    loading_view.state.errorMessage = R.string.error_no_campaigns_found.string()
                 }
                 else {
                     loading_view.state = ViewState.ready

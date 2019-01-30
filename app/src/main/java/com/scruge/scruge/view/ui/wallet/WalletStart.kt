@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.services.Service
 import kotlinx.android.synthetic.main.fragment_wallet_start.*
 
@@ -29,11 +30,11 @@ class WalletStartFragment: NavigationFragment() {
     }
 
     private fun setupViews() {
-        wallet_start_button.title = "ADD ACCOUNT"
+        wallet_start_button.title = R.string.do_import_key.string()
     }
 
     private fun setupNavigationBar() {
-        title = "Wallet"
+        title = R.string.title_wallet.string()
     }
 
     private fun setupActions() {
@@ -42,7 +43,7 @@ class WalletStartFragment: NavigationFragment() {
 
         wallet_start_create.setOnClickListener {
             if (!Service.tokenManager.hasToken) {
-                return@setOnClickListener alert("Please sign in with your Scruge account first")
+                return@setOnClickListener alert(R.string.alert_sign_in_first.string())
             }
             Service.presenter.presentCreateAccountFragment(this)
         }

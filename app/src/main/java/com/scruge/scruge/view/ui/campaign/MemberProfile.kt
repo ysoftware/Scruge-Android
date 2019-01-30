@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.setImage
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Member
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.cells.SocialAdapter
-import com.scruge.scruge.view.main.TabbarActivity
-import com.ysoftware.mvvm.single.ViewModel
-import com.ysoftware.mvvm.single.ViewModelDelegate
 import kotlinx.android.synthetic.main.fragment_member_profile.*
 
 
@@ -49,7 +46,7 @@ class MemberProfileFragment : NavigationFragment() {
 
     private fun setupNavigationBar() {
         shouldHideNavigationBar = true
-        title = "Team member"
+        title = R.string.title_team_member.string()
     }
 
     private fun refreshProfile() {

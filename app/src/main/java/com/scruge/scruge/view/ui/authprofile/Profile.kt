@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.setImage
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.profile.ProfileVM
@@ -58,9 +59,11 @@ class ProfileFragment: NavigationFragment(), ViewModelDelegate {
 
     private fun refreshProfile() {
         profile_email.text = vm.email
-        profile_name.text = if (vm.name.isBlank()) "Anonymous" else vm.name
+        profile_name.text = if (vm.name.isBlank()) R.string.label_anonymous.string() else vm.name
         profile_location.text = vm.country
-        profile_about.text = if (vm.description.isBlank()) "No information provided" else vm.description
+        profile_about.text = 
+                if (vm.description.isBlank()) R.string.label_profile_no_information.string()
+                else vm.description
         profile_image.setImage(vm.imageUrl)
     }
 }

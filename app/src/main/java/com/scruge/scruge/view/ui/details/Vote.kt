@@ -9,6 +9,7 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.VoteInfo
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.view.cells.*
@@ -81,7 +82,7 @@ class VoteFragment: NavigationFragment(), ViewModelDelegate {
     private fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = true
         shouldHideNavigationBar = false
-        title = "Vote"
+        title = R.string.title_vote.string()
     }
 
     private fun loadVote() {
@@ -97,10 +98,10 @@ class VoteFragment: NavigationFragment(), ViewModelDelegate {
     }
 
     private fun vote(value:Boolean, passcode:String) {
-        val account = accountVM.selectedAccount ?: return alert("You don't have your blockchain account setup")
+        val account = accountVM.selectedAccount ?: return alert(R.string.error_wallet_not_setup.string())
 
         if (passcode.isEmpty()) {
-            return alert("Enter your wallet passcode")
+            return alert(R.string.error_wallet_enter_wallet_password.string())
         }
 
         vm.vote(value, account, passcode) { error ->
@@ -108,7 +109,7 @@ class VoteFragment: NavigationFragment(), ViewModelDelegate {
                 alert(error)
             }
             else {
-                alert("Transaction was successful") { navigationController?.navigateBack() }
+                alert(R.string.alert_transaction_success.string()) { navigationController?.navigateBack() }
             }
         }
     }
@@ -150,7 +151,7 @@ class VoteFragment: NavigationFragment(), ViewModelDelegate {
                     }
                 }
                 Block.update -> fr.vm.lastUpdateVM?.let {
-                    (holder as? LastUpdateCell)?.setup(it, "Rationale: ")
+                    (holder as? LastUpdateCell)?.setup(it, R.string.title_rationale.string())
                             ?.updateTap { update ->
 
                             }
@@ -159,7 +160,8 @@ class VoteFragment: NavigationFragment(), ViewModelDelegate {
                             }
                 }
                 Block.countdown ->
-                    (holder as? CountdownCell)?.setup("Vote ends in: ", fr.voting?.endTimestamp ?: 0)
+                    (holder as? CountdownCell)?.setup(R.string.title_vote_ends_in.string(),
+                                                      fr.voting?.endTimestamp ?: 0)
                 Block.controls ->
                     (holder as? VoteControlsCell)?.setup { passcode, value ->
                         fr.vote(value, passcode)

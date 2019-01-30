@@ -9,6 +9,7 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.VoteInfo
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.model.entity.VoteResult
@@ -79,7 +80,7 @@ class VoteResultFragment: NavigationFragment(), ViewModelDelegate {
     private fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = true
         shouldHideNavigationBar = false
-        title = "Voting Progress"
+        title = R.string.title_voting_progress.string()
     }
 
     private fun loadResult() {
@@ -121,7 +122,8 @@ class VoteResultFragment: NavigationFragment(), ViewModelDelegate {
             when (block) {
                 Block.info -> (holder as? VoteInfoCell)?.setup(fr.vm, VoteKind.from(fr.voteResult?.kind ?: 0))
                 Block.countdown ->
-                    (holder as? CountdownCell)?.setup("Vote ends in: ", fr.voteResult?.endTimestamp ?: 0)
+                    (holder as? CountdownCell)?.setup(R.string.title_vote_ends_in.string(),
+                                                      fr.voteResult?.endTimestamp ?: 0)
                 Block.result -> (holder as? VoteResultCell)?.setup(fr.voteResult)
             }
         }

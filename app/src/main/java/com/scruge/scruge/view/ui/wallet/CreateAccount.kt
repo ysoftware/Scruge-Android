@@ -9,12 +9,10 @@ import com.memtrip.eos.core.crypto.EosPrivateKey
 import com.memtrip.eos.core.crypto.EosPublicKey
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
-import com.scruge.scruge.dependencies.view.alert
-import com.scruge.scruge.dependencies.view.ask
-import com.scruge.scruge.dependencies.view.hideKeyboard
-import com.scruge.scruge.dependencies.view.setHidden
+import com.scruge.scruge.dependencies.view.*
 import com.scruge.scruge.model.error.EOSError
 import com.scruge.scruge.model.error.ErrorHandler
+import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.services.eos.toEosName
@@ -40,9 +38,9 @@ class CreateAccountFragment: NavigationFragment() {
     }
 
     private fun setupViews() {
-        wallet_create_save.title = "REGISTER"
-        val generate = "Generate a new keypair and we will use it to create a new EOS account for you"
-        val imported = "Use the imported key to create a new EOS account"
+        wallet_create_save.title = R.string.do_create_account_cap.string()
+        val generate = R.string.label_create_account_generate_text.string()
+        val imported = R.string.label_create_account_use_imported_text.string()
 
         wallet_create_password_view.setHidden(Service.wallet.hasAccount)
         wallet_create_confirm_view.setHidden(Service.wallet.hasAccount)
@@ -52,8 +50,8 @@ class CreateAccountFragment: NavigationFragment() {
     private fun setupActions() {
         wallet_create_save.click { save() }
         wallet_create_import.setOnClickListener {
-            val t = "Are you sure to delete your wallet information?"
-            val q = "Make sure to export your private key first because there is no way it can be retrieved later."
+            val t = R.string.title_sure_to_delete_wallet.string()
+            val q = R.string.label_sure_to_delete_wallet.string()
 
             if (Service.wallet.hasAccount) {
                 ask(t, q) { r ->
@@ -71,7 +69,7 @@ class CreateAccountFragment: NavigationFragment() {
     }
 
     private fun setupNavigationBar() {
-        title = "Create EOS Account"
+        title = R.string.title_create_eos_account.string()
     }
 
     private lateinit var publicKey:EosPublicKey
@@ -93,7 +91,7 @@ class CreateAccountFragment: NavigationFragment() {
     }
 
     private fun showKey() {
-        wallet_create_key.text = "Public key:\n$publicKey"
+        wallet_create_key.text = R.string.public_key_display.string(publicKey.toString())
     }
 
     private fun newKeypair() {
@@ -104,7 +102,7 @@ class CreateAccountFragment: NavigationFragment() {
 
     private fun save() {
         if (!Service.tokenManager.hasToken) {
-            return alert("Please sign in with your Scruge account first")
+            return alert(R.string.alert_sign_in_first.string())
         }
 
         val name = wallet_create_name.text.toString()
@@ -112,28 +110,28 @@ class CreateAccountFragment: NavigationFragment() {
         val confirm = wallet_create_confirm.text.toString()
 
         if (name.isBlank())
-            return alert("Enter new account name")
+            return alert(R.string.error_enter_eos_account_name.string())
 
         if (name.length != 12)
-            return alert("New account name has to be exactly 12 symbols long")
+            return alert(R.string.error_eos_account_length.string())
 
         val eosName = name.toEosName() ?: return alert(EOSError.incorrectName)
 
         if (name.contains("."))
-            return alert("We can not create an account name that contains a dot")
+            return alert(R.string.error_eos_account_cant_contain_dot.string())
 
         privateKey?.let {
 
-            if (passcode.isEmpty()) return alert("Enter your new passcode")
+            if (passcode.isEmpty()) return alert(R.string.error_enter_new_password.string())
 
-            if (passcode != confirm) return alert("Passwords do not match")
+            if (passcode != confirm) return alert(R.string.error_register_passwords_do_not_match.string())
 
             Service.wallet.importKey(it.toString(), passcode) {
                 if (it != null) {
                     createAccount(eosName, it.publicKey)
                 }
                 else {
-                    alert("An error occured. Please try again")
+                    alert(WalletError.unknown)
                 }
             }
         } ?: createAccount(eosName, publicKey)
@@ -148,7 +146,7 @@ class CreateAccountFragment: NavigationFragment() {
                     return@onSuccess alert(it)
                 }
                 Service.settings.setDidCreateEosAccount()
-                alert("Your account have been created.\n\nMake sure to save your private publicKey in a safe place!\n\nIf you lose the publicKey, your account will be lost forever!")
+                alert(R.string.alert_eos_account_created.string())
                 Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 1000)
             }.onFailure {
                 alert(ErrorHandler.message(it))

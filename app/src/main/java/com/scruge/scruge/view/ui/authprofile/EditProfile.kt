@@ -8,10 +8,6 @@ import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
-import com.scruge.scruge.dependencies.view.alert
-import com.scruge.scruge.dependencies.view.ask
-import com.scruge.scruge.dependencies.view.hideKeyboard
-import com.scruge.scruge.dependencies.view.setImage
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.viewmodel.profile.ProfileVM
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
@@ -21,6 +17,7 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.MediaStore
+import com.scruge.scruge.dependencies.view.*
 import com.scruge.scruge.view.main.TabbarActivity
 
 class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPressedListener {
@@ -53,7 +50,8 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
     }
 
     private fun setupViews() {
-        edit_profile_button.title = if (editingProfile == null) "create profile" else "update profile"
+        edit_profile_button.title = if (editingProfile == null) R.string.do_create_profile.string()
+        else R.string.do_update_profile.string()
     }
 
     private fun setupActions() {
@@ -69,7 +67,7 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
 
     private fun setupEditing() {
         editingProfile?.let { vm ->
-            edit_profile_name.setText(if (vm.name.isBlank()) "Anonymous" else vm.name)
+            edit_profile_name.setText(if (vm.name.isBlank()) R.string.label_anonymous.string() else vm.name)
             edit_profile_location.setText(vm.country)
             edit_profile_about.setText(vm.description)
             edit_profile_image.setImage(vm.imageUrl, hideOnFail = false)
@@ -101,7 +99,7 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
     override fun onBackPressedHandled(): Boolean {
         if (editingProfile != null) { return false }
 
-        ask(question = "Are you sure that you want to quit?") { reply ->
+        ask(question = R.string.label_sure_to_quit.string()) { reply ->
             if (reply) {
                 Service.tokenManager.removeToken()
                 navigationController?.navigateBack()

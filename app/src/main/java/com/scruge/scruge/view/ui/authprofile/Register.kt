@@ -9,6 +9,8 @@ import com.scruge.scruge.dependencies.dataformatting.isValidEmail
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.hideKeyboard
+import com.scruge.scruge.dependencies.view.string
+import com.scruge.scruge.model.error.AuthError
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.main.AuthActivity
@@ -37,7 +39,7 @@ class RegisterFragment: NavigationFragment() {
     }
 
     private fun setupViews() {
-        register_button.title = "Sign Up"
+        register_button.title = R.string.title_sign_up.string()
     }
 
     private fun setupActions() {
@@ -85,28 +87,28 @@ class RegisterFragment: NavigationFragment() {
     }
 
     private fun validate():Boolean {
-        if (email.isEmpty()) {
-            alert("Enter your email")
+        if (password != passwordConfirm) {
+            alert(R.string.error_register_passwords_do_not_match.string())
+            return false
+        }
+
+        if (email.isBlank()) {
+            alert(R.string.error_login_enter_email.string())
             return false
         }
 
         if (password.isEmpty()) {
-            alert("Enter your password")
-            return false
-        }
-
-        if (password != passwordConfirm) {
-            alert("Passwords do not match")
+            alert(R.string.error_login_enter_password.string())
             return false
         }
 
         if (!email.isValidEmail()) {
-            alert("Email is not valid")
+            alert(AuthError.invalidEmail)
             return false
         }
 
         if (password.length <= 6) {
-            alert("Password is too short")
+            alert(AuthError.incorrectPasswordLength)
             return false
         }
 

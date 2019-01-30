@@ -10,6 +10,7 @@
     <string name="title_place_your_vote">Place your vote</string>
     <string name="hint_wallet_password">Wallet password</string>
     <string name="title_vote_ends_in">Vote ends in:</string>
+    <string name="title_rationale">Rationale:</string>
     <string name="timer_days">Days</string>
     <string name="timer_hours">Hours</string>
     <string name="timer_minutes">Minutes</string>
@@ -26,6 +27,7 @@
     <string name="label_ok">OK</string>
     <string name="hint_write_a_comment">Write a comment</string>
     <string name="do_send_cap">SEND</string>
+    <string name="do_send">Send</string>
     <string name="label_i_agree_terms">I agree to the terms of the offer and take all the risks on myself</string>
     <string name="hint_email_address">Email address</string>
     <string name="hint_password">Password</string>
@@ -165,4 +167,72 @@
     <string name="alert_private_key_warning">Be careful not to share your private key with anyone!</string>
     <string name="alert_copied_to_clipboard">Copied to clipboard</string>
 
+    <!-- from ui view code -->
+    <string name="title_activity">Activity</string>
+    <string name="error_activity_noActions">No recent actions</string>
+    <string name="do_create_profile">create profile</string>
+    <string name="do_update_profile">update profile</string>
+    <string name="label_sure_to_quit">Are you sure that you want to quit?</string>
+    <string name="error_login_enter_email">Enter your email</string>
+    <string name="error_login_enter_password">Enter your password</string>
+    <string name="title_reset_password">Reset password</string>
+    <string name="label_enter_your_email">Enter your email</string>
+    <string name="label_reset_password_message">Check your email address for the letter with password recovery instructions</string>
+    <string name="label_profile_no_information">No information provided</string>
+    <string name="title_sign_up">Sign Up</string>
+    <string name="error_register_passwords_do_not_match">Passwords do not match</string>
+    <string name="title_team_member">Team member</string>
+    <string name="error_no_campaigns_found">No campaigns were found for your request</string>
+    <string name="do_vote">Vote</string>
+    <string name="do_view_voting_progress">View Voting Progress</string>
+    <string name="button_campaign_over">Campaign over</string>
+    <string name="do_contribute">Contribute</string>
+    <string name="do_sign_in_to_contribute">Sign in to contribute</string>
+    <string name="button_campaign_starts_on">Starts on %1$s</string>
+    <string name="alert_transaction_success">Transaction was successful</string>
+    <string name="error_wallet_enter_wallet_password">Enter your wallet password</string>
+    <string name="error_wallet_not_setup">You don\'t have your blockchain account set up</string>
+    <string name="error_wallet_invalid_amount">Enter valid amount</string>
+    <string name="label_you_have_contributed_usd">You have already contributed $%1$s in this project</string>
+    <string name="label_investing_in">Investing in %1$s</string>
+    <string name="error_wallet_no_transferable_tokens">You don\'t seem to have any transferable tokens</string>
+    <string name="do_invest_in">Invest in %1$s</string>
+    <string name="do_pay_cap">PAY</string>
+    <string name="title_faq_single">Frequently answered question</string>
+    <string name="title_milestone_single">Milestone</string>
+    <string name="title_updates">Updates</string>
+    <string name="error_no_comments">No comments</string>
+    <string name="title_vote">Vote</string>
+    <string name="title_voting_progress">Voting Progress</string>
+    <string name="title_buy_ram">Buy RAM</string>
+    <string name="label_wallet_picker_info">Select an account that you want to make investments with and receive ICO tokens on. You will not be able to change it after you make first investment.</string>
+    <string name="do_hide_wallet_data">Hide wallet data</string>
+    <string name="title_sure_to_delete_wallet">Are you sure to delete your wallet information?</string>
+    <string name="label_sure_to_delete_wallet">Make sure to export your private key first because there is no way it can be retrieved later.</string>
+    <string name="alert_sign_in_first">Please sign in with your Scruge account first</string>
+    <string name="title_transfer_tokens">Transfer tokens</string>
+    <string name="alert_select_correct_token">An error occured. Select correct token to transfer</string>
+    <string name="do_transfer_tokens">Transfer</string>
+    <string name="title_manage_resources">Manage Resources</string>
+    <string name="tokens_available">%1$s available</string>
+    <string name="do_stake">Stake Resources</string>
+    <string name="do_import_key">IMPORT KEY</string>
+    <string name="title_import_private_key">Import Private Key</string>
+    <string name="error_enter_private_key">Enter your private key</string>
+    <string name="error_incorrect_key_format">Incorrect format of private key</string>
+    <string name="error_couldnt_import_private_key">Could not import this key</string>
+    <string name="do_create_account_cap">CREATE ACCOUNT</string>
+    <string name="label_create_account_generate_text">Generate a new keypair and we will use it to create a new EOS account for you</string>
+    <string name="label_create_account_use_imported_text">Use the imported key to create a new EOS account</string>
+    <string name="title_create_eos_account">Create EOS Account</string>
+    <string name="error_enter_new_password">Enter your new passcode</string>
+    <string name="error_eos_account_cant_contain_dot">We can not create an account name that contains a dot</string>
+    <string name="error_eos_account_length">New account name has to be exactly 12 symbols long</string>
+    <string name="error_enter_eos_account_name">Enter new account name</string>
+    <string name="alert_eos_account_created">Your account have been created.
+
+Make sure to save your private publicKey in a safe place!
+
+If you lose the publicKey, your account will be lost forever!</string>
+    <string name="public_key_display">Public key: %1$s</string>
 </resources>

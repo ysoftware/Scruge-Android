@@ -10,6 +10,7 @@ import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.askForInput
 import com.scruge.scruge.dependencies.view.hideKeyboard
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.error.AuthError
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
@@ -40,7 +41,7 @@ class LoginFragment: NavigationFragment() {
     }
 
     private fun setupViews() {
-        login_button.title = "Log In"
+        login_button.title = R.string.do_log_in.string()
     }
 
     private fun setupActions() {
@@ -57,13 +58,18 @@ class LoginFragment: NavigationFragment() {
         login_forgot.setOnClickListener {
             hideKeyboard()
 
-            askForInput("Reset password", "Enter your email", "Email…", false, "Send", email) { string ->
+            askForInput(R.string.title_reset_password.string(),
+                        R.string.label_enter_your_email.string(),
+                        R.string.hint_email_address.string(),
+                        false,
+                        R.string.do_send.string(),
+                        email) { string ->
                 string?.let {
                     if (it.isValidEmail()) {
                         Service.api.resetPassword(string) {
                             it.onSuccess {
                                     ErrorHandler.error(it.result)?.let { alert(it) }
-                                            ?: alert("Check your email address for the letter with password recovery instructions")
+                                            ?: alert(R.string.label_reset_password_message.string())
                             }.onFailure {
                                 alert(it)
                             }
@@ -99,23 +105,23 @@ class LoginFragment: NavigationFragment() {
     }
 
     private fun validate():Boolean {
-        if (email.isEmpty()) {
-            alert("Enter your email")
+        if (email.isBlank()) {
+            alert(R.string.error_login_enter_email.string())
             return false
         }
 
         if (password.isEmpty()) {
-            alert("Enter your password")
+            alert(R.string.error_login_enter_password.string())
             return false
         }
 
         if (!email.isValidEmail()) {
-            alert("Email is not valid")
+            alert(AuthError.invalidEmail)
             return false
         }
 
         if (password.length <= 6) {
-            alert("Password is too short")
+            alert(AuthError.incorrectPasswordLength)
             return false
         }
 
