@@ -97,7 +97,7 @@ class ErrorHandler {
             }
             (error as? GeneralError)?.let {
                 if (it.code != 0) {
-                    return  R.string.error_general_code.string(it.code)
+                    return  R.string.error_general_code.string(it.code.toString())
                 }
             }
             (error as? ErrorMessage)?.let {
