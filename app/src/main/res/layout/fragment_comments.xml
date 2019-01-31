@@ -53,13 +53,13 @@
 
         <RelativeLayout
             android:id="@+id/comment_send_view"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_alignParentEnd="true">
 
             <Button
                 android:id="@+id/comment_send"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:text="@string/do_send_cap"
