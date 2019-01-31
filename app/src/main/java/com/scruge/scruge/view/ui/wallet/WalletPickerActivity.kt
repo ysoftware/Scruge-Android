@@ -54,7 +54,7 @@ class WalletPickerActivity: AppCompatActivity(), ArrayViewModelDelegate {
 
         var selected = -1
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.ViewwHolder {
             return Adapter.ViewHolder(
                     LayoutInflater.from(parent.context).inflate(R.layout.cell_account, parent, false))
         }

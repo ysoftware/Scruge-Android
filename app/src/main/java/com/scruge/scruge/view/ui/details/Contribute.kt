@@ -66,7 +66,7 @@ class ContributeFragment : NavigationFragment() {
 
     private fun setupNavigationBar() {
         shouldHideNavigationBar = false
-        title = R.string.do_invest_in.string(vm.title)
+        title = R.string.title_invest_in.string(vm.title)
     }
 
     private fun setupInformation() {

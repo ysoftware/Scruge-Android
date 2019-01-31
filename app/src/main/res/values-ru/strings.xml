@@ -198,7 +198,7 @@
     <string name="label_you_have_contributed_usd">Вы уже инвестировали $%1$s в этот проект</string>
     <string name="label_investing_in">Инвестиции в %1$s</string>
     <string name="error_wallet_no_transferable_tokens">Похоже, у вас нет токенов, которые можно переводить</string>
-    <string name="do_invest_in">Инвестировать в %1$s</string>
+    <string name="title_invest_in">Инвестировать в %1$s</string>
     <string name="do_pay_cap">ЗАПЛАТИТЬ</string>
     <string name="title_faq_single">Ответ на вопрос</string>
     <string name="title_milestone_single">Milestone</string>
@@ -248,6 +248,9 @@
     <string name="title_featured">Главная</string>
     <string name="title_profile">Профиль</string>
     <string name="label_no_comments_yet">Нет комментариев</string>
+
+    <string name="label_select_currency_cap">ВЫБЕРИТЕ ТОКЕН</string>
+    <string name="title_select_account">Выберите Аккаунт</string>
 
     <!-- plurals -->
     <plurals name="see_all_comments">

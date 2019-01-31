@@ -133,6 +133,8 @@
     <string name="label_voting_to_extend">extend deadline</string>
     <string name="label_voting_to_release_funds">release funds</string>
     <string name="label_voting_participated">Participated in voting to %1$s for campaign %2$s</string>
+
+    <!-- sent "(amount) to (receiver)" -->
     <string name="transaction_sent_to_description">%1$s to %2$s</string>
     <string name="transaction_received_from_description">%1$s from %2$s</string>
     <string name="transaction_invested_in_description">%1$s in %2$s</string>
@@ -196,7 +198,7 @@
     <string name="label_you_have_contributed_usd">You have already contributed $%1$s in this project</string>
     <string name="label_investing_in">Investing in %1$s</string>
     <string name="error_wallet_no_transferable_tokens">You don\'t seem to have any transferable tokens</string>
-    <string name="do_invest_in">Invest in %1$s</string>
+    <string name="title_invest_in">Invest in %1$s</string>
     <string name="do_pay_cap">PAY</string>
     <string name="title_faq_single">Frequently answered question</string>
     <string name="title_milestone_single">Milestone</string>
@@ -246,6 +248,10 @@ If you lose the key, your account will be lost forever!</string>
     <string name="title_featured">Featured</string>
     <string name="title_profile">Profile</string>
     <string name="label_no_comments_yet">No comments yet</string>
+
+
+    <string name="label_select_currency_cap">SELECT CURRENCY</string>
+    <string name="title_select_account">Select Account</string>
 
     <!-- plurals  -->
     <plurals name="see_all_comments">
