@@ -28,7 +28,8 @@ class TopCommentCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 itemView.top_comment_profile_image.setImage(it)
             } ?: itemView.top_comment_profile_image.setImageDrawable(null)
 
-            itemView.top_comment_see_all.text = R.plurals.see_all_comments.plural(allCommentsCount)
+            itemView.top_comment_see_all.text = R.plurals.see_all_comments.plural(allCommentsCount,
+                                                                                  allCommentsCount.toString())
             itemView.top_comment_view.visibility = View.VISIBLE
             itemView.top_comment_no_view.visibility = View.GONE
         }

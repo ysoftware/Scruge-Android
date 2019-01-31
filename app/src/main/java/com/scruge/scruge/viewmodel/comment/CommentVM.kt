@@ -27,8 +27,12 @@ class CommentVM(model: Comment?) : ViewModel<Comment>(model) {
 
     val isLiking get() = model?.isLiking == true
 
-    val repliesText:String? get() = model?.repliesCount?.let { R.plurals.see_replies.plural(it) }
-    
+    val repliesText:String? get() {
+        return model?.repliesCount?.let { number ->
+            if (number == 0) { return null }
+            return R.plurals.see_replies.plural(number, number.toString())
+        }
+    }
 
     fun like() {
         model?.let { model ->

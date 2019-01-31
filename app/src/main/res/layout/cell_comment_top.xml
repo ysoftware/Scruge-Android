@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
                 android:maxLines="1"
-                android:text="No comments yet"
+                android:text="@string/label_no_comments_yet"
                 android:textColor="@color/text_title"
                 android:textSize="14sp"/>
 

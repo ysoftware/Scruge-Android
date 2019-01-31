@@ -133,7 +133,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
     }
 
     private fun setupBottomButton() {
-        campaign_button.setBackgroundColor(resources.getColor(R.color.purple))
+        campaign_button.setBackgroundColor(ContextCompat.getColor(campaign_button.context, R.color.purple))
         showContributionButton(true)
 
         when (vm.status) {
@@ -163,7 +163,7 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
                 }
             }
             CampaignVM.Status.preparing -> {
-                campaign_button.setBackgroundColor(resources.getColor(R.color.gray))
+                campaign_button.setBackgroundColor(ContextCompat.getColor(campaign_button.context, R.color.gray))
                 campaign_button.text = R.string.button_campaign_starts_on.string(vm.startDate)
             }
             else -> showContributionButton(false)

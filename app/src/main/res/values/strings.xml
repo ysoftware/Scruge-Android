@@ -86,9 +86,9 @@
     <string name="do_delete_wallet">Delete Wallet</string>
 
     <!-- errors -->
-    <string name="error_auth_incorrectEmailLength">Email should be longer than 5 and shorter than 254 symbols.</string>
-    <string name="error_auth_incorrectPasswordLength">Password should be longer than 5 and shorter than 50 symbols.</string>
-    <string name="error_auth_notAuthorized">This action requires authentication. Please, sign in with your Scruge account.</string>
+    <string name="error_auth_incorrectEmailLength">Email should be longer than 5 and shorter than 254 symbols</string>
+    <string name="error_auth_incorrectPasswordLength">Password should be longer than 5 and shorter than 50 symbols</string>
+    <string name="error_auth_notAuthorized">Authentication required. Please, sign in with your Scruge account</string>
     <string name="error_auth_invalidEmail">Incorrectly formatted email</string>
     <string name="error_auth_accountBlocked">This account was blocked</string>
     <string name="error_auth_accountExists">User already exists</string>
@@ -101,14 +101,14 @@
     <string name="error_backend_resourceNotFound">Nothing was found for this request</string>
     <string name="error_backend_parsingError">Unexpected server response</string>
     <string name="error_backend_unknown">Unexpected server error</string>
-    <string name="error_backend_emailSendError">Unable to send email</string>
+    <string name="error_backend_emailSendError">Could not send you email</string>
     <string name="error_backend_paramsConflict">Parameters conflict with each other</string>
     <string name="error_backend_replyNotSupported">Replying to this is not allowed</string>
-    <string name="error_wallet_incorrectPasscode">Incorrect passcode</string>
-    <string name="error_wallet_noAccounts">No accounts are associated with imported public key</string>
+    <string name="error_wallet_incorrectPasscode">Incorrect wallet password</string>
+    <string name="error_wallet_noAccounts">No accounts are associated with imported key</string>
     <string name="error_wallet_noKey">You have no keys in your wallet</string>
     <string name="error_wallet_noSelectedAccount">You did not verify any EOS accounts</string>
-    <string name="error_wallet_selectedAccountMissing">Your verified account is not accessible with imported EOS key</string>
+    <string name="error_wallet_selectedAccountMissing">Your verified account is not accessible with imported private key</string>
     <string name="error_wallet_unknown">Unexpected wallet error</string>
     <string name="error_eos_overdrawnBalance">Overdrawn balance</string>
     <string name="error_eos_unknown">Unknown error</string>
@@ -205,7 +205,7 @@
     <string name="title_vote">Vote</string>
     <string name="title_voting_progress">Voting Progress</string>
     <string name="title_buy_ram">Buy RAM</string>
-    <string name="label_wallet_picker_info">Select an account that you want to make investments with and receive ICO tokens on. You will not be able to change it after you make first investment.</string>
+    <string name="label_wallet_picker_info">Select an account that you want to make investments with and receive ICO tokens on. We will verify it for your Scruge account and you will not be able to change it after you make first investment.</string>
     <string name="do_hide_wallet_data">Hide wallet data</string>
     <string name="title_sure_to_delete_wallet">Are you sure to delete your wallet information?</string>
     <string name="label_sure_to_delete_wallet">Make sure to export your private key first because there is no way it can be retrieved later.</string>
@@ -225,15 +225,15 @@
     <string name="label_create_account_generate_text">Generate a new keypair and we will use it to create a new EOS account for you</string>
     <string name="label_create_account_use_imported_text">Use the imported key to create a new EOS account</string>
     <string name="title_create_eos_account">Create EOS Account</string>
-    <string name="error_enter_new_password">Enter your new passcode</string>
+    <string name="error_enter_new_password">Enter your new password</string>
     <string name="error_eos_account_cant_contain_dot">We can not create an account name that contains a dot</string>
     <string name="error_eos_account_length">New account name has to be exactly 12 symbols long</string>
     <string name="error_enter_eos_account_name">Enter new account name</string>
     <string name="alert_eos_account_created">Your account have been created.
 
-Make sure to save your private publicKey in a safe place!
+Make sure to save your private key in a safe place!
 
-If you lose the publicKey, your account will be lost forever!</string>
+If you lose the the key, your account will be lost forever!</string>
     <string name="public_key_display">Public key: %1$s</string>
     <string name="label_campaign_ends">ends</string>
     <string name="label_campaign_ended">ended</string>
@@ -244,18 +244,18 @@ If you lose the publicKey, your account will be lost forever!</string>
     <string name="title_comments">Comments</string>
     <string name="title_update">Update</string>
     <string name="title_featured">Featured</string>
+    <string name="title_profile">Profile</string>
+    <string name="label_no_comments_yet">No comments yet</string>
 
     <!-- plurals  -->
     <plurals name="see_all_comments">
-        <item quantity="zero">No comments</item>
-        <item quantity="one">See %1$d comment</item>
+        <item quantity="one">See %1$s comment</item>
         <item quantity="other">See all %1$s comments</item>
     </plurals>
 
     <plurals name="see_replies">
-        <item quantity="zero">No replies</item>
-        <item quantity="one">See %1$d reply</item>
-        <item quantity="other">See all %1$d replies</item>
+        <item quantity="one">See %1$s reply</item>
+        <item quantity="other">See all %1$s replies</item>
     </plurals>
 
 </resources>

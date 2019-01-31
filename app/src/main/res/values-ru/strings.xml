@@ -1,0 +1,265 @@
+<resources>
+
+    <!-- general -->
+    <string name="app_name">Scruge</string>
+
+    <!-- from layout -->
+    <string name="action_done_cap">ГОТОВО</string>
+    <string name="title_about_the_team">О команде</string>
+    <string name="do_reply">Ответить</string>
+    <string name="title_place_your_vote">Проголосуйте</string>
+    <string name="hint_wallet_password">Пароль кошелька</string>
+    <string name="title_vote_ends_in">Голосование закончится:</string>
+    <string name="title_rationale">Сообщение от команды:</string>
+    <string name="timer_days">Дней</string>
+    <string name="timer_hours">Часов</string>
+    <string name="timer_minutes">Минут</string>
+    <string name="title_documents">Документы</string>
+    <string name="title_token_economies">Экономика токена</string>
+    <string name="label_total_token_supply">Макс. количество токенов</string>
+    <string name="label_token_percent_for_public_sale">Процент для публичной продажи</string>
+    <string name="label_initial_release_after_funding">Изначальная выдача после сбора средств</string>
+    <string name="label_annual_inflation_rate">Годовая инфляция</string>
+    <string name="do_see_all_updates">Посмотреть все новости</string>
+    <string name="title_vote_results">Результаты</string>
+    <string name="label_no">Нет</string>
+    <string name="label_yes">Да</string>
+    <string name="label_ok">ОК</string>
+    <string name="hint_write_a_comment">Ваш комментарий</string>
+    <string name="do_send_cap">ОТПРАВИТЬ</string>
+    <string name="do_send">Отправить</string>
+    <string name="label_i_agree_terms">Я соглашаюсь с условиями предложения и беру все риски на себя</string>
+    <string name="hint_email_address">Адрес email</string>
+    <string name="hint_password">Пароль</string>
+    <string name="do_forgot_password">Забыли пароль?</string>
+    <string name="label_not_a_member_yet">Ещё не с нами?</string>
+    <string name="do_sign_up">Зарегистрироваться</string>
+    <string name="do_privacy_policy">Политика конфиденциальности</string>
+    <string name="title_about_me">Обо мне</string>
+    <string name="hint_full_name">Полное имя</string>
+    <string name="hint_location">Местоположение</string>
+    <string name="hint_about_you">О вас</string>
+    <string name="hint_new_password">Новый пароль</string>
+    <string name="hint_confirm_password">Подтвердите пароль</string>
+    <string name="label_already_have_an_account">Уже есть аккаунт?</string>
+    <string name="do_log_in">Войти</string>
+    <string name="do_edit_profile">Редактировать профиль</string>
+    <string name="do_sign_out">Выйти</string>
+    <string name="hint_stake_cpu">Покупка CPU</string>
+    <string name="eos">EOS</string>
+    <string name="hint_stake_net">Покупка NET</string>
+    <string name="hint_transfer_receiver">Получатель</string>
+    <string name="hint_transfer_amount">Количество</string>
+    <string name="hint_transfer_memo">Записка</string>
+    <string name="title_wallet">Кошелёк</string>
+    <string name="title_transactions">Транзакции</string>
+    <string name="title_transfer">Сделать Перевод</string>
+    <string name="title_wallet_data">Данные кошелька</string>
+    <string name="title_resources">Ресурсы</string>
+    <string name="title_exchange">Обменник</string>
+    <string name="hint_eos_account_name">Имя аккаунта (12 символов)</string>
+    <string name="hint_new_wallet_password">Новый пароль кошелька</string>
+    <string name="hint_confirm_wallet_password">Подтвердите пароль кошелька</string>
+    <string name="do_generate_new_key">Сгенерировать новый ключ</string>
+    <string name="label_already_have_an_eos_account">Уже владеете EOS аккаунтом?</string>
+    <string name="do_import_your_key">Импортировать свой ключ</string>
+    <string name="hint_private_key">Приватный ключ</string>
+    <string name="label_no_eos_account">Нет аккаунта EOS?</string>
+    <string name="do_create_account">Создать аккаунт</string>
+    <string name="label_no_eos_accounts_for_key">Ключ, который вы импортировали не связан с аккаунтами EOS. Мы можем создать вам аккаунт бесплатно.</string>
+    <string name="label_export_this_key">Хотите экспортировать ключ?</string>
+    <string name="do_see_wallet_data">Посмотреть данные кошелька</string>
+    <string name="label_import_different_key">Хотите импортировать другой ключ?</string>
+    <string name="do_remove_key_and_start_over">Удалить ключ и начать заново</string>
+    <string name="label_protected_by_privacy_policy">Вся информация защищена соответственно с политикой конфиденциальности</string>
+    <string name="label_wallet_start_text">Добавьте ваш аккаунт EOS или создайте новый, чтобы инвестировать в проекты!</string>
+    <string name="do_try_again">Попробовать снова</string>
+    <string name="title_public_key">Публичный ключ</string>
+    <string name="title_private_key">Приватный ключ</string>
+    <string name="title_eos_cpu">CPU</string>
+    <string name="title_eos_net">NET</string>
+    <string name="title_eos_ram">RAM</string>
+    <string name="do_buy_eos_ram">КУПИТЬ RAM</string>
+    <string name="do_stake_resources">КУПИТЬ РЕСУРСЫ</string>
+    <string name="do_unstake_resources">СНЯТЬ РЕСУРСЫ</string>
+    <string name="do_switch_eos_account">Сменить аккаунт</string>
+    <string name="do_delete_wallet">Удалить кошелёк</string>
+
+    <!-- errors -->
+    <string name="error_auth_incorrectEmailLength">Email должен быть длиной от 5 до 254 символов</string>
+    <string name="error_auth_incorrectPasswordLength">Пароль должен быть длиной от 5 до 50 символов</string>
+    <string name="error_auth_notAuthorized">Требуется авторизация. Пожалуйста, войдите со своим аккаунтом Scruge</string>
+    <string name="error_auth_invalidEmail">Неверный формат email</string>
+    <string name="error_auth_accountBlocked">Этот аккаунт был заблокирован</string>
+    <string name="error_auth_accountExists">Такой пользователь уже существует</string>
+    <string name="error_auth_incorrectCredentials">Неверный логин или пароль</string>
+    <string name="error_auth_denied">Доступ запрещён</string>
+    <string name="error_network_connectionProblem">Не удалось подключиться к серверу</string>
+    <string name="error_network_unknown">Ошибка соединения</string>
+    <string name="error_backend_notImplemented">Функционал не реализован</string>
+    <string name="error_backend_invalidResourceId">Неверный запрос</string>
+    <string name="error_backend_resourceNotFound">Ничего не найдено по этому запросу</string>
+    <string name="error_backend_parsingError">Неожиданный ответ сервера</string>
+    <string name="error_backend_unknown">Неожиданная ошибка сервера</string>
+    <string name="error_backend_emailSendError">Не удалось отправить вам email</string>
+    <string name="error_backend_paramsConflict">Конфликтующие параметры запроса</string>
+    <string name="error_backend_replyNotSupported">Нельзя ответить на это сообщение</string>
+    <string name="error_wallet_incorrectPasscode">Неверный пароль кошелька</string>
+    <string name="error_wallet_noAccounts">Ни один аккаунт не доступен с ключом, который вы импортировали</string>
+    <string name="error_wallet_noKey">У вас ни одного ключа в кошельке</string>
+    <string name="error_wallet_noSelectedAccount">Вы не прикрепили аккаунт EOS</string>
+    <string name="error_wallet_selectedAccountMissing">Ваш прикреплённый аккаунт не доступен с ключом, который вы импортировали</string>
+    <string name="error_wallet_unknown">Неожиданная ошибка кошелька</string>
+    <string name="error_eos_overdrawnBalance">Недостаточно средств</string>
+    <string name="error_eos_unknown">Неизвестная ошибка</string>
+    <string name="error_eos_abiError">Неверный формат данных транзакции</string>
+    <string name="error_eos_incorrectName">Неверное имя: может содержать только буквы, цифры от 1 до 5 и знак точки</string>
+    <string name="error_eos_incorrectToken">Указан неверный токен</string>
+    <string name="error_eos_actionError">Не удалось выполнить транзакцию на блокчейне. Пожалуйста, попробуйте ещё раз</string>
+    <string name="error_eos_notSupported">EOS Не Поддерживается</string>
+    <string name="error_eos_eosAccountExists">Аккаунт EOS с таким именем уже существует</string>
+    <string name="error_general_unexpected">Неожиданная ошибка</string>
+    <string name="error_general_code">Ошибка %1$s</string>
+
+    <!-- view model -->
+    <string name="label_anonymous">Аноним</string>
+    <string name="label_ms_current">%1$sмс / %2$sмс</string>
+    <string name="label_kb_current">%1$sКБ / %2$sКБ</string>
+    <string name="transaction_sent">Отправление</string>
+    <string name="transaction_received">Получение</string>
+    <string name="transaction_transfer">Перевод</string>
+    <string name="transaction_invested">Инвестиция</string>
+    <string name="transaction_voted">Голосование</string>
+    <string name="label_voting_to_extend">продлить дедлайн</string>
+    <string name="label_voting_to_release_funds">выдать средства</string>
+    <string name="label_voting_participated">Участвовал в голосовании чтобы %1$s для кампании %2$s</string>
+
+    <!-- sent "(amount) to (receiver)" -->
+    <string name="transaction_sent_to_description">%1$s на %2$s</string>
+    <string name="transaction_received_from_description">%1$s от %2$s</string>
+    <string name="transaction_invested_in_description">%1$s в %2$s</string>
+    <string name="label_milestone_funds_release">С выдачей %1$s средств</string>
+
+    <!-- from cell view code -->
+    <string name="do_add_your_comment">Добавить комментарий</string>
+    <string name="label_voting_to_for">Голосуем чтобы %1$s для %2$s</string>
+    <string name="title_faq">Часто Задаваемые Вопросы</string>
+    <string name="title_milestones">Этапы</string>
+    <string name="title_current_milestone">Текущий этап</string>
+    <string name="title_next_milestone">Следующий этап</string>
+    <string name="title_previous_milestone">Предыдущий этап</string>
+    <string name="title_future_milestone">Будущий этап</string>
+    <string name="title_last_update">Последняя Новость</string>
+    <string name="do_vote_for">ГОЛОСОВАТЬ ЗА</string>
+    <string name="do_vote_against">ГОЛОСОВАТЬ ПРОТИВ</string>
+    <string name="label_vote_extend_description">Голосуем, продлять ли дедлайн текущего этапа.</string>
+    <string name="label_vote_release_description">Голосуем принять ли выполненный этап, отправить следующую порцию средств создателю кампании, или же вернуть оставшиеся средства инвесторам и закрыть кампанию.</string>
+
+
+    <!-- from main view code -->
+    <string name="title_preview">Просмотр</string>
+    <string name="title_privacy">Политика Конфиденциальности</string>
+    <string name="title_settings">Настройки</string>
+
+    <!-- from views view code -->
+    <string name="title_export_private_key">Экспорт приватного ключа</string>
+    <string name="label_export_private_key">Введите ваш пароль кошелька, чтобы увидеть приватный ключ</string>
+    <string name="do_unlock_wallet">Разблокировать</string>
+    <string name="error_incorrectPassword">Неверный пароль</string>
+    <string name="alert_private_key_warning">Осторожно обращайтесь с приватным ключом. Никому не показывайте его!</string>
+    <string name="alert_copied_to_clipboard">Скопировано</string>
+
+    <!-- from ui view code -->
+    <string name="title_activity">Активность</string>
+    <string name="error_activity_noActions">Нет недавних действий</string>
+    <string name="do_create_profile">Создать профиль</string>
+    <string name="do_update_profile">Обновить профиль</string>
+    <string name="label_sure_to_quit">Вы уверены, что хотите выйти?</string>
+    <string name="error_login_enter_email">Введите ваш email</string>
+    <string name="error_login_enter_password">Введите ваш пароль</string>
+    <string name="title_reset_password">Сброс пароля</string>
+    <string name="label_enter_your_email">Введите ваш email</string>
+    <string name="label_reset_password_message">Мы отправили вам email с инструкциями о восстановлении пароля</string>
+    <string name="label_profile_no_information">Нет подробной информации</string>
+    <string name="title_sign_up">Регистрация</string>
+    <string name="error_register_passwords_do_not_match">Пароли не совпадают</string>
+    <string name="title_team_member">Член команды</string>
+    <string name="error_no_campaigns_found">Кампаний по вашему запросу не найдено</string>
+    <string name="do_vote">Голосовать</string>
+    <string name="do_view_voting_progress">Смотреть Прогресс</string>
+    <string name="button_campaign_over">Кампания окончена</string>
+    <string name="do_contribute">Инвестировать</string>
+    <string name="do_sign_in_to_contribute">Войдите, чтобы участвовать</string>
+    <string name="button_campaign_starts_on">Стартует %1$s</string>
+    <string name="alert_transaction_success">Транзакция прошла успешно</string>
+    <string name="error_wallet_enter_wallet_password">Введите ваш пароль кошелька</string>
+    <string name="error_wallet_not_setup">Вы не настроили ваш аккаунт блокчейна</string>
+    <string name="error_wallet_invalid_amount">Введите правильное количество</string>
+    <string name="label_you_have_contributed_usd">Вы уже инвестировали $%1$s в этот проект</string>
+    <string name="label_investing_in">Инвестиции в %1$s</string>
+    <string name="error_wallet_no_transferable_tokens">Похоже, у вас нет токенов, которые можно переводить</string>
+    <string name="do_invest_in">Инвестировать в %1$s</string>
+    <string name="do_pay_cap">ЗАПЛАТИТЬ</string>
+    <string name="title_faq_single">Ответ на вопрос</string>
+    <string name="title_milestone_single">Milestone</string>
+    <string name="title_updates">Новости</string>
+    <string name="error_no_comments">Нет комментариев</string>
+    <string name="title_vote">Голосование</string>
+    <string name="title_voting_progress">Прогресс Голосования</string>
+    <string name="title_buy_ram">Купить RAM</string>
+    <string name="label_wallet_picker_info">Выберите аккаунт, с которого хотите проводить инвестиции и на который хотите получать токены. Мы прикрепим этот аккаунт к вашей учётной записи Scruge. После первой инвестиции вы не сможете его поменять.</string>
+    <string name="do_hide_wallet_data">Спрятать данные кошелька</string>
+    <string name="title_sure_to_delete_wallet">Вы уверены, что хотите удалить данные вашего кошелька?</string>
+    <string name="label_sure_to_delete_wallet">Убедитесь, что записали ваш приватный ключ, потому что иначе не будет никакого способа его восстановить.</string>
+    <string name="alert_sign_in_first">Пожалуйста, сначала войдите в ваш аккаунт Scruge</string>
+    <string name="title_transfer_tokens">Переводести токены</string>
+    <string name="alert_select_correct_token">Произошла ошибка. Выберите правильный токен для перевода</string>
+    <string name="do_transfer_tokens">Перевести</string>
+    <string name="title_manage_resources">Управление Ресурсами</string>
+    <string name="tokens_available">Доступно %1$s</string>
+    <string name="do_stake">Купить Ресурсы</string>
+    <string name="do_import_key">ИМПОРТИРОВАТЬ</string>
+    <string name="title_import_private_key">Импорт приватного ключа</string>
+    <string name="error_enter_private_key">Введите ваш приватный ключ</string>
+    <string name="error_incorrect_key_format">Неверный формат приватного ключа</string>
+    <string name="error_couldnt_import_private_key">Не удалось импортировать этот ключ</string>
+    <string name="do_create_account_cap">СОЗДАТЬ АККАУНТ</string>
+    <string name="label_create_account_generate_text">Сгенерируйте новую пару ключей и мы используем их, чтобы создать для вас аккаунт EOS</string>
+    <string name="label_create_account_use_imported_text">Используйте импортированный вами ключ, чтобы создать аккаунт EOS</string>
+    <string name="title_create_eos_account">Создать аккаунт EOS</string>
+    <string name="error_enter_new_password">Введите новый пароль</string>
+    <string name="error_eos_account_cant_contain_dot">Мы не можем создать имя аккаунта, которое содержит знак точки</string>
+    <string name="error_eos_account_length">Имя нового аккаунта должно быть длиной точно 12 символов</string>
+    <string name="error_enter_eos_account_name">Введите имя нового аккаунта</string>
+    <string name="alert_eos_account_created">Ваш аккаунт был создан.
+
+Убедитесь, что сохранили приватный ключ в безопасном месте!
+
+Если вы потеряете ключ, доступ к вашему аккаунт будет утрачен навсегда!</string>
+    <string name="public_key_display">Публичный ключ: %1$s</string>
+    <string name="label_campaign_ends">заканчивается</string>
+    <string name="label_campaign_ended">закончена</string>
+    <string name="error_comment_too_short">Слишком короткое сообщение</string>
+    <string name="hint_add_comment">Ваш комментарий</string>
+    <string name="hint_sign_in_to_comment">Войдите чтобы оставлять комментарии</string>
+    <string name="do_sign_in">Войти</string>
+    <string name="title_comments">Комментарии</string>
+    <string name="title_update">Новости</string>
+    <string name="title_featured">Главная</string>
+    <string name="title_profile">Профиль</string>
+    <string name="label_no_comments_yet">Нет комментариев</string>
+
+    <!-- plurals -->
+    <plurals name="see_all_comments">
+        <item quantity="one">Посмотреть %1$s комментарий</item>
+        <item quantity="few">Посмотреть все %1$s комментария</item>
+        <item quantity="many">Посмотреть все %1$s комментариев</item>
+    </plurals>
+
+    <plurals name="see_replies">
+        <item quantity="one">Посмотреть %1$d ответ</item>
+        <item quantity="few">Посмотреть %1$s ответа</item>
+        <item quantity="many">Посмотреть %1$s ответов</item>
+    </plurals>
+
+</resources>

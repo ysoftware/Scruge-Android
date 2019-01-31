@@ -64,11 +64,9 @@ class ActionVM(model: ActionReceipt?) : ViewModel<ActionReceipt>(model) {
 
         return when (type) {
             ActionType.sent ->
-                R.string.transaction_received_from_description.string(type.transferObj.quantity,
-                                                                      type.transferObj.to)
+                R.string.transaction_received_from_description.string(type.transferObj.quantity, type.transferObj.to)
             ActionType.received ->
-                R.string.transaction_received_from_description.string(type.transferObj.quantity,
-                                                                      type.transferObj.from)
+                R.string.transaction_received_from_description.string(type.transferObj.quantity, type.transferObj.from)
             ActionType.transfer -> {
                 val tr = type.transferObj
                 "${tr.from} -> ${tr.to}: ${tr.quantity}"

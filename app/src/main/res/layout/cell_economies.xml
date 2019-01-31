@@ -33,7 +33,9 @@
             android:layout_marginTop="30dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/economies_supply"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
                 android:text="@string/label_total_token_supply"
@@ -42,11 +44,12 @@
 
             <TextView
                 android:id="@+id/economies_supply"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/regular"
                 android:textAlignment="viewEnd"
+                android:layout_marginStart="10dp"
                 android:textColor="@color/text_gray"
                 android:textSize="16sp"/>
         </RelativeLayout>
@@ -64,17 +67,20 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/regular"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/economies_public_percent"
                 android:text="@string/label_token_percent_for_public_sale"
                 android:textColor="@color/text_regular"
                 android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/economies_public_percent"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/regular"
                 android:textAlignment="viewEnd"
@@ -95,8 +101,10 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/economies_initial_release"
                 android:fontFamily="@font/regular"
                 android:text="@string/label_initial_release_after_funding"
                 android:textColor="@color/text_regular"
@@ -104,7 +112,8 @@
 
             <TextView
                 android:id="@+id/economies_initial_release"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/regular"
@@ -126,8 +135,10 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/economies_inflation"
                 android:fontFamily="@font/regular"
                 android:text="@string/label_annual_inflation_rate"
                 android:textColor="@color/text_regular"
@@ -135,10 +146,11 @@
 
             <TextView
                 android:id="@+id/economies_inflation"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/regular"
+                android:layout_marginStart="10dp"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/text_gray"
                 android:textSize="16sp"/>

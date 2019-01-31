@@ -9,7 +9,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun datePresent(milliseconds:Long, format:String):String {
-    return SimpleDateFormat(format, Locale.ENGLISH).format(Date(milliseconds))
+    val current = ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
+    return SimpleDateFormat(format, current).format(Date(milliseconds))
 }
 
 fun dateToRelative(milliseconds:Long, future:String = "", past:String = ""):String {
