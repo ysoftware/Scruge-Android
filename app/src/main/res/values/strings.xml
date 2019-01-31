@@ -233,7 +233,7 @@
 
 Make sure to save your private key in a safe place!
 
-If you lose the the key, your account will be lost forever!</string>
+If you lose the key, your account will be lost forever!</string>
     <string name="public_key_display">Public key: %1$s</string>
     <string name="label_campaign_ends">ends</string>
     <string name="label_campaign_ended">ended</string>
