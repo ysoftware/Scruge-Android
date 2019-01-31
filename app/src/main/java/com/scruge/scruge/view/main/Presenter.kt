@@ -198,7 +198,7 @@ class Presenter {
 
     fun presentCreateAccountFragment(fragment: NavigationFragment) {
         if (Service.settings.didCreateEosAccount) {
-            val msg = "You have previously created an eos account. Please, import the private key."
+            val msg = R.string.alert_previously_created_eos.string()
             fragment.alert(msg)
             return
         }

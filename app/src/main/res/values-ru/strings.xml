@@ -249,8 +249,12 @@
     <string name="title_profile">Профиль</string>
     <string name="label_no_comments_yet">Нет комментариев</string>
 
+    <string name="do_cancel">Отмена</string>
+    <string name="title_select_action">Выберите действие</string>
     <string name="label_select_currency_cap">ВЫБЕРИТЕ ТОКЕН</string>
     <string name="title_select_account">Выберите Аккаунт</string>
+    <string name="alert_previously_created_eos">Вы уже раннее создавали аккаунт EOS. Пожалуйста, импортируйте ваш приватный ключ</string>
+    <string name="error_image_too_small">Выбрано слишком маленькое изображение</string>
 
     <!-- plurals -->
     <plurals name="see_all_comments">

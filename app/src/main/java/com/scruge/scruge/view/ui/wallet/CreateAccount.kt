@@ -146,8 +146,9 @@ class CreateAccountFragment: NavigationFragment() {
                     return@onSuccess alert(it)
                 }
                 Service.settings.setDidCreateEosAccount()
-                alert(R.string.alert_eos_account_created.string())
-                Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 1000)
+                alert(R.string.alert_eos_account_created.string()) {
+                    Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 1000)
+                }
             }.onFailure {
                 alert(ErrorHandler.message(it))
             }

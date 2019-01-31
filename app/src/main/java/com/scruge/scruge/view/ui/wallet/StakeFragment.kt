@@ -82,6 +82,10 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 val net = Balance(systemToken, netValue)
                 val passcode = stake_passcode.text.toString()
 
+                if (passcode.isEmpty()) {
+                    return@let alert(R.string.error_wallet_enter_wallet_password.string())
+                }
+
                 hideKeyboard()
                 Service.eos.stakeResources(model, cpu, net, passcode) { result ->
                     result.onSuccess {

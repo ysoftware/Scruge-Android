@@ -249,9 +249,12 @@ If you lose the key, your account will be lost forever!</string>
     <string name="title_profile">Profile</string>
     <string name="label_no_comments_yet">No comments yet</string>
 
-
+    <string name="do_cancel">Cancel</string>
+    <string name="title_select_action">Select action</string>
     <string name="label_select_currency_cap">SELECT CURRENCY</string>
     <string name="title_select_account">Select Account</string>
+    <string name="alert_previously_created_eos">You have previously created an eos account. Please, import a private key</string>
+    <string name="error_image_too_small">Selected image is too small</string>
 
     <!-- plurals  -->
     <plurals name="see_all_comments">
