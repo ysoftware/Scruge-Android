@@ -258,6 +258,18 @@ If you lose the key, your account will be lost forever!</string>
     <string name="error_auth_email_not_confirmed">Please, confirm your email. We\'ve sent you a letter with a confirmation link</string>
     <string name="error_eos_transaction_failed">Transaction failed: %1$s</string>
 
+    <string name="label_replied_to_your_comment">%1$s replied to your comment</string>
+    <string name="label_finished_funding_campaign">%1$s has finished its funding campaign</string>
+    <string name="label_reached_goal_of">%1$s has successfully reached the goal of %2$s</string>
+    <string name="label_did_not_reach_goal_of">%1$s did not reach the minimum goal of %2$s</string>
+    <string name="label_posted_update">%1$s posted an update</string>
+
+    <string name="label_voting_in_starts_soon">Voting in %1$s starts soon</string>
+    <string name="label_voting_to_of_for_starts_in_on_at">Voting to %1$s of milestone %2$s for campaign %3$s starts in %4$s days on %5$s at %6$s.</string>
+    <string name="label_voting_in_has_finished">Voting in %1$s has finished</string>
+    <string name="label_voting_to_of_for_has_finished">Voting to %1$s of milestone %2$s for %3$s has finished.
+Check out the results now.</string>
+
     <!-- plurals  -->
     <plurals name="see_all_comments">
         <item quantity="one">See %1$s comment</item>
