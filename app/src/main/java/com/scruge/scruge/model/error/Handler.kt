@@ -32,7 +32,9 @@ class ErrorHandler {
                         .replace("assertion failure with message:", "")
                         .replace("pending console output:", "")
                         .trim()
-                return ErrorMessage(msg)
+                val message = if (msg.isBlank()) message(EOSError.unknown) else msg
+                val string = R.string.error_eos_transaction_failed.string(message)
+                return ErrorMessage(string)
             }
             catch (ex:Exception) { }
             return null
@@ -53,6 +55,7 @@ class ErrorHandler {
                     accountExists -> R.string.error_auth_accountExists.string()
                     incorrectCredentials -> R.string.error_auth_incorrectCredentials.string()
                     denied -> R.string.error_auth_denied.string()
+                    emailNotConfirmed -> R.string.error_auth_email_not_confirmed.string()
                 }
             }
             (error as? NetworkingError)?.let {

@@ -255,6 +255,8 @@
     <string name="title_select_account">Выберите Аккаунт</string>
     <string name="alert_previously_created_eos">Вы уже раннее создавали аккаунт EOS. Пожалуйста, импортируйте ваш приватный ключ</string>
     <string name="error_image_too_small">Выбрано слишком маленькое изображение</string>
+    <string name="error_auth_email_not_confirmed">Пожалуйста, подтвердите адрес вашей электронной почты. Мы выслали вам письмо со ссылкой для подтверждения</string>
+    <string name="error_eos_transaction_failed">Транзакция не выполнена: %1$s</string>
 
     <!-- plurals -->
     <plurals name="see_all_comments">

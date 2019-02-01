@@ -255,6 +255,8 @@ If you lose the key, your account will be lost forever!</string>
     <string name="title_select_account">Select Account</string>
     <string name="alert_previously_created_eos">You have previously created an eos account. Please, import a private key</string>
     <string name="error_image_too_small">Selected image is too small</string>
+    <string name="error_auth_email_not_confirmed">Please, confirm your email. We\'ve sent you a letter with a confirmation link</string>
+    <string name="error_eos_transaction_failed">Transaction failed: %1$s</string>
 
     <!-- plurals  -->
     <plurals name="see_all_comments">
