@@ -46,5 +46,12 @@ class Settings {
 
     fun setDidCreateEosAccount() = File(url).writeBytes(ByteArray(1))
 
-    val didCreateEosAccount:Boolean get() = File(url).readBytes().contentEquals(ByteArray(1))
+    val didCreateEosAccount:Boolean get() {
+        return try {
+            File(url).readBytes().contentEquals(ByteArray(1))
+        }
+        catch (ex:Exception) {
+            false
+        }
+    }
 }
