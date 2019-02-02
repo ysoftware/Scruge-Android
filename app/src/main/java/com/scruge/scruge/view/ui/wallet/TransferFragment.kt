@@ -86,6 +86,8 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
                 return@click
             }
 
+            if (balances.isEmpty()) return@click
+
             val token = balances[i].token
             val name = transfer_receiver.text.toString()
             val memo = transfer_memo.text.toString()

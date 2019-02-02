@@ -3,7 +3,6 @@ package com.scruge.scruge.support
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import com.facebook.soloader.SoLoader
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.Settings
 import com.scruge.scruge.services.api.Api
@@ -27,8 +26,6 @@ class App: Application() {
 
     private fun setupApp() {
         Service.api.environment = Api.Environment.prod
-
-        SoLoader.init(this, false)
 
         Service.eos.nodeUrl = Service.settings.get<String>(Settings.Setting.nodeUrl)
                 ?.let { it } ?: "https://eos.greymass.com"

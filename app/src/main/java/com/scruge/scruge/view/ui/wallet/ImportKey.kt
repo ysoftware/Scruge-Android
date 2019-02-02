@@ -68,11 +68,13 @@ class ImportKeyFragment: NavigationFragment() {
         Service.wallet.deleteWallet()
 
         Service.wallet.importKey(key, passcode) { account ->
-            if (account != null) {
-                Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 400)
-            }
-            else {
-                alert(R.string.error_couldnt_import_private_key.string())
+            activity?.runOnUiThread {
+                if (account != null) {
+                    Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 400)
+                }
+                else {
+                    alert("Could not import this key")
+                }
             }
         }
     }

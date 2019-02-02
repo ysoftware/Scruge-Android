@@ -1,36 +1,25 @@
 package com.scruge.scruge.services.wallet.storage
 
 import android.content.Context
-import com.facebook.android.crypto.keychain.AndroidConceal
-import com.facebook.crypto.Crypto
-import com.facebook.crypto.CryptoConfig
-import com.facebook.crypto.Entity
 import com.scruge.scruge.support.App
 import java.io.File
 import android.content.ContextWrapper
+import android.util.Log
 import com.memtrip.eos.core.crypto.EosPrivateKey
 import com.memtrip.eos.core.crypto.EosPublicKey
+import com.pvryan.easycrypt.ECResultListener
+import com.pvryan.easycrypt.symmetric.ECSymmetric
 import kotlin.random.Random
 
 class KeyStore {
 
     private val SharedKey = "RawPublicKey"
     private val keychain = App.context.getSharedPreferences("KEY_STORE", Context.MODE_PRIVATE)
-    private val entity = Entity.create("Keystore")
 
     private fun file(key: String): File {
         val cw = ContextWrapper(App.context)
         val directory = cw.getDir("media", Context.MODE_PRIVATE)
         return File(directory, key)
-    }
-
-    private fun getCrypto(passcode: String, salt:String): Crypto {
-        /// FIXME: SECURITY CHECK REQUIRED
-        val keychain = PasswordGeneratedKeyChain(CryptoConfig.KEY_256)
-        keychain.setPassword(passcode)
-        keychain.salt = salt.toByteArray()
-        keychain.generate()
-        return AndroidConceal.get().createDefaultCrypto(keychain)
     }
 
     // PUBLIC
@@ -45,61 +34,75 @@ class KeyStore {
         return file(rawPublicKey).exists() && keychain.contains(SharedKey)
     }
 
-    fun storeKey(key: EosPrivateKey, passcode: String): Boolean {
+    fun storeKey(key: EosPrivateKey, passcode: String, completion:(Boolean)->Unit) {
         val rawPublicKey = key.publicKey.toString()
-        val salt = randomString(16)
+        val f = file(rawPublicKey)
 
-        val crypto = getCrypto(passcode, salt)
-        if (!crypto.isAvailable) { return false }
+        if (f.exists()) { f.delete() }
 
-        val encrypted = try {
-            crypto.encrypt(key.bytes, entity)
+        try {
+            ECSymmetric().encrypt(key.toString(), passcode, object : ECResultListener {
+
+                override fun onFailure(message: String, e: Exception) {
+                    Log.e("CRYPTO", message)
+                    e.printStackTrace()
+                    completion(false)
+                }
+
+                override fun <T> onSuccess(result: T) {
+                    (result as? String)?.let {
+                        f.writeText(it)
+                        keychain.edit().putString(SharedKey, rawPublicKey).apply()
+                        completion(true)
+                    } ?: completion(false)
+                }
+            })
         }
         catch (ex:Exception) {
             ex.printStackTrace()
-            return false
+            completion(false)
         }
-
-        file(rawPublicKey).writeBytes(encrypted)
-        file("iv_$rawPublicKey").writeText(salt)
-        keychain.edit().putString(SharedKey, rawPublicKey).apply()
-        return true
     }
 
-    fun retrieveKey(passcode: String): EosPrivateKey? {
-        val rawPublicKey = getAccount()?.rawPublicKey ?: return null
+    fun retrieveKey(passcode: String, completion: (EosPrivateKey?)->Unit) {
+        val rawPublicKey = getAccount()?.rawPublicKey ?: return completion(null)
+        val f = file(rawPublicKey)
 
-        val salt = file("iv_$rawPublicKey").readText()
-        if (salt.length != 16) { return null }
+        if (!f.exists()) { completion(null) }
+        val text = f.readText()
 
-        val crypto = getCrypto(passcode, salt)
-        if (!crypto.isAvailable) {
-            return null
-        }
+        try {
+            ECSymmetric().decrypt(text, passcode, object : ECResultListener {
 
-        val decrypted = try {
-            crypto.decrypt(file(rawPublicKey).readBytes(), entity)
+                override fun onFailure(message: String, e: Exception) {
+                    Log.e("CRYPTO", message)
+                    e.printStackTrace()
+                    completion(null)
+                }
+
+                override fun <T> onSuccess(result: T) {
+                    (result as? String)?.let {
+                        try {
+                            return completion(EosPrivateKey(it))
+                        }
+                        catch (ex:Exception) { }
+                    }
+                    completion(null)
+                }
+            })
         }
         catch (ex: Exception) {
             ex.printStackTrace()
-            return null
+            completion(null)
         }
-
-        return EosPrivateKey(decrypted)
     }
 
     fun deleteAccount() {
-        val rawPublicKey = getAccount()?.publicKey?.toString() ?: return
-        keychain.edit().remove(SharedKey).apply()
-        file("iv_$rawPublicKey").delete()
-        file(rawPublicKey).delete()
-    }
-
-    private fun randomString(length:Int): String {
-        val charPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-                .toCharArray().map { it.toString() }
-        return (1..length).map { Random.nextInt(0, charPool.size) }
-                .joinToString("", transform = charPool::get)
-
+        try {
+            val rawPublicKey = getAccount()?.publicKey?.toString() ?: return
+            keychain.edit().remove(SharedKey).apply()
+            file(rawPublicKey).delete()
+        }
+        catch (ex:java.lang.Exception) {}
     }
 }
