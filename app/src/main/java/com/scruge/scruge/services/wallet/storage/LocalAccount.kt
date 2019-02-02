@@ -14,6 +14,6 @@ class LocalAccount(val publicKey:EosPublicKey) {
     }
 
     fun retrievePrivateKey(passcode:String, completion:(EosPrivateKey?)->Unit) {
-        completion(Service.wallet.storage.retrieveKey(passcode))
+        Service.wallet.storage.retrieveKey(passcode, completion)
     }
 }

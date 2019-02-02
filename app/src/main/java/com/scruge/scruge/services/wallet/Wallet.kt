@@ -23,13 +23,15 @@ class Wallet {
 
     fun createKey(passcode: String, completion: (LocalAccount?) -> Unit) {
         val privateKey = EosPrivateKey()
-        storage.storeKey(privateKey, passcode)
-        completion(LocalAccount(privateKey.publicKey))
+        storage.storeKey(privateKey, passcode) {
+            completion(if (it) LocalAccount(privateKey.publicKey) else null)
+        }
     }
 
     fun importKey(rawPrivateKey: String, passcode: String, completion: (LocalAccount?) -> Unit) {
         val privateKey = EosPrivateKey(rawPrivateKey)
-        storage.storeKey(privateKey, passcode)
-        completion(LocalAccount(privateKey.publicKey))
+        storage.storeKey(privateKey, passcode) {
+            completion(if (it) LocalAccount(privateKey.publicKey) else null)
+        }
     }
 }
