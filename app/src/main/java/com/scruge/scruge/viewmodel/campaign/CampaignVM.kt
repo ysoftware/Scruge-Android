@@ -305,7 +305,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
     val status:Status get() = model?.status?.let { Status.fromValue(it) } ?: Status.closed
 
-    val videoUrl:Uri? get() = model?.let { Uri.parse(it.videoUrl.replace("controls=0", "")) }
+    val videoUrl:Uri? get() = model?.let { Uri.parse(it.videoUrl) }
 
     // partial
 
