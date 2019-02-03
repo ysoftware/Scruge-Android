@@ -9,6 +9,7 @@ import com.memtrip.eos.core.crypto.EosPrivateKey
 import com.memtrip.eos.core.crypto.EosPublicKey
 import com.pvryan.easycrypt.ECResultListener
 import com.pvryan.easycrypt.symmetric.ECSymmetric
+import org.jetbrains.anko.runOnUiThread
 import kotlin.random.Random
 
 class KeyStore {
@@ -44,17 +45,21 @@ class KeyStore {
             ECSymmetric().encrypt(key.toString(), passcode, object : ECResultListener {
 
                 override fun onFailure(message: String, e: Exception) {
-                    Log.e("CRYPTO", message)
-                    e.printStackTrace()
-                    completion(false)
+                    App.context.runOnUiThread {
+                        Log.e("CRYPTO", message)
+                        e.printStackTrace()
+                        completion(false)
+                    }
                 }
 
                 override fun <T> onSuccess(result: T) {
-                    (result as? String)?.let {
-                        f.writeText(it)
-                        keychain.edit().putString(SharedKey, rawPublicKey).apply()
-                        completion(true)
-                    } ?: completion(false)
+                    App.context.runOnUiThread {
+                        (result as? String)?.let {
+                            f.writeText(it)
+                            keychain.edit().putString(SharedKey, rawPublicKey).apply()
+                            completion(true)
+                        } ?: completion(false)
+                    }
                 }
             })
         }
@@ -75,19 +80,24 @@ class KeyStore {
             ECSymmetric().decrypt(text, passcode, object : ECResultListener {
 
                 override fun onFailure(message: String, e: Exception) {
-                    Log.e("CRYPTO", message)
-                    e.printStackTrace()
-                    completion(null)
+                    App.context.runOnUiThread {
+                        Log.e("CRYPTO", message)
+                        e.printStackTrace()
+                        completion(null)
+                    }
                 }
 
                 override fun <T> onSuccess(result: T) {
-                    (result as? String)?.let {
-                        try {
-                            return completion(EosPrivateKey(it))
+                    App.context.runOnUiThread {
+                        (result as? String)?.let {
+                            try {
+                                return@runOnUiThread completion(EosPrivateKey(it))
+                            }
+                            catch (ex: Exception) {
+                            }
                         }
-                        catch (ex:Exception) { }
+                        completion(null)
                     }
-                    completion(null)
                 }
             })
         }
