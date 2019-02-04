@@ -7,9 +7,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.scruge.scruge.model.error.ScrugeError
 import android.content.DialogInterface
+import android.text.method.PasswordTransformationMethod
 import android.view.inputmethod.EditorInfo
 import com.scruge.scruge.model.error.ErrorHandler
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.getInputField
 import com.afollestad.materialdialogs.input.input
 import com.scruge.scruge.R
 
@@ -90,5 +92,9 @@ fun Activity.askForInput(title:String = "",
         }
         negativeButton()
         positiveButton(text = actionTitle)
+
+        if (isSecure) {
+            getInputField().transformationMethod = PasswordTransformationMethod.getInstance()
+        }
     }
 }
