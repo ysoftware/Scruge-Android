@@ -96,6 +96,8 @@ class ErrorHandler {
                     actionError -> R.string.error_eos_actionError.string()
                     notSupported -> R.string.error_eos_notSupported.string()
                     eosAccountExists -> R.string.error_eos_eosAccountExists.string()
+                    createAccountIpLimitReached -> R.string.error_eos_createAccountIpLimitReached.string()
+                    createAccountDailyLimitReached -> R.string.error_eos_createAccountDailyLimitReached.string()
                 }
             }
             (error as? GeneralError)?.let {
@@ -148,6 +150,9 @@ class ErrorHandler {
                 501 -> incorrectName
                 502 -> eosAccountExists
                 505 -> actionError
+                506 -> createAccountIpLimitReached
+                507 -> createAccountDailyLimitReached
+
                 599 -> notSupported
 
                 // http

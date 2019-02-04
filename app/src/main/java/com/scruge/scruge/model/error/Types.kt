@@ -52,7 +52,11 @@ enum class EOSError:ScrugeError {
 
     notSupported,
 
-    eosAccountExists
+    eosAccountExists,
+
+    createAccountIpLimitReached,
+
+    createAccountDailyLimitReached
 }
 
 enum class BackendError:ScrugeError {

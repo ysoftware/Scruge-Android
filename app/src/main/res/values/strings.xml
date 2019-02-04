@@ -270,6 +270,9 @@ If you lose the key, your account will be lost forever!</string>
     <string name="label_voting_to_of_for_has_finished">Voting to %1$s of milestone %2$s for %3$s has finished.
 Check out the results now.</string>
 
+    <string name="error_eos_createAccountIpLimitReached">Can\'t create another EOS account for you. Please, contact us at support@scruge.world</string>
+    <string name="error_eos_createAccountDailyLimitReached">Daily limit for free EOS accounts is reached. Please, try again later or contact us at support@scruge.world</string>
+
     <!-- plurals  -->
     <plurals name="see_all_comments">
         <item quantity="one">See %1$s comment</item>

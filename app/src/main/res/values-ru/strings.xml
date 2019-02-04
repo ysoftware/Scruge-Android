@@ -270,6 +270,10 @@
     <string name="label_voting_to_of_for_has_finished">Голосование чтобы %1$s этапа %2$s в кампании %3$s завершено.
 Узнайте результаты прямо сейчас.</string>
 
+    <string name="error_eos_createAccountIpLimitReached">Не удаётся создать вам ещё один аккаунт EOS. Пожалуйста, свяжитесь с нами на support@scruge.world</string>
+    <string name="error_eos_createAccountDailyLimitReached">Достигнут суточный лимит по созданию бесплатных аккаунтов. Пожалуйста, попробуйте ещё раз позже или свяжитесь с нами на support@scruge.world</string>
+
+
     <!-- plurals -->
     <plurals name="see_all_comments">
         <item quantity="one">Посмотреть %1$s комментарий</item>
