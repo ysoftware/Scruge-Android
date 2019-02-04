@@ -241,7 +241,7 @@
     <string name="label_campaign_ended">закончена</string>
     <string name="error_comment_too_short">Слишком короткое сообщение</string>
     <string name="hint_add_comment">Ваш комментарий</string>
-    <string name="hint_sign_in_to_comment">Войдите чтобы оставлять комментарии</string>
+    <string name="hint_sign_in_to_comment">Войдите чтобы отвечать</string>
     <string name="do_sign_in">Войти</string>
     <string name="title_comments">Комментарии</string>
     <string name="title_update">Новости</string>
@@ -277,14 +277,14 @@
     <!-- plurals -->
     <plurals name="see_all_comments">
         <item quantity="one">Посмотреть %1$s комментарий</item>
-        <item quantity="few">Посмотреть все %1$s комментария</item>
+        <item quantity="few">Посмотреть %1$s комментария</item>
         <item quantity="many">Посмотреть все %1$s комментариев</item>
     </plurals>
 
     <plurals name="see_replies">
         <item quantity="one">Посмотреть %1$d ответ</item>
         <item quantity="few">Посмотреть %1$s ответа</item>
-        <item quantity="many">Посмотреть %1$s ответов</item>
+        <item quantity="many">Посмотреть все %1$s ответов</item>
     </plurals>
 
 </resources>
