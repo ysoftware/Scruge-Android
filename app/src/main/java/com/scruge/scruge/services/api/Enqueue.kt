@@ -1,15 +1,14 @@
 package com.scruge.scruge.services.api
 
-import com.google.gson.*
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.gson.Gson
 import com.scruge.scruge.model.error.*
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.ActivityListResponse
 import com.scruge.scruge.services.api.model.ResultResponse
-import java.lang.Exception
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 fun <T> callback(fn: (Throwable?, Response<T>?) -> Unit): Callback<T> {
     return object : Callback<T> {

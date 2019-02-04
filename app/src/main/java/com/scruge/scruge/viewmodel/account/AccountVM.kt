@@ -1,6 +1,5 @@
 package com.scruge.scruge.viewmodel.account
 
-import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.eos.Token

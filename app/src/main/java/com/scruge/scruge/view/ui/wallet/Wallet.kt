@@ -10,7 +10,10 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
-import com.scruge.scruge.dependencies.view.*
+import com.scruge.scruge.dependencies.view.ask
+import com.scruge.scruge.dependencies.view.setHidden
+import com.scruge.scruge.dependencies.view.string
+import com.scruge.scruge.dependencies.view.toggleHidden
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.WalletError

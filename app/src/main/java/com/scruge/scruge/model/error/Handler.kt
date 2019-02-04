@@ -1,20 +1,15 @@
 package com.scruge.scruge.model.error
 
-import androidx.core.content.ContextCompat
-import com.scruge.scruge.model.error.AuthError.*
-import com.scruge.scruge.model.error.BackendError.*
-import com.scruge.scruge.model.error.EOSError.*
-import com.scruge.scruge.model.error.NetworkingError.*
-import com.scruge.scruge.model.error.NetworkingError.unknown
-import com.scruge.scruge.model.error.WalletError.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.view.string
-import com.scruge.scruge.support.App
-import com.scruge.scruge.support.App.Companion.context
-import java.lang.Exception
-
+import com.scruge.scruge.model.error.AuthError.*
+import com.scruge.scruge.model.error.BackendError.*
+import com.scruge.scruge.model.error.EOSError.*
+import com.scruge.scruge.model.error.NetworkingError.connectionProblem
+import com.scruge.scruge.model.error.NetworkingError.unknown
+import com.scruge.scruge.model.error.WalletError.*
 
 class ErrorHandler {
 

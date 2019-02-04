@@ -3,13 +3,11 @@ package com.scruge.scruge.view.cells
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.view.setupForHorizontalLayout
-import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.viewmodel.faq.FaqAVM
 import com.scruge.scruge.viewmodel.faq.FaqVM

@@ -4,7 +4,6 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.formatRounding
-import com.scruge.scruge.dependencies.view.Dimension
 import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.model.entity.VoteResult

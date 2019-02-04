@@ -3,17 +3,17 @@ package com.scruge.scruge.dependencies.view
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.scruge.scruge.model.error.ScrugeError
 import android.content.DialogInterface
 import android.text.method.PasswordTransformationMethod
 import android.view.inputmethod.EditorInfo
-import com.scruge.scruge.model.error.ErrorHandler
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.getInputField
 import com.afollestad.materialdialogs.input.input
 import com.scruge.scruge.R
+import com.scruge.scruge.model.error.ErrorHandler
+import com.scruge.scruge.model.error.ScrugeError
 
 // alert
 

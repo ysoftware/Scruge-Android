@@ -25,13 +25,12 @@ import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.comment.CommentAVM
 import com.scruge.scruge.viewmodel.comment.CommentSource
 import com.scruge.scruge.viewmodel.comment.CommentVM
+import com.scruge.scruge.viewmodel.faq.FaqVM
+import com.scruge.scruge.viewmodel.milestone.MilestoneVM
 import com.scruge.scruge.viewmodel.profile.ProfileVM
 import com.scruge.scruge.viewmodel.update.UpdateAVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.theartofdev.edmodo.cropper.CropImage
-import com.scruge.scruge.viewmodel.faq.FaqVM
-import com.scruge.scruge.viewmodel.milestone.MilestoneVM
-import java.net.URL
 
 class Presenter {
 

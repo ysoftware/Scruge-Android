@@ -2,12 +2,10 @@ package com.scruge.scruge.dependencies.navigation
 
 import android.transition.Slide
 import android.view.Gravity
-
-import com.scruge.scruge.view.views.NavigationBar
-
-import java.util.Stack
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.scruge.scruge.view.views.NavigationBar
+import java.util.*
 
 class NavigationController(private val manager: FragmentManager, val containerId: Int) :
         NavigationBar.Delegate {

@@ -14,7 +14,6 @@ import com.scruge.scruge.viewmodel.activity.ActivityVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import kotlinx.android.synthetic.main.cell_activity.view.*
 import kotlinx.android.synthetic.main.cell_activity_vote.view.*
-import java.util.*
 
 class VoteNotificationCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

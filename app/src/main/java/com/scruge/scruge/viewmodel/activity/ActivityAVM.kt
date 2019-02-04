@@ -1,8 +1,6 @@
 package com.scruge.scruge.viewmodel.activity
 
 import com.scruge.scruge.model.entity.ActivityModel
-import com.scruge.scruge.model.error.GeneralError
-import com.scruge.scruge.model.error.wrap
 import com.scruge.scruge.services.Service
 import com.ysoftware.mvvm.array.ArrayViewModel
 

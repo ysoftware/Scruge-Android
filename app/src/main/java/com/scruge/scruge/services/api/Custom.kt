@@ -2,20 +2,10 @@ package com.scruge.scruge.services.api
 
 import android.util.Log
 import com.google.gson.Gson
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.scruge.scruge.model.entity.*
-import com.scruge.scruge.model.error.*
-import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.ActivityListResponse
-import com.scruge.scruge.services.api.model.ResultResponse
 import com.scruge.scruge.viewmodel.activity.ActivityType
-import okhttp3.ResponseBody
-import org.json.JSONArray
-import retrofit2.Call
-import retrofit2.Response
-import java.lang.Exception
 
 class CustomParser {
 

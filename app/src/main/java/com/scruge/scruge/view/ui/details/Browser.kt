@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.views.NavigationBarButton
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import kotlinx.android.synthetic.main.fragment_browser.*
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import com.scruge.scruge.dependencies.view.string
 
 
 class BrowserFragment : NavigationFragment() {

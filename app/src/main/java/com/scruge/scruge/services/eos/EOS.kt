@@ -11,7 +11,6 @@ import com.memtrip.eos.http.rpc.model.history.request.GetActions
 import com.memtrip.eos.http.rpc.model.history.request.GetKeyAccounts
 import com.memtrip.eos.http.rpc.model.history.response.HistoricAccountAction
 import com.memtrip.eos.http.rpc.model.transaction.response.TransactionCommitted
-import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.model.entity.Resources
 import com.scruge.scruge.model.error.EOSError

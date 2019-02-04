@@ -9,7 +9,6 @@ import com.scruge.scruge.model.entity.Comment
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
 import com.ysoftware.mvvm.single.ViewModel
-import java.lang.Exception
 
 class CommentVM(model: Comment?) : ViewModel<Comment>(model) {
 

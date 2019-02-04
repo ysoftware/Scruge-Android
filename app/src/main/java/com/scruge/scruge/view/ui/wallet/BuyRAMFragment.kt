@@ -11,7 +11,6 @@ import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.account.AccountVM
 import com.ysoftware.mvvm.array.ArrayViewModelDelegate
 import com.ysoftware.mvvm.single.ViewModelDelegate
-import kotlinx.android.synthetic.main.fragment_wallet.*
 
 class BuyRAMFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
 

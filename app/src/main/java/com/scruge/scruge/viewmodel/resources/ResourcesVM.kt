@@ -6,7 +6,6 @@ import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Resources
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.eos.EosName
-import com.scruge.scruge.services.eos.toEosName
 import com.ysoftware.mvvm.single.ViewModel
 
 class ResourcesVM : ViewModel<Resources>(null) {

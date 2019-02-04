@@ -1,9 +1,7 @@
 package com.scruge.scruge.dependencies.dataformatting
 
 import android.content.res.Resources
-import android.os.Build
 import androidx.core.os.ConfigurationCompat
-import com.scruge.scruge.support.App
 import org.ocpsoft.prettytime.PrettyTime
 import java.text.SimpleDateFormat
 import java.util.*

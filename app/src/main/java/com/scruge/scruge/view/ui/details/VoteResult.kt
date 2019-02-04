@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
-import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.dependencies.view.string
-import com.scruge.scruge.model.entity.VoteInfo
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.model.entity.VoteResult
-import com.scruge.scruge.view.cells.*
+import com.scruge.scruge.view.cells.CountdownCell
+import com.scruge.scruge.view.cells.VoteInfoCell
+import com.scruge.scruge.view.cells.VoteResultCell
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.view.ui.campaign.CampaignFragment
 import com.scruge.scruge.viewmodel.account.AccountAVM

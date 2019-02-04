@@ -17,7 +17,6 @@ import com.scruge.scruge.view.cells.ActivityViewHolder
 import com.scruge.scruge.view.cells.VoteNotificationCell
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.activity.ActivityAVM
-import com.scruge.scruge.viewmodel.update.UpdateAVM
 import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
 import kotlinx.android.synthetic.main.fragment_activity.*

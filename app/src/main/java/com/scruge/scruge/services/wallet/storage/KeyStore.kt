@@ -1,16 +1,15 @@
 package com.scruge.scruge.services.wallet.storage
 
 import android.content.Context
-import com.scruge.scruge.support.App
-import java.io.File
 import android.content.ContextWrapper
 import android.util.Log
 import com.memtrip.eos.core.crypto.EosPrivateKey
 import com.memtrip.eos.core.crypto.EosPublicKey
 import com.pvryan.easycrypt.ECResultListener
 import com.pvryan.easycrypt.symmetric.ECSymmetric
+import com.scruge.scruge.support.App
 import org.jetbrains.anko.runOnUiThread
-import kotlin.random.Random
+import java.io.File
 
 class KeyStore {
 

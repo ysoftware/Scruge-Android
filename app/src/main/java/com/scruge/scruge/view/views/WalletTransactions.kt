@@ -16,7 +16,10 @@ import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.viewmodel.transaction.ActionVM
 import com.scruge.scruge.viewmodel.transaction.ActionsAVM
 import com.scruge.scruge.viewmodel.transaction.ActionsQuery
-import com.ysoftware.mvvm.array.*
+import com.ysoftware.mvvm.array.ArrayViewModel
+import com.ysoftware.mvvm.array.ArrayViewModelDelegate
+import com.ysoftware.mvvm.array.Query
+import com.ysoftware.mvvm.array.Update
 import com.ysoftware.mvvm.single.ViewModel
 import kotlinx.android.synthetic.main.cell_transaction.view.*
 

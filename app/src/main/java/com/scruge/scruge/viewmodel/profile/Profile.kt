@@ -1,6 +1,5 @@
 package com.scruge.scruge.viewmodel.profile
 
-import android.graphics.Bitmap
 import android.net.Uri
 import com.scruge.scruge.model.entity.Profile
 import com.scruge.scruge.model.error.ErrorHandler

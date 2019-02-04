@@ -1,12 +1,8 @@
 package com.scruge.scruge.services.eos
 
-import com.memtrip.eos.abi.writer.ByteWriter
-import com.memtrip.eos.abi.writer.Squishable
-import com.memtrip.eos.abi.writer.bytewriter.DefaultByteWriter
 import com.memtrip.eos.abi.writer.compression.CompressionFactory
 import com.memtrip.eos.abi.writer.compression.CompressionType
 import com.memtrip.eos.chain.actions.ChainResponse
-import com.memtrip.eos.chain.actions.transaction.AbiBinaryGenTransactionWriter
 import com.memtrip.eos.chain.actions.transaction.ChainTransaction
 import com.memtrip.eos.chain.actions.transaction.TransactionContext
 import com.memtrip.eos.chain.actions.transaction.abi.ActionAbi

@@ -1,12 +1,8 @@
 package com.scruge.scruge.viewmodel.transaction
 
-import android.graphics.Color
-import android.util.Log
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
-import com.google.gson.internal.LinkedHashTreeMap
 import com.memtrip.eos.chain.actions.transaction.transfer.actions.TransferArgs
-import com.memtrip.eos.http.rpc.model.history.response.HistoricAccountAction
 import com.memtrip.eos.http.rpc.model.transaction.response.TransactionAct
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.datePresent
@@ -15,7 +11,6 @@ import com.scruge.scruge.model.entity.ActionReceipt
 import com.scruge.scruge.model.entity.VoteKind
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.eos.EosName
-import com.scruge.scruge.support.App.Companion.context
 import com.ysoftware.mvvm.single.ViewModel
 
 class ActionVM(model: ActionReceipt?) : ViewModel<ActionReceipt>(model) {

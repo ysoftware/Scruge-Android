@@ -1,7 +1,6 @@
 package com.scruge.scruge.services.wallet
 
 import com.memtrip.eos.core.crypto.EosPrivateKey
-import com.memtrip.eos.core.crypto.EosPublicKey
 import com.scruge.scruge.services.wallet.storage.KeyStore
 import com.scruge.scruge.services.wallet.storage.LocalAccount
 

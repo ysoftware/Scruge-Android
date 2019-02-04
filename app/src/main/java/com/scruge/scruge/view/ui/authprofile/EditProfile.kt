@@ -1,6 +1,10 @@
 package com.scruge.scruge.view.ui.authprofile
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +12,12 @@ import android.view.ViewGroup
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
-import com.scruge.scruge.services.Service
-import com.scruge.scruge.viewmodel.profile.ProfileVM
-import kotlinx.android.synthetic.main.fragment_profile_edit.*
-import com.theartofdev.edmodo.cropper.CropImage
-import android.content.Intent
-import android.app.Activity
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.provider.MediaStore
 import com.scruge.scruge.dependencies.view.*
+import com.scruge.scruge.services.Service
 import com.scruge.scruge.view.main.TabbarActivity
+import com.scruge.scruge.viewmodel.profile.ProfileVM
+import com.theartofdev.edmodo.cropper.CropImage
+import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
 class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPressedListener {
 

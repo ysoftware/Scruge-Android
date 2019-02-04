@@ -3,7 +3,6 @@ package com.scruge.scruge.dependencies.view
 import android.net.Uri
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
-import java.lang.Exception
 
 fun ImageView.setImage(url: Uri?, hideOnFail:Boolean = true) {
     Picasso.Builder(context)

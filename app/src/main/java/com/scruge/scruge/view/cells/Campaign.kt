@@ -6,7 +6,6 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.scruge.scruge.dependencies.view.setImage
 import com.scruge.scruge.viewmodel.campaign.CampaignVM
-import com.scruge.scruge.viewmodel.campaign.PartialCampaignVM
 import com.scruge.scruge.viewmodel.campaign.PartialCampaignViewModel
 import kotlinx.android.synthetic.main.cell_campaign_info.view.*
 import kotlinx.android.synthetic.main.cell_campaign_small.view.*

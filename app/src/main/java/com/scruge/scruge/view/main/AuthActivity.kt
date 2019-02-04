@@ -1,7 +1,6 @@
 package com.scruge.scruge.view.main
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController
