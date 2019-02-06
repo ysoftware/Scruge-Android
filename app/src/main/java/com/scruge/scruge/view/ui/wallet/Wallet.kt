@@ -237,7 +237,9 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
             arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
 
         if (update == Update.reload) {
-            selectVM()
+            activity?.runOnUiThread {
+                selectVM()
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.scruge.scruge.view.ui.authprofile
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,7 +55,9 @@ class ProfileFragment: NavigationFragment(), ViewModelDelegate {
     }
 
     override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
-        refreshProfile()
+        activity?.runOnUiThread {
+            refreshProfile()
+        }
     }
 
     private fun refreshProfile() {

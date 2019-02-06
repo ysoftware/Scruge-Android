@@ -1,5 +1,6 @@
 package com.scruge.scruge.view.ui.campaign
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -83,7 +84,9 @@ class FeaturedFragment: NavigationFragment(), ArrayViewModelDelegate {
 
     override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
             arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
-        updateHandler.handle(update)
+        activity?.runOnUiThread {
+            updateHandler.handle(update)
+        }
     }
 
     override fun didChangeState(state: State) {

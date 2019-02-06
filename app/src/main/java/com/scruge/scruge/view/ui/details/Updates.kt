@@ -1,5 +1,6 @@
 package com.scruge.scruge.view.ui.details
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -87,7 +88,9 @@ class UpdatesFragment : NavigationFragment(), ArrayViewModelDelegate {
 
     override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
             arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
-        handler.handle(update)
+        activity?.runOnUiThread {
+            handler.handle(update)
+        }
     }
 
     class Adapter(val fr:UpdatesFragment) : RecyclerView.Adapter<UpdateCell>() {

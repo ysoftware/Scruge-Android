@@ -1,5 +1,6 @@
 package com.scruge.scruge.view.ui.details
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -94,7 +95,10 @@ class VoteFragment: NavigationFragment(), ViewModelDelegate {
 
     override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
         super.didUpdateData(viewModel)
-        adapter.notifyDataSetChanged()
+
+        activity?.runOnUiThread {
+            adapter.notifyDataSetChanged()
+        }
     }
 
     private fun vote(value:Boolean, passcode:String) {

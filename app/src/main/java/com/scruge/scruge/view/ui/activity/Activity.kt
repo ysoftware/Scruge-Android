@@ -89,33 +89,37 @@ class ActivityFragment: NavigationFragment(), ArrayViewModelDelegate {
 
     override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
             arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
-        handler.handle(update)
+        activity?.runOnUiThread {
+            handler.handle(update)
+        }
     }
 
     override fun didChangeState(state: State) {
         super.didChangeState(state)
 
-        when (vm.state) {
-            State.error -> {
-                refresh_control.isRefreshing = false
-                val message = ErrorHandler.message(vm.state.errorValue)
-                loading_view.state = ViewState.error
-                loading_view.state.errorMessage = message
-            }
-            State.loading, State.initial -> {
-                loading_view.state = ViewState.loading
-            }
-            State.ready -> {
-                refresh_control.isRefreshing = false
-                if (vm.numberOfItems == 0) {
+        activity?.runOnUiThread {
+            when (vm.state) {
+                State.error -> {
+                    refresh_control.isRefreshing = false
+                    val message = ErrorHandler.message(vm.state.errorValue)
                     loading_view.state = ViewState.error
-                    loading_view.state.errorMessage = R.string.error_activity_noActions.string()
+                    loading_view.state.errorMessage = message
                 }
-                else {
-                    loading_view.state = ViewState.ready
+                State.loading, State.initial -> {
+                    loading_view.state = ViewState.loading
                 }
+                State.ready -> {
+                    refresh_control.isRefreshing = false
+                    if (vm.numberOfItems == 0) {
+                        loading_view.state = ViewState.error
+                        loading_view.state.errorMessage = R.string.error_activity_noActions.string()
+                    }
+                    else {
+                        loading_view.state = ViewState.ready
+                    }
+                }
+                else -> return@runOnUiThread
             }
-            else -> return
         }
     }
 

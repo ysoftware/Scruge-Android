@@ -201,30 +201,35 @@ class CampaignFragment: NavigationFragment(), ViewModelDelegate, ArrayViewModelD
     // DELEGATE
 
     override fun <M : Comparable<M>> didUpdateData(viewModel: ViewModel<M>) {
-        if (viewModel !== vm) {
-            adapter?.notifyDataSetChanged()
-            return
-        }
-
-        setupNavigationBar()
-        campaign_loading_view.state = vm.state
-
-        // todo
-        when (vm.state) {
-            ViewState.error -> {
-                //                refresh_control.endRefreshing
+        activity?.runOnUiThread {
+            if (viewModel !== vm) {
+                adapter?.notifyDataSetChanged()
+                return@runOnUiThread
             }
-            ViewState.ready -> {
-                showData()
-                //                refresh_control.endRefreshing
+
+            setupNavigationBar()
+            campaign_loading_view?.state = vm.state
+
+            // todo
+            when (vm.state) {
+                ViewState.error -> {
+                    //                refresh_control.endRefreshing
+                }
+                ViewState.ready -> {
+                    showData()
+                    //                refresh_control.endRefreshing
+                }
+                ViewState.loading -> {
+                }
             }
-            ViewState.loading -> { }
         }
     }
 
     override fun <M : Comparable<M>, VM : ViewModel<M>, Q : Query> didUpdateData(
             arrayViewModel: ArrayViewModel<M, VM, Q>, update: Update) {
-        adapter?.notifyDataSetChanged()
+        activity?.runOnUiThread {
+            adapter?.notifyDataSetChanged()
+        }
     }
 
     // ADAPTER
