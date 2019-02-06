@@ -14,7 +14,10 @@ class MilestoneVM(model: Milestone?) : ViewModel<Milestone>(model) {
     val date get() = model?.let { datePresent(it.endTimestamp, "d MMMM yyyy") } ?: ""
 
     val fundsRelease:String get() {
-        val value = (model?.fundsReleasePercent ?: 0.0).formatRounding()
+        val percent = model?.fundsReleasePercent ?: 0.0
+        if (percent == 0.0) { return "" }
+
+        val value = percent.formatRounding() + "%"
         return R.string.label_milestone_funds_release.string(value)
     }
 }
