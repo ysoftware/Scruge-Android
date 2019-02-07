@@ -108,6 +108,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         wallet_data_container.setOnClickListener {
             collapseAll(wallet_data_view)
             if (!wallet_data_view.toggleHidden()) {
+                scrollToBottom()
                 wallet_data_view.updateViews()
             }
             else {
@@ -118,6 +119,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         wallet_transactions_container.setOnClickListener {
             collapseAll(wallet_transactions_view)
             if (!wallet_transactions_view.toggleHidden()) {
+                scrollToBottom()
                 wallet_transactions_view.accountName = vm.selectedAccount?.name
             }
         }
@@ -239,7 +241,8 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     private fun scrollToBottom() {
-        activity?.runOnUiThread { wallet_scroll_view.fullScroll(View.FOCUS_DOWN) }
+        Handler().postDelayed(
+                { activity?.runOnUiThread { wallet_scroll_view.fullScroll(View.FOCUS_DOWN) } }, 250)
     }
 
     // DELEGATE
