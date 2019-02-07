@@ -28,12 +28,12 @@ fun Fragment.alert(message:String, completion:(()->Unit)? = null) {
     }
 }
 
-fun Fragment.alert(error:Throwable) {
-    alert(ErrorHandler.message(error))
+fun Fragment.alert(error:Throwable, completion:(()->Unit)? = null) {
+    alert(ErrorHandler.message(error), completion)
 }
 
-fun Fragment.alert(error:ScrugeError) {
-    alert(ErrorHandler.message(error))
+fun Fragment.alert(error:ScrugeError, completion:(()->Unit)? = null) {
+    alert(ErrorHandler.message(error), completion)
 }
 
 // ask

@@ -246,6 +246,12 @@ class Presenter {
         fragment.navigationController?.navigateTo(fr)
     }
 
+    fun presentVoteBPFragment(fragment: NavigationFragment, vm:AccountVM) {
+        val fr = VoteBPFragment()
+        fr.accountVM = vm
+        fragment.navigationController?.navigateTo(fr)
+    }
+
     // OTHER
 
     fun presentPrivacyPolicy(fragment: NavigationFragment) {

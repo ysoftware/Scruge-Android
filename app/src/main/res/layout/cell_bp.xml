@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/bp_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/text_regular"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/bp_votes"
+        android:layout_marginStart="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/text_gray"
+        android:textSize="14sp"/>
+
+
+    <RelativeLayout
+        android:id="@+id/bp_checkmark"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/checkmark_selected">
+
+        <ImageView
+            android:id="@+id/bp_checkmark_image"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/check"/>
+    </RelativeLayout>
+
+</RelativeLayout>

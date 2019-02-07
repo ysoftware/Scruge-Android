@@ -26,6 +26,7 @@ import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
 import kotlinx.android.synthetic.main.fragment_wallet.*
+import kotlinx.android.synthetic.main.fragment_wallet.view.*
 import kotlinx.android.synthetic.main.view_wallet_settings.view.*
 
 class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
@@ -142,6 +143,12 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         wallet_transfer.setOnClickListener {
             accountVM?.let {
                 Service.presenter.presentTransferFragment(this, it)
+            }
+        }
+
+        wallet_vote_bp.setOnClickListener {
+            accountVM?.let {
+                Service.presenter.presentVoteBPFragment(this, it)
             }
         }
     }
