@@ -243,8 +243,8 @@ class EOS {
                       completion: (Result<String>) -> Unit) {
 
         account.getTransactionContext(passcode) {
-            val context = it ?:
-            return@getTransactionContext completion(Result.failure(WalletError.incorrectPasscode.wrap()))
+            val context = it ?: return@getTransactionContext completion(
+                    Result.failure(WalletError.incorrectPasscode.wrap()))
 
             val bps = names.map { it.toString() }.sorted()
 

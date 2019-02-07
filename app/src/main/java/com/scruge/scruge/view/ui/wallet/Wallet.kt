@@ -26,7 +26,6 @@ import com.ysoftware.mvvm.array.*
 import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
 import kotlinx.android.synthetic.main.fragment_wallet.*
-import kotlinx.android.synthetic.main.fragment_wallet.view.*
 import kotlinx.android.synthetic.main.view_wallet_settings.view.*
 
 class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDelegate {
@@ -126,6 +125,7 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         wallet_resources_container.setOnClickListener {
             collapseAll(wallet_resources_view)
             if (!wallet_resources_view.toggleHidden()) {
+                scrollToBottom()
                 wallet_resources_view.accountName = vm.selectedAccount?.name
             }
         }
@@ -236,6 +236,10 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         else {
             setupVM()
         }
+    }
+
+    private fun scrollToBottom() {
+        activity?.runOnUiThread { wallet_scroll_view.fullScroll(View.FOCUS_DOWN) }
     }
 
     // DELEGATE
