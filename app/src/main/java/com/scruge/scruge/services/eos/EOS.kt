@@ -4,12 +4,16 @@ import android.util.Log
 import com.memtrip.eos.chain.actions.ChainResponse
 import com.memtrip.eos.chain.actions.transaction.account.DelegateBandwidthChain
 import com.memtrip.eos.chain.actions.transaction.transfer.TransferChain
+import com.memtrip.eos.chain.actions.transaction.vote.VoteChain
 import com.memtrip.eos.http.rpc.Api
 import com.memtrip.eos.http.rpc.model.account.request.AccountName
 import com.memtrip.eos.http.rpc.model.contract.request.GetCurrencyBalance
 import com.memtrip.eos.http.rpc.model.history.request.GetActions
 import com.memtrip.eos.http.rpc.model.history.request.GetKeyAccounts
 import com.memtrip.eos.http.rpc.model.history.response.HistoricAccountAction
+import com.memtrip.eos.http.rpc.model.info.Info
+import com.memtrip.eos.http.rpc.model.producer.request.GetProducers
+import com.memtrip.eos.http.rpc.model.producer.response.ProducerList
 import com.memtrip.eos.http.rpc.model.transaction.response.TransactionCommitted
 import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.model.entity.Resources
@@ -52,6 +56,43 @@ class EOS {
 
     // METHODS
 
+    fun getChainInfo(url:String, completion: (Result<Info>) -> Unit) {
+        service.chain.getInfo()
+                .doOnError { completion(Result.failure(it)) }
+                .subscribeOn(Schedulers.newThread())
+                .subscribe({ response ->
+                       val info = response.body()
+                       if (info != null) {
+                           completion(Result.success(info))
+                       }
+                       else {
+                           completion(Result.failure(EOSError.unknown.wrap()))
+                       }
+                   }) { error ->
+                    val e = ErrorHandler.error(error) ?: EOSError.unknown
+                    completion(Result.failure(e.wrap()))
+                }
+    }
+
+    fun getProducers(completion: (Result<ProducerList>) -> Unit) {
+        val body = GetProducers(true, "", -1)
+        service.chain.getProducers(body)
+                .doOnError { completion(Result.failure(it)) }
+                .subscribeOn(Schedulers.newThread())
+                .subscribe({ response ->
+                               val info = response.body()
+                               if (info != null) {
+                                   completion(Result.success(info))
+                               }
+                               else {
+                                   completion(Result.failure(EOSError.unknown.wrap()))
+                               }
+                           }) { error ->
+                    val e = ErrorHandler.error(error) ?: EOSError.unknown
+                    completion(Result.failure(e.wrap()))
+                }
+    }
+
     fun getAccounts(wallet: LocalAccount, completion: (Result<List<String>>) -> Unit) {
         service.history.getKeyAccounts(GetKeyAccounts(wallet.rawPublicKey))
                 .doOnError { completion(Result.failure(it)) }
@@ -64,10 +105,10 @@ class EOS {
                     else {
                         completion(Result.failure(EOSError.unknown.wrap()))
                     }
-                }, { error ->
+                }) { error ->
                     val e = ErrorHandler.error(error) ?: EOSError.unknown
                     completion(Result.failure(e.wrap()))
-        })
+                }
     }
 
     fun getResources(account:EosName, completion: (Result<Resources>)->Unit) {
@@ -79,10 +120,10 @@ class EOS {
                     response.body()?.let {
                         completion(Result.success(Resources(it)))
                     }
-                }, { error ->
+                }) { error ->
                     val e = ErrorHandler.error(error) ?: EOSError.unknown
                     completion(Result.failure(e.wrap()))
-                })
+                }
     }
 
     fun getActions(account:EosName,
@@ -100,11 +141,11 @@ class EOS {
                             query.setLimit(it.first().account_action_seq)
                         }
                         completion(Result.success(actions))
-                    } ?: completion(Result.failure(EOSError.unknown.wrap()))
-                           }, { error ->
-                    val e = ErrorHandler.error(error) ?: EOSError.unknown
-                    completion(Result.failure(e.wrap()))
-                })
+                        } ?: completion(Result.failure(EOSError.unknown.wrap()))
+                    }) { error ->
+                        val e = ErrorHandler.error(error) ?: EOSError.unknown
+                        completion(Result.failure(e.wrap()))
+                    }
     }
 
     fun getBalance(account:EosName,
@@ -196,6 +237,22 @@ class EOS {
         }
     }
 
+    fun voteProducers(account: AccountModel,
+                      names:Set<EosName>,
+                      passcode: String,
+                      completion: (Result<String>) -> Unit) {
+
+        account.getTransactionContext(passcode) {
+            val context = it ?:
+            return@getTransactionContext completion(Result.failure(WalletError.incorrectPasscode.wrap()))
+
+            val bps = names.map { it.toString() }.sorted()
+
+            val args = VoteChain.Args(account.name, "", bps)
+            VoteChain(service.chain).vote(args, context).subscribe(completion)
+        }
+    }
+
     fun <M:AbiConvertible>sendAction(action:EosName,
                                      contract:EosName = contractAccount,
                                      account:AccountModel,
@@ -221,17 +278,17 @@ fun Single<ChainResponse<TransactionCommitted>>.subscribe(completion: (Result<St
     }
     subscribeOn(Schedulers.newThread())
             .subscribe({ response ->
-                           val id = response.body?.transaction_id
-                           if (id != null) {
-                               completion(Result.success(id))
-                           }
-                           else {
-                               Log.e("EOS", response.errorBody)
-                               val e = ErrorHandler.parse(response.errorBody) ?: EOSError.unknown
-                               completion(Result.failure(e.wrap()))
-                           }
-                       }, { error ->
-                           val e = ErrorHandler.error(error) ?: EOSError.unknown
-                           completion(Result.failure(e.wrap()))
-                       })
+               val id = response.body?.transaction_id
+               if (id != null) {
+                   completion(Result.success(id))
+               }
+               else {
+                   Log.e("EOS", response.errorBody)
+                   val e = ErrorHandler.parse(response.errorBody) ?: EOSError.unknown
+                   completion(Result.failure(e.wrap()))
+               }
+           }) { error ->
+               val e = ErrorHandler.error(error) ?: EOSError.unknown
+               completion(Result.failure(e.wrap()))
+           }
 }
