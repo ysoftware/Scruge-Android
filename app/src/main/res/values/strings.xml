@@ -273,6 +273,16 @@ Check out the results now.</string>
     <string name="error_eos_createAccountIpLimitReached">Can\'t create another EOS account for you. Please, contact us at support@scruge.world</string>
     <string name="error_eos_createAccountDailyLimitReached">Daily limit for free EOS accounts is reached. Please, try again later or contact us at support@scruge.world</string>
 
+
+    <string name="do_sell_eos_ram">Sell Ram</string>
+    <string name="do_manage_ram">Manage RAM</string>
+    <string name="title_vote_bp">Block producers</string>
+    <string name="do_vote_bp">Vote</string>
+    <string name="label_vote_bp_description">Select up to 30 block producers to vote for</string>
+    <string name="hint_bp_filter">Filter the list</string>
+    <string name="label_selected_bps">Selected %1$s / 30</string>
+
+
     <!-- plurals  -->
     <plurals name="see_all_comments">
         <item quantity="one">See %1$s comment</item>

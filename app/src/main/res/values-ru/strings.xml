@@ -274,6 +274,15 @@
     <string name="error_eos_createAccountDailyLimitReached">Достигнут суточный лимит по созданию бесплатных аккаунтов. Пожалуйста, попробуйте ещё раз позже или свяжитесь с нами на support@scruge.world</string>
 
 
+    <string name="do_sell_eos_ram">КУПИТЬ RAM</string>
+    <string name="do_manage_ram">УПРАВЛЯТЬ RAM</string>
+    <string name="title_vote_bp">Блок продюсеры</string>
+    <string name="do_vote_bp">Голосовать</string>
+    <string name="label_vote_bp_description">Выберите от 0 до 30 блок-продюсеров, за которых хотите проголосовать</string>
+    <string name="hint_bp_filter">Фильтровать список</string>
+    <string name="label_selected_bps">Выбрано %1$s / 30</string>
+
+
     <!-- plurals -->
     <plurals name="see_all_comments">
         <item quantity="one">Посмотреть %1$s комментарий</item>
