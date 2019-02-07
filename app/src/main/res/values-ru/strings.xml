@@ -212,7 +212,7 @@
     <string name="title_sure_to_delete_wallet">Вы уверены, что хотите удалить данные вашего кошелька?</string>
     <string name="label_sure_to_delete_wallet">Убедитесь, что записали ваш приватный ключ, потому что иначе не будет никакого способа его восстановить.</string>
     <string name="alert_sign_in_first">Пожалуйста, сначала войдите в ваш аккаунт Scruge</string>
-    <string name="title_transfer_tokens">Переводести токены</string>
+    <string name="title_transfer_tokens">Перевод токенов</string>
     <string name="alert_select_correct_token">Произошла ошибка. Выберите правильный токен для перевода</string>
     <string name="do_transfer_tokens">Перевести</string>
     <string name="title_manage_resources">Управление Ресурсами</string>
