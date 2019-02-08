@@ -1,6 +1,7 @@
 package com.scruge.scruge.services
 
 import android.content.Context
+import android.os.Environment.DIRECTORY_DOCUMENTS
 import com.scruge.scruge.support.App
 import java.io.File
 
@@ -9,7 +10,7 @@ class Settings {
 
     enum class Setting {
 
-        selectedAccount, userTokens, nodeUrl
+        selectedAccount, userTokens, nodeUrl, didCreateAccount
     }
 
     val defaults = App.context.getSharedPreferences("Settings", Context.MODE_PRIVATE)
@@ -17,7 +18,6 @@ class Settings {
     inline fun <reified T> get(settins:Setting): T? {
         return when (T::class) {
             String::class -> defaults.getString(settins.name, null) as? T
-
             else -> null
         }
     }
@@ -42,16 +42,22 @@ class Settings {
 
     // special eos account creation check
 
-    private val url = "${App.context.filesDir}/e"
+    private val file = File(App.context.getExternalFilesDir(DIRECTORY_DOCUMENTS), "scruge.s")
 
-    fun setDidCreateEosAccount() = File(url).writeBytes(ByteArray(1))
+    fun setDidCreateEosAccount() {
+        try {
+            file.writeBytes(ByteArray(1))
+            set(Setting.didCreateAccount, "1")
+        }
+        catch (ex:Exception) { }
+    }
 
     val didCreateEosAccount:Boolean get() {
         return try {
-            File(url).readBytes().contentEquals(ByteArray(1))
+            file.readBytes().contentEquals(ByteArray(1))
         }
         catch (ex:Exception) {
-            false
+            get<String>(Setting.didCreateAccount) != null
         }
     }
 }
