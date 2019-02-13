@@ -18,7 +18,7 @@
     <string name="title_token_economies">Экономика токена</string>
     <string name="label_total_token_supply">Макс. количество токенов</string>
     <string name="label_token_percent_for_public_sale">Процент для публичной продажи</string>
-    <string name="label_initial_release_after_funding">Изначальная выдача после сбора средств</string>
+    <string name="label_initial_release_after_funding">Изначальная выдача</string>
     <string name="label_annual_inflation_rate">Годовая инфляция</string>
     <string name="do_see_all_updates">Посмотреть все новости</string>
     <string name="title_vote_results">Результаты</string>

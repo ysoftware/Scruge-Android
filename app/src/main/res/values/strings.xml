@@ -18,7 +18,7 @@
     <string name="title_token_economies">Token economies</string>
     <string name="label_total_token_supply">Total token supply</string>
     <string name="label_token_percent_for_public_sale">Token percent for public sale</string>
-    <string name="label_initial_release_after_funding">Initial release after funding</string>
+    <string name="label_initial_release_after_funding">Initial release</string>
     <string name="label_annual_inflation_rate">Annual inflation rate</string>
     <string name="do_see_all_updates">See all updates</string>
     <string name="title_vote_results">Results</string>
