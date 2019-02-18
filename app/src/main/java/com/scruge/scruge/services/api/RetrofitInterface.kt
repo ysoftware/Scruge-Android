@@ -6,45 +6,47 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
+private const val versionString = "" // "v${Api.version}/"
+
 @JvmSuppressWildcards
 interface BackendApi {
 
-    @GET("")
+    @GET(versionString + "")
     fun getInfo(): Call<ResponseBody>
 
     // WALLET
-    @POST("user/{token}/create_eos_account")
+    @POST(versionString + "user/{token}/create_eos_account")
     fun createAccount(@Path("token") token:String,
                       @Body request: AccountRequest): Call<ResponseBody>
 
     // AUTH
 
-    @POST("auth/login")
+    @POST(versionString + "auth/login")
     fun login(@Body request: AuthRequest): Call<ResponseBody>
 
-    @POST("auth/reset_password")
+    @POST(versionString + "auth/reset_password")
     fun resetPassword(@Body request: LoginRequest): Call<ResponseBody>
 
-    @POST("auth/register")
+    @POST(versionString + "auth/register")
     fun signUp(@Body request: RegisterRequest): Call<ResponseBody>
 
-    @POST("auth/check_email")
+    @POST(versionString + "auth/check_email")
     fun checkEmail(@Body request: EmailRequest): Call<ResponseBody>
 
     // PROFILE
 
-    @GET("user/{token}/id")
+    @GET(versionString + "user/{token}/id")
     fun getUserId(@Path("token") token:String): Call<ResponseBody>
 
-    @Multipart @POST("avatar/{token}")
+    @Multipart @POST(versionString + "avatar/{token}")
     fun updateProfileImage(@Part image: MultipartBody.Part,
                            @Path("token") token:String): Call<ResponseBody>
 
-    @PUT("profile/{token}")
+    @PUT(versionString + "profile/{token}")
     fun updateProfile(@Path("token") token:String,
                       @Body request: ProfileRequest): Call<ResponseBody>
 
-    @GET("profile/{token}")
+    @GET(versionString + "profile/{token}")
     fun getProfile(@Path("token") token:String): Call<ResponseBody>
 
     // CATEGORIES & TAGS
@@ -52,101 +54,101 @@ interface BackendApi {
 
     // CAMPAIGNS
 
-    @GET("campaign/{id}")
+    @GET(versionString + "campaign/{id}")
     fun getCampaign(@Path("id") id:Int): Call<ResponseBody>
 
-    @GET("campaigns/{token}/backed")
+    @GET(versionString + "campaigns/{token}/backed")
     fun getBacked(@Path("token") token:String): Call<ResponseBody>
 
-    @GET("campaigns/{token}/subscribed")
+    @GET(versionString + "campaigns/{token}/subscribed")
     fun getSubscribed(@Path("token") token:String): Call<ResponseBody>
 
-    @GET("campaigns")
+    @GET(versionString + "campaigns")
     fun getCampaignList(@QueryMap request: Map<String, Any>): Call<ResponseBody>
 
     // SUBSCRIPTIONS
 
-    @GET("user/{token}/is_subscribed")
+    @GET(versionString + "user/{token}/is_subscribed")
     fun getSubscriptionStatus(@Path("token") token:String,
                               @QueryMap request: Map<String, Any>): Call<ResponseBody>
 
-    @POST("user/{token}/campaign_subscribe")
+    @POST(versionString + "user/{token}/campaign_subscribe")
     fun subscribe(@Path("token") token:String,
                   @Body request: CampaignRequest): Call<ResponseBody>
 
-    @POST("user/{token}/campaign_unsubscribe")
+    @POST(versionString + "user/{token}/campaign_unsubscribe")
     fun unsubscribe(@Path("token") token:String,
                     @Body request: CampaignRequest): Call<ResponseBody>
 
     // UPDATES
 
-    @GET("campaign/{campaignId}/updates")
+    @GET(versionString + "campaign/{campaignId}/updates")
     fun getUpdateList(@Path("campaignId") campaignId:Int): Call<ResponseBody>
 
-    @GET("user/{token}/activity")
+    @GET(versionString + "user/{token}/activity")
     fun getActivity(@Path("token") token:String,
                     @QueryMap request: Map<String, Any>): Call<ResponseBody>
 
-    @GET("activity")
+    @GET(versionString + "activity")
     fun getActivity(@QueryMap request: Map<String, Any>): Call<ResponseBody>
 
-    @GET("user/{token}/votes")
+    @GET(versionString + "user/{token}/votes")
     fun getVoteNotifications(@Path("token") token:String): Call<ResponseBody>
 
     // HTML DESCRIPTION
 
-    @GET("campaign/{campaignId}/update/{updateId}/description")
+    @GET(versionString + "campaign/{campaignId}/update/{updateId}/description")
     fun getUpdateDescription(@Path("campaignId") campaignId:Int,
                              @Path("updateId") updateId:String): Call<ResponseBody>
 
 
-    @GET("campaign/{campaignId}/content")
+    @GET(versionString + "campaign/{campaignId}/content")
     fun getCampaignContent(@Path("campaignId") campaignId:Int): Call<ResponseBody>
 
-    @GET("update/{updateId}/content")
+    @GET(versionString + "update/{updateId}/content")
     fun getUpdateContent(@Path("updateId") updateId:String): Call<ResponseBody>
 
     // MILESTONES
 
-    @GET("campaign/{campaignId}/milestones")
+    @GET(versionString + "campaign/{campaignId}/milestones")
     fun getMilestones(@Path("campaignId") campaignId:Int): Call<ResponseBody>
 
     // CONTRIBUTIONS
 
-    @GET("user/{token}/did_contribute")
+    @GET(versionString + "user/{token}/did_contribute")
     fun getDidContribute(@Path("token") token:String,
                          @QueryMap request:Map<String, Any>): Call<ResponseBody>
 
-    @GET("user/{token}/did_vote")
+    @GET(versionString + "user/{token}/did_vote")
     fun getDidVote(@Path("token") token:String,
                    @QueryMap request:Map<String, Any>): Call<ResponseBody>
 
-    @POST("user/{token}/vote")
+    @POST(versionString + "user/{token}/vote")
     fun notifyVote(@Path("token") token:String,
                    @Body request: VoteNotificationRequest):Call<ResponseBody>
 
-    @POST("user/{token}/contributions")
+    @POST(versionString + "user/{token}/contributions")
     fun notifyContribution(@Path("token") token:String,
                            @Body request: ContributionNotificationRequest):Call<ResponseBody>
 
-    @GET("user/{token}/contributions")
+    @GET(versionString + "user/{token}/contributions")
     fun getContributionHistory(@Path("token") token:String):Call<ResponseBody>
 
-    @GET("campaign/{campaignId}/vote_results")
+    @GET(versionString + "campaign/{campaignId}/vote_results")
     fun getVoteResult(@Path("campaignId") campaignId:Int):Call<ResponseBody>
 
-    @GET("campaign/{campaignId}/votes")
+    @GET(versionString + "campaign/{campaignId}/votes")
     fun getVoteInfo(@Path("campaignId") campaignId:Int):Call<ResponseBody>
 
     // COMMENTS
 
-    @POST("comment/{commentId}/like")
+    @POST(versionString + "comment/{commentId}/like")
     fun likeComment(@Path("commentId") commentId:String,
                     @Body request:CommentLikeRequest):Call<ResponseBody>
 
-    @POST("comments")
+    @POST(versionString + "comments")
     fun postComment(@Body request:CommentRequest):Call<ResponseBody>
 
-    @GET("comments")
+    @GET(versionString + "comments")
     fun getComments(@QueryMap request:Map<String, Any>):Call<ResponseBody>
 }

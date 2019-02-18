@@ -35,7 +35,7 @@ class Api {
         const val version = 2
     }
 
-    var isLoggingEnabled = false
+    var isLoggingEnabled = true
     var logLimit = 2000
 
     enum class Environment(val url: String) {
