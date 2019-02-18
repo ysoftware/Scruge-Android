@@ -1,6 +1,7 @@
 package com.scruge.scruge.view.main
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +9,10 @@ import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.navigation.NavigationController
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.Dimension
+import com.scruge.scruge.dependencies.view.alert
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.api.Api
 import kotlinx.android.synthetic.main.activity_main.*
 
 class TabbarActivity : AppCompatActivity() {
@@ -29,6 +33,20 @@ class TabbarActivity : AppCompatActivity() {
         navigationControllers.forEach { it.isVisible = false }
         Service.presenter.setupMainTabs(navigationControllers)
         setupTabbar()
+
+        checkApiVersion()
+    }
+
+    private fun checkApiVersion() {
+        Handler().postDelayed({
+            Service.api.getInfo { result ->
+                val response = result.getOrNull() ?: return@getInfo
+                val v = response.lastSupportedVersion ?: return@getInfo
+                if (v > Api.version) {
+                    alert(R.string.alert_update_required.string())
+                }
+            }
+        }, 2000)
     }
 
     private fun setupTabbar() {

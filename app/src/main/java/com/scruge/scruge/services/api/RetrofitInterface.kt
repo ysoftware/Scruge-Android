@@ -9,6 +9,9 @@ import retrofit2.http.*
 @JvmSuppressWildcards
 interface BackendApi {
 
+    @GET("")
+    fun getInfo(): Call<ResponseBody>
+
     // WALLET
     @POST("user/{token}/create_eos_account")
     fun createAccount(@Path("token") token:String,

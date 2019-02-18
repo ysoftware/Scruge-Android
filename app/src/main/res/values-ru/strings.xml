@@ -282,6 +282,7 @@
     <string name="hint_bp_filter">Фильтровать список</string>
     <string name="label_selected_bps">Выбрано %1$s / 30</string>
 
+    <string name="alert_update_required">Вы используете устаревшую версию приложения. Некоторые функции могут не работать. Пожалуйста, обновитесь до последней версии.</string>
 
     <!-- plurals -->
     <plurals name="see_all_comments">

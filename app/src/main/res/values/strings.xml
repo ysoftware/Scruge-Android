@@ -282,6 +282,7 @@ Check out the results now.</string>
     <string name="hint_bp_filter">Filter the list</string>
     <string name="label_selected_bps">Selected %1$s / 30</string>
 
+    <string name="alert_update_required">You are using an older version of the app. Some features might not work as expected. Please, update to the latest version.</string>
 
     <!-- plurals  -->
     <plurals name="see_all_comments">

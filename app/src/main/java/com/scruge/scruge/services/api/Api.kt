@@ -30,6 +30,11 @@ import java.net.URI
 
 class Api {
 
+    companion object {
+
+        const val version = 2
+    }
+
     var isLoggingEnabled = false
     var logLimit = 2000
 
@@ -56,6 +61,12 @@ class Api {
         return Retrofit.Builder().baseUrl(environment.url).addConverterFactory(GsonConverterFactory.create())
                 .client(client).build().create(BackendApi::class.java)
     }
+
+    fun getInfo(completion: (Result<GeneralInfoResponse>) -> Unit) {
+        service.getInfo().enqueue(completion)
+    }
+
+    // BOUNTY
 
     // WALLET
 
