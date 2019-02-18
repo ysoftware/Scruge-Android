@@ -43,7 +43,7 @@ dependencies {
 
     // standard
     implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    implementation 'com.google.android.material:material:1.1.0-alpha03'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
 
@@ -66,21 +66,21 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:input:2.0.0-rc9'
 
     // firebase
-    implementation 'com.google.firebase:firebase-core:16.0.6'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
 
     // eos
-    implementation ("com.memtrip.eos-jvm:eos-core:1.0.0-alpha26") {
+    implementation ("com.memtrip.eos-jvm:eos-core:1.0.0-beta01") {
         exclude group: "com.lambdaworks", module: "scrypt"
     }
-    implementation ("com.memtrip.eos-jvm:eos-http-rpc:1.0.0-alpha29") {
+    implementation ("com.memtrip.eos-jvm:eos-http-rpc:1.0.0-beta01") {
         exclude group: "com.lambdaworks", module: "scrypt"
     }
-    implementation ("com.memtrip.eos-jvm:eos-abi-writer:1.0.0-alpha26") {
+    implementation ("com.memtrip.eos-jvm:eos-abi-writer:1.0.0-beta01") {
         exclude group: "com.lambdaworks", module: "scrypt"
     }
-    implementation ("com.memtrip.eos-jvm:eos-chain-actions:1.0.0-alpha29") {
+    implementation ("com.memtrip.eos-jvm:eos-chain-actions:1.0.0-beta01") {
         exclude group: "com.lambdaworks", module: "scrypt"
     }
     kapt 'com.memtrip.eos-jvm:eos-abi-writer-preprocessor:1.0.0-alpha26'
