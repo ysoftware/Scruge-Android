@@ -2,9 +2,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <ScrollView
+        android:layout_above="@id/earn_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -40,7 +42,7 @@
                             android:layout_height="match_parent"/>
 
                         <ImageView
-                            android:id="@+id/projectimage"
+                            android:id="@+id/project_image"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                     </RelativeLayout>
@@ -171,13 +173,13 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
                             android:layout_alignParentStart="true"
-                            android:layout_toStartOf="@id/economies_public_percent"
-                            android:text="@string/label_token_percent_for_public_sale"
+                            android:layout_toStartOf="@id/economies_inflation"
+                            android:text="@string/label_annual_inflation_rate"
                             android:textColor="@color/text_regular"
                             android:textSize="16sp"/>
 
                         <TextView
-                            android:id="@+id/economies_public_percent"
+                            android:id="@+id/economies_inflation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
@@ -228,6 +230,7 @@
             <!-- DOCUMENTS -->
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/project_documents"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"

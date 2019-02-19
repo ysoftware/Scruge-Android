@@ -30,4 +30,10 @@ class ProjectVM(model: Project?) : ViewModel<Project>(model) {
         return if (model.annualInflationPercent.start != model.annualInflationPercent.end)
             "$start% - $end%" else "$start%"
     }
+
+    val tokenListingDate:String? get() = model?.economics?.listingDate
+
+    val tokenExchange:String? get() = model?.economics?.exchange?.name
+
+    val tokenUrl:String? get() = model?.economics?.exchange?.url
 }

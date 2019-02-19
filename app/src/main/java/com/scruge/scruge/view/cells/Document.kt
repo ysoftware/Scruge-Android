@@ -19,7 +19,7 @@ class DocumentsCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setup(vm:DocumentAVM):DocumentsCell {
         this.vm = vm
         itemView.documents_recycler_view.setupForVerticalLayout()
-        itemView.documents_recycler_view.adapter = Adapter(this)
+        itemView.documents_recycler_view.adapter = Adapter(vm, tap)
         return this
     }
 
@@ -28,7 +28,7 @@ class DocumentsCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
         return this
     }
 
-    class Adapter(val cell:DocumentsCell): RecyclerView.Adapter<Adapter.ViewHolder>() {
+    class Adapter(val vm:DocumentAVM, val tap:(DocumentVM)->Unit): RecyclerView.Adapter<Adapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return ViewHolder(LayoutInflater.from(parent.context)
@@ -36,13 +36,13 @@ class DocumentsCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         override fun getItemCount(): Int {
-            return cell.vm.numberOfItems
+            return vm.numberOfItems
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = cell.vm.item(position)
+            val item = vm.item(position)
             holder.itemView.document_title.text = item.name
-            holder.itemView.setOnClickListener { cell.tap(item) }
+            holder.itemView.setOnClickListener { tap(item) }
         }
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

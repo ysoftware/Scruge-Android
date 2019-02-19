@@ -284,28 +284,28 @@
     <string name="alert_update_required">Вы используете устаревшую версию приложения. Некоторые функции могут не работать. Пожалуйста, обновитесь до последней версии.</string>
 
     <!-- bounties -->
-    <string name="title_earn">Earn</string>
-    <string name="do_earn">See bounties</string>
-    <string name="error_no_projects">No projects</string>
-    <string name="label_listed_on_exchange">Trading on %@</string>
-    <string name="label_not_listed">No info on token trading</string>
-    <string name="label_listing_date">Trading starts</string>
-    <string name="do_submit">Submit</string>
-    <string name="do_label_submit">Provide a link or any other way to review your completed work.</string>
-    <string name="hint_proof">Your proof of work</string>
-    <string name="title_bounty_description">Bounty Description</string>
-    <string name="title_bounty_rewards">Bounty Rewards</string>
-    <string name="title_bounty_rules">Bounty Rules</string>
-    <string name="title_submit">Submit your work</string>
-    <string name="error_enter_proof">Enter your proof of work</string>
-    <string name="label_bounty_submissions">Submissions</string>
-    <string name="label_bounty_limit_per_user">Limit per user</string>
-    <string name="label_bounty_resubmission_period">Resubmission period</string>
-    <string name="label_bounty_max_reward">Max reward</string>
-    <string name="label_bounty_percent_of_total_supply">%@ of total supply</string>
-    <string name="label_days_short_no_plural">d.</string>
-    <string name="label_you_have_submitted_for_bounty">You have submitted your work for a bounty</string>
-    <string name="label_you_were_paid_x_for_bounty">You were paid %@ for your bounty submission</string>
+    <string name="title_earn">Баунти</string>
+    <string name="do_earn">Смотреть баунти</string>
+    <string name="error_no_projects">Нет проектов</string>
+    <string name="label_listed_on_exchange">Участвует в торгах на %1$s</string>
+    <string name="label_not_listed">Нет инфо о торгах этого токена</string>
+    <string name="label_listing_date">Торги начнутся</string>
+    <string name="do_submit">Участвовать</string>
+    <string name="do_label_submit">Предоставьте ссылку или другой способ проверить и оценить выполненную вами работу.</string>
+    <string name="hint_proof">Подтверждение выполненной работы</string>
+    <string name="title_bounty_description">Описание</string>
+    <string name="title_bounty_rewards">Награды</string>
+    <string name="title_bounty_rules">Правила</string>
+    <string name="title_submit">Отправить работу</string>
+    <string name="error_enter_proof">Введите подтверждение вашей работы</string>
+    <string name="label_bounty_submissions">Участники</string>
+    <string name="label_bounty_limit_per_user">Лимит на участника</string>
+    <string name="label_bounty_resubmission_period">Период повторного участия</string>
+    <string name="label_bounty_max_reward">Макс. награда</string>
+    <string name="label_bounty_percent_of_total_supply">%@ от общего кол-ва</string>
+    <string name="label_days_short_no_plural">дн.</string>
+    <string name="label_you_have_submitted_for_bounty">Вы отправили вашу работу в баунти</string>
+    <string name="label_you_were_paid_x_for_bounty">Вам перечислили %1$s за выполненную вами работу для баунти</string>
 
     <!-- plurals -->
     <plurals name="see_all_comments">

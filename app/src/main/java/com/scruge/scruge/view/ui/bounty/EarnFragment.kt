@@ -31,7 +31,7 @@ class EarnFragment : NavigationFragment(), ViewModelDelegate, ArrayViewModelDele
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_featured, container, false)
+        return inflater.inflate(R.layout.fragment_bounty_projects, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
