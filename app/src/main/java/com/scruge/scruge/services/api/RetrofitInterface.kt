@@ -11,7 +11,7 @@ private const val versionString = "" // "v${Api.version}/"
 @JvmSuppressWildcards
 interface BackendApi {
 
-    @GET(versionString + "")
+    @GET(versionString + "/")
     fun getInfo(): Call<ResponseBody>
 
     // BOUNTY

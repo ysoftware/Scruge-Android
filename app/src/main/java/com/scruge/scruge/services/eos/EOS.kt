@@ -42,7 +42,7 @@ class EOS {
 
     val contractAccount = EosName.create("testaccount1")
 
-    private val testNodeUrl = "http://35.242.241.205:7777"
+    val testNodeUrl = "https://api-kylin.eosasia.one"
 
     val isMainNet get() = nodeUrl != testNodeUrl
 

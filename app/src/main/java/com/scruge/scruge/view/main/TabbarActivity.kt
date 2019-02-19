@@ -20,6 +20,7 @@ class TabbarActivity : AppCompatActivity() {
     private val navigationControllers =
             listOf(NavigationController(supportFragmentManager, R.id.container_view_featured),
                    NavigationController(supportFragmentManager, R.id.container_view_activity),
+                   NavigationController(supportFragmentManager, R.id.container_view_earn),
                    NavigationController(supportFragmentManager, R.id.container_view_wallet),
                    NavigationController(supportFragmentManager, R.id.container_view_profile))
 
