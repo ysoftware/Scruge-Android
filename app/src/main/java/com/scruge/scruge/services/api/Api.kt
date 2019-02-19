@@ -14,6 +14,7 @@ import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
 import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.services.eos.Token
+import com.scruge.scruge.view.ui.bounty.ProjectVM
 import com.scruge.scruge.viewmodel.activity.ActivityQ
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
 import com.scruge.scruge.viewmodel.comment.CommentQuery
@@ -67,6 +68,23 @@ class Api {
     }
 
     // BOUNTY
+
+    fun getProjects(completion: (Result<ProjectsResponse>) -> Unit) {
+        service.getProjects().enqueue(completion)
+    }
+
+    fun getBounties(projectVM: ProjectVM, completion: (Result<BountiesResponse>) -> Unit) {
+        val request = BountiesRequest(projectVM.providerName)
+        service.getBounties(request.toMap()).enqueue(completion)
+    }
+
+    fun postSubmission(bountyId:Long, proof:String, hunterName:String, providerName:String,
+                       completion: (Result<ResultResponse>) -> Unit) {
+        Service.tokenManager.getToken()?.let {
+            val request = SubmissionRequest(it, bountyId, proof, hunterName, providerName)
+            service.postSubmission(request).enqueue(completion)
+        } ?: completion(Result.failure(AuthError.noToken.wrap()))
+    }
 
     // WALLET
 

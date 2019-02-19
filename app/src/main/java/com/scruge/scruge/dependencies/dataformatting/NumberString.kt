@@ -33,3 +33,4 @@ fun Double.formatDecimal(separator:String = ""):String {
 }
 
 fun Int.formatDecimal(separator: String = ""):String = toDouble().formatDecimal(separator)
+fun Long.formatDecimal(separator: String = ""):String = toDouble().formatDecimal(separator)

@@ -273,7 +273,6 @@
     <string name="error_eos_createAccountIpLimitReached">Не удаётся создать вам ещё один аккаунт EOS. Пожалуйста, свяжитесь с нами на support@scruge.world</string>
     <string name="error_eos_createAccountDailyLimitReached">Достигнут суточный лимит по созданию бесплатных аккаунтов. Пожалуйста, попробуйте ещё раз позже или свяжитесь с нами на support@scruge.world</string>
 
-
     <string name="do_sell_eos_ram">КУПИТЬ RAM</string>
     <string name="do_manage_ram">УПРАВЛЯТЬ RAM</string>
     <string name="title_vote_bp">Блок продюсеры</string>
@@ -283,6 +282,30 @@
     <string name="label_selected_bps">Выбрано %1$s / 30</string>
 
     <string name="alert_update_required">Вы используете устаревшую версию приложения. Некоторые функции могут не работать. Пожалуйста, обновитесь до последней версии.</string>
+
+    <!-- bounties -->
+    <string name="title_earn">Earn</string>
+    <string name="do_earn">See bounties</string>
+    <string name="error_no_projects">No projects</string>
+    <string name="label_listed_on_exchange">Trading on %@</string>
+    <string name="label_not_listed">No info on token trading</string>
+    <string name="label_listing_date">Trading starts</string>
+    <string name="do_submit">Submit</string>
+    <string name="do_label_submit">Provide a link or any other way to review your completed work.</string>
+    <string name="hint_proof">Your proof of work</string>
+    <string name="title_bounty_description">Bounty Description</string>
+    <string name="title_bounty_rewards">Bounty Rewards</string>
+    <string name="title_bounty_rules">Bounty Rules</string>
+    <string name="title_submit">Submit your work</string>
+    <string name="error_enter_proof">Enter your proof of work</string>
+    <string name="label_bounty_submissions">Submissions</string>
+    <string name="label_bounty_limit_per_user">Limit per user</string>
+    <string name="label_bounty_resubmission_period">Resubmission period</string>
+    <string name="label_bounty_max_reward">Max reward</string>
+    <string name="label_bounty_percent_of_total_supply">%@ of total supply</string>
+    <string name="label_days_short_no_plural">d.</string>
+    <string name="label_you_have_submitted_for_bounty">You have submitted your work for a bounty</string>
+    <string name="label_you_were_paid_x_for_bounty">You were paid %@ for your bounty submission</string>
 
     <!-- plurals -->
     <plurals name="see_all_comments">

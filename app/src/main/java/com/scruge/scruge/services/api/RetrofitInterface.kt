@@ -14,7 +14,19 @@ interface BackendApi {
     @GET(versionString + "")
     fun getInfo(): Call<ResponseBody>
 
+    // BOUNTY
+
+    @GET(versionString + "projects")
+    fun getProjects(): Call<ResponseBody>
+
+    @GET(versionString + "bounties")
+    fun getBounties(@QueryMap request: Map<String, Any>): Call<ResponseBody>
+
+    @POST(versionString + "submissions")
+    fun postSubmission(@Body request: SubmissionRequest): Call<ResponseBody>
+
     // WALLET
+
     @POST(versionString + "user/{token}/create_eos_account")
     fun createAccount(@Path("token") token:String,
                       @Body request: AccountRequest): Call<ResponseBody>
