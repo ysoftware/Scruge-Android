@@ -77,6 +77,16 @@ class ActivityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
                 title = vm.votingResultTitle
                 description = vm.votingResultDescription
             }
+            ActivityType.submission -> {
+                date = vm.submissionDate
+                title = vm.submissionTitle
+                description = vm.submissionDetails
+            }
+            ActivityType.submissionPaid -> {
+                date = vm.submissionPaidDate
+                title = vm.submissionPaidTitle
+                description = vm.submissionPaidDetails
+            }
         }
 
         itemView.cell_activity_content_image.setImage(image)

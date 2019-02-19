@@ -27,6 +27,8 @@ class CustomParser {
                         ActivityType.voting -> ActivityVoting::class.java
                         ActivityType.fundingInfo -> ActivityFunding::class.java
                         ActivityType.votingResults -> ActivityVotingResult::class.java
+                        ActivityType.submission -> ActivitySubmission::class.java
+                        ActivityType.submissionPaid -> ActivitySubmissionPaid::class.java
                     })
                     array.add(obj)
                 }

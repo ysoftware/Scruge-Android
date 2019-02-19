@@ -48,3 +48,19 @@ data class ActivityFunding(override val type:String,
                            val raised:Double):ActivityModel {
     override fun compareTo(other: ActivityModel): Int = compareTo(this, other)
 }
+
+data class ActivitySubmission(override val type: String,
+                              val timestamp: Long,
+                              val bountyName:String,
+                              val projectName:String):ActivityModel {
+    override fun compareTo(other: ActivityModel): Int = compareTo(this, other)
+}
+
+data class ActivitySubmissionPaid(override val type: String,
+                                  val timestamp: Long,
+                                  val bountyName:String,
+                                  val paidEOS:String?,
+                                  val paid:String?,
+                                  val projectName:String):ActivityModel {
+    override fun compareTo(other: ActivityModel): Int = compareTo(this, other)
+}

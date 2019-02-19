@@ -1,11 +1,8 @@
 package com.scruge.scruge.viewmodel.campaign
 
 import android.net.Uri
-import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.dataformatting.datePresent
 import com.scruge.scruge.dependencies.dataformatting.datePresentRelative
-import com.scruge.scruge.dependencies.dataformatting.dateToRelative
-import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.ViewState
 import com.scruge.scruge.model.entity.*
 import com.scruge.scruge.model.error.ErrorHandler

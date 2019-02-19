@@ -9,7 +9,7 @@ import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.ysoftware.mvvm.single.ViewModel
 
 enum class ActivityType {
-    reply, update, voting, votingResults, fundingInfo;
+    reply, update, voting, votingResults, fundingInfo, submission, submissionPaid;
 
     companion object {
 
@@ -20,6 +20,8 @@ enum class ActivityType {
                 "Voting" -> voting
                 "CampFundingEnd" -> fundingInfo
                 "VotingResult" -> votingResults
+                "Submission" -> submission
+                "SubmissionPaid" -> submissionPaid
                 else -> update
             }
         }
@@ -36,9 +38,12 @@ class ActivityVM(model: ActivityModel?): ViewModel<ActivityModel>(model) {
         get() = when (type) {
             ActivityType.update -> R.drawable.checkmark
             ActivityType.reply -> R.drawable.comment
-            ActivityType.voting -> R.drawable.star
-            ActivityType.fundingInfo -> R.drawable.checkmark
-            ActivityType.votingResults -> R.drawable.star
+            ActivityType.voting -> R.drawable.voting_soon
+            ActivityType.votingResults -> R.drawable.voting_result
+            ActivityType.fundingInfo -> R.drawable.piggy
+
+            ActivityType.submission -> R.drawable.checkmark
+            ActivityType.submissionPaid -> R.drawable.piggy
         }
 
     val color
@@ -46,8 +51,11 @@ class ActivityVM(model: ActivityModel?): ViewModel<ActivityModel>(model) {
             ActivityType.update -> R.color.green
             ActivityType.reply -> R.color.purple
             ActivityType.voting -> R.color.green
-            ActivityType.fundingInfo -> R.color.purple
             ActivityType.votingResults -> R.color.purple
+            ActivityType.fundingInfo -> R.color.purple
+
+            ActivityType.submission -> R.color.green
+            ActivityType.submissionPaid -> R.color.purple
         }
 
     // reply
@@ -130,6 +138,30 @@ class ActivityVM(model: ActivityModel?): ViewModel<ActivityModel>(model) {
 
             R.string.label_voting_to_of_for_has_finished.string(type, it.milestoneTitle, it.campaign.title)
         } ?: ""
+
+
+    // submission
+
+    val submissionDate:String get()
+        = (model as? ActivitySubmission)?.timestamp?.let { datePresent(it, "d MMMM HH:mm") } ?: ""
+
+    val submissionTitle:String get()
+            = (model as? ActivitySubmission)?.let { "${it.projectName}: ${it.bountyName}" } ?: ""
+
+    val submissionDetails get() = R.string.label_you_have_submitted_for_bounty.string()
+
+    // submission paid
+
+    val submissionPaidDate:String get()
+        = (model as? ActivitySubmissionPaid)?.timestamp?.let { datePresent(it, "d MMMM HH:mm") } ?: ""
+
+    val submissionPaidTitle:String get()
+        = (model as? ActivitySubmissionPaid)?.let { "${it.projectName}: ${it.bountyName}" } ?: ""
+
+    val submissionPaidDetails get()
+        = (model as? ActivitySubmissionPaid)?.let {
+            (it.paid ?: it.paidEOS)?.let {
+            R.string.label_you_were_paid_x_for_bounty.string(it) }} ?: ""
 
     // other
 
