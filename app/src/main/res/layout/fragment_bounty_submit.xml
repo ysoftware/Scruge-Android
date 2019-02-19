@@ -1,7 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="15dp">
+
+    <TextView
+        android:id="@+id/submit_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/regular"
+        android:text="@string/do_label_submit"
+        android:textAlignment="center"
+        android:textColor="@color/text_gray"
+        android:textSize="14sp"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/field_background">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/clip"/>
+
+        <EditText
+            android:id="@+id/bounty_submit_proof"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/regular"
+            android:hint="@string/hint_proof"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="45dp"
+            android:paddingEnd="0dp"
+            android:textColor="@color/text_regular"
+            android:textColorHint="@color/text_light"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/field_background">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/lock"/>
+
+        <EditText
+            android:id="@+id/bounty_submit_passcode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/regular"
+            android:hint="@string/hint_wallet_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingStart="45dp"
+            android:paddingEnd="0dp"
+            android:textColor="@color/text_regular"
+            android:textColorHint="@color/text_light"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+    <com.scruge.scruge.view.views.ButtonView
+        android:id="@+id/bounty_submit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"/>
 
 </LinearLayout>

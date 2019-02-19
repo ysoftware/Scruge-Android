@@ -15,9 +15,7 @@ import com.scruge.scruge.view.ui.authprofile.EditProfileFragment
 import com.scruge.scruge.view.ui.authprofile.LoginFragment
 import com.scruge.scruge.view.ui.authprofile.ProfileFragment
 import com.scruge.scruge.view.ui.authprofile.RegisterFragment
-import com.scruge.scruge.view.ui.bounty.BountyVM
-import com.scruge.scruge.view.ui.bounty.EarnFragment
-import com.scruge.scruge.view.ui.bounty.ProjectVM
+import com.scruge.scruge.view.ui.bounty.*
 import com.scruge.scruge.view.ui.campaign.CampaignFragment
 import com.scruge.scruge.view.ui.campaign.FeaturedFragment
 import com.scruge.scruge.view.ui.campaign.MemberProfileFragment
@@ -48,19 +46,29 @@ class Presenter {
     // BOUNTIES
 
     fun presentProjectFragment(fragment:NavigationFragment, projectVM: ProjectVM) {
-
+        val fr = ProjectFragment()
+        fr.projectVM = projectVM
+        fragment.navigationController?.navigateTo(fr)
     }
 
     fun presentBountiesFragment(fragment: NavigationFragment, projectVM: ProjectVM) {
-
+        val fr = BountiesFragment()
+        fr.projectVM = projectVM
+        fragment.navigationController?.navigateTo(fr)
     }
 
     fun presentBountyFragment(fragment: NavigationFragment, bountyVM: BountyVM, projectVM: ProjectVM) {
-
+        val fr = BountyFragment()
+        fr.projectVM = projectVM
+        fr.bountyVM = bountyVM
+        fragment.navigationController?.navigateTo(fr)
     }
 
     fun presentSubmitFragment(fragment: NavigationFragment, bountyVM: BountyVM, projectVM: ProjectVM) {
-
+        val fr = SubmitFragment()
+        fr.projectVM = projectVM
+        fr.bountyVM = bountyVM
+        fragment.navigationController?.navigateTo(fr)
     }
 
     // AUTH

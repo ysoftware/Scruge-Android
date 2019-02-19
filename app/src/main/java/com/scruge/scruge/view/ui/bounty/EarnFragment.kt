@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_featured.*
 
 class EarnFragment : NavigationFragment(), ViewModelDelegate, ArrayViewModelDelegate {
 
-
     // PROPERTIES
 
     private val vm = ProjectAVM()
