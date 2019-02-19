@@ -11,6 +11,11 @@ fun datePresent(milliseconds:Long, format:String):String {
     return SimpleDateFormat(format, current).format(Date(milliseconds))
 }
 
+fun datePresentRelative(milliseconds: Long):String {
+    val current = ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
+    return PrettyTime(current).format(Date(milliseconds))
+}
+
 fun dateToRelative(milliseconds:Long, future:String = "", past:String = ""):String {
     val current = ConfigurationCompat.getLocales(Resources.getSystem().configuration)[0]
     val string = if (Date().time > milliseconds) past else future
