@@ -64,7 +64,7 @@ class TabbarActivity : AppCompatActivity() {
             if (!Service.tokenManager.hasToken) {
                 Service.presenter.presentLoginActivity(this) { didLogIn ->
                     if (didLogIn) {
-                        selectTab(3)
+                        selectTab(4)
                     }
                 }
                 return false

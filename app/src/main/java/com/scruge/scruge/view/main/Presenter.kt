@@ -15,6 +15,9 @@ import com.scruge.scruge.view.ui.authprofile.EditProfileFragment
 import com.scruge.scruge.view.ui.authprofile.LoginFragment
 import com.scruge.scruge.view.ui.authprofile.ProfileFragment
 import com.scruge.scruge.view.ui.authprofile.RegisterFragment
+import com.scruge.scruge.view.ui.bounty.BountyVM
+import com.scruge.scruge.view.ui.bounty.EarnFragment
+import com.scruge.scruge.view.ui.bounty.ProjectVM
 import com.scruge.scruge.view.ui.campaign.CampaignFragment
 import com.scruge.scruge.view.ui.campaign.FeaturedFragment
 import com.scruge.scruge.view.ui.campaign.MemberProfileFragment
@@ -37,8 +40,27 @@ class Presenter {
     fun setupMainTabs(navigationControllers:List<NavigationController>) {
         navigationControllers[0].replaceRoot(FeaturedFragment())
         navigationControllers[1].replaceRoot(ActivityFragment())
-        navigationControllers[2].replaceRoot(WalletFragment())
-        navigationControllers[3].replaceRoot(ProfileFragment())
+        navigationControllers[2].replaceRoot(EarnFragment())
+        navigationControllers[3].replaceRoot(WalletFragment())
+        navigationControllers[4].replaceRoot(ProfileFragment())
+    }
+
+    // BOUNTIES
+
+    fun presentProjectFragment(fragment:NavigationFragment, projectVM: ProjectVM) {
+
+    }
+
+    fun presentBountiesFragment(fragment: NavigationFragment, projectVM: ProjectVM) {
+
+    }
+
+    fun presentBountyFragment(fragment: NavigationFragment, bountyVM: BountyVM, projectVM: ProjectVM) {
+
+    }
+
+    fun presentSubmitFragment(fragment: NavigationFragment, bountyVM: BountyVM, projectVM: ProjectVM) {
+
     }
 
     // AUTH
