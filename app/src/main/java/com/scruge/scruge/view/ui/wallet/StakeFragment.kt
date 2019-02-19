@@ -6,19 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.scruge.scruge.R
-import com.scruge.scruge.dependencies.dataformatting.formatRounding
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.alert
 import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.services.Service
-import com.scruge.scruge.services.api.Api
-import com.scruge.scruge.services.eos.Token
 import com.scruge.scruge.view.main.TabbarActivity
+import com.scruge.scruge.view.views.ButtonView
 import com.scruge.scruge.viewmodel.account.AccountVM
 import com.ysoftware.mvvm.array.ArrayViewModelDelegate
-import com.ysoftware.mvvm.single.ViewModel
 import com.ysoftware.mvvm.single.ViewModelDelegate
 import kotlinx.android.synthetic.main.fragment_staking.*
 
@@ -54,27 +51,28 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
         stake_resources_view.hideControls(true)
         stake_resources_view.hideRAM(true)
         stake_button.title = R.string.do_stake.string()
+        unstake_button.title = R.string.do_unstake_resources.string()
 
-        stake_button.click {
+        val listener: (ButtonView)->Unit = { sender ->
             accountVM.model?.let { model ->
                 val cpuStr = stake_cpu_edit.text.toString()
                 val cpuString = if (cpuStr.isBlank()) "0" else cpuStr
                 val cpuValue = cpuString.toDoubleOrNull()
-                        ?: return@click alert(R.string.error_wallet_invalid_amount.string())
+                        ?: return@let alert(R.string.error_wallet_invalid_amount.string())
                 if (cpuValue < 0.0001 && cpuValue != 0.0) {
-                    return@click alert(R.string.error_wallet_invalid_amount.string())
+                    return@let alert(R.string.error_wallet_invalid_amount.string())
                 }
 
                 val netStr = stake_net_edit.text.toString()
                 val netString = if (netStr.isBlank()) "0" else netStr
                 val netValue = netString.toDoubleOrNull()
-                        ?: return@click alert(R.string.error_wallet_invalid_amount.string())
+                        ?: return@let alert(R.string.error_wallet_invalid_amount.string())
                 if (netValue < 0.0001 && netValue != 0.0) {
-                    return@click alert(R.string.error_wallet_invalid_amount.string())
+                    return@let alert(R.string.error_wallet_invalid_amount.string())
                 }
 
                 if (netValue == 0.0 && cpuValue == 0.0) {
-                    return@click alert(R.string.error_wallet_invalid_amount.string())
+                    return@let alert(R.string.error_wallet_invalid_amount.string())
                 }
 
                 val systemToken = Service.eos.systemToken
@@ -87,7 +85,8 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 }
 
                 hideKeyboard()
-                Service.eos.stakeResources(model, cpu, net, passcode) { result ->
+
+                val block:(Result<String>)->Unit = { result ->
                     result.onSuccess {
                         alert(R.string.alert_transaction_success.string())
                         activity?.runOnUiThread {
@@ -97,8 +96,17 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                         alert(it)
                     }
                 }
+
+                if (sender == stake_button) {
+                    Service.eos.stakeResources(model, cpu, net, passcode, block)
+                }
+                else {
+                    Service.eos.unstakeResources(model, cpu, net, passcode, block)
+                }
             }
         }
+        stake_button.click { listener(it) }
+        unstake_button.click { listener(it) }
     }
 
     private fun setupNavigationBar() {

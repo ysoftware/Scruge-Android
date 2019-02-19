@@ -8,6 +8,7 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import com.scruge.scruge.R
 import com.scruge.scruge.dependencies.view.setHidden
+import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.viewmodel.resources.ResourcesVM
 import com.ysoftware.mvvm.single.ViewModel
@@ -36,6 +37,9 @@ class WalletResourcesView(context: Context, attrs: AttributeSet?, defStyleAttr: 
     }
 
     private fun setup() {
+        res_stake_button.title = R.string.do_stake_resources.string()
+        res_ram_button.title = R.string.do_manage_ram.string()
+
         vm.delegate = this
 
         res_cpu_progress.mode = ProgressView.Mode.progress
@@ -65,13 +69,13 @@ class WalletResourcesView(context: Context, attrs: AttributeSet?, defStyleAttr: 
     var buyRamBlock:(()->Unit)? = null
         set(value) {
             field = value
-            res_ram_button.setOnClickListener { value?.invoke() }
+            res_ram_button.click { value?.invoke() }
         }
 
     var stakeBlock:(()->Unit)? = null
         set(value) {
             field = value
-            res_stake_button.setOnClickListener { value?.invoke() }
+            res_stake_button.click { value?.invoke() }
         }
 
     private fun updateViews() {

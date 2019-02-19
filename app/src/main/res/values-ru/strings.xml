@@ -80,8 +80,8 @@
     <string name="title_eos_net">NET</string>
     <string name="title_eos_ram">RAM</string>
     <string name="do_buy_eos_ram">КУПИТЬ RAM</string>
-    <string name="do_stake_resources">КУПИТЬ РЕСУРСЫ</string>
-    <string name="do_unstake_resources">СНЯТЬ РЕСУРСЫ</string>
+    <string name="do_stake_resources">УПРАВЛЯТЬ РЕСУРСАМИ</string>
+    <string name="do_unstake_resources">СНЯТЬ БРОНЬ</string>
     <string name="do_switch_eos_account">Сменить аккаунт</string>
     <string name="do_delete_wallet">Удалить кошелёк</string>
 
@@ -217,7 +217,7 @@
     <string name="do_transfer_tokens">Перевести</string>
     <string name="title_manage_resources">Управление Ресурсами</string>
     <string name="tokens_available">Доступно %1$s</string>
-    <string name="do_stake">Купить Ресурсы</string>
+    <string name="do_stake">Забронировать Ресурсы</string>
     <string name="do_import_key">ИМПОРТИРОВАТЬ</string>
     <string name="title_import_private_key">Импорт приватного ключа</string>
     <string name="error_enter_private_key">Введите ваш приватный ключ</string>

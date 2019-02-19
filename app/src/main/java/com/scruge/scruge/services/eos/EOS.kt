@@ -3,6 +3,7 @@ package com.scruge.scruge.services.eos
 import android.util.Log
 import com.memtrip.eos.chain.actions.ChainResponse
 import com.memtrip.eos.chain.actions.transaction.account.DelegateBandwidthChain
+import com.memtrip.eos.chain.actions.transaction.account.UnDelegateBandwidthChain
 import com.memtrip.eos.chain.actions.transaction.transfer.TransferChain
 import com.memtrip.eos.chain.actions.transaction.vote.VoteChain
 import com.memtrip.eos.http.rpc.Api
@@ -43,7 +44,7 @@ class ContractAccounts {
 
 class EOS {
 
-    val systemToken get() = if (Service.eos.isMainNet) Token.EOS else Token.SYS
+    val systemToken = Token.EOS
 
     private val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -224,6 +225,27 @@ class EOS {
             val args = DelegateBandwidthChain.Args(account.name, account.name,
                                                    net.toString(), cpu.toString(), false)
             DelegateBandwidthChain(service.chain).delegateBandwidth(args, context).subscribe(completion)
+        }
+    }
+
+    fun unstakeResources(account: AccountModel,
+                         cpu:Balance,
+                         net:Balance,
+                         passcode:String,
+                         completion:(Result<String>)->Unit) {
+
+        if (cpu.token != net.token) {
+            completion(Result.failure(EOSError.incorrectToken.wrap()))
+            return
+        }
+
+        account.getTransactionContext(passcode) {
+            val context = it ?: return@getTransactionContext completion(
+                    Result.failure(WalletError.incorrectPasscode.wrap()))
+
+            val args = UnDelegateBandwidthChain.Args(account.name, account.name,
+                                                     net.toString(), cpu.toString())
+            UnDelegateBandwidthChain(service.chain).unDelegateBandwidth(args, context).subscribe(completion)
         }
     }
 

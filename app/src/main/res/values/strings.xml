@@ -80,7 +80,7 @@
     <string name="title_eos_net">NET</string>
     <string name="title_eos_ram">RAM</string>
     <string name="do_buy_eos_ram">BUY RAM</string>
-    <string name="do_stake_resources">STAKE RESOURCES</string>
+    <string name="do_stake_resources">MANAGE RESOURCES</string>
     <string name="do_unstake_resources">UNSTAKE RESOURCES</string>
     <string name="do_switch_eos_account">Switch account</string>
     <string name="do_delete_wallet">Delete Wallet</string>

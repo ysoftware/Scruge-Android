@@ -44,11 +44,9 @@ data class Token(val contract:EosName,
     companion object {
 
         // todo change on the main net
-        val Scruge = Token(EosName.create("eosio.token"), "SCR")
+        val Scruge = Token(EosName.create("eosio.token"), "BIDL")
 
         val EOS = Token(EosName.create("eosio.token"), "EOS")
-
-        val SYS = Token(EosName.create("eosio.token"), "SYS")
 
         val default = listOf(EOS) // Scruge
 
