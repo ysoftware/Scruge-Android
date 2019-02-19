@@ -13,7 +13,6 @@ import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.error.AuthError
 import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.services.Service
-import com.scruge.scruge.view.main.AuthActivity
 import kotlinx.android.synthetic.main.fragment_register.*
 
 class RegisterFragment: NavigationFragment() {
@@ -63,23 +62,9 @@ class RegisterFragment: NavigationFragment() {
             result.onSuccess {
                 ErrorHandler.error(it.result)?.let {
                     alert(it)
-                } ?: finishLogin(email, password)
-            }.onFailure {
-                alert(it)
-            }
-        }
-    }
-
-    private fun finishLogin(email:String, password:String) {
-        isWorking = true
-        Service.api.login(email, password) { result ->
-            isWorking = false
-
-            result.onSuccess {
-                Service.tokenManager.save(it.token)
-                (activity as? AuthActivity)?.didLogIn = true
-                hideKeyboard()
-                Service.presenter.presentProfileSetupFragment(this)
+                } ?: alert(R.string.alert_register_confirm_email.string()) {
+                    Service.presenter.replaceWithLoginFragment(this)
+                }
             }.onFailure {
                 alert(it)
             }

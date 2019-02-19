@@ -307,6 +307,8 @@
     <string name="label_you_have_submitted_for_bounty">Вы отправили вашу работу в баунти</string>
     <string name="label_you_were_paid_x_for_bounty">Вам перечислили %1$s за выполненную вами работу для баунти</string>
 
+    <string name="alert_register_confirm_email">Пожалуйста, подтвердите ваш email по ссылке, которую мы вам отправили</string>
+
     <!-- plurals -->
     <plurals name="see_all_comments">
         <item quantity="one">Посмотреть %1$s комментарий</item>

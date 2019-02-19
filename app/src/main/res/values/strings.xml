@@ -307,6 +307,8 @@ Check out the results now.</string>
     <string name="label_you_have_submitted_for_bounty">You have submitted your work for a bounty</string>
     <string name="label_you_were_paid_x_for_bounty">You were paid %@ for your bounty submission</string>
 
+    <string name="alert_register_confirm_email">Please, confirm your email with the link we\'ve sent you</string>
+
     <!-- plurals  -->
     <plurals name="see_all_comments">
         <item quantity="one">See %1$s comment</item>
