@@ -14,6 +14,7 @@ import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.api.model.*
 import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.services.eos.Token
+import com.scruge.scruge.support.App
 import com.scruge.scruge.view.ui.bounty.ProjectVM
 import com.scruge.scruge.viewmodel.activity.ActivityQ
 import com.scruge.scruge.viewmodel.campaign.CampaignQuery
@@ -305,9 +306,11 @@ class Api {
 
     // LOGGING
 
-    fun log(message: String) {
-        if (isLoggingEnabled) {
-            Log.e("BACKEND API", message.take(logLimit))
+    fun log(message: String?) {
+        if (isLoggingEnabled && App.isDebug) {
+            message?.let {
+                Log.e("BACKEND API", it.take(logLimit))
+            }
         }
     }
 }

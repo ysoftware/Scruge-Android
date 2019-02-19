@@ -18,6 +18,8 @@ class App: Application() {
         private var _context:Context? = null
 
         val context get() = _context!!
+
+        val isDebug get() = context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
     }
 
     override fun onCreate() {
@@ -33,7 +35,6 @@ class App: Application() {
         Service.eos.nodeUrl = Service.settings.get<String>(Settings.Setting.nodeUrl)
                 ?.let { it } ?: "https://eos.greymass.com"
 
-        val isDebug = context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
         if (isDebug) {
             Service.eos.nodeUrl = Service.eos.testNodeUrl
             Service.api.environment = Api.Environment.test

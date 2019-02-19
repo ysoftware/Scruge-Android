@@ -22,9 +22,11 @@ fun Context.alert(message:String) {
 }
 
 fun Fragment.alert(message:String, completion:(()->Unit)? = null) {
-    activity?.runOnUiThread {
-        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
-        completion?.invoke()
+    activity?.let { act ->
+        act.runOnUiThread {
+            Toast.makeText(act, message, Toast.LENGTH_LONG).show()
+            completion?.invoke()
+        }
     }
 }
 

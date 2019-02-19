@@ -75,7 +75,7 @@ inline fun <reified T> Call<ResponseBody>.enqueue(crossinline completion: (Resul
             completion(Result.failure(BackendError.parsingError.wrap()))
         }
         t?.let {
-            Service.api.log(t.localizedMessage)
+            Service.api.log(t.localizedMessage ?: t.message ?: "unknown error")
             completion(Result.failure((ErrorHandler.error(t) ?: NetworkingError.unknown).wrap()))
         }
     })
