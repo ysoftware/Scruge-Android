@@ -3,9 +3,12 @@ package com.scruge.scruge.support
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.Settings
 import com.scruge.scruge.services.api.Api
+
+
 
 class App: Application() {
 
@@ -29,5 +32,11 @@ class App: Application() {
 
         Service.eos.nodeUrl = Service.settings.get<String>(Settings.Setting.nodeUrl)
                 ?.let { it } ?: "https://eos.greymass.com"
+
+        val isDebug = context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+        if (isDebug) {
+            Service.eos.nodeUrl = Service.eos.testNodeUrl
+            Service.api.environment = Api.Environment.test
+        }
     }
 }
