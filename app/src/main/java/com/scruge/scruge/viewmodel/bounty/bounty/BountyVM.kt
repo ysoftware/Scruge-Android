@@ -59,7 +59,7 @@ class BountyVM(model: Bounty?) : ViewModel<Bounty>(model) {
                 "${model.limitPerUser}" +
                 "\n" +
 
-                R.string.label_bounty_resubmission_period +
+                R.string.label_bounty_resubmission_period.string() +
                 ": " +
                 "$timeLimitDays" +
                 R.string.label_days_short_no_plural.string()

@@ -9,7 +9,7 @@ import com.scruge.scruge.dependencies.dataformatting.datePresent
 import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.ActionReceipt
 import com.scruge.scruge.model.entity.VoteKind
-import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.eos.ContractAccounts
 import com.scruge.scruge.services.eos.EosName
 import com.ysoftware.mvvm.single.ViewModel
 
@@ -121,7 +121,7 @@ enum class ActionType {
                     val data:TransferArgs = gson.fromJson(json, object : TypeToken<TransferArgs>() {}.type)
 
                         if (accountName == data.from) {
-                            if (data.to == Service.eos.contractAccount.toString()) {
+                            if (data.to == ContractAccounts.BIDLMain.toString()) {
                                 val type = invested
                                 type.campaignTitle = "-campaign-" // todo
                                 type.amount = data.quantity
@@ -145,7 +145,7 @@ enum class ActionType {
                     }
                 }
             }
-            else if (action.name == "vote" && action.account == Service.eos.contractAccount.toString()) {
+            else if (action.name == "vote" && action.account == ContractAccounts.BIDLMain.toString()) {
                 val type = voted
                 type.campaignTitle = "-campaign-" // todo
                 type.voteKind = VoteKind.extend // todo

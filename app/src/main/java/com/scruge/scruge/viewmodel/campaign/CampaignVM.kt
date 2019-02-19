@@ -11,6 +11,7 @@ import com.scruge.scruge.model.error.ErrorHandler
 import com.scruge.scruge.model.error.ScrugeError
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.Service
+import com.scruge.scruge.services.eos.ContractAccounts
 import com.scruge.scruge.services.eos.EosName
 import com.scruge.scruge.services.eos.ScrugeVote
 import com.scruge.scruge.services.eos.Token
@@ -150,7 +151,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
             userResult.onSuccess {
                 val balance = Balance(Token.Scruge, amount)
                 Service.eos.sendMoney(account,
-                                      Service.eos.contractAccount,
+                                      ContractAccounts.BIDLMain,
                                       balance,
                                       "${it.userId}-${model.id}",
                                       passcode) { transactionResult ->

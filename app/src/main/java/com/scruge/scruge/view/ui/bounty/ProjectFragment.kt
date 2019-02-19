@@ -43,6 +43,7 @@ class ProjectFragment: NavigationFragment() {
     }
 
     private fun setupViews() {
+        title = projectVM.name
         earn_button.text = R.string.do_earn.string()
 
         val vm = projectVM

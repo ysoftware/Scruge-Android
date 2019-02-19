@@ -5,6 +5,22 @@ import com.memtrip.eos.abi.writer.bytewriter.DefaultByteWriter
 import java.util.*
 
 @Abi
+data class Submission(val hunterName:String,
+                      val providerName:String,
+                      val proof:String,
+                      val bountyId:Long): AbiConvertible {
+
+    override fun toBytes(): ByteArray {
+        val writer = DefaultByteWriter(512)
+        writer.putAccountName(hunterName)
+        writer.putAccountName(providerName)
+        writer.putString(proof)
+        writer.putLong(bountyId)
+        return writer.toBytes()
+    }
+}
+
+@Abi
 data class ScrugeVote(val eosAccount:String,
                       val userId:Int,
                       val campaignId:Int,

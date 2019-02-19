@@ -31,6 +31,16 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
+class ContractAccounts {
+
+    companion object {
+
+        val BIDLMain = EosName.create("testaccount1")
+
+        val bounty = EosName.create("scrugebounty")
+    }
+}
+
 class EOS {
 
     val systemToken get() = if (Service.eos.isMainNet) Token.EOS else Token.SYS
@@ -39,8 +49,6 @@ class EOS {
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
-
-    val contractAccount = EosName.create("testaccount1")
 
     val testNodeUrl = "https://api-kylin.eosasia.one"
 
@@ -253,8 +261,25 @@ class EOS {
         }
     }
 
+    fun bountySubmit(account: AccountModel,
+                     proof:String,
+                     providerName:String,
+                     bountyId:Long,
+                     passcode:String,
+                     completion: (Result<String>) -> Unit) {
+
+        val data = Submission(account.name, providerName, proof, bountyId)
+
+        Service.eos.sendAction(EosName.create("submit"),
+                               contract = ContractAccounts.bounty,
+                               account = account,
+                               data = data,
+                               passcode = passcode,
+                               completion = completion)
+    }
+
     fun <M:AbiConvertible>sendAction(action:EosName,
-                                     contract:EosName = contractAccount,
+                                     contract:EosName = ContractAccounts.BIDLMain,
                                      account:AccountModel,
                                      data:M,
                                      passcode:String,
