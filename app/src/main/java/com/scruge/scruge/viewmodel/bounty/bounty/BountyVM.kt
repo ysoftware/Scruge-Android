@@ -7,7 +7,7 @@ import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.services.Time
 import com.ysoftware.mvvm.single.ViewModel
 
-class BountyVM(model: Bounty?) : ViewModel<Bounty>(model) {
+class BountyVM(model: Bounty?, val tokenSupply:Long?) : ViewModel<Bounty>(model) {
 
     val id:Long? get() = model?.bountyId
 
@@ -74,7 +74,7 @@ class BountyVM(model: Bounty?) : ViewModel<Bounty>(model) {
     fun getMaxReward():String? {
         val model = model ?: return null
         val maxReward = model.maxReward ?: return null
-        val totalSupply = model.totalSupply ?: return null
+        val totalSupply = tokenSupply ?: return null
         val array = maxReward.split(" ")
 
         if (array.size == 2) {

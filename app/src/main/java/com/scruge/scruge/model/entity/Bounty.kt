@@ -6,7 +6,7 @@ data class Bounty(val bountyName: String?, val bountyId: Long, val providerName:
                   val resubmissionPeriodMilliseconds: Long, val submissionLimit: Int, val budget: String,
                   val endTimestamp: Long, val paid: String, val paidEOS: String,
                   val submissions: Int, val participantsPaid: Int, val timestamp: Long,
-                  val totalSupply: Long?, val maxReward: String?) : Comparable<Bounty> {
+                  val maxReward: String?) : Comparable<Bounty> {
 
     override fun compareTo(other: Bounty): Int = compareValuesBy(this, other) { it.bountyId }
 }
