@@ -37,7 +37,7 @@ class BountyVM(model: Bounty?) : ViewModel<Bounty>(model) {
 
         return R.string.label_bounty_submissions.string() +
                 ": " +
-                "${model.submissions}/${model.userLimit}" +
+                "${model.submissions}/${model.submissionLimit}" +
                 "\n" +
 
                 R.string.label_bounty_limit_per_user.string() +
@@ -47,11 +47,11 @@ class BountyVM(model: Bounty?) : ViewModel<Bounty>(model) {
 
     val longerDescription:String get() {
         val model = model ?: return ""
-        val timeLimitDays = model.timeLimit / Time.day
+        val timeLimitDays = model.resubmissionPeriodMilliseconds / Time.day
 
         var str = R.string.label_bounty_submissions.string() +
                 ": " +
-                "${model.submissions}/${model.userLimit}" +
+                "${model.submissions}/${model.submissionLimit}" +
                 "\n" +
 
                 R.string.label_bounty_limit_per_user.string() +
