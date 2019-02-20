@@ -1,7 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <com.scruge.scruge.view.views.WalletResourcesView
+        android:id="@+id/ram_resources"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/edit_profile_cardview"
+        app:cardElevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="15dp">
+
+            <TextView
+                android:id="@+id/ram_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/regular"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/text_gray"
+                android:textSize="13sp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:background="@color/field_background">
+
+                <Spinner
+                    android:id="@+id/ram_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dropdown"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@color/field_background">
+
+                <EditText
+                    android:id="@+id/ram_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/regular"
+                    android:hint="@string/hint_amount"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:paddingStart="45dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@color/text_regular"
+                    android:textColorHint="@color/text_light"
+                    android:textSize="14sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/field_background">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/lock"/>
+
+                <EditText
+                    android:id="@+id/ram_passcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/regular"
+                    android:hint="@string/hint_wallet_password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingStart="45dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@color/text_regular"
+                    android:textColorHint="@color/text_light"
+                    android:textSize="14sp"/>
+
+            </RelativeLayout>
+
+            <com.scruge.scruge.view.views.ButtonView
+                android:id="@+id/ram_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"/>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

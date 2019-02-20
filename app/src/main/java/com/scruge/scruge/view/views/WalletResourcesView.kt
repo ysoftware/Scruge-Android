@@ -32,6 +32,10 @@ class WalletResourcesView(context: Context, attrs: AttributeSet?, defStyleAttr: 
         res_ram.setHidden(value)
     }
 
+    fun hideResources(value:Boolean) {
+        res_resources.setHidden(value)
+    }
+
     fun hideControls(value:Boolean) {
         res_controls.setHidden(value)
     }

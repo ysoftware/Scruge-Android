@@ -124,7 +124,6 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
 
     private fun setupViews() {
         transfer_button.title = R.string.do_transfer_tokens.string()
-
         transfer_account_name.text = accountVM.displayName
 
         val eosName = accountVM.name ?: return

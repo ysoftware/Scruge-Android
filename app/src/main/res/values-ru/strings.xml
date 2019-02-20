@@ -79,7 +79,7 @@
     <string name="title_eos_cpu">CPU</string>
     <string name="title_eos_net">NET</string>
     <string name="title_eos_ram">RAM</string>
-    <string name="do_buy_eos_ram">КУПИТЬ RAM</string>
+    <string name="do_buy_eos_ram">Купить %1$s байт</string>
     <string name="do_stake_resources">УПРАВЛЯТЬ РЕСУРСАМИ</string>
     <string name="do_unstake_resources">СНЯТЬ БРОНЬ</string>
     <string name="do_switch_eos_account">Сменить аккаунт</string>
@@ -273,7 +273,7 @@
     <string name="error_eos_createAccountIpLimitReached">Не удаётся создать вам ещё один аккаунт EOS. Пожалуйста, свяжитесь с нами на support@scruge.world</string>
     <string name="error_eos_createAccountDailyLimitReached">Достигнут суточный лимит по созданию бесплатных аккаунтов. Пожалуйста, попробуйте ещё раз позже или свяжитесь с нами на support@scruge.world</string>
 
-    <string name="do_sell_eos_ram">КУПИТЬ RAM</string>
+    <string name="do_sell_eos_ram">Продать RAM на %1$s EOS</string>
     <string name="do_manage_ram">УПРАВЛЯТЬ RAM</string>
     <string name="title_vote_bp">Блок продюсеры</string>
     <string name="do_vote_bp">Голосовать</string>
@@ -308,6 +308,15 @@
     <string name="label_you_were_paid_x_for_bounty">Вам перечислили %1$s за выполненную вами работу для баунти</string>
 
     <string name="alert_register_confirm_email">Пожалуйста, подтвердите ваш email по ссылке, которую мы вам отправили</string>
+
+    <string name="do_buy_bytes_ram">Купить за %1$s EOS</string>
+    <string name="label_sell_ram">Продать RAM (байт)</string>
+    <string name="label_buy_ram_bytes">Купить RAM (байт)</string>
+    <string name="label_buy_ram_eos">Купить RAM (EOS)</string>
+    <string name="current_ram_price">Текущая цена: %1$s EOS / КБ</string>
+    <string name="title_manage_ram">Управление RAM</string>
+    <string name="hint_amount">Количество</string>
+    <string name="error_incorrect_input">Неверный ввод</string>
 
     <!-- plurals -->
     <plurals name="see_all_comments">

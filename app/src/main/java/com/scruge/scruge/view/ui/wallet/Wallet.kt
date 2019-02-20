@@ -133,7 +133,9 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
         }
 
         wallet_resources_view.buyRamBlock = {
-
+            accountVM?.let {
+                Service.presenter.presentBuyRAMFragment(this, it)
+            }
         }
 
         wallet_resources_view.stakeBlock = {

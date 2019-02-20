@@ -2,13 +2,13 @@ package com.scruge.scruge.services.eos
 
 import android.util.Log
 import com.memtrip.eos.chain.actions.ChainResponse
-import com.memtrip.eos.chain.actions.transaction.account.DelegateBandwidthChain
-import com.memtrip.eos.chain.actions.transaction.account.UnDelegateBandwidthChain
+import com.memtrip.eos.chain.actions.transaction.account.*
 import com.memtrip.eos.chain.actions.transaction.transfer.TransferChain
 import com.memtrip.eos.chain.actions.transaction.vote.VoteChain
 import com.memtrip.eos.http.rpc.Api
 import com.memtrip.eos.http.rpc.model.account.request.AccountName
 import com.memtrip.eos.http.rpc.model.contract.request.GetCurrencyBalance
+import com.memtrip.eos.http.rpc.model.contract.request.GetTableRows
 import com.memtrip.eos.http.rpc.model.history.request.GetActions
 import com.memtrip.eos.http.rpc.model.history.request.GetKeyAccounts
 import com.memtrip.eos.http.rpc.model.history.response.HistoricAccountAction
@@ -92,6 +92,45 @@ class EOS {
                                val info = response.body()
                                if (info != null) {
                                    completion(Result.success(info))
+                               }
+                               else {
+                                   completion(Result.failure(EOSError.unknown.wrap()))
+                               }
+                           }) { error ->
+                    val e = ErrorHandler.error(error) ?: EOSError.unknown
+                    completion(Result.failure(e.wrap()))
+                }
+    }
+
+    fun getRamPrice(completion: (Result<Double>) -> Unit) {
+        val params = GetTableRows("eosio", "eosio", "rammarket", "", true, 1, "", "", "", "", "")
+        service.chain.getTableRows(params)
+                .doOnError { completion(Result.failure(it)) }
+                .subscribeOn(Schedulers.newThread())
+                .subscribe({ response ->
+                               val info = response.body()
+                               if (info != null) {
+                                   val rows = info.rows
+
+                                   if (rows.isEmpty()) {
+                                       return@subscribe completion(Result.failure(EOSError.unknown.wrap()))
+                                   }
+
+                                   val q = rows[0]["quote"] as? Map<String, Any>
+                                           ?: return@subscribe completion(Result.failure(EOSError.unknown.wrap()))
+                                   val quoteS = q["balance"] as? String
+                                           ?: return@subscribe completion(Result.failure(EOSError.unknown.wrap()))
+                                   val quote = quoteS.split(" ").firstOrNull()?.toDoubleOrNull()
+                                           ?: return@subscribe completion(Result.failure(EOSError.unknown.wrap()))
+
+                                   val b = rows[0]["base"] as? Map<String, Any>
+                                           ?: return@subscribe completion(Result.failure(EOSError.unknown.wrap()))
+                                   val baseS = b["balance"] as? String
+                                           ?: return@subscribe completion(Result.failure(EOSError.unknown.wrap()))
+                                   val base = baseS.split(" ").firstOrNull()?.toDoubleOrNull()
+                                           ?: return@subscribe completion(Result.failure(EOSError.unknown.wrap()))
+
+                                   completion(Result.success(quote / base))
                                }
                                else {
                                    completion(Result.failure(EOSError.unknown.wrap()))
@@ -246,6 +285,47 @@ class EOS {
             val args = UnDelegateBandwidthChain.Args(account.name, account.name,
                                                      net.toString(), cpu.toString())
             UnDelegateBandwidthChain(service.chain).unDelegateBandwidth(args, context).subscribe(completion)
+        }
+    }
+
+    fun buyRam(account: AccountModel,
+               amount:Balance,
+               passcode: String,
+               completion: (Result<String>) -> Unit) {
+
+        account.getTransactionContext(passcode) {
+            val context = it ?: return@getTransactionContext completion(
+                    Result.failure(WalletError.incorrectPasscode.wrap()))
+
+            val args = BuyRamChain.Args(account.name, amount.toString())
+            BuyRamChain(service.chain).buyRam(args, context).subscribe(completion)
+        }
+    }
+
+    fun buyRam(account: AccountModel,
+               bytes:Long,
+               passcode: String,
+               completion: (Result<String>) -> Unit) {
+
+        account.getTransactionContext(passcode) {
+            val context = it ?: return@getTransactionContext completion(
+                    Result.failure(WalletError.incorrectPasscode.wrap()))
+
+            val args = BuyRamBytesChain.Args(account.name, bytes)
+            BuyRamBytesChain(service.chain).buyRamBytes(args, context).subscribe(completion)
+        }
+    }
+
+    fun sellRam(account: AccountModel,
+                bytes:Long,
+                passcode: String,
+                completion: (Result<String>) -> Unit) {
+        account.getTransactionContext(passcode) {
+            val context = it ?: return@getTransactionContext completion(
+                    Result.failure(WalletError.incorrectPasscode.wrap()))
+
+            val args = SellRamChain.Args(bytes)
+            SellRamChain(service.chain).sellRam(args, context).subscribe(completion)
         }
     }
 

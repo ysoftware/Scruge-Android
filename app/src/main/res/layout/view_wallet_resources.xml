@@ -6,82 +6,90 @@
     android:orientation="vertical"
     android:padding="15dp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/res_resources"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bold"
+                android:text="@string/title_eos_cpu"
+                android:textColor="@color/text_title"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/res_cpu_staked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/regular"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
 
         <TextView
+            android:id="@+id/res_cpu_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:text="@string/title_eos_cpu"
-            android:textColor="@color/text_title"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/res_cpu_staked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/regular"
             android:textColor="@color/text_gray"
             android:textSize="14sp"/>
 
-    </RelativeLayout>
+        <com.scruge.scruge.view.views.ProgressView
+            android:id="@+id/res_cpu_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"/>
 
-    <TextView
-        android:id="@+id/res_cpu_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/regular"
-        android:textColor="@color/text_gray"
-        android:textSize="14sp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
 
-    <com.scruge.scruge.view.views.ProgressView
-        android:id="@+id/res_cpu_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bold"
+                android:text="@string/title_eos_net"
+                android:textColor="@color/text_title"
+                android:textSize="14sp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+            <TextView
+                android:id="@+id/res_net_staked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/regular"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
 
         <TextView
+            android:id="@+id/res_net_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
-            android:text="@string/title_eos_net"
-            android:textColor="@color/text_title"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/res_net_staked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/regular"
             android:textColor="@color/text_gray"
             android:textSize="14sp"/>
 
-    </RelativeLayout>
+        <com.scruge.scruge.view.views.ProgressView
+            android:id="@+id/res_net_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"/>
 
-    <TextView
-        android:id="@+id/res_net_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/regular"
-        android:textColor="@color/text_gray"
-        android:textSize="14sp"/>
-
-    <com.scruge.scruge.view.views.ProgressView
-        android:id="@+id/res_net_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/res_ram"
