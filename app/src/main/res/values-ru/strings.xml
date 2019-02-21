@@ -302,7 +302,7 @@
     <string name="label_bounty_limit_per_user">Лимит на участника</string>
     <string name="label_bounty_resubmission_period">Период повторного участия</string>
     <string name="label_bounty_max_reward">Макс. награда</string>
-    <string name="label_bounty_percent_of_total_supply">%@ от общего кол-ва</string>
+    <string name="label_bounty_percent_of_total_supply">%1$s от общего кол-ва</string>
     <string name="label_days_short_no_plural">дн.</string>
     <string name="label_you_have_submitted_for_bounty">Вы отправили вашу работу в баунти</string>
     <string name="label_you_were_paid_x_for_bounty">Вам перечислили %1$s за выполненную вами работу для баунти</string>

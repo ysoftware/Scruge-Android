@@ -140,7 +140,11 @@ class CreateAccountFragment: NavigationFragment() {
     }
 
     private fun createAccount(name:EosName, publicKey:EosPublicKey) {
+        wallet_create_save.isBusy = true
+        
         Service.api.createAccount(name, publicKey) { result ->
+            wallet_create_save.isBusy = false
+
             result.onSuccess {
                 ErrorHandler.error(it.result)?.let {
                     return@onSuccess alert(it)

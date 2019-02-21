@@ -66,7 +66,7 @@ class ButtonView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
 
     // DEBOUNCE
 
-    private var debounceTime = 1000L
+    private var debounceTime = 650L
     private var lastNavigationTime:Long = 0
 
     private fun shouldDebounce():Boolean {

@@ -71,7 +71,10 @@ class SubmitFragment: NavigationFragment() {
             return alert(R.string.error_wallet_enter_wallet_password.string())
         }
 
+        bounty_submit_button.isBusy = true
         Service.eos.bountySubmit(model, proof, providerName, id, passcode) { result ->
+            bounty_submit_button.isBusy = false
+
             result.onSuccess {
                 Service.api.postSubmission(id, proof, model.name, providerName) {
                     alert(R.string.alert_transaction_success.string()) {

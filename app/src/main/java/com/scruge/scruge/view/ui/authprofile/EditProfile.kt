@@ -80,7 +80,10 @@ class EditProfileFragment: NavigationFragment(), NavigationController.OnBackPres
         val country = edit_profile_location.text.toString().trim()
         val description = edit_profile_about.text.toString().trim()
 
+        edit_profile_button.isBusy = true
         ProfileVM.updateProfile(name, country, description, selectedImageUri) { error ->
+            edit_profile_button.isBusy = false
+
             if (error != null) {
                 alert(error)
                 return@updateProfile

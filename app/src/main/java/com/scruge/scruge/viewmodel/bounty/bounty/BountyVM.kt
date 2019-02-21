@@ -84,8 +84,9 @@ class BountyVM(model: Bounty?, val tokenSupply:Long?) : ViewModel<Bounty>(model)
             return R.string.label_bounty_max_reward.string() +
                     ": " +
                     maxReward +
-                    " " +
-                    R.string.label_bounty_percent_of_total_supply.string(percent)
+                    " (" +
+                    R.string.label_bounty_percent_of_total_supply.string(percent) +
+                    ")"
         }
         return null
     }

@@ -163,7 +163,7 @@ class NavigationController(private val manager: FragmentManager, val containerId
 
     private fun shouldDebounce():Boolean {
         val time = Date().time
-        val shouldDebounce = time - lastNavigationTime < 1000L
+        val shouldDebounce = time - lastNavigationTime < 650L
         if (!shouldDebounce) {
             lastNavigationTime = time
         }
