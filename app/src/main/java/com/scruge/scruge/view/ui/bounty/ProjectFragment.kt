@@ -93,11 +93,12 @@ class ProjectFragment: NavigationFragment() {
         else {
             val docsVM = DocumentAVM(vm.documents)
             project_documents_recycler_view.setupForVerticalLayout()
-            project_documents_recycler_view.adapter = DocumentsCell.Adapter(docsVM) { docVM ->
-                Service.presenter
-                        .presentBrowser(this,
-                                        "https://drive.google.com/viewerng/viewer?embedded=true&url=${docVM.documentUrl}",
-                                        docVM.name)
+            val adapter = DocumentsCell.Adapter(docsVM)
+            project_documents_recycler_view.adapter = adapter
+            adapter.tap = { docVM ->
+                Service.presenter.presentBrowser(this,
+                                                 "https://drive.google.com/viewerng/viewer?embedded=true&url=${docVM.documentUrl}",
+                                                 docVM.name)
             }
         }
     }

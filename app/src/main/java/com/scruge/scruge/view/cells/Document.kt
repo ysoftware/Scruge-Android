@@ -13,22 +13,23 @@ import kotlinx.android.synthetic.main.cell_documents.view.*
 
 class DocumentsCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private lateinit var tap:(DocumentVM)->Unit
-    private lateinit var vm:DocumentAVM
+    private lateinit var adapter:Adapter
 
     fun setup(vm:DocumentAVM):DocumentsCell {
-        this.vm = vm
         itemView.documents_recycler_view.setupForVerticalLayout()
-        itemView.documents_recycler_view.adapter = Adapter(vm, tap)
+        adapter = Adapter(vm)
+        itemView.documents_recycler_view.adapter = adapter
         return this
     }
 
     fun tap(tap: (DocumentVM)->Unit): DocumentsCell {
-        this.tap = tap
+        adapter.tap = tap
         return this
     }
 
-    class Adapter(val vm:DocumentAVM, val tap:(DocumentVM)->Unit): RecyclerView.Adapter<Adapter.ViewHolder>() {
+    class Adapter(val vm:DocumentAVM): RecyclerView.Adapter<Adapter.ViewHolder>() {
+
+        lateinit var tap:(DocumentVM)->Unit
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return ViewHolder(LayoutInflater.from(parent.context)
