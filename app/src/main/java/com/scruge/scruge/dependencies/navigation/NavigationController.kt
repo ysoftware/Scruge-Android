@@ -35,6 +35,10 @@ class NavigationController(private val manager: FragmentManager, val containerId
 
     // METHODS
 
+    fun popToRoot() {
+        rootFragment?.let { replaceRoot(it) }
+    }
+
     fun replaceRoot(fragment: Fragment) {
         val oldFragment = rootFragment
         rootFragment = fragment
@@ -53,10 +57,6 @@ class NavigationController(private val manager: FragmentManager, val containerId
         updateViews()
     }
 
-    fun popToRoot() {
-        rootFragment?.let { replaceRoot(it) }
-    }
-
     fun replaceTop(fragment: Fragment) {
         if (navigateBack()) {
             navigateTo(fragment)
@@ -66,7 +66,8 @@ class NavigationController(private val manager: FragmentManager, val containerId
         }
     }
 
-    fun navigateTo(fragment: Fragment) {
+    fun navigateTo(fragment: Fragment, debounce:Boolean = true) {
+        if (debounce && shouldDebounce()) { return }
         if (rootFragment == null) { return }
 
         val oldFragment = rootFragment
@@ -89,7 +90,8 @@ class NavigationController(private val manager: FragmentManager, val containerId
         updateViews()
     }
 
-    fun navigateBack(): Boolean {
+    fun navigateBack(debounce:Boolean = true): Boolean {
+        if (debounce && shouldDebounce()) { return false }
         if (fragmentStack.isEmpty()) { return false }
 
         val oldFragment = fragmentStack.pop()
@@ -153,5 +155,18 @@ class NavigationController(private val manager: FragmentManager, val containerId
 
     override fun navigationBarDidClickBackButton(instance: NavigationBar) {
         navigateBack()
+    }
+
+    // DEBOUNCE
+
+    private var lastNavigationTime:Long = 0
+
+    private fun shouldDebounce():Boolean {
+        val time = Date().time
+        val shouldDebounce = time - lastNavigationTime < 1000L
+        if (!shouldDebounce) {
+            lastNavigationTime = time
+        }
+        return shouldDebounce
     }
 }
