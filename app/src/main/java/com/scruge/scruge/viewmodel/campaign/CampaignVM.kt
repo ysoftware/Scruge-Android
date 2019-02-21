@@ -23,6 +23,7 @@ import com.scruge.scruge.viewmodel.milestone.MilestoneAVM
 import com.scruge.scruge.viewmodel.milestone.MilestoneVM
 import com.scruge.scruge.viewmodel.update.UpdateVM
 import com.ysoftware.mvvm.single.ViewModel
+import java.util.*
 import kotlin.math.roundToInt
 
 class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaignViewModel,
@@ -323,5 +324,7 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
     override val softCap get() = model?.economics?.softCap ?: 0
 
-    override val daysLeft:String get() = model?.let { datePresentRelative(it.endTimestamp) } ?: ""
+    override val daysLeft:String get() = model?.let {
+        datePresentRelative(if (Date().time < it.startTimestamp)
+                                it.startTimestamp else it.endTimestamp) } ?: ""
 }

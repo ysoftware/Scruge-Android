@@ -1,11 +1,10 @@
 package com.scruge.scruge.viewmodel.campaign
 
 import android.net.Uri
-import com.scruge.scruge.R
-import com.scruge.scruge.dependencies.dataformatting.dateToRelative
-import com.scruge.scruge.dependencies.view.string
+import com.scruge.scruge.dependencies.dataformatting.datePresentRelative
 import com.scruge.scruge.model.entity.PartialCampaign
 import com.ysoftware.mvvm.single.ViewModel
+import java.util.*
 import kotlin.math.roundToInt
 
 class PartialCampaignVM(model: PartialCampaign?) : ViewModel<PartialCampaign>(model),
@@ -31,6 +30,6 @@ class PartialCampaignVM(model: PartialCampaign?) : ViewModel<PartialCampaign>(mo
     override val softCap get() = model?.economics?.softCap ?: 0
 
     override val daysLeft:String get() = model?.let {
-        dateToRelative(it.endTimestamp,
-                       R.string.label_campaign_ends.string(), R.string.label_campaign_ended.string()) } ?: ""
+        datePresentRelative(if (Date().time < it.startTimestamp)
+                                it.startTimestamp else it.endTimestamp) } ?: ""
 }
