@@ -21,8 +21,6 @@ class LoginFragment: NavigationFragment() {
 
     // PROPERTIES
 
-    private var isWorking = false
-
     private val email get() = login_email?.text?.toString() ?: ""
     private val password get() = login_password?.text?.toString() ?: ""
 
@@ -86,11 +84,11 @@ class LoginFragment: NavigationFragment() {
     // ACTIONS
 
     private fun login() {
-        if (isWorking || !validate()) { return }
+        if (!validate()) { return }
 
-        isWorking = true
+        login_button.isBusy = true
         Service.api.login(email, password) { result ->
-            isWorking = false
+            login_button.isBusy = false
 
             result.onSuccess {
                 Service.tokenManager.save(it.token)

@@ -19,8 +19,6 @@ class RegisterFragment: NavigationFragment() {
 
     // PROPERTIES
 
-    private var isWorking = false
-
     private val email get() = register_email?.text?.toString() ?: ""
     private val password get() = register_password?.text?.toString() ?: ""
     private val passwordConfirm get() = register_confirm?.text?.toString() ?: ""
@@ -54,11 +52,12 @@ class RegisterFragment: NavigationFragment() {
     }
 
     private fun signUp() {
-        if (isWorking || !validate()) { return }
+        if (!validate()) { return }
 
-        isWorking = true
+        register_button.isBusy = true
         Service.api.signUp(email, password) { result ->
-            isWorking = false
+            register_button.isBusy = false
+
             result.onSuccess {
                 ErrorHandler.error(it.result)?.let {
                     alert(it)
