@@ -98,7 +98,10 @@ class ContributeFragment : NavigationFragment() {
             return alert(R.string.error_wallet_enter_wallet_password.string())
         }
 
+        contribute_button_pay.isBusy = true
         vm.contribute(amountSCR, account, passcode) { error ->
+            contribute_button_pay.isBusy = false
+
             if (error != null) {
                 alert(error)
             }

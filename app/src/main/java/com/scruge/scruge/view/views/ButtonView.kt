@@ -3,9 +3,12 @@ package com.scruge.scruge.view.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import com.scruge.scruge.R
 import kotlinx.android.synthetic.main.view_button.view.*
+import org.jetbrains.anko.runOnUiThread
+import java.util.*
 
 class ButtonView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
         RelativeLayout(context, attrs, defStyleAttr) {
@@ -25,18 +28,53 @@ class ButtonView(context:Context, attrs:AttributeSet?, defStyleAttr:Int):
 
     fun click(click:((ButtonView)->Unit)) {
         this.click = click
-        button_view_button.setOnClickListener { this.click?.let { it(this) }}
+
+        button_view_button.setOnClickListener {
+            if (shouldDebounce && shouldDebounce()) { return@setOnClickListener }
+            if (isBusy) { return@setOnClickListener }
+
+            this.click?.let { it(this) }
+        }
     }
+
+    var shouldDebounce = true
+
+    var isBusy = false
+        set(value) {
+            context.runOnUiThread {
+                field = value
+                button_view_progress.visibility = if (isBusy) View.VISIBLE else View.GONE
+                button_view_button.alpha = if (isBusy) 0f else 1f
+            }
+        }
 
     var color:Color = Color.purple
         set(value) {
-            field = value
-            button_background.setBackgroundResource(value.id)
+            context.runOnUiThread {
+                field = value
+                button_background.setBackgroundResource(value.id)
+            }
         }
 
     var title:String = ""
         set(value) {
-            field = value
-            button_view_button.text = title
+            context.runOnUiThread {
+                field = value
+                button_view_button.text = title
+            }
         }
+
+    // DEBOUNCE
+
+    private var debounceTime = 1000L
+    private var lastNavigationTime:Long = 0
+
+    private fun shouldDebounce():Boolean {
+        val time = Date().time
+        val shouldDebounce = time - lastNavigationTime < debounceTime
+        if (!shouldDebounce) {
+            lastNavigationTime = time
+        }
+        return shouldDebounce
+    }
 }

@@ -109,9 +109,12 @@ class VoteBPFragment: NavigationFragment() {
             return alert(R.string.error_wallet_enter_wallet_password.string())
         }
 
+        bp_vote_button.isBusy = true
         Service.eos.voteProducers(account,
                                   selected.mapNotNull { EosName.from(it.name) }.toSet(),
                                   passcode) { result ->
+            bp_vote_button.isBusy = false
+
             result.onSuccess {
                 alert(R.string.alert_transaction_success.string()) {
                     navigationController?.navigateBack()

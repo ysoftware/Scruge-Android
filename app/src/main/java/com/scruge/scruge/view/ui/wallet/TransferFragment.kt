@@ -71,6 +71,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
 
         transfer_button.click {
             hideKeyboard()
+
             val i = transfer_spinner.selectedItemPosition
 
             if (balances.size <= i) {
@@ -110,7 +111,11 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
 
 
             val balance = Balance(token, amount)
+
+            it.isBusy = true
             Service.eos.sendMoney(account, recipient, balance, memo, passcode) { result ->
+                it.isBusy = false
+
                 result.onSuccess {
                     alert(R.string.alert_transaction_success.string()) {
                         navigationController?.navigateBack()

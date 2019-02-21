@@ -55,6 +55,7 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
 
         val listener: (ButtonView)->Unit = { sender ->
             accountVM.model?.let { model ->
+
                 val cpuStr = stake_cpu_edit.text.toString()
                 val cpuString = if (cpuStr.isBlank()) "0" else cpuStr
                 val cpuValue = cpuString.toDoubleOrNull()
@@ -85,8 +86,11 @@ class StakeFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDele
                 }
 
                 hideKeyboard()
+                sender.isBusy = true
 
                 val block:(Result<String>)->Unit = { result ->
+                    sender.isBusy = false
+
                     result.onSuccess {
                         alert(R.string.alert_transaction_success.string())
                         activity?.runOnUiThread {

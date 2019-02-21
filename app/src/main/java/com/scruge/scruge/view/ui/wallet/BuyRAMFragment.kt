@@ -159,7 +159,11 @@ class BuyRAMFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
             return alert(R.string.error_wallet_enter_wallet_password.string())
         }
 
+        ram_button.isBusy = true
+
         val block:(Result<String>)->Unit = {
+            ram_button.isBusy = false
+
             it.onSuccess {
                 alert(R.string.alert_transaction_success.string()) {
                     navigationController?.navigateBack()
