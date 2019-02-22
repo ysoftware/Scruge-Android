@@ -29,6 +29,10 @@ class CampaignInfoCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var imageUrl: Uri? = null
     private var didLoadMedia = false
 
+    fun detach() {
+
+    }
+
     fun setup(vm: CampaignVM) {
         imageUrl = vm.imageUrl
 
@@ -65,7 +69,6 @@ class CampaignInfoCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.campaign_info_image.visibility = View.GONE
         wv.settings.javaScriptEnabled = true
         wv.settings.setSupportZoom(false)
-        wv.settings.mediaPlaybackRequiresUserGesture
 
         wv.loadDataWithBaseURL(url.toString(), html, "text/html; charset=utf-8", "UTF-8", "")
         didLoadMedia = true

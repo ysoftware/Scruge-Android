@@ -19,7 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <VideoEnabledWebView
+            <com.scruge.scruge.dependencies.view.webview.VideoEnabledWebView
                 android:id="@+id/campaign_info_web_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
