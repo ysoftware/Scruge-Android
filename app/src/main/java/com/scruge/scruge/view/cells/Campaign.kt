@@ -40,9 +40,9 @@ class CampaignInfoCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.campaign_progress_view.total = vm.hardCap.toDouble()
         itemView.campaign_progress_view.firstGoal = vm.softCap.toDouble()
 
-        val url = vm.videoUrl
-        if (url != null) {
-            setupWebView(url.toString())
+        val html = vm.videoFrame
+        if (html != null) {
+            setupWebView(html, vm.videoUrl)
         }
         else {
             setupImageView()
@@ -56,7 +56,7 @@ class CampaignInfoCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun setupWebView(url:String) {
+    private fun setupWebView(html:String, url:Uri?) {
         if (didLoadMedia) return
         val wv = itemView.campaign_info_web_view
 
@@ -64,8 +64,10 @@ class CampaignInfoCell(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.campaign_info_web_view.visibility = View.VISIBLE
         itemView.campaign_info_image.visibility = View.GONE
         wv.settings.javaScriptEnabled = true
+        wv.settings.setSupportZoom(false)
+        wv.settings.mediaPlaybackRequiresUserGesture
 
-        wv.loadUrl(url)
+        wv.loadDataWithBaseURL(url.toString(), html, "text/html; charset=utf-8", "UTF-8", "")
         didLoadMedia = true
     }
 }

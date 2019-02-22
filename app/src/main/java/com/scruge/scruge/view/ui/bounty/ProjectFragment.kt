@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.scruge.scruge.R
+import com.scruge.scruge.dependencies.dataformatting.toUriOrNull
 import com.scruge.scruge.dependencies.navigation.NavigationFragment
 import com.scruge.scruge.dependencies.view.*
 import com.scruge.scruge.services.Service
@@ -14,6 +15,7 @@ import com.scruge.scruge.view.cells.DocumentsCell
 import com.scruge.scruge.view.cells.SocialAdapter
 import com.scruge.scruge.view.main.TabbarActivity
 import com.scruge.scruge.viewmodel.document.DocumentAVM
+import kotlinx.android.synthetic.main.cell_campaign_info.view.*
 import kotlinx.android.synthetic.main.fragment_bounty_project.*
 
 class ProjectFragment: NavigationFragment() {
@@ -67,9 +69,9 @@ class ProjectFragment: NavigationFragment() {
             project_economies_trading_value.setHidden(true)
         }
 
-        val url = vm.videoUrl
-        if (url != null) {
-            setupWebView(url.toString())
+        val html = vm.videoFrame
+        if (html != null) {
+            setupWebView(html, vm.videoUrl?.toUriOrNull())
         }
         else {
             setupImageView()
@@ -116,17 +118,15 @@ class ProjectFragment: NavigationFragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun setupWebView(url:String) {
+    private fun setupWebView(html:String, url:Uri?) {
         if (didLoadMedia) return
         val wv = project_web_view
 
-        // todo setup
-        project_web_view.visibility = View.VISIBLE
-        project_image.visibility = View.GONE
+        project_web_view.campaign_info_web_view.visibility = View.VISIBLE
+        project_web_view.campaign_info_image.visibility = View.GONE
         wv.settings.javaScriptEnabled = true
 
-        wv.loadUrl(url)
+        wv.loadDataWithBaseURL(url.toString(), html, "text/html; charset=utf-8", "UTF-8", "")
         didLoadMedia = true
     }
-
 }

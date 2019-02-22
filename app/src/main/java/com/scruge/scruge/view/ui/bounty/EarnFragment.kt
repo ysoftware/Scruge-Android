@@ -58,7 +58,7 @@ class EarnFragment : NavigationFragment(), ViewModelDelegate, ArrayViewModelDele
     private fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = false
         shouldHideNavigationBar = false
-        title = R.string.title_featured.string()
+        title = R.string.title_earn.string()
     }
 
     private fun setupVM() {
@@ -102,7 +102,7 @@ class EarnFragment : NavigationFragment(), ViewModelDelegate, ArrayViewModelDele
                 refresh_control.isRefreshing = false
                 if (vm.numberOfItems == 0) {
                     loading_view.state = ViewState.error
-                    loading_view.state.errorMessage = R.string.error_no_campaigns_found.string()
+                    loading_view.state.errorMessage = R.string.error_no_projects.string()
                 }
                 else {
                     loading_view.state = ViewState.ready

@@ -34,7 +34,7 @@ class Api {
 
     companion object {
 
-        const val version = 2
+        const val version = 1
     }
 
     var isLoggingEnabled = true

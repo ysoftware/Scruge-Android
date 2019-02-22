@@ -306,6 +306,8 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
 
     val videoUrl:Uri? get() = model?.let { Uri.parse(it.videoUrl) }
 
+    val videoFrame:String? get() = videoUrl?.let { makeYoutubeFrame(it.toString()) }
+
     // partial
 
     override val description get() = model?.description ?: ""
@@ -327,4 +329,21 @@ class CampaignVM(model: Campaign?) : ViewModel<Campaign>(model), PartialCampaign
     override val daysLeft:String get() = model?.let {
         datePresentRelative(if (Date().time < it.startTimestamp)
                                 it.startTimestamp else it.endTimestamp) } ?: ""
+}
+
+fun makeYoutubeFrame(url:String): String {
+    val urlString = url.replace("controls=0", "").replace("&&", "&")
+
+    val style = """
+	style="overflow: hidden; overflow-x: hidden; overflow-y: hidden;
+	height: 0; max-height: 100%; max-width: 100%; min-height: 100%; min-width: 100%; width: 0;
+	scrolling:no; position:absolute; top:0px; left:0px; right:0px; bottom:0px"
+	"""
+    val frame = """
+	<iframe src="$urlString"
+	$style
+	frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+	allowfullscreen></iframe>
+	"""
+    return "<body style=\"margin:0px;padding:0px;overflow:hidden\">$frame</body>"
 }

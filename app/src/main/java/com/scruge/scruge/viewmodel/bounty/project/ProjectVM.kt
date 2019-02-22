@@ -3,6 +3,7 @@ package com.scruge.scruge.view.ui.bounty
 import com.scruge.scruge.dependencies.dataformatting.formatDecimal
 import com.scruge.scruge.model.entity.Document
 import com.scruge.scruge.model.entity.Social
+import com.scruge.scruge.viewmodel.campaign.makeYoutubeFrame
 import com.ysoftware.mvvm.single.ViewModel
 
 class ProjectVM(model: Project?) : ViewModel<Project>(model) {
@@ -34,6 +35,8 @@ class ProjectVM(model: Project?) : ViewModel<Project>(model) {
     val tokenListingDate:String? get() = model?.economics?.listingDate
 
     val tokenExchange:String? get() = model?.economics?.exchange?.name
+
+    val videoFrame:String? get() = videoUrl?.let { makeYoutubeFrame(it) }
 
     val tokenUrl:String? get() = model?.economics?.exchange?.url
 }

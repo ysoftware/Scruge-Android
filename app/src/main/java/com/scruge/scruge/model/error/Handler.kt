@@ -140,6 +140,8 @@ class ErrorHandler {
                 105 -> accountExists
                 106 -> incorrectCredentials
                 107 -> accountBlocked
+                108 -> emailSendError
+                109 -> emailNotConfirmed
 
                 // eos
                 501 -> incorrectName
