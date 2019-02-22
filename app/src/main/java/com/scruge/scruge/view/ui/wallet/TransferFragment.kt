@@ -14,6 +14,7 @@ import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Balance
 import com.scruge.scruge.model.error.EOSError
+import com.scruge.scruge.model.error.GeneralError
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.Settings
@@ -97,7 +98,7 @@ class TransferFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelD
                 ?: return@click alert(EOSError.incorrectToken)
 
             val account = accountVM.model
-                    ?: return@click alert(WalletError.unknown)
+                    ?: return@click alert(GeneralError.implementationError)
 
             val recipient = name.toEosName() ?: return@click alert(EOSError.incorrectName)
 

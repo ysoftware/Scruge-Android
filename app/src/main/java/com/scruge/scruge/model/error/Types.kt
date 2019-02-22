@@ -6,7 +6,7 @@ data class ErrorMessage(val message:String):ScrugeError
 
 enum class GeneralError:ScrugeError {
 
-    unknown;
+    unknown, implementationError;
 
     var code:Int = 0
 }

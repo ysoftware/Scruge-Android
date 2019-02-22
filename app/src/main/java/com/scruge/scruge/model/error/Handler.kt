@@ -96,8 +96,9 @@ class ErrorHandler {
                 }
             }
             (error as? GeneralError)?.let {
-                if (it.code != 0) {
-                    return  R.string.error_general_code.string(it.code.toString())
+                return when (it) {
+                    GeneralError.unknown -> R.string.error_general_code.string(it.code.toString())
+                    GeneralError.implementationError -> R.string.error_general_unexpected.string()
                 }
             }
             (error as? ErrorMessage)?.let {
@@ -159,6 +160,7 @@ class ErrorHandler {
 
                 // special
                 999 -> notImplemented
+
                 else -> {
                     val error = GeneralError.unknown
                     error.code = result

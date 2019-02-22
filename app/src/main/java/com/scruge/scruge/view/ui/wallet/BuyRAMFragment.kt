@@ -148,7 +148,7 @@ class BuyRAMFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
     }
 
     private fun send() {
-        val model = accountVM.model ?: return alert(GeneralError.unknown)
+        val model = accountVM.model ?: return alert(GeneralError.implementationError)
 
         val input = ram_amount.text.toString().toDoubleOrNull()
                 ?: return alert(R.string.error_incorrect_input.string())

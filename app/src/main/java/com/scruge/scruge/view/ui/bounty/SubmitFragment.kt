@@ -57,7 +57,7 @@ class SubmitFragment: NavigationFragment() {
         val id = bountyVM.id ?: return alert(GeneralError.unknown)
 
         val vm = accountAVM.selectedAccount ?: return alert(R.string.error_wallet_not_setup.string())
-        val model = vm.model ?: return alert(R.string.error_wallet_not_setup.string())
+        val model = vm.model ?: return alert(GeneralError.implementationError)
 
         val proof = bounty_submit_proof.text.toString()
 

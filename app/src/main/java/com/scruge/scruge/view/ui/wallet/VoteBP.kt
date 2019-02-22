@@ -15,6 +15,7 @@ import com.scruge.scruge.dependencies.view.hideKeyboard
 import com.scruge.scruge.dependencies.view.setupForVerticalLayout
 import com.scruge.scruge.dependencies.view.string
 import com.scruge.scruge.model.entity.Producer
+import com.scruge.scruge.model.error.GeneralError
 import com.scruge.scruge.model.error.WalletError
 import com.scruge.scruge.services.Service
 import com.scruge.scruge.services.eos.EosName
@@ -101,7 +102,7 @@ class VoteBPFragment: NavigationFragment() {
         hideKeyboard()
 
         val account = accountVM.model
-                ?: return alert(WalletError.unknown)
+                ?: return alert(GeneralError.implementationError)
 
         val passcode = bp_password_field.text.toString()
 
