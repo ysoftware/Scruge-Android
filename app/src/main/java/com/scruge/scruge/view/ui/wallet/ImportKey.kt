@@ -70,7 +70,9 @@ class ImportKeyFragment: NavigationFragment() {
         Service.wallet.importKey(key, passcode) { account ->
             activity?.runOnUiThread {
                 if (account != null) {
-                    Handler().postDelayed({ Service.presenter.replaceWithWalletFragment(this) }, 400)
+                    Handler().postDelayed({
+                      if (isStateSaved) { return@postDelayed }
+                      Service.presenter.replaceWithWalletFragment(this) }, 400)
                 }
                 else {
                     alert("Could not import this key")

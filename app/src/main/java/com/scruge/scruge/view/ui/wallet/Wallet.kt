@@ -167,6 +167,8 @@ class WalletFragment: NavigationFragment(), ArrayViewModelDelegate, ViewModelDel
             State.error -> {
                 val error = ErrorHandler.error(vm.state.errorValue)
                 Handler(Looper.getMainLooper()).postDelayed({
+                    if (isStateSaved) { return@postDelayed }
+
                     when (error) {
                         WalletError.noKey -> Service.presenter.replaceWithWalletStartFragment(this)
                         WalletError.noAccounts -> Service.presenter.replaceWithWalletNoAccountFragment(this)
