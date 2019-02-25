@@ -67,7 +67,7 @@ class VoteBPFragment: NavigationFragment() {
     private fun setupNavigationBar() {
         (activity as? TabbarActivity)?.tabbarHidden = true
         shouldHideNavigationBar = false
-        title = R.string.title_transfer_tokens.string()
+        title = R.string.title_vote_bp.string()
     }
 
     private fun setupActions() {
