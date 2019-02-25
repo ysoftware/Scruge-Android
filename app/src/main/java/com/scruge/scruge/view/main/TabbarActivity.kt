@@ -42,7 +42,7 @@ class TabbarActivity : AppCompatActivity() {
         Handler().postDelayed({
             Service.api.getInfo { result ->
                 val response = result.getOrNull() ?: return@getInfo
-                val v = response.lastSupportedVersion ?: return@getInfo
+                val v = response.apiMinSupportVersion ?: return@getInfo
                 if (v > Api.version) {
                     alert(R.string.alert_update_required.string())
                 }
